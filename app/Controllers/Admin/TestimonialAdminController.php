@@ -45,11 +45,13 @@ class TestimonialAdminController extends BaseController
                 ]
             ],
             'angkatan' => [
-                'rules' => 'required|exact_length[9]|alpha_numeric_punct',
+                'rules' => 'required|alpha_space',
+                // 'rules' => 'required|exact_length[9]|alpha_numeric_punct',
                 'errors' => [
                     'required' => 'Kolom {field} harus diisi!',
-                    'exact_length' => 'Inputan harus berformat 2007-2010',
-                    'alpha_numeric_punct' => 'Inputan harus berformat 2007-2010'
+                    'alpha_space' => 'inputan tidak boleh mengandung karakter aneh'
+                    // 'exact_length' => 'Inputan harus berformat 2007-2010',
+                    // 'alpha_numeric_punct' => 'Inputan harus berformat 2007-2010'
                 ]
             ],
             'content' => [
@@ -101,11 +103,13 @@ class TestimonialAdminController extends BaseController
                 ]
             ],
             'angkatan' => [
-                'rules' => 'required|exact_length[9]|alpha_numeric_punct',
+                // 'rules' => 'required|exact_length[9]|alpha_numeric_punct',
+                'rules' => 'required|alpha_space',
                 'errors' => [
                     'required' => 'Kolom {field} harus diisi!',
-                    'exact_length' => 'Inputan harus berformat 2007-2010',
-                    'alpha_numeric_punct' => 'Inputan harus berformat 2007-2010'
+                    'alpha_space' => 'inputan tidak boleh mengandung karakter aneh'
+                    // 'exact_length' => 'Inputan harus berformat 2007-2010',
+                    // 'alpha_numeric_punct' => 'Inputan harus berformat 2007-2010'
                 ]
             ],
             'content' => [

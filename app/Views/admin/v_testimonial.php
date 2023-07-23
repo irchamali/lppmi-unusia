@@ -60,7 +60,7 @@
                                                 <th>No</th>
                                                 <th>Photo</th>
                                                 <th>Name</th>
-                                                <th>Angkatan</th>
+                                                <th>Jabatan</th>
                                                 <th>Content</th>
                                                 <th>Action</th>
                                             </tr>
@@ -137,7 +137,7 @@
                                     <input type="text" name="nama" class="form-control" placeholder="Name" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="angkatan" class="form-control" placeholder="2007-2010" required>
+                                    <input type="text" name="angkatan" class="form-control" placeholder="Jabatan?" required>
                                 </div>
                                 <div class="form-group">
                                     <textarea name="content" class="form-control" rows="6" placeholder="Content" required></textarea>
@@ -182,7 +182,7 @@
                                         <input type="text" name="nama" value="<?= $row['testimonial_name']; ?>" class="form-control" placeholder="Name" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="angkatan" value="<?= $row['testimonial_angkatan']; ?>" class="form-control" placeholder="2007-2010" required>
+                                        <input type="text" name="angkatan" value="<?= $row['testimonial_angkatan']; ?>" class="form-control" placeholder="Jabatan?" required>
                                     </div>
                                     <div class="form-group">
                                         <textarea name="content" class="form-control" rows="6" placeholder="Content" required><?= $row['testimonial_content']; ?></textarea>
