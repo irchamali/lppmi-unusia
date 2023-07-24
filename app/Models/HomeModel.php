@@ -31,7 +31,7 @@ class HomeModel extends Model
     function get_latest_post()
     {
         return $this->db->table('tbl_post')
-            ->join('tbl_user', 'post_user_id=user_id', 'left')->limit(6)->orderBy('post_id', 'DESC')->get()->getRowArray();
+            ->join('tbl_user', 'post_user_id=user_id', 'left')->limit(3)->orderBy('post_id', 'DESC')->get()->getRowArray();
     }
 
     function get_popular_post()

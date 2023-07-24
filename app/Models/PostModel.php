@@ -40,6 +40,16 @@ class PostModel extends Model
 			WHERE post_category_id='$category_id' AND NOT post_id='$kode' ORDER BY post_views DESC LIMIT 4");
         return $query;
     }
+
+    // Fungsi untuk mendapatkan latest_post dengan pagination dan batasan 3 post
+    public function getLatestPosts($limit = 3)
+    {
+        $this->orderBy('post_date', 'DESC')
+             ->where(['post_status' => 1]);
+
+        return $this->paginate($limit, 'latest_post');
+    }
+
     public function search_post($query)
     {
         $result = $this->db->query("SELECT tbl_post.*,user_name,user_photo FROM tbl_post

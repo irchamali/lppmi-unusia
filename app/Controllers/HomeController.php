@@ -6,6 +6,7 @@ use App\Models\AboutModel;
 use App\Models\HomeModel;
 use App\Models\SiteModel;
 use App\Models\TestimonialModel;
+use App\Models\PostModel;
 
 class HomeController extends BaseController
 {
@@ -15,6 +16,7 @@ class HomeController extends BaseController
         $this->siteModel = new SiteModel();
         $this->aboutModel = new AboutModel();
         $this->testimonialModel = new TestimonialModel();
+        $this->postModel = new PostModel();
     }
     public function index()
     {
@@ -23,6 +25,10 @@ class HomeController extends BaseController
             'home' => $this->homeModel->find(1),
             'about' => $this->aboutModel->find(1),
             'testimonials' => $this->testimonialModel->findAll(),
+            // 'latest_post' => $this->postModel->findAll(),
+            'latest_posts' => $this->postModel->getLatestPosts(3),
+            // 'posts' => $this->postModel->paginate(3, 'posts'),
+            'pager' => $this->postModel->pager,
             'validation' => \Config\Services::validation(),
             'title' => 'Home',
             'active' => 'Home'
