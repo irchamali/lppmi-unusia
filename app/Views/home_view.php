@@ -84,7 +84,7 @@
                     <p><?= $about['about_description']; ?></p>
                     <div class="position-relative mt-4">
                         <img src="/assets/frontend/img/about-2.jpg" class="img-fluid rounded-4" alt="">
-                        <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
+                        <a href="<?= $home['home_video']; ?>" class="glightbox play-btn"></a>
                     </div>
                     <!-- <img src="/assets/frontend/img/about.jpg" class="img-fluid rounded-4 mb-4" alt=""> -->
                 </div>
@@ -254,7 +254,7 @@
                             </a>
                         </div>
 
-                        <p class="post-category">Nama Category</p>
+                        <p class="post-category"><?= $post['category_name'] ?></p>
 
                         <h2 class="title">
                             <a href="/post/<?= $post['post_slug']; ?>"><?= $post['post_title']; ?></a>

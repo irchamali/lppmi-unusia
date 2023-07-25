@@ -205,7 +205,7 @@ class SettingAdminController extends BaseController
     {
         $data = [
             'akun' => $this->akun,
-            'title' => 'Website Setting',
+            'title' => 'Home Setting',
             'active' => $this->active,
             'total_inbox' => $this->inboxModel->where('inbox_status', 0)->get()->getNumRows(),
             'inboxs' => $this->inboxModel->where('inbox_status', 0)->findAll(),
@@ -323,7 +323,7 @@ class SettingAdminController extends BaseController
     {
         $data = [
             'akun' => $this->akun,
-            'title' => 'Website Setting',
+            'title' => 'About Setting',
             'active' => $this->active,
             'total_inbox' => $this->inboxModel->where('inbox_status', 0)->get()->getNumRows(),
             'inboxs' => $this->inboxModel->where('inbox_status', 0)->findAll(),
