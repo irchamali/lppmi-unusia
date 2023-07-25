@@ -20,17 +20,17 @@
                             <img src="/assets/backend/images/post/<?= $post['post_image']; ?>" alt="<?= $post['post_title']; ?>" class="img-fluid">
                         </div>
 
-                        <!-- <p class="post-category">Politics</p> -->
+                        <p class="post-category"><?= $post['category_name']; ?></p>
 
                         <h2 class="title">
                             <a href="/post/<?= $post['post_slug']; ?>"><?= $post['post_title']; ?></a>
                         </h2>
 
                         <div class="d-flex align-items-center">
-                            <img src="/assets/backend/images/post/<?= $post['post_image']; ?>" alt="<?= $post['post_title']; ?>"
+                            <img src="/assets/backend/images/users/<?= $post['user_photo']; ?>" alt="<?= $post['post_title']; ?>"
                                 class="img-fluid post-author-img flex-shrink-0">
                             <div class="post-meta">
-                                <p class="post-author-list">Nama Author</p>
+                                <p class="post-author-list"><?= $post['user_name']; ?></p>
                                 <p class="post-date">
                                     <time datetime="2022-01-01"><?= date('d M Y', strtotime($post['post_date'])); ?></time>
                                 </p>

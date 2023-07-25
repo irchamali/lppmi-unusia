@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class PostModel extends Model
 {
-    protected $table            = 'tbl_post';
+    protected $table            = 'v_post';
     protected $primaryKey       = 'post_id';
     protected $allowedFields    = ['post_title', 'post_description', 'post_contents', 'post_image', 'post_category_id', 'post_tags', 'post_slug', 'post_status', 'post_views', 'post_user_id'];
     protected $useTimestamps = true;
