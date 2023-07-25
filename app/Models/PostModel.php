@@ -47,8 +47,17 @@ class PostModel extends Model
         $this->orderBy('post_date', 'DESC')
              ->where(['post_status' => 1]);
 
-        return $this->paginate($limit, 'latest_post');
+        return $this->paginate($limit, 'posts');
     }
+
+    public function getAllPosts($limit = 6)
+    {
+        $this->orderBy('post_date', 'DESC')
+             ->where(['post_status' => 1]);
+
+        return $this->paginate($limit, 'posts');
+    }
+
 
     public function search_post($query)
     {
@@ -59,7 +68,7 @@ class PostModel extends Model
         return $result;
     }
     public function get_all_post($user_id = null)
-    {
+    { 
         if ($user_id == null) {
             $result = $this->db->query("SELECT post_id,post_title,post_slug,post_user_id,post_image,DATE_FORMAT(post_date,'%d %M %Y') AS post_date,category_name,post_tags,post_status,post_views FROM tbl_post JOIN tbl_category ON post_category_id=category_id");
             return $result;

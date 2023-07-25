@@ -26,7 +26,7 @@ class HomeController extends BaseController
             'about' => $this->aboutModel->find(1),
             'testimonials' => $this->testimonialModel->findAll(),
             // 'latest_post' => $this->postModel->findAll(),
-            'latest_posts' => $this->postModel->getLatestPosts(3),
+            'latest_posts' => $this->postModel->getLatestPosts(),
             // 'posts' => $this->postModel->paginate(3, 'posts'),
             'pager' => $this->postModel->pager,
             'validation' => \Config\Services::validation(),
