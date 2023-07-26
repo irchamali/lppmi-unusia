@@ -50,7 +50,7 @@ class PostModel extends Model
         return $this->paginate($limit, 'posts');
     }
 
-    public function getAllPosts($limit = 6)
+    public function getAllPosts($limit = 3)
     {
         $this->orderBy('post_date', 'DESC')
              ->where(['post_status' => 1]);
