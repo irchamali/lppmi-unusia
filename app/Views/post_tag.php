@@ -1,42 +1,55 @@
 <?= $this->extend('layout/template-home'); ?>
 <?= $this->section('content'); ?>
 
-<main id="main" data-aos="fade-up">
+<main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
     <?= $this->include('layout/breadcrumbs'); ?>
     <!-- End Breadcrumbs -->
 
-    <section id="recent-blog-posts" class="recent-blog-posts">
-
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
         <div class="container" data-aos="fade-up">
 
             <header class="section-header">
                 <h2 class="text-center"><?= $keyword; ?></h2>
             </header><br>
 
-            <div class="row">
-                <?php foreach ($posts as $row) : ?>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="post-box">
-                            <div class="post-img"><img src="/assets/backend/images/post/<?= $row['post_image']; ?>" class="img-fluid" alt=""></div>
-                            <span class="post-date">
-                                <?= date('d M Y', strtotime($row['post_date'])); ?>
-                                |
-                                <?= $row['post_views'] . ' views'; ?>
-                            </span>
-                            <h3 class="post-title"><a href="/post/<?= $row['post_slug']; ?>"><?= $row['post_title']; ?></a>
-                            </h3>
-                            <a href="/post/<?= $row['post_slug']; ?>" class="readmore stretched-link mt-auto"><span>Read More</span><i class="bi bi-arrow-right"></i></a><br>
+            <div class="row gy-4 posts-list">
+                <?php foreach ($posts as $post) : ?>
+                <div class="col-xl-4 col-md-6">
+                    <article>
+
+                        <div class="post-img">
+                            <img src="/assets/backend/images/post/<?= $post['post_image']; ?>" alt="<?= $post['post_title']; ?>" class="img-fluid">
                         </div>
-                    </div>
+
+                        <!-- <p class="post-category"></p> -->
+
+                        <h2 class="title">
+                            <a href="/post/<?= $post['post_slug']; ?>"><?= $post['post_title']; ?></a>
+                        </h2>
+
+                        <div class="d-flex align-items-center">
+                            <img src="/assets/backend/images/users/<?= $post['user_photo']; ?>" alt="<?= $post['post_title']; ?>"
+                                class="img-fluid post-author-img flex-shrink-0">
+                            <div class="post-meta">
+                                <p class="post-author-list"><?= $post['user_name']; ?></p>
+                                <p class="post-date">
+                                    <time datetime="2022-01-01"><?= date('d M Y', strtotime($post['post_date'])); ?></time>
+                                </p>
+                            </div>
+                        </div>
+
+                    </article>
+                </div><!-- End post list item -->
                 <?php endforeach; ?>
-            </div><br><br>
+            </div><!-- End blog posts list -->
+            
+            <!-- End blog pagination -->
 
         </div>
-
-    </section>
-    <!-- End Recent Blog Posts Section -->
+    </section><!-- End Blog Section -->
 
 </main><!-- End #main -->
 

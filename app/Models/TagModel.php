@@ -14,7 +14,8 @@ class TagModel extends Model
     {
         $query = $this->db->query("SELECT tbl_post.*,user_name,user_photo FROM tbl_post
 			LEFT JOIN tbl_user ON post_user_id=user_id
-			WHERE post_tags LIKE '%$tag%'");
+			WHERE post_tags LIKE '%$tag%'
+            ORDER BY tbl_post.post_date DESC"); // Menambahkan klausa ORDER BY
         return $query;
     }
 }

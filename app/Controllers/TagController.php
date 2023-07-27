@@ -5,11 +5,12 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\AboutModel;
 use App\Models\CategoryModel;
+use App\Models\TagModel;
 use App\Models\HomeModel;
 use App\Models\PostModel;
 use App\Models\SiteModel;
 
-class CategoryController extends BaseController
+class TagController extends BaseController
 {
     public function __construct()
     {
@@ -17,6 +18,7 @@ class CategoryController extends BaseController
         $this->siteModel = new SiteModel();
         $this->aboutModel = new AboutModel();
         $this->postModel = new PostModel();
+        $this->tagModel = new TagModel();
         $this->categoryModel = new CategoryModel();
     }
     public function index($slug = null)
@@ -24,26 +26,27 @@ class CategoryController extends BaseController
         if ($slug == null) {
             return redirect()->to('/post');
         }
-        $posts = $this->categoryModel->get_post_by_category($slug);
+        $posts = $this->tagModel->get_post_by_tags($slug);
         if ($posts->getNumRows() < 1) {
             $posts = $posts->getResultArray();
-            $keyword = "Category '$slug' tidak ditemukan";
+            $keyword = "Tag '$slug' tidak ditemukan";
         } else {
             $posts = $posts->getResultArray();
-            $keyword = "Category: $slug ";
+            $keyword = "Tag: $slug ";
         }
         $data = [
             'site' => $this->siteModel->find(1),
             'home' => $this->homeModel->find(1),
             'about' => $this->aboutModel->find(1),
-            'posts' => $this->categoryModel->findAll(),
-            // 'posts' => $this->postModel->paginate(3, 'posts'),
-            // 'pager' => $this->postModel->pager,
-            'title' => 'Category',
+            'posts' => $this->tagModel->findAll(),
+            // 'posts' => $this->tagModel->get_post_by_tags($tag),
+            'posts' => $this->tagModel->paginate(2, 'posts'),
+            'pager' => $this->tagModel->pager,
+            'title' => 'Tag',
             'keyword' => $keyword,
             'posts' => $posts,
             'active' => 'Post'
         ];
-        return view('post_category', $data);
+        return view('post_tag', $data);
     }
 }
