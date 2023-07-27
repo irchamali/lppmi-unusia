@@ -45,8 +45,6 @@
                 </div><!-- End post list item -->
                 <?php endforeach; ?>
             </div><!-- End blog posts list -->
-
-            
             
             <!-- End blog pagination -->
 

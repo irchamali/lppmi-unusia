@@ -14,7 +14,10 @@ class CategoryModel extends Model
     {
         $query = $this->db->query("SELECT tbl_post.*,tbl_category.*,user_name,user_photo FROM
 			tbl_post LEFT JOIN tbl_category ON post_category_id=category_id 
-			LEFT JOIN tbl_user ON post_user_id=user_id WHERE category_slug='$slug'");
+			LEFT JOIN tbl_user ON post_user_id=user_id WHERE category_slug='$slug'
+            ORDER BY tbl_post.post_date DESC"); // Menambahkan klausa ORDER BY
+            
         return $query;
     }
+    
 }
