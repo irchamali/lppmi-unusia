@@ -10,12 +10,6 @@
     <section id="team" class="team">
         <div class="container" data-aos="fade-up">
 
-            <div class="section-title">
-                <h2><?= $title; ?></h2>
-                <h3><span><?= $about['about_name']; ?></span></h3>
-                <p>Masa Khidmat 2022/2023</p>
-            </div>
-
             <div class="row">
                 <?php foreach ($teams as $team) : ?>
                     <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">

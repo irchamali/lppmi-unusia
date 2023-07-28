@@ -1375,8 +1375,15 @@ section {
 }
 
 .team .member img {
+  transition: 0.3s;
+  position: relative;
+  z-index: 1;
   border-radius: 10px;
   overflow: hidden;
+}
+
+.team .member:hover img {
+  transform: scale(1.1);
 }
 
 .team .member .member-content {
@@ -1668,6 +1675,12 @@ section {
   overflow: hidden;
 }
 
+.recent-posts .post-img img {
+  transition: 0.3s;
+  position: relative;
+  z-index: 1;
+}
+
 .recent-posts .post-category {
   font-size: 16px;
   color: #6f6f6f;
@@ -1705,6 +1718,10 @@ section {
   font-size: 14px;
   color: #3c3c3c;
   margin-bottom: 0;
+}
+
+.recent-posts .post-img:hover img {
+  transform: scale(1.1);
 }
 
 /*--------------------------------------------------------------
@@ -2058,6 +2075,16 @@ section {
   max-height: 240px;
   margin: -30px -30px 15px -30px;
   overflow: hidden;
+}
+
+.blog .posts-list .post-img img {
+  transition: 0.3s;
+  position: relative;
+  z-index: 1;
+}
+
+.blog .post-img:hover img {
+  transform: scale(1.1);
 }
 
 .blog .posts-list .post-category {
