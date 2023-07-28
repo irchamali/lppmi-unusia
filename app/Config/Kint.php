@@ -27,7 +27,7 @@ class Kint extends BaseConfig
     public $maxDepth          = 6;
     public $displayCalledFrom = true;
     public $expanded          = false;
-
+    
     /*
     |--------------------------------------------------------------------------
     | RichRenderer Settings
