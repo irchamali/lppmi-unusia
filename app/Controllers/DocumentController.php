@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\AboutModel;
 use App\Models\HomeModel;
 use App\Models\SiteModel;
+use App\Models\MemberModel;
 
 class DocumentController extends BaseController
 {
@@ -14,6 +15,7 @@ class DocumentController extends BaseController
         $this->homeModel = new HomeModel();
         $this->siteModel = new SiteModel();
         $this->aboutModel = new AboutModel();
+        $this->memberModel = new MemberModel();
     }
     public function index()
     {
@@ -22,7 +24,8 @@ class DocumentController extends BaseController
             'home' => $this->homeModel->find(1),
             'about' => $this->aboutModel->find(1),
             'title' => 'Document',
-            'active' => 'Document'
+            'active' => 'Document',
+            'members' => $this->memberModel->findAll()
         ];
         return view('document_view', $data);
     }
