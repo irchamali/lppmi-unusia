@@ -68,14 +68,15 @@ class DocsAdminController extends BaseController
         }
         
         $name = strip_tags(htmlspecialchars($this->request->getPost('name'), ENT_QUOTES));
+        $unit = strip_tags(htmlspecialchars($this->request->getPost('unit'), ENT_QUOTES));
         $link = strip_tags(htmlspecialchars($this->request->getPost('link'), ENT_QUOTES));
-        $desc = strip_tags(htmlspecialchars($this->request->getPost('desc'), ENT_QUOTES));
+        $category = strip_tags(htmlspecialchars($this->request->getPost('category'), ENT_QUOTES));
         // Simpan ke database
         $this->documentModel->save([
-            'document_name' => $name,
-            'document_unit' => $unit,
-            'document_link' => $link,
-            'document_category' => $category
+            'docs_name' => $name,
+            'docs_unit' => $unit,
+            'docs_link' => $link,
+            'docs_category_id' => $category
             
         ]);
         return redirect()->to('/admin/document')->with('msg', 'success');
@@ -111,26 +112,26 @@ class DocsAdminController extends BaseController
         ])) {
             return redirect()->to('/admin/document')->with('msg', 'error');
         }
-        $document_id = strip_tags(htmlspecialchars($this->request->getPost('document_id'), ENT_QUOTES));
+        $docs_id = strip_tags(htmlspecialchars($this->request->getPost('docs_id'), ENT_QUOTES));
         $name = strip_tags(htmlspecialchars($this->request->getPost('name'), ENT_QUOTES));
         $unit = strip_tags(htmlspecialchars($this->request->getPost('unit'), ENT_QUOTES));
         $link = strip_tags(htmlspecialchars($this->request->getPost('link'), ENT_QUOTES));
         $category = strip_tags(htmlspecialchars($this->request->getPost('category'), ENT_QUOTES));
         // Cek Foto
 
-        $this->documentModel->update($document_id, [
-            'document_name' => $name,
-            'document_unit' => $unit,
-            'document_link' => $link,
-            'document_desc' => $category
+        $this->documentModel->update($docs_id, [
+            'docs_name' => $name,
+            'docs_unit' => $unit,
+            'docs_link' => $link,
+            'docs_category_id' => $category
             
         ]);
         return redirect()->to('/admin/document')->with('msg', 'info');
     }
     public function delete()
     {
-        $document_id = $this->request->getPost('kode');
-        $this->documentModel->delete($document_id);
+        $docs_id = $this->request->getPost('kode');
+        $this->documentModel->delete($docs_id);
         return redirect()->to('/admin/document')->with('msg', 'success-delete');
     }
 }

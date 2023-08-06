@@ -136,7 +136,7 @@
                     class="waves-effect waves-button"><span class="menu-icon icon-home"></span>
                     <p>Dashboard</p>
                 </a></li>
-            <li class="droplink <?= ($title === "Profile Setting") ? 'active open' : '' ?><?= ($title === "Website Setting") ? 'active open' : '' ?><?= ($title === "Home Setting") ? 'active open' : '' ?><?= ($title === "About Setting") ? 'active open' : '' ?>"><a
+            <li class="droplink <?= ($title === "Profile Setting") ? 'active open' : '' ?><?= ($title === "Website Setting") ? 'active open' : '' ?><?= ($title === "Home Setting") ? 'active open' : '' ?><?= ($title === "All Slider") ? 'active open' : '' ?><?= ($title === "About Setting") ? 'active open' : '' ?>"><a
                     href="/<?= session('role'); ?>/settings" class="waves-effect waves-button"><span
                         class="menu-icon icon-settings"></span>
                     <p>Settings</p><span class="arrow"></span>
@@ -146,6 +146,7 @@
                     <?php if (session('role') == 'admin') : ?>
                     <li class="<?= ($title === "Website Setting") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/setting/web">Website</a></li>
                     <li class="<?= ($title === "Home Setting") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/setting/home">Home</a></li>
+                    <li class="<?= ($title === "All Slider") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/slider">Slider</a></li>
                     <li class="<?= ($title === "About Setting") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/setting/about">About</a></li>
                     <?php endif; ?>
                 </ul>
@@ -182,12 +183,12 @@
                     <p>Subscribers</p>
                 </a>
             </li>
-            <li class="<?= ($active == 'slider') ? 'active' : '' ?>">
+            <!-- <li class="<?= ($active == 'slider') ? 'active' : '' ?>">
                 <a href="/<?= session('role'); ?>/slider" class="waves-effect waves-button"><span
                         class="menu-icon icon-star"></span>
                     <p>Slider</p>
                 </a>
-            </li>
+            </li> -->
             <li class="<?= ($active == 'member') ? 'active' : '' ?>">
                 <a href="/<?= session('role'); ?>/member" class="waves-effect waves-button"><span
                         class="menu-icon icon-key"></span>

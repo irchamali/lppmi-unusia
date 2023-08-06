@@ -126,6 +126,13 @@ $routes->group('admin', ['filter' => 'authadmin'], static function ($routes) {
         $routes->get('activate/(:num)', 'Admin\SubscriberAdminController::activate/$1');
         $routes->get('deactivate/(:num)', 'Admin\SubscriberAdminController::deactivate/$1');
     });
+    // Documents Route
+    $routes->group('document', static function ($routes) {
+        $routes->get('', 'Admin\DocsAdminController::index');
+        $routes->post('', 'Admin\DocsAdminController::insert');
+        $routes->put('', 'Admin\DocsAdminController::update');
+        $routes->delete('', 'Admin\DocsAdminController::delete');
+    });
     // Slider Route
     $routes->group('slider', static function ($routes) {
         $routes->get('', 'Admin\SliderAdminController::index');
