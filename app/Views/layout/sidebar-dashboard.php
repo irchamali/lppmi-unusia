@@ -182,6 +182,12 @@
                     <p>Subscribers</p>
                 </a>
             </li>
+            <li class="<?= ($active == 'slider') ? 'active' : '' ?>">
+                <a href="/<?= session('role'); ?>/slider" class="waves-effect waves-button"><span
+                        class="menu-icon icon-star"></span>
+                    <p>Slider</p>
+                </a>
+            </li>
             <li class="<?= ($active == 'member') ? 'active' : '' ?>">
                 <a href="/<?= session('role'); ?>/member" class="waves-effect waves-button"><span
                         class="menu-icon icon-key"></span>

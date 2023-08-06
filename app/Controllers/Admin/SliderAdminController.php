@@ -13,7 +13,7 @@ class SliderAdminController extends BaseController
     {
         $this->inboxModel = new InboxModel();
         $this->commentModel = new CommentModel();
-
+        // $this->load->model('sliderModel');
         $this->sliderModel = new SliderModel();
     }
     public function index()
