@@ -126,7 +126,7 @@
                     <div class="modal-body">
 
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <input type="text" name="name" class="form-control" placeholder="Nama Dokumen" required>
                                 </div>
@@ -169,7 +169,7 @@
                         <div class="modal-body">
 
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <input type="text" name="name" value="<?= $row['docs_name']; ?>" class="form-control" placeholder="Nama Dokumen" required>
                                     </div>
