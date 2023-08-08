@@ -137,7 +137,13 @@
                                     <textarea type="url" name="link" class="form-control" placeholder="Link misal: https://drive.google.com/" required></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="category" class="form-control" placeholder="Kategori Level" required>
+                                    <label>Category</label>
+                                    <select class="form-control" name="category" required>
+                                        <option value="">-Select Option-</option>
+                                            <?php foreach ($categories as $row) : ?>
+                                                <option value="<?= $row['category_id']; ?>"><?= $row['category_name']; ?></option>
+                                            <?php endforeach; ?>
+                                    </select>
                                 </div>
 
                             </div>
