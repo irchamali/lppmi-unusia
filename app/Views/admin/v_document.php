@@ -137,11 +137,10 @@
                                     <textarea type="url" name="link" class="form-control" placeholder="Link misal: https://drive.google.com/" required></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label>Category</label>
                                     <select class="form-control" name="category" required>
-                                        <option value="">-Select Option-</option>
+                                        <option value="">-Category Option-</option>
                                             <?php foreach ($categories as $row) : ?>
-                                                <option value="<?= $row['category_id']; ?>"><?= $row['category_name']; ?></option>
+                                                <option value="<?= $row['docscategory_id']; ?>"><?= $row['docscategory_name']; ?></option>
                                             <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -185,8 +184,13 @@
                                     <div class="form-group">
                                         <textarea name="link" class="form-control" rows="2" placeholder="Share Link Google Drive" required><?= $row['docs_link']; ?></textarea>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="text" name="category" value="<?= $row['docs_category_id']; ?>" class="form-control" placeholder="Kategori Level" required>
+                                    
+                                    <select name="category" class="form-control">
+                                        <option value="">-Select Category-</option>
+                                        <?php foreach($categories as $erow): ?>
+                                        <option value="<?= $row['docs_category_id']; ?>" <?= ($row['docs_category_id'] == $erow['docscategory_id'])?'selected': '' ?>><?= $erow['docscategory_name']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
                                     </div>
 
                                 </div>
@@ -194,9 +198,7 @@
 
                         </div>
                         <div class="modal-footer">
-                            <input type="hidden" name="docs_id" value="<?= $row['docs_id']; ?>" required>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-success">Update</button>
+                            
                         </div>
                     </div>
                 </div>

@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\CommentModel;
 use App\Models\InboxModel;
 use App\Models\DocumentModel;
+use App\Models\DocsCategoryModel;
 
 class DocsAdminController extends BaseController
 {
@@ -13,8 +14,8 @@ class DocsAdminController extends BaseController
     {
         $this->inboxModel = new InboxModel();
         $this->commentModel = new CommentModel();
-
         $this->documentModel = new DocumentModel();
+        $this->docscategoryModel = new DocscategoryModel();
     }
     public function index()
     {
@@ -29,7 +30,7 @@ class DocsAdminController extends BaseController
             'comments' => $this->commentModel->where('comment_status', 0)->findAll(),
             'helper_text' => helper('text'),
             'breadcrumbs' => $this->request->getUri()->getSegments(),
-
+            'categories' => $this->docscategoryModel->findAll(),
             'documents' => $this->documentModel->findAll()
         ];
 
@@ -70,7 +71,7 @@ class DocsAdminController extends BaseController
         $name = strip_tags(htmlspecialchars($this->request->getPost('name'), ENT_QUOTES));
         $unit = strip_tags(htmlspecialchars($this->request->getPost('unit'), ENT_QUOTES));
         $link = strip_tags(htmlspecialchars($this->request->getPost('link'), ENT_QUOTES));
-        $category = strip_tags(htmlspecialchars($this->request->getPost('category'), ENT_QUOTES));
+        $category = strip_tags(htmlspecialchars($this->request->getPost('category'), ENT_QUOTES)); print_r($category);die();
         // Simpan ke database
         $this->documentModel->save([
             'docs_name' => $name,
@@ -83,6 +84,8 @@ class DocsAdminController extends BaseController
     }
     public function update()
     {
+        // $docs_id = $this->request->getPost('docs_id');
+        // Validasi
         if (!$this->validate([
             'name' => [
                 'rules' => 'required',
@@ -104,9 +107,10 @@ class DocsAdminController extends BaseController
                 ]
             ],
             'category' => [
-                'rules' => 'required',
+                'rules' => 'required|numeric',
                 'errors' => [
-                    'required' => 'Kolom {field} harus diisi!'
+                    'required' => 'Kolom {field} harus diisi!',
+                    'numeric' => 'inputan harus angka'
                 ]
             ]
         ])) {
