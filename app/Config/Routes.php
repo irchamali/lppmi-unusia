@@ -133,6 +133,13 @@ $routes->group('admin', ['filter' => 'authadmin'], static function ($routes) {
         $routes->put('', 'Admin\DocsAdminController::update');
         $routes->delete('', 'Admin\DocsAdminController::delete');
     });
+    // Documents Category Route
+    $routes->group('docscategory', static function ($routes) {
+        $routes->get('', 'Admin\DocsCategoryAdminController::index');
+        $routes->post('', 'Admin\DocsCategoryAdminController::insert');
+        $routes->put('', 'Admin\DocsCategoryAdminController::update');
+        $routes->delete('', 'Admin\DocsCategoryAdminController::delete');
+    });
     // Slider Route
     $routes->group('slider', static function ($routes) {
         $routes->get('', 'Admin\SliderAdminController::index');

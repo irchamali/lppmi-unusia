@@ -86,6 +86,8 @@ abstract class BaseController extends Controller
                 $this->active = 'subscriber';
             } elseif (url_is('admin/document*')) {
                 $this->active = 'document';
+            } elseif (url_is('admin/docscategory*')) {
+                $this->active = 'docscategory';
             } elseif (url_is('admin/slider*')) {
                 $this->active = 'slider';
             } elseif (url_is('admin/member*')) {
@@ -114,6 +116,8 @@ abstract class BaseController extends Controller
                 $this->active = 'subscriber';
             } elseif (url_is('admin/document*')) {
                 $this->active = 'document';
+            } elseif (url_is('admin/docscategory*')) {
+                $this->active = 'docscategory';
             } elseif (url_is('author/slider*')) {
                 $this->active = 'slider';
             } elseif (url_is('author/member*')) {

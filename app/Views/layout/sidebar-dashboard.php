@@ -162,7 +162,7 @@
                     <li class="<?= ($title === "All Tag") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/tag">Tag</a></li>
                 </ul>
             </li>
-            <li class="droplink <?= ($title === "All Document") ? 'active open' : '' ?><?= ($title === "About Setting") ? 'active open' : '' ?>"><a
+            <li class="droplink <?= ($title === "All Document") ? 'active open' : '' ?><?= ($title === "Category of Document") ? 'active open' : '' ?>"><a
                     href="/<?= session('role'); ?>/document" class="waves-effect waves-button"><span
                         class="menu-icon icon-link"></span>
                     <p>Documents</p><span class="arrow"></span>
@@ -170,7 +170,7 @@
                 <ul class="sub-menu">
                     <?php if (session('role') == 'admin') : ?>
                     <li class="<?= ($title === "All Document") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/document">Document</a></li>
-                    <li class="<?= ($title === "Category Document") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/docscategory/about">Category</a></li>
+                    <li class="<?= ($title === "Category of Document") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/docscategory">Category</a></li>
                     <?php endif; ?>
                 </ul>
             </li>
