@@ -34,9 +34,33 @@ class DocsCategoryAdminController extends BaseController
 
         return view('admin/v_docscategory', $data);
     }
-    public function save()
+    
+    public function edit()
     {
-        $category = strip_tags(htmlspecialchars($this->request->getPost('category'), ENT_QUOTES));
+        $id       = $this->request->getPost('kode');
+        $category = strip_tags(htmlspecialchars($this->request->getPost('categoryedit'), ENT_QUOTES));
+        $string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $category);
+        $trim     = trim($string);
+        $slug     = strtolower(str_replace(" ", "-", $trim));
+        $this->docscategoryModel->save([
+            'docscategory_id' => $id,
+            'docscategory_name' => $category,
+            'docscategory_slug' => $slug
+        ]);
+        return redirect()->to('admin/docscategory')->with('msg', 'info');
+    }
+
+    public function delete()
+    {
+        $id = $this->request->getPost('id');
+        $this->docscategoryModel->delete($id);
+
+        return redirect()->to('admin/docscategory')->with('msg', 'success-delete');
+    }
+
+    public function insert(){
+        $id = $this->request->getPost('id');
+        $category = strip_tags(htmlspecialchars($this->request->getPost('categoryadd'), ENT_QUOTES));
         $string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $category);
         $trim     = trim($string);
         $slug     = strtolower(str_replace(" ", "-", $trim));
@@ -46,26 +70,5 @@ class DocsCategoryAdminController extends BaseController
         ]);
 
         return redirect()->to('admin/docscategory')->with('msg', 'success');
-    }
-    public function edit()
-    {
-        $id          = $this->request->getPost('kode');
-        $category = strip_tags(htmlspecialchars($this->request->getPost('category2'), ENT_QUOTES));
-        $string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $category);
-        $trim     = trim($string);
-        $slug     = strtolower(str_replace(" ", "-", $trim));
-        $this->categoryModel->save([
-            'docscategory_id' => $id,
-            'docscategory_name' => $category,
-            'docscategory_slug' => $slug
-        ]);
-        return redirect()->to('admin/docscategory')->with('msg', 'info');
-    }
-    public function delete()
-    {
-        $id = $this->request->getPost('id');
-        $this->docscategoryModel->delete($id);
-
-        return redirect()->to('admin/docscategory')->with('msg', 'success-delete');
     }
 }

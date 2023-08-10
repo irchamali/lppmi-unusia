@@ -188,17 +188,19 @@
                                     <select name="category" class="form-control">
                                         <option value="">-Select Category-</option>
                                         <?php foreach($categories as $erow): ?>
-                                        <option value="<?= $row['docs_category_id']; ?>" <?= ($row['docs_category_id'] == $erow['docscategory_id'])?'selected': '' ?>><?= $erow['docscategory_name']; ?></option>
+                                        <option value="<?= $erow['docscategory_id']; ?>" <?= ($row['docs_category_id'] == $erow['docscategory_id'])?'selected': '' ?>><?= $erow['docscategory_name']; ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                     </div>
 
                                 </div>
                             </div>
+                            <div class="modal-footer">
+                            <input type="hidden" name="docs_id" value="<?= $row['docs_id']; ?>" required>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-success">Update</button>
+                            </div>
 
-                        </div>
-                        <div class="modal-footer">
-                            
                         </div>
                     </div>
                 </div>

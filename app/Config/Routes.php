@@ -137,7 +137,7 @@ $routes->group('admin', ['filter' => 'authadmin'], static function ($routes) {
     $routes->group('docscategory', static function ($routes) {
         $routes->get('', 'Admin\DocsCategoryAdminController::index');
         $routes->post('', 'Admin\DocsCategoryAdminController::insert');
-        $routes->put('', 'Admin\DocsCategoryAdminController::update');
+        $routes->put('', 'Admin\DocsCategoryAdminController::edit');
         $routes->delete('', 'Admin\DocsCategoryAdminController::delete');
     });
     // Slider Route

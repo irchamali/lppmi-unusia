@@ -102,7 +102,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <input type="text" name="category" class="form-control" placeholder="Category Name" required>
+                            <input type="text" name="categoryadd" class="form-control" placeholder="Category Name" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -115,6 +115,7 @@
     </form>
 
     <!--EDIT RECORD MODAL-->
+    
     <form action="/<?= session('role'); ?>/docscategory" method="POST">
         <input type="hidden" name="_method" value="PUT">
         <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -126,8 +127,9 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <input type="text" name="category2" class="form-control" placeholder="Category Name" required>
+                            <input type="text" name="categoryedit" class="form-control" placeholder="Category Name" required>
                         </div>
+                        <!--  -->
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="kode" required>
@@ -191,7 +193,7 @@
                 var id = $(this).data('id');
                 var name = $(this).data('category');
                 $('[name="kode"]').val(id);
-                $('[name="category2"]').val(name);
+                $('[name="categoryedit"]').val(name);
                 $('#EditModal').modal('show');
             });
 

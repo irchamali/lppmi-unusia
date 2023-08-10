@@ -71,7 +71,7 @@ class DocsAdminController extends BaseController
         $name = strip_tags(htmlspecialchars($this->request->getPost('name'), ENT_QUOTES));
         $unit = strip_tags(htmlspecialchars($this->request->getPost('unit'), ENT_QUOTES));
         $link = strip_tags(htmlspecialchars($this->request->getPost('link'), ENT_QUOTES));
-        $category = strip_tags(htmlspecialchars($this->request->getPost('category'), ENT_QUOTES)); print_r($category);die();
+        $category = strip_tags(htmlspecialchars($this->request->getPost('category'), ENT_QUOTES)); 
         // Simpan ke database
         $this->documentModel->save([
             'docs_name' => $name,
@@ -84,7 +84,7 @@ class DocsAdminController extends BaseController
     }
     public function update()
     {
-        // $docs_id = $this->request->getPost('docs_id');
+        $docs_id = $this->request->getPost('docs_id'); 
         // Validasi
         if (!$this->validate([
             'name' => [
@@ -122,6 +122,8 @@ class DocsAdminController extends BaseController
         $link = strip_tags(htmlspecialchars($this->request->getPost('link'), ENT_QUOTES));
         $category = strip_tags(htmlspecialchars($this->request->getPost('category'), ENT_QUOTES));
         // Cek Foto
+
+//print_r($category);die();
 
         $this->documentModel->update($docs_id, [
             'docs_name' => $name,
