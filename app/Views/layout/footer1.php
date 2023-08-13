@@ -60,7 +60,7 @@
           <!-- <div class="col-sm-6 mt-3 mt-sm-0">
             <p class="lh-lg mb-0 fw-semi-bold">&copy; Copyright UNUSIA <?= date('Y'); ?></p>
           </div> -->
-          <!-- <div class="col text-sm-end mt-3 mt-sm-0"><span class="fw-semi-bold">Designed by </span><a class="text-white" href="https://themewagon.com/" target="_blank">Themewagon</a></div> -->
+          <div class="col text-sm-end mt-3 mt-sm-0"><span class="fw-semi-bold">Designed by </span><a class="text-white" href="https://ti.unusia.ac.id/" target="_blank">UnusiaLabs</a></div>
         </div>
       </div>
     </footer>

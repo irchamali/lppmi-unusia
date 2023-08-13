@@ -103,7 +103,7 @@
                     </ul>
                 </li>
               
-              <li class="nav-item dropdown"><a class="nav-link" href="/news" role="button">Berita</a>
+              <li class="nav-item dropdown"><a class="nav-link" href="/post" role="button">Berita</a>
               </li>
 
               <li class="nav-item dropdown"><a class="nav-link" href="/contact" role="button">Kontak</a>
