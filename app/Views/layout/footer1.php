@@ -1,18 +1,19 @@
 <!-- <section> begin ============================-->
+    <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i>Cek Atas</a>
+    <!-- <a class="scroll-top" href="#">Up</a> -->
+
     <section style="background-color: #3D4C6F">
 
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-6">
             <div class="bg-primary text-white p-5 p-lg-6 rounded-3">
-              <h4 class="text-white fs-1 fs-lg-2 mb-1">LPPMI UNUSIA</h4><br>
+              <h4 class="text-white fs-1 fs-lg-2 mb-1"><?= $site['site_name']; ?></h4><br>
               <ul class="list-unstyled">
-                <li class="mb-0"><a class="text-decoration-none d-flex align-items-center" href="#!"> <span class="brand-icon me-3"><span class="fas fa-star"></span></span>
-                  <p class="fs-0 text-white mb-0 d-inline-block">Lembaga Pengawasan dan Penjaminan Mutu Internal - Universitas Nahdlatul Ulama Indonesia</p>
+                <li class="mb-0"><a class="text-decoration-none d-flex align-items-center" href="#"> <span class="brand-icon me-3"><span class="fas fa-star"></span></span>
+                  <p class="fs-0 text-white mb-0 d-inline-block"><?= $site['site_description']; ?></p>
                 </a></li>
-                
               </ul>
-              
             </div>
           </div>
           <div class="col-lg-6 mt-4 mt-lg-0">
@@ -50,6 +51,7 @@
 
     </section>
     <!-- <section> close ============================-->
+    
     <!-- ============================================-->
 
 
@@ -65,6 +67,9 @@
       </div>
     </footer>
 
+    
+    <!-- Template Main JS File -->
+    <!-- <script src="/assets/frontend/js/main.js"></script> -->
 
     <!-- ===============================================-->
     <!--    JavaScripts-->

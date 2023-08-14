@@ -34,7 +34,7 @@
                         <p class="text-primary pt-4 mb-5 fs-1 fs-md-2 lh-xs" data-zanim-xs='{"delay":0.1}'><?= $slider['slider_subtitle']; ?></p>
                         </div>
                         <div class="overflow-hidden">
-                        <div data-zanim-xs='{"delay":0.2}'><a class="btn btn-primary me-3 mt-3" href="<?= $slider['slider_link']; ?>">Read more<span class="fas fa-chevron-right ms-2"></span></a><a class="btn btn-warning mt-3" href="contact.html">Contact us<span class="fas fa-chevron-right ms-2"></span></a></div>
+                        <div data-zanim-xs='{"delay":0.2}'><a class="btn btn-primary me-3 mt-3" href="<?= $slider['slider_link']; ?>">Read more<span class="fas fa-chevron-right ms-2"></span></a><a class="btn btn-warning mt-3" href="/contact">Contact us<span class="fas fa-chevron-right ms-2"></span></a></div>
                         </div>
                     </div>
                     </div>
@@ -58,7 +58,7 @@
         <div class="container">
           <div class="row justify-content-center text-center">
             <div class="col-10 col-md-6">
-              <h3 class="fs-2 fs-lg-3"><?= $about['about_name']; ?></h3>
+              <h3 class="fs-2 fs-lg-3"><?= $site['site_name']; ?></h3>
               <p class="px-lg-4 mt-3"><?= $site['site_description']; ?></p>
               <hr class="short" data-zanim-xs='{"from":{"opacity":0,"width":0},"to":{"opacity":1,"width":"4.20873rem"},"duration":0.8}' data-zanim-trigger="scroll" />
             </div>
