@@ -123,7 +123,7 @@ class DocsAdminController extends BaseController
         $category = strip_tags(htmlspecialchars($this->request->getPost('category'), ENT_QUOTES));
         // Cek Foto
 
-//print_r($category);die();
+        //print_r($category);die();
 
         $this->documentModel->update($docs_id, [
             'docs_name' => $name,
@@ -134,6 +134,7 @@ class DocsAdminController extends BaseController
         ]);
         return redirect()->to('/admin/document')->with('msg', 'info');
     }
+    
     public function delete()
     {
         $docs_id = $this->request->getPost('kode');

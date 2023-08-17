@@ -23,6 +23,7 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Nama dokumen</th>
+                                                <th>Link Drive</th>
                                                 <th>Kategori</th>
                                                 <th>Action</th>
                                             </tr>
@@ -30,20 +31,20 @@
                                         <tbody id="body-table">
                                             <?php
                                             $no = 0;
-                                            foreach ($members as $row) :
+                                            foreach ($documents as $row) :
                                                 $no++;
                                             ?>
                                                 <tr>
                                                     <td style="vertical-align: middle;"><?= $no; ?></td>
-                                                    <td style="vertical-align: middle;"><?= $row['member_name']; ?>
-                                                    </td>
-                                                    <td style="vertical-align: middle;"><?= $row['member_link']; ?>
+                                                    <td style="vertical-align: middle;"><?= $row['docs_name']; ?></td>
+                                                    <td style="vertical-align: middle;"><?= $row['docs_link']; ?></td>
+                                                    <td style="vertical-align: middle;"><?= $row['docs_category_id']; ?></td>
                                                     <td style="vertical-align: middle;">
                                                         <div class="btn-group">
-                                                            <a href="#" class="btn btn-success btn-md"><i class="bi bi-folder"></i></a>
+                                                            <a href="<?= $row['docs_link']; ?>" class="btn btn-success btn-md" download><i class="bi bi-download"></i></a>
                                                         </div>
                                                         <div class="btn-group">
-                                                            <a href="#" class="btn btn-primary btn-xs"><i class="bi bi-eye"></i></a>
+                                                            <a href="<?= $row['docs_link']; ?>" target="_blank" class="btn btn-primary btn-xs" alt="lihat"><i class="bi bi-eye"></i></a>
                                                         </div>
                                                     </td>
                                                 </tr>
