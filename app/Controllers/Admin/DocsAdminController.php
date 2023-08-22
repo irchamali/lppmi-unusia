@@ -51,6 +51,13 @@ class DocsAdminController extends BaseController
                     'required' => 'Kolom {field} harus diisi!'
                 ]
             ],
+            'year' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Kolom {field} harus diisi angka tahun!',
+                    'required' => 'Kolom {field} harus diisi!'
+                ]
+            ],
             'link' => [
                 'rules' => 'required|valid_url_strict',
                 'errors' => [
@@ -70,12 +77,14 @@ class DocsAdminController extends BaseController
         
         $name = strip_tags(htmlspecialchars($this->request->getPost('name'), ENT_QUOTES));
         $unit = strip_tags(htmlspecialchars($this->request->getPost('unit'), ENT_QUOTES));
+        $year = strip_tags(htmlspecialchars($this->request->getPost('year'), ENT_QUOTES));
         $link = strip_tags(htmlspecialchars($this->request->getPost('link'), ENT_QUOTES));
         $category = strip_tags(htmlspecialchars($this->request->getPost('category'), ENT_QUOTES)); 
         // Simpan ke database
         $this->documentModel->save([
             'docs_name' => $name,
             'docs_unit' => $unit,
+            'docs_year' => $year,
             'docs_link' => $link,
             'docs_category_id' => $category
             
@@ -99,6 +108,13 @@ class DocsAdminController extends BaseController
                     'required' => 'Kolom {field} harus diisi!'
                 ]
             ],
+            'year' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Kolom {field} harus diisi!',
+                    'numeric' => 'inputan harus angka'
+                ]
+            ],
             'link' => [
                 'rules' => 'required|valid_url_strict',
                 'errors' => [
@@ -119,6 +135,7 @@ class DocsAdminController extends BaseController
         $docs_id = strip_tags(htmlspecialchars($this->request->getPost('docs_id'), ENT_QUOTES));
         $name = strip_tags(htmlspecialchars($this->request->getPost('name'), ENT_QUOTES));
         $unit = strip_tags(htmlspecialchars($this->request->getPost('unit'), ENT_QUOTES));
+        $year = strip_tags(htmlspecialchars($this->request->getPost('year'), ENT_QUOTES));
         $link = strip_tags(htmlspecialchars($this->request->getPost('link'), ENT_QUOTES));
         $category = strip_tags(htmlspecialchars($this->request->getPost('category'), ENT_QUOTES));
         // Cek Foto
@@ -128,6 +145,7 @@ class DocsAdminController extends BaseController
         $this->documentModel->update($docs_id, [
             'docs_name' => $name,
             'docs_unit' => $unit,
+            'docs_year' => $year,
             'docs_link' => $link,
             'docs_category_id' => $category
             

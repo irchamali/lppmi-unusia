@@ -62,6 +62,7 @@
                                                 <th>No</th>
                                                 <th>Name</th>
                                                 <th>Unit</th>
+                                                <th>Tahun</th>
                                                 <th>Link</th>
                                                 <th>Category</th>
                                                 <th>Action</th>
@@ -78,6 +79,8 @@
                                                     <td style="vertical-align: middle;"><?= $row['docs_name']; ?>
                                                     </td>
                                                     <td style="vertical-align: middle;"><?= $row['docs_unit']; ?>
+                                                    </td>
+                                                    <td style="vertical-align: middle;"><?= $row['docs_year']; ?>
                                                     </td>
                                                     <td style="vertical-align: middle;"><?= $row['docs_link']; ?>
                                                     </td>
@@ -134,6 +137,9 @@
                                     <input type="text" name="unit" class="form-control" placeholder="Nama Institusi/Lembaga/Unit/Fakultas/Prodi" required>
                                 </div>
                                 <div class="form-group">
+                                    <input type="text" name="year" class="form-control" placeholder="Tahun Pembuatan: YYYY" required>
+                                </div>
+                                <div class="form-group">
                                     <textarea type="url" name="link" class="form-control" placeholder="Link misal: https://drive.google.com/" required></textarea>
                                 </div>
                                 <div class="form-group">
@@ -180,6 +186,9 @@
                                     </div>
                                     <div class="form-group">
                                         <input type="text" name="unit" value="<?= $row['docs_unit']; ?>" class="form-control" placeholder="Institusi/Lembaga/Unit/Fakultas/Prodi" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="year" value="<?= $row['docs_year']; ?>" class="form-control" placeholder="Tahun Pembuatan YYYY" required>
                                     </div>
                                     <div class="form-group">
                                         <textarea name="link" class="form-control" rows="2" placeholder="Share Link Google Drive" required><?= $row['docs_link']; ?></textarea>
