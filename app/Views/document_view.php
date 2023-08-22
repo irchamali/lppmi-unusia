@@ -22,8 +22,8 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama dokumen</th>
-                                                <th>Link Drive</th>
+                                                <th>Tahun</th>
+                                                <th>Nama Dokumen</th>                    
                                                 <th>Kategori</th>
                                                 <th>Action</th>
                                             </tr>
@@ -36,8 +36,8 @@
                                             ?>
                                                 <tr>
                                                     <td style="vertical-align: middle;"><?= $no; ?></td>
-                                                    <td style="vertical-align: middle;"><?= $row['docs_name']; ?></td>
-                                                    <td style="vertical-align: middle;"><a href="<?= $row['docs_link']; ?>"><?= $row['docs_link']; ?></a></td>
+                                                    <td style="vertical-align: middle;"><?= $row['docs_year']; ?></td>
+                                                    <td style="vertical-align: middle;"><a href="<?= $row['docs_link']; ?>"><?= $row['docs_name']; ?></a></td>
                                                     <td style="vertical-align: middle;"><?= $row['docscategory_name']; ?></td>
                                                     <td style="vertical-align: middle;">
                                                         <!-- <div class="btn-group">
