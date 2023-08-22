@@ -37,14 +37,14 @@
                                                 <tr>
                                                     <td style="vertical-align: middle;"><?= $no; ?></td>
                                                     <td style="vertical-align: middle;"><?= $row['docs_name']; ?></td>
-                                                    <td style="vertical-align: middle;"><?= $row['docs_link']; ?></td>
-                                                    <td style="vertical-align: middle;"><?= $row['docs_category_id']; ?></td>
+                                                    <td style="vertical-align: middle;"><a href="<?= $row['docs_link']; ?>"><?= $row['docs_link']; ?></a></td>
+                                                    <td style="vertical-align: middle;"><?= $row['docscategory_name']; ?></td>
                                                     <td style="vertical-align: middle;">
-                                                        <div class="btn-group">
+                                                        <!-- <div class="btn-group">
                                                             <a href="<?= $row['docs_link']; ?>" class="btn btn-success btn-md" download><i class="bi bi-download"></i></a>
-                                                        </div>
+                                                        </div> -->
                                                         <div class="btn-group">
-                                                            <a href="<?= $row['docs_link']; ?>" target="_blank" class="btn btn-primary btn-xs" alt="lihat"><i class="bi bi-eye"></i></a>
+                                                            <a href="<?= $row['docs_link']; ?>" target="_blank" class="btn btn-warning btn-xs" alt="lihat"><i class="bi bi-eye"></i></a>
                                                         </div>
                                                     </td>
                                                 </tr>
