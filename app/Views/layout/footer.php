@@ -76,6 +76,17 @@
 <!-- Template Main JS File -->
 <script src="/assets/frontend/js/main.js"></script>
 
+<!-- DataTables -->
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#mytable').DataTable();
+    });
+</script>
+
 </body>
 
 </html>

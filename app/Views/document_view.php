@@ -18,7 +18,7 @@
                             <div class="panel-body">
                                 <!-- <button type="button" class="btn btn-success m-b-sm" data-toggle="modal" data-target="#myModal">Add New Member</button> -->
                                 <div class="table-responsive">
-                                    <table id="mytable" class="display table" style="width: 100%; ">
+                                    <table id="mytable" class="display table table-striped table-hover" style="width: 100%; ">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
