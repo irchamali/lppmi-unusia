@@ -50,7 +50,7 @@
     </div>
     <div class="sticky-top navbar-elixir">
       <div class="container">
-        <nav class="navbar navbar-expand-lg"> <a class="navbar-brand" href="/"><img src="/assets/elixir/assets/img/logo-dark.png" alt="logo" /></a>
+        <nav class="navbar navbar-expand-lg"> <a class="navbar-brand" href="/"><img src="/assets/elixir/assets/img/logo-dark1.png" alt="logo" /></a>
           <button class="navbar-toggler p-0" type="button" data-bs-toggle="collapse" data-bs-target="#primaryNavbarCollapse" aria-controls="primaryNavbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><span class="hamburger hamburger--emphatic"><span class="hamburger-box"><span class="hamburger-inner"></span></span></span></button>
           <div class="collapse navbar-collapse" id="primaryNavbarCollapse">
             <ul class="navbar-nav py-3 py-lg-0 mt-1 mb-2 my-lg-0 ms-lg-n1">
@@ -82,7 +82,7 @@
                     </ul>
                 </li>
               
-              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle dropdown-indicator" href="JavaScript:void(0)" role="button" data-bs-toggle="dropdown" aria-expanded="false">Forumulir</a>
+              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle dropdown-indicator" href="JavaScript:void(0)" role="button" data-bs-toggle="dropdown" aria-expanded="false">Formulir</a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">Daftar Tilik AMI</a></li>
                     <li><a class="dropdown-item" href="#">Daftar Tilik Audit Non Akademik</a></li>

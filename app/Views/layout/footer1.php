@@ -58,7 +58,7 @@
     <footer class="footer bg-primary text-center py-4">
       <div class="container">
         <div class="row align-items-center opacity-85 text-white">
-          <div class="col-sm-3 text-sm-start"><a href="#"><img src="/assets/elixir/assets/img/logo-light.png" alt="logo" /></a></div>
+          <div class="col-sm-3 text-sm-start"><a href="#"><img src="/assets/elixir/assets/img/logo-light1.png" alt="logo" /></a></div>
           <!-- <div class="col-sm-6 mt-3 mt-sm-0">
             <p class="lh-lg mb-0 fw-semi-bold">&copy; Copyright UNUSIA <?= date('Y'); ?></p>
           </div> -->
