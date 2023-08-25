@@ -74,7 +74,7 @@
                                     <div class="form-group">
                                         <label for="input1" class="col-sm-2 control-label">Description</label>
                                         <div class="col-sm-10">
-                                            <textarea name="description" class="form-control" id="summernote" placeholder="Description"><?= $abouts['about_description']; ?></textarea>
+                                            <textarea name="description" class="form-control" rows="6" placeholder="Description"><?= $abouts['about_description']; ?></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
