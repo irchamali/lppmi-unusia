@@ -128,9 +128,9 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="input1" class="col-sm-2 control-label">Pinterest</label>
+                                        <label for="input1" class="col-sm-2 control-label">Alamat</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="pinterest" class="form-control" value="<?= $sites['site_pinterest']; ?>" id="input1" placeholder="Pinterest URL">
+                                            <input type="text" name="address" class="form-control" value="<?= $sites['site_address']; ?>" id="input1" placeholder="Alamat Kampus">
                                         </div>
                                     </div>
 

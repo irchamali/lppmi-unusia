@@ -42,7 +42,7 @@
     <div class="bg-primary py-3 d-none d-sm-block text-white fw-bold">
       <div class="container">
         <div class="row align-items-center gx-4">
-          <div class="col-auto d-none d-lg-block fs--1"><span class="fas fa-map-marker-alt text-warning me-2" data-fa-transform="grow-3"></span><?= $about['about_alamat']; ?></div>
+          <div class="col-auto d-none d-lg-block fs--1"><span class="fas fa-map-marker-alt text-warning me-2" data-fa-transform="grow-3"></span><?= $site['site_address']; ?></div>
           <div class="col-auto ms-md-auto order-md-2 d-none d-sm-flex fs--1 align-items-center"><span class="fas fa-inbox text-warning me-2" data-fa-transform="grow-3"></span><a class="ms-2 fs--1 d-inline text-white fw-bold" href="mailto:<?= $site['site_mail']; ?>"><?= $site['site_mail']; ?></a></div>
           <div class="col-auto"><span class="fas fa-phone-alt text-warning" data-fa-transform="shrink-3"></span><a class="ms-2 fs--1 d-inline text-white fw-bold" href="tel:<?= $site['site_wa']; ?>"><?= $site['site_wa']; ?></a></div>
         </div>
@@ -61,10 +61,10 @@
                         <li><a class="dropdown-item" href="#">Strategy Map</a></li>
                         <li><a class="dropdown-item" href="#">Milestone</a></li>
                         <li><a class="dropdown-item" href="#">Fungsi dan Tugas</a></li>
-                        <li><a class="dropdown-item" href="#">Struktur Organisas</a></li>
+                        <li><a class="dropdown-item" href="#">Struktur Organisasi</a></li>
                         <li><a class="dropdown-item" href="#">Personel LPPMI</a></li>
-                        <li><a class="dropdown-item" href="#">Alur Kerja dan Pertanggungjawaban</a></li>
-                        <li><a class="dropdown-item" href="#">Monitoring dan Evaluasi Rutin</a></li>                    
+                        <li><a class="dropdown-item" href="#">Alur Kerja dan PJ</a></li>
+                        <li><a class="dropdown-item" href="#">Monev Rutin</a></li>                    
                     </ul>
                 </li>
 

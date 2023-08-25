@@ -24,7 +24,7 @@
                             <i class="bi bi-geo-alt flex-shrink-0"></i>
                             <div>
                                 <h4>Lokasi:</h4>
-                                <p><?= $about['about_alamat']; ?></p>
+                                <p><?= $site['site_address']; ?></p>
                             </div>
                         </div><!-- End Info Item -->
 

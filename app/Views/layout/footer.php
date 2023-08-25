@@ -41,9 +41,7 @@
             <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
                 <h4>Sekretariat</h4>
                 <p>
-                    <?= $about['about_alamat']; ?><br>
-                    <!-- <strong>Phone:</strong> <a href="tel:+<?= $site['site_wa']; ?>"><?= $site['site_wa']; ?></a><br> -->
-                    <!-- <strong>Email:</strong> <a href="mailto:<?= $site['site_mail']; ?>"><?= $site['site_mail']; ?></a><br> -->
+                    <?= $site['site_address']; ?><br>
                 </p>
 
             </div>

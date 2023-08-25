@@ -98,7 +98,7 @@ class SettingAdminController extends BaseController
                     'valid_url_strict' => 'inputan harus berupa link'
                 ]
             ],
-            'pinterest' => [
+            'address' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Kolom {field} harus diisi!'
@@ -153,9 +153,10 @@ class SettingAdminController extends BaseController
         $instagram = strip_tags(htmlspecialchars($this->request->getPost('instagram'), ENT_QUOTES));
         $twitter = strip_tags(htmlspecialchars($this->request->getPost('twitter'), ENT_QUOTES));
         $linkedin = strip_tags(htmlspecialchars($this->request->getPost('linkedin'), ENT_QUOTES));
-        $pinterest = $this->request->getPost('pinterest');
+        // $pinterest = $this->request->getPost('pinterest');
         $wa = strip_tags(htmlspecialchars($this->request->getPost('wa'), ENT_QUOTES));
         $mail = strip_tags(htmlspecialchars($this->request->getPost('mail'), ENT_QUOTES));
+        $address = strip_tags(htmlspecialchars($this->request->getPost('address'), ENT_QUOTES));
 
         // Cek Foto
         $data = $this->siteModel->find($site_id);
@@ -195,7 +196,7 @@ class SettingAdminController extends BaseController
             'site_twitter' => $twitter,
             'site_instagram' => $instagram,
             'site_linkedin' => $linkedin,
-            'site_pinterest' => $pinterest,
+            'site_address' => $address,
             'site_wa' => $wa,
             'site_mail' => $mail,
         ]);
