@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title><?= $site['site_name']; ?> | <?= $site['site_description']; ?></title>
+  <title><?= $title; ?> - <?= $site['site_name']; ?></title>
   <meta content="<?= $post['post_description'] ?? $site['site_description']; ?>" name="description">
   <meta content="UNUSIA, LPPMI, LPPMI UNUSIA, NU, Universitas Nahdlatul Ulama Indonesia" name="keywords">
 
