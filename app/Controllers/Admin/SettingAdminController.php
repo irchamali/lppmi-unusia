@@ -356,7 +356,13 @@ class SettingAdminController extends BaseController
                     'alpha_space' => 'inputan tidak boleh mengandung karakter aneh'
                 ]
             ],
-            'alamat' => [
+            'visi' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kolom {field} harus diisi!'
+                ]
+            ],
+            'misi' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Kolom {field} harus diisi!'
@@ -382,7 +388,8 @@ class SettingAdminController extends BaseController
         // Inisiasi
         $about_id = strip_tags(htmlspecialchars($this->request->getPost('about_id'), ENT_QUOTES));
         $name = strip_tags(htmlspecialchars($this->request->getPost('name'), ENT_QUOTES));
-        $alamat = strip_tags(htmlspecialchars($this->request->getPost('alamat'), ENT_QUOTES));
+        $visi = strip_tags(htmlspecialchars($this->request->getPost('visi'), ENT_QUOTES));
+        $misi = strip_tags(htmlspecialchars($this->request->getPost('misi'), ENT_QUOTES));
         $description = strip_tags(htmlspecialchars($this->request->getPost('description'), ENT_QUOTES));
 
         // Cek Foto
@@ -400,7 +407,8 @@ class SettingAdminController extends BaseController
             'about_name' => $name,
             'about_image' => $namaImgAbout,
             'about_description' => $description,
-            'about_alamat' => $alamat
+            'about_visi' => $visi,
+            'about_misi' => $misi
         ]);
         return redirect()->to('/admin/setting/about')->with('msg', 'success');
     }

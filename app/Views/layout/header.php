@@ -72,9 +72,19 @@
       <nav id="navbar" class="navbar">
         <ul>
           <!-- <li><a href="#hero">Home</a></li> -->
-          <li><a href="/about">Tentang</a></li>
-          <li><a href="#services">Akreditasi</a></li>
-          <li class="dropdown"><a href="#"><span>Dokumen</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li class="dropdown"><a href="/about"><span>Tentang</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="/about">Profil</a></li>
+              <li><a href="#">Strategy Map</a></li>
+              <li><a href="#">Milestone</a></li>
+              <li><a href="#">Fungsi dan Tugas</a></li>
+              <li><a href="#">Struktur Organisasi</a></li>
+              <li><a href="#">Alur Kerja</a></li>
+              <li><a href="#">Monev Rutin</a></li>
+            </ul>
+          </li>
+          <li><a href="/akreditasi">Akreditasi</a></li>
+          <li class="dropdown"><a href="/document"><span>Dokumen</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
               <li class="dropdown"><a href="#"><span>Drop Down 2</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>

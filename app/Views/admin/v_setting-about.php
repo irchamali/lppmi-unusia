@@ -52,15 +52,27 @@
                             <div class="panel panel-white">
                                 <div class="panel-body">
                                     <div class="form-group">
-                                        <label for="name" class="col-sm-2 control-label">Name</label>
+                                        <label for="name" class="col-sm-2 control-label">Nama</label>
                                         <div class="col-sm-10">
                                             <input type="text" name="name" class="form-control" value="<?= $abouts['about_name']; ?>" id="name" placeholder="Nama Organisasi">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="alamat" class="col-sm-2 control-label">Alamat</label>
+                                        <label for="input1" class="col-sm-2 control-label">Visi</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="alamat" class="form-control" value="<?= $abouts['about_alamat']; ?>" id="alamat" placeholder="Alamat Organisasi">
+                                            <textarea name="visi" class="form-control" rows="2" placeholder="visi"><?= $abouts['about_visi']; ?></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input1" class="col-sm-2 control-label">Misi</label>
+                                        <div class="col-sm-10">
+                                            <textarea name="misi" class="form-control" rows="14" placeholder="Misi"><?= $abouts['about_misi']; ?></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input1" class="col-sm-2 control-label">Profil Singkat</label>
+                                        <div class="col-sm-10">
+                                            <textarea name="description" class="form-control" rows="6" placeholder="Description"><?= $abouts['about_description']; ?></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -69,12 +81,6 @@
                                             <input type="file" name="img_about" class="form-control" id="input1">
                                             <p class="help-block">Image Heading harus beresolusi 456 x 470 Pixels.</p>
                                             <img src="/assets/frontend/img/<?= $abouts['about_image']; ?>" width="300" class="thumbnail">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="input1" class="col-sm-2 control-label">Description</label>
-                                        <div class="col-sm-10">
-                                            <textarea name="description" class="form-control" rows="6" placeholder="Description"><?= $abouts['about_description']; ?></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">

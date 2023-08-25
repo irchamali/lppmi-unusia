@@ -57,12 +57,12 @@
 
                 <li class="nav-item dropdown"><a class="nav-link dropdown-toggle dropdown-indicator" href="JavaScript:void(0)" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tentang</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Profil</a></li>
+                        <li><a class="dropdown-item" href="/about">Profil</a></li>
                         <li><a class="dropdown-item" href="#">Strategy Map</a></li>
                         <li><a class="dropdown-item" href="#">Milestone</a></li>
                         <li><a class="dropdown-item" href="#">Fungsi dan Tugas</a></li>
                         <li><a class="dropdown-item" href="#">Struktur Organisasi</a></li>
-                        <li><a class="dropdown-item" href="#">Personel LPPMI</a></li>
+                        <!-- <li><a class="dropdown-item" href="#">Personel LPPMI</a></li> -->
                         <li><a class="dropdown-item" href="#">Alur Kerja dan PJ</a></li>
                         <li><a class="dropdown-item" href="#">Monev Rutin</a></li>                    
                     </ul>

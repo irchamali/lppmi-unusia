@@ -20,9 +20,89 @@
       </div>
 
       <!-- <section> begin ============================-->
-      <section class="bg-100">
+      <section class="bg-100 mt-2">
 
         <div class="container">
+            <div class="swiper theme-slider" data-swiper='{"autoplay":true,"spaceBetween":30,"loop":true,"slidesPerView":1,"breakpoints":{"670":{"slidesPerView":2},"1200":{"slidesPerView":3}}}'>
+            <div class="swiper-wrapper">
+                <div class="swiper-slide col-lg-4 mb-4 mb-lg-0">
+                    <div class="card h-100">
+                        <div class="card-body px-5">
+                        <h5 class="mb-3">Strategy Map</h5>
+                            <a class="btn-outline-primary btn-icon-right btn btn-icon rounded-pill" href="#">
+                                <span class="btn-icon-wrapper">
+                                    <span class="far fa-check-circle"></span>
+                                </span>Read more
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide col-lg-4 mb-4 mb-lg-0">
+                    <div class="card h-100">
+                        <div class="card-body px-5">
+                        <h5 class="mb-3">Milestone</h5>
+                            <a class="btn-outline-primary btn-icon-right btn btn-icon rounded-pill" href="#">
+                                <span class="btn-icon-wrapper">
+                                    <span class="far fa-arrow-alt-circle-right"></span>
+                                </span>Read more
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide col-lg-4 mb-4 mb-lg-0">
+                    <div class="card h-100">
+                        <div class="card-body px-5">
+                        <h5 class="mb-3">Fungsi dan Tugas</h5>
+                            <a class="btn-outline-primary btn-icon-right btn btn-icon rounded-pill" href="#">
+                                <span class="btn-icon-wrapper">
+                                    <span class="far fa-check-circle"></span>
+                                </span>Read more
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide col-lg-4 mb-4 mb-lg-0">
+                    <div class="card h-100">
+                        <div class="card-body px-5">
+                        <h5 class="mb-3">Struktur Organisasi</h5>
+                            <a class="btn-outline-primary btn-icon-right btn btn-icon rounded-pill" href="#">
+                                <span class="btn-icon-wrapper">
+                                    <span class="far fa-arrow-alt-circle-right"></span>
+                                </span>Read more
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide col-lg-4 mb-4 mb-lg-0">
+                    <div class="card h-100">
+                        <div class="card-body px-5">
+                        <h5 class="mb-3">Alur Kerja</h5>
+                            <a class="btn-outline-primary btn-icon-right btn btn-icon rounded-pill" href="#">
+                                <span class="btn-icon-wrapper">
+                                    <span class="far fa-check-circle"></span>
+                                </span>Read more
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide col-lg-4 mb-4 mb-lg-0">
+                    <div class="card h-100">
+                        <div class="card-body px-5">
+                        <h5 class="mb-3">Monitoring dan Evaluasi</h5>
+                            <a class="btn-outline-primary btn-icon-right btn btn-icon rounded-pill" href="#">
+                                <span class="btn-icon-wrapper">
+                                    <span class="far fa-arrow-alt-circle-right"></span>
+                                </span>Read more
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-nav">
+                <div class="swiper-button-prev"><span class="fas fa-chevron-left"></span></div>
+                <div class="swiper-button-next"><span class="fas fa-chevron-right"></span></div>
+            </div>
+            </div>
             
           <div class="row mt-6">
             <div class="col">
@@ -35,10 +115,9 @@
                 <p class="mt-3"><?= $about['about_description']; ?></p><br>
                 <h5>Visi</h5>
                 <blockquote class="blockquote my-5 ms-lg-6" style="max-width: 700px;">
-                  <h5 class="fw-medium ms-3 mb-0">Menjadi Unit Kerja yang Profesional, Independen, Objektif, Kredibel, Berkolaborasi, dan Berintegritas Guna Mewujudkan Good University Governance dalam Meningkatkan Mutu dan Tata Kelola Universitas 2025.</h5>
+                  <h5 class="fw-medium ms-3 mb-0"><?= $about['about_visi']; ?></h5>
                 </blockquote><br>
                 <h5>Misi</h5>
-                
                 <p class="column-lg-6 mb-1">
                 1. Mewujudkan Good University Governance melalui pengawasan dan penjaminan mutu bidang akademik dan nonakademik.<br> 
                 2. Memastikan pelaksanaan sistem mutu dan tata kelola yang mengandung prinsip profesional, independen, objektif, kredibel, berintegritas, dan meningkatkan budaya kolaborasi.<br>
