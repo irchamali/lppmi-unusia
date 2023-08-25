@@ -9,7 +9,7 @@ class LoginController extends BaseController
 {
     public function index()
     {
-        return view('v_login', ['validation' => \Config\Services::validation()]);
+        return view('login_view', ['validation' => \Config\Services::validation()]);
     }
     public function validasi()
     {
