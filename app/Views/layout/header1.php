@@ -110,7 +110,7 @@
               </li>
 
             </ul>
-            <a class="btn btn-outline-primary rounded-pill btn-sm border-2 d-block d-lg-inline-block ms-auto my-3 my-lg-0" href="/document" target="_blank">Pengaduan</a>
+            <a class="btn btn-outline-primary rounded-pill btn-sm border-2 d-block d-lg-inline-block ms-auto my-3 my-lg-0" href="/pengaduan" target="_blank">Pengaduan</a>
           </div>
         </nav>
       </div>

@@ -72,6 +72,9 @@ $routes->get('document', 'DocumentController::index');
 $routes->get('contact', 'ContactController::index');
 $routes->post('contact', 'ContactController::inbox');
 
+// PengaduanController
+$routes->get('pengaduan', 'PengaduanController::index');
+
 // LoginController & Logout
 $routes->group('', ['filter' => 'logedin'], static function ($routes) {
     $routes->get('login', 'LoginController::index');
