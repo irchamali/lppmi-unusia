@@ -10,7 +10,7 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="author" content="Ircham Ali" />
-    <link rel="shortcut icon" href="/assets/frontend/img/apple-touch-icon.png">
+    <link rel="shortcut icon" href="/assets/backend/images/favicon.ico">
 
     <!-- Styles -->
     <link href="/assets/backend/plugins/pace-master/themes/blue/pace-theme-flash.css" rel="stylesheet" />
@@ -77,7 +77,7 @@
                                         <div class="col-sm-10">
                                             <input type="file" name="logo_icon" class="form-control" id="input1">
                                             <p class="help-block">Favicon harus beresolusi 32 x 32 Pixels.</p>
-                                            <img src="/assets/frontend/images/<?= $sites['site_favicon']; ?>" class="thumbnail">
+                                            <img src="/assets/backend/images/site/<?= $sites['site_favicon']; ?>" class="thumbnail">
                                         </div>
                                     </div>
 
@@ -86,7 +86,7 @@
                                         <div class="col-sm-10">
                                             <input type="file" name="logo_header" class="form-control" id="input1">
                                             <p class="help-block">Logo harus beresolusi 248 x 54 Pixels.</p>
-                                            <img src="/assets/frontend/images/<?= $sites['site_logo_header']; ?>" class="thumbnail">
+                                            <img src="/assets/backend/images/site/<?= $sites['site_logo_header']; ?>" class="thumbnail">
                                         </div>
                                     </div>
 
@@ -95,7 +95,7 @@
                                         <div class="col-sm-10">
                                             <input type="file" name="logo_big" class="form-control" id="input1">
                                             <p class="help-block">Logo big harus beresolusi 560 x 315 Pixels.</p>
-                                            <img src="/assets/frontend/images/<?= $sites['site_logo_big']; ?>" width="560" class="thumbnail">
+                                            <img src="/assets/backend/images/site/<?= $sites['site_logo_big']; ?>" width="560" class="thumbnail">
                                         </div>
                                     </div>
 

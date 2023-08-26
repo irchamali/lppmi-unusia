@@ -170,19 +170,19 @@ class SettingAdminController extends BaseController
             $namaLogoIcon = $logoIconAwal;
         } else {
             $namaLogoIcon = $fileLogoIcon->getRandomName();
-            $fileLogoIcon->move('assets/frontend/images/', $namaLogoIcon);
+            $fileLogoIcon->move('assets/backend/images/site/', $namaLogoIcon);
         }
         if ($fileLogoHeader->getName() == '') {
             $namaLogoHeader = $logoHeaderAwal;
         } else {
             $namaLogoHeader = $fileLogoHeader->getRandomName();
-            $fileLogoHeader->move('assets/frontend/images/', $namaLogoHeader);
+            $fileLogoHeader->move('assets/backend/images/site/', $namaLogoHeader);
         }
         if ($fileLogoBig->getName() == '') {
             $namaLogoBig = $logoBigAwal;
         } else {
             $namaLogoBig = $fileLogoBig->getRandomName();
-            $fileLogoBig->move('assets/frontend/images/', $namaLogoBig);
+            $fileLogoBig->move('assets/backend/images/site/', $namaLogoBig);
         }
         // Simpan ke database
         $this->siteModel->update($site_id, [
@@ -295,19 +295,19 @@ class SettingAdminController extends BaseController
             $namaImgHeading = $imgHeadingAwal;
         } else {
             $namaImgHeading = $fileImgHeading->getRandomName();
-            $fileImgHeading->move('assets/frontend/img/', $namaImgHeading);
+            $fileImgHeading->move('assets/backend/images/home/', $namaImgHeading);
         }
         if ($fileImgTestimonial->getName() == '') {
             $namaImgTestimonial = $imgTestimonialAwal;
         } else {
             $namaImgTestimonial = $fileImgTestimonial->getRandomName();
-            $fileImgTestimonial->move('assets/frontend/img/', $namaImgTestimonial);
+            $fileImgTestimonial->move('assets/backend/images/home/', $namaImgTestimonial);
         }
         if ($fileImgTestimonial2->getName() == '') {
             $namaImgTestimonial2 = $imgTestimonial2Awal;
         } else {
             $namaImgTestimonial2 = $fileImgTestimonial2->getRandomName();
-            $fileImgTestimonial2->move('assets/frontend/img/', $namaImgTestimonial2);
+            $fileImgTestimonial2->move('assets/backend/images/home/', $namaImgTestimonial2);
         }
         // Simpan ke database
         $this->homeModel->update($home_id, [
@@ -400,7 +400,7 @@ class SettingAdminController extends BaseController
             $namaImgAbout = $imgAboutAwal;
         } else {
             $namaImgAbout = $fileImgAbout->getRandomName();
-            $fileImgAbout->move('assets/frontend/img/', $namaImgAbout);
+            $fileImgAbout->move('assets/backend/images/home/', $namaImgAbout);
         }
         // Simpan ke database
         $this->aboutModel->update($about_id, [

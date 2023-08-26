@@ -75,7 +75,7 @@
                                         <div class="col-sm-10">
                                             <input type="file" name="img_heading" class="form-control" id="input1">
                                             <p class="help-block">Image heading sebaiknya beresolusi 1215 x 872 Pixels.</p>
-                                            <img src="/assets/frontend/img/<?= $homes['home_bg_heading']; ?>" width="560" class="thumbnail">
+                                            <img src="/assets/backend/images/home/<?= $homes['home_bg_heading']; ?>" width="560" class="thumbnail">
                                         </div>
                                     </div>
 
@@ -84,7 +84,7 @@
                                         <div class="col-sm-10">
                                             <input type="file" name="img_testimonial" class="form-control" id="input1">
                                             <p class="help-block">Image testimonial sebaiknya beresolusi 1043 x 663 Pixels.</p>
-                                            <img src="/assets/frontend/img/<?= $homes['home_bg_testimonial']; ?>" width="560" class="thumbnail">
+                                            <img src="/assets/backend/images/home/<?= $homes['home_bg_testimonial']; ?>" width="560" class="thumbnail">
                                         </div>
                                     </div>
 
@@ -93,7 +93,7 @@
                                         <div class="col-sm-10">
                                             <input type="file" name="img_testimonial2" class="form-control" id="input1">
                                             <p class="help-block">Image testimonial2 sebaiknya beresolusi 726 x 790 Pixels.</p>
-                                            <img src="/assets/frontend/img/<?= $homes['home_bg_testimonial2']; ?>" width="560" class="thumbnail">
+                                            <img src="/assets/backend/images/home/<?= $homes['home_bg_testimonial2']; ?>" width="560" class="thumbnail">
                                         </div>
                                     </div>
 
