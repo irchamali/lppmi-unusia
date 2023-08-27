@@ -186,6 +186,18 @@
                     <?php endif; ?>
                 </ul>
             </li>
+            <li class="droplink <?= ($title === "Data Akreditasi") ? 'active open' : '' ?><?= ($title === "Data Program Studi") ? 'active open' : '' ?>"><a
+                    href="/<?= session('role'); ?>/laporan" class="waves-effect waves-button"><span
+                        class="menu-icon icon-flag"></span>
+                    <p>Pusat Data</p><span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <?php if (session('role') == 'admin') : ?>
+                    <li class="<?= ($title === "Data Akreditasi") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/akreditasi">Akreditasi</a></li>
+                    <li class="<?= ($title === "Data Program Studi") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/prodi">Program Studi</a></li>
+                    <?php endif; ?>
+                </ul>
+            </li>
             <?php if (session('role') == 'admin') : ?>
             <li class="<?= ($active == 'inbox') ? 'active' : '' ?>">
                 <a href="/<?= session('role'); ?>/inbox" class="waves-effect waves-button"><span

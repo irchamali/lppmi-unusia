@@ -160,6 +160,20 @@ $routes->group('admin', ['filter' => 'authadmin'], static function ($routes) {
         $routes->put('', 'Admin\LapCategoryAdminController::edit');
         $routes->delete('', 'Admin\LapCategoryAdminController::delete');
     });
+    // Akreditasi Route
+    $routes->group('akreditasi', static function ($routes) {
+        $routes->get('', 'Admin\ApsAdminController::index');
+        $routes->post('', 'Admin\ApsAdminController::insert');
+        $routes->put('', 'Admin\ApsAdminController::update');
+        $routes->delete('', 'Admin\ApsAdminController::delete');
+    });
+    // Prodi Route
+    $routes->group('prodi', static function ($routes) {
+        $routes->get('', 'Admin\ProdiAdminController::index');
+        $routes->post('', 'Admin\ProdiAdminController::insert');
+        $routes->put('', 'Admin\ProdiAdminController::edit');
+        $routes->delete('', 'Admin\ProdiAdminController::delete');
+    });
     // Slider Route
     $routes->group('slider', static function ($routes) {
         $routes->get('', 'Admin\SliderAdminController::index');
