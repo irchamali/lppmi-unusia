@@ -146,6 +146,20 @@ $routes->group('admin', ['filter' => 'authadmin'], static function ($routes) {
         $routes->put('', 'Admin\DocsCategoryAdminController::edit');
         $routes->delete('', 'Admin\DocsCategoryAdminController::delete');
     });
+    // Laporan Route
+    $routes->group('laporan', static function ($routes) {
+        $routes->get('', 'Admin\LapAdminController::index');
+        $routes->post('', 'Admin\LapAdminController::insert');
+        $routes->put('', 'Admin\LapAdminController::update');
+        $routes->delete('', 'Admin\LapAdminController::delete');
+    });
+    // Laporan Category Route
+    $routes->group('lapcategory', static function ($routes) {
+        $routes->get('', 'Admin\LapCategoryAdminController::index');
+        $routes->post('', 'Admin\LapCategoryAdminController::insert');
+        $routes->put('', 'Admin\LapCategoryAdminController::edit');
+        $routes->delete('', 'Admin\LapCategoryAdminController::delete');
+    });
     // Slider Route
     $routes->group('slider', static function ($routes) {
         $routes->get('', 'Admin\SliderAdminController::index');

@@ -174,6 +174,18 @@
                     <?php endif; ?>
                 </ul>
             </li>
+            <li class="droplink <?= ($title === "Semua Laporan") ? 'active open' : '' ?><?= ($title === "Kategori Laporan") ? 'active open' : '' ?>"><a
+                    href="/<?= session('role'); ?>/laporan" class="waves-effect waves-button"><span
+                        class="menu-icon icon-eye"></span>
+                    <p>Laporan</p><span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <?php if (session('role') == 'admin') : ?>
+                    <li class="<?= ($title === "Semua Laporan") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/laporan">Laporan</a></li>
+                    <li class="<?= ($title === "Kategori Laporan") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/lapcategory">Kategori</a></li>
+                    <?php endif; ?>
+                </ul>
+            </li>
             <?php if (session('role') == 'admin') : ?>
             <li class="<?= ($active == 'inbox') ? 'active' : '' ?>">
                 <a href="/<?= session('role'); ?>/inbox" class="waves-effect waves-button"><span
