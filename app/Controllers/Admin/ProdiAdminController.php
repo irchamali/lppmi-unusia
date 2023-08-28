@@ -38,15 +38,15 @@ class ProdiAdminController extends BaseController
     public function edit()
     {
         $id       = $this->request->getPost('kode');
-        $category = strip_tags(htmlspecialchars($this->request->getPost('prodiedit'), ENT_QUOTES));
-        $string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $category);
+        $prodi    = strip_tags(htmlspecialchars($this->request->getPost('prodiedit'), ENT_QUOTES));
+        $string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $prodi);
         $trim     = trim($string);
         $slug     = strtolower(str_replace(" ", "-", $trim));
         $kodeps   = strip_tags(htmlspecialchars($this->request->getPost('kodeps'), ENT_QUOTES));
         $strata   = strip_tags(htmlspecialchars($this->request->getPost('strata'), ENT_QUOTES));
         $this->prodiModel->save([
             'prodi_id' => $id,
-            'prodi_nama' => $category,
+            'prodi_nama' => $prodi,
             'prodi_slug' => $slug,
             'prodi_kode' => $kodeps,
             'prodi_strata' => $strata
@@ -63,15 +63,15 @@ class ProdiAdminController extends BaseController
     }
 
     public function insert(){
-        $id = $this->request->getPost('id');
-        $category = strip_tags(htmlspecialchars($this->request->getPost('prodiadd'), ENT_QUOTES));
-        $string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $category);
+        $id       = $this->request->getPost('id');
+        $prodi    = strip_tags(htmlspecialchars($this->request->getPost('prodiadd'), ENT_QUOTES));
+        $string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $prodi);
         $trim     = trim($string);
         $slug     = strtolower(str_replace(" ", "-", $trim));
         $kodeps   = strip_tags(htmlspecialchars($this->request->getPost('kodeps'), ENT_QUOTES));
         $strata   = strip_tags(htmlspecialchars($this->request->getPost('strata'), ENT_QUOTES));
         $this->prodiModel->save([
-            'prodi_nama' => $category,
+            'prodi_nama' => $prodi,
             'prodi_slug' => $slug,
             'prodi_kode' => $kodeps,
             'prodi_strata' => $strata

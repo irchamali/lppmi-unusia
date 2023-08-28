@@ -32,6 +32,7 @@ class ApsAdminController extends BaseController
             'breadcrumbs' => $this->request->getUri()->getSegments(),
             'studies' => $this->prodiModel->findAll(),
             'aps' => $this->apsModel->findAll()
+            // 'pstudies' => $this->apsModel->getAllAps()->getResultArray()
         ];
 
         return view('admin/v_akreditasi', $data);
@@ -40,8 +41,9 @@ class ApsAdminController extends BaseController
     {
         if (!$this->validate([
             'prodi' => [
-                'rules' => 'required',
+                'rules' => 'required|numeric',
                 'errors' => [
+                    'required' => 'Kolom {field} harus diisi angka!',
                     'required' => 'Kolom {field} harus diisi!'
                 ]
             ],
@@ -93,7 +95,7 @@ class ApsAdminController extends BaseController
             'no_sk' => $sk,
             'thn_sk' => $tahun,
             'peringkat' => $peringkat,
-            'kadaluarsa' => $kadaluarsa,
+            'tgl_kadaluarsa' => $kadaluarsa,
             'aps_link' => $link
             
         ]);
@@ -160,7 +162,7 @@ class ApsAdminController extends BaseController
             'no_sk' => $sk,
             'thn_sk' => $tahun,
             'peringkat' => $peringkat,
-            'kadaluarsa' => $kadaluarsa,
+            'tgl_kadaluarsa' => $kadaluarsa,
             'aps_link' => $link
             
         ]);

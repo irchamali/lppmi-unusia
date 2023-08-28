@@ -60,7 +60,7 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Prodi</th>
+                                                <th>Prodi id</th>
                                                 <th>No.SK</th>
                                                 <th>Tahun SK</th>
                                                 <th>Peringkat</th>
@@ -184,9 +184,9 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div>
-                                        <select name="category" class="form-control">
-                                            <option value="">-Select Category-</option>
+                                    <div class="form-group">
+                                        <select name="prodi" class="form-control">
+                                            <option value="">- Select Prodi -</option>
                                             <?php foreach($studies as $erow): ?>
                                             <option value="<?= $erow['prodi_id']; ?>" <?= ($row['prodi_id'] == $erow['prodi_id'])?'selected': '' ?>><?= $erow['prodi_nama']; ?></option>
                                             <?php endforeach; ?>
@@ -202,7 +202,7 @@
                                         <input type="text" name="peringkat" value="<?= $row['peringkat']; ?>" class="form-control" placeholder="Peringkat Akreditasi" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="kadaluarsa" value="<?= $row['kadaluarsa']; ?>" class="form-control" placeholder="Tgl Kadaluarsa Akreditasi" required>
+                                        <input type="text" name="kadaluarsa" value="<?= $row['tgl_kadaluarsa']; ?>" class="form-control" placeholder="Tgl Kadaluarsa Akreditasi" required>
                                     </div>
                                     <div class="form-group">
                                         <textarea name="link" class="form-control" rows="2" placeholder="Share Link Bukti" required><?= $row['aps_link']; ?></textarea>
@@ -212,7 +212,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                            <input type="hidden" name="docs_id" value="<?= $row['docs_id']; ?>" required>
+                            <input type="hidden" name="aps_id" value="<?= $row['aps_id']; ?>" required>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                 <button type="submit" class="btn btn-success">Update</button>
                             </div>

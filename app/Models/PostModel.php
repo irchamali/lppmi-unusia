@@ -58,7 +58,6 @@ class PostModel extends Model
         return $this->paginate($limit, 'posts');
     }
 
-
     public function search_post($query)
     {
         $result = $this->db->query("SELECT tbl_post.*,user_name,user_photo FROM tbl_post
@@ -67,6 +66,7 @@ class PostModel extends Model
 			WHERE post_title LIKE '%$query%' OR category_name LIKE '%$query%' OR post_tags LIKE '%$query%' LIMIT 12");
         return $result;
     }
+    
     public function get_all_post($user_id = null)
     { 
         if ($user_id == null) {

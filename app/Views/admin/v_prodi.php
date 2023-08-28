@@ -75,7 +75,7 @@
                                                     <td><?= $row['prodi_kode']; ?></td>
                                                     <td><?= $row['prodi_strata']; ?></td>
                                                     <td style="text-align: center;">
-                                                        <a href="javascript:void(0);" class="btn btn-xs btn-edit" data-id="<?= $row['prodi_id']; ?>" data-category="<?= $row['prodi_nama']; ?>"><span class="fa fa-pencil"></span></a>
+                                                        <a href="javascript:void(0);" class="btn btn-xs btn-edit" data-id="<?= $row['prodi_id']; ?>" data-prodi="<?= $row['prodi_nama']; ?>"><span class="fa fa-pencil"></span></a>
                                                         <a href="javascript:void(0);" class="btn btn-xs btn-delete" data-id="<?= $row['prodi_id']; ?>"><span class="fa fa-trash"></span></a>
                                                     </td>
                                                 </tr>
@@ -139,12 +139,7 @@
                         <div class="form-group">
                             <input type="text" name="prodiedit" class="form-control" placeholder="Nama Prodi" required>
                         </div>
-                        <div class="form-group">
-                            <input type="text" name="kodeps" class="form-control" placeholder="Kode Prodi" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="strata" class="form-control" placeholder="S1/S2/S3" required>
-                        </div>
+                        
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="kode" required>
@@ -155,6 +150,7 @@
             </div>
         </div>
     </form>
+    
 
     <!--DELETE RECORD MODAL-->
     <form action="/<?= session('role'); ?>/prodi" method="POST">
@@ -206,7 +202,7 @@
             //Edit Record
             $('.btn-edit').on('click', function() {
                 var id = $(this).data('id');
-                var name = $(this).data('category');
+                var name = $(this).data('prodi');
                 $('[name="kode"]').val(id);
                 $('[name="prodiedit"]').val(name);
                 $('#EditModal').modal('show');
