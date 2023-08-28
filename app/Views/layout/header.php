@@ -133,7 +133,7 @@
           <!-- <li><a href="#about">SDM</a></li> -->
           <li><a href="/team">SDM</a></li>
           <li><a href="/post">Berita</a></li>
-          <li><a href="#services">Pengaduan</a></li>
+          <li><a href="/pengaduan">Pengaduan</a></li>
           <li><a href="/gallery">Galeri</a></li>
           <li><a href="/contact">Kontak</a></li>
         </ul>
