@@ -27,7 +27,7 @@ class AkreditasiController extends BaseController
             'about' => $this->aboutModel->find(1),
             'documents' => $this->akreditasiModel->findAll(),
             // 'documents' => $this->docsModel->getAllDocs(),
-            'pager' => $this->docsModel->pager,
+            'pager' => $this->akreditasiModel->pager,
             'title' => 'Akreditasi',
             'active' => 'Akreditasi'
         ];

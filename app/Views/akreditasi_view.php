@@ -26,7 +26,7 @@
             
             <div class="row mt-3">
                 <div class="col">
-                    <h3 class="text-center fs-2 fs-md-3">Daftar Akreditasi Prodi</h3>
+                    <h3 class="text-center fs-2 fs-md-3">Akreditasi Program Studi</h3>
                     <hr class="short" data-zanim-xs='{"from":{"opacity":0,"width":0},"to":{"opacity":1,"width":"4.20873rem"},"duration":0.8}' data-zanim-trigger="scroll" />
                 </div>
                 <div class="col-12">

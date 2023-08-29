@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class LapModel extends Model
 {
-    protected $table         = 'v_laporan';
+    protected $table         = 'v_report';
     protected $primaryKey    = 'lap_id';
     protected $allowedFields = ['lap_name','lap_unit','lap_link','lap_category_id'];
     protected $useTimestamps = true;

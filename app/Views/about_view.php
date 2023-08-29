@@ -29,10 +29,10 @@
                     <div class="card h-100">
                         <div class="card-body px-5">
                         <h5 class="mb-3">Strategy Map</h5>
-                            <a class="btn-outline-primary btn-icon-right btn btn-icon rounded-pill" href="#">
+                            <a class="btn-sm btn-outline-primary btn-icon-right btn btn-icon rounded-pill" href="#">
                                 <span class="btn-icon-wrapper">
                                     <span class="far fa-check-circle"></span>
-                                </span>Read more
+                                </span>Read more&nbsp;&nbsp;
                             </a>
                         </div>
                     </div>
@@ -41,10 +41,10 @@
                     <div class="card h-100">
                         <div class="card-body px-5">
                         <h5 class="mb-3">Milestone</h5>
-                            <a class="btn-outline-primary btn-icon-right btn btn-icon rounded-pill" href="#">
+                            <a class="btn-sm btn-outline-primary btn-icon-right btn btn-icon rounded-pill" href="#">
                                 <span class="btn-icon-wrapper">
                                     <span class="far fa-arrow-alt-circle-right"></span>
-                                </span>Read more
+                                </span>Read more&nbsp;&nbsp;
                             </a>
                         </div>
                     </div>
@@ -53,10 +53,10 @@
                     <div class="card h-100">
                         <div class="card-body px-5">
                         <h5 class="mb-3">Fungsi dan Tugas</h5>
-                            <a class="btn-outline-primary btn-icon-right btn btn-icon rounded-pill" href="#">
+                            <a class="btn-sm btn-outline-primary btn-icon-right btn btn-icon rounded-pill" href="#">
                                 <span class="btn-icon-wrapper">
                                     <span class="far fa-check-circle"></span>
-                                </span>Read more
+                                </span>Read more&nbsp;&nbsp;
                             </a>
                         </div>
                     </div>
@@ -65,10 +65,10 @@
                     <div class="card h-100">
                         <div class="card-body px-5">
                         <h5 class="mb-3">Struktur Organisasi</h5>
-                            <a class="btn-outline-primary btn-icon-right btn btn-icon rounded-pill" href="#">
+                            <a class="btn-sm btn-outline-primary btn-icon-right btn btn-icon rounded-pill" href="#">
                                 <span class="btn-icon-wrapper">
                                     <span class="far fa-arrow-alt-circle-right"></span>
-                                </span>Read more
+                                </span>Read more&nbsp;&nbsp;
                             </a>
                         </div>
                     </div>
@@ -77,10 +77,10 @@
                     <div class="card h-100">
                         <div class="card-body px-5">
                         <h5 class="mb-3">Alur Kerja</h5>
-                            <a class="btn-outline-primary btn-icon-right btn btn-icon rounded-pill" href="#">
+                            <a class="btn-sm btn-outline-primary btn-icon-right btn btn-icon rounded-pill" href="#">
                                 <span class="btn-icon-wrapper">
                                     <span class="far fa-check-circle"></span>
-                                </span>Read more
+                                </span>Read more&nbsp;&nbsp;
                             </a>
                         </div>
                     </div>
@@ -89,10 +89,10 @@
                     <div class="card h-100">
                         <div class="card-body px-5">
                         <h5 class="mb-3">Monitoring dan Evaluasi</h5>
-                            <a class="btn-outline-primary btn-icon-right btn btn-icon rounded-pill" href="#">
+                            <a class="btn-sm btn-outline-primary btn-icon-right btn btn-icon rounded-pill" href="#">
                                 <span class="btn-icon-wrapper">
                                     <span class="far fa-arrow-alt-circle-right"></span>
-                                </span>Read more
+                                </span>Read more&nbsp;&nbsp;
                             </a>
                         </div>
                     </div>

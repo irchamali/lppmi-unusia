@@ -71,6 +71,9 @@ $routes->get('akreditasi', 'AkreditasiController::index');
 // DocumentController
 $routes->get('document', 'DocumentController::index');
 
+// LaporanController
+$routes->get('laporan', 'LaporanController::index');
+
 // ContactController
 $routes->get('contact', 'ContactController::index');
 $routes->post('contact', 'ContactController::inbox');

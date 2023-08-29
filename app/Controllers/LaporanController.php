@@ -6,18 +6,18 @@ use App\Controllers\BaseController;
 use App\Models\AboutModel;
 use App\Models\HomeModel;
 use App\Models\SiteModel;
-use App\Models\DocumentModel;
-use App\Models\DocsModel;
+use App\Models\LaporanModel;
+use App\Models\LapModel;
 
-class DocumentController extends BaseController
+class LaporanController extends BaseController
 {
     public function __construct()
     {
         $this->homeModel = new HomeModel();
         $this->siteModel = new SiteModel();
         $this->aboutModel = new AboutModel();
-        $this->documentModel = new DocumentModel();
-        $this->docsModel = new DocsModel();
+        $this->laporanModel = new LaporanModel();
+        $this->lapModel = new LapModel();
     }
     public function index()
     {
@@ -25,13 +25,12 @@ class DocumentController extends BaseController
             'site' => $this->siteModel->find(1),
             'home' => $this->homeModel->find(1),
             'about' => $this->aboutModel->find(1),
-            // 'documents' => $this->documentModel->findAll(),
-            'documents' => $this->docsModel->findAll(),
+            'documents' => $this->lapModel->findAll(),
             // 'documents' => $this->docsModel->getAllDocs(),
-            'pager' => $this->docsModel->pager,
-            'title' => 'Document',
-            'active' => 'Document'
+            'pager' => $this->lapModel->pager,
+            'title' => 'Laporan',
+            'active' => 'Laporan'
         ];
-        return view('document_view', $data);
+        return view('laporan_view', $data);
     }
 }
