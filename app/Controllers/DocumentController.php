@@ -32,6 +32,6 @@ class DocumentController extends BaseController
             'title' => 'Document',
             'active' => 'Document'
         ];
-        return view('document_view', $data);
+        return view('document_view1', $data);
     }
 }
