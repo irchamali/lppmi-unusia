@@ -60,7 +60,7 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Prodi id</th>
+                                                <!-- <th>Prodi id</th> -->
                                                 <th>No.SK</th>
                                                 <th>Tahun SK</th>
                                                 <th>Peringkat</th>
@@ -76,16 +76,11 @@
                                             ?>
                                                 <tr>
                                                     <td style="vertical-align: middle;"><?= $no; ?></td>
-                                                    <td style="vertical-align: middle;"><?= $row['prodi_id']; ?>
-                                                    </td>
-                                                    <td style="vertical-align: middle;"><?= $row['no_sk']; ?>
-                                                    </td>
-                                                    <td style="vertical-align: middle;"><?= $row['thn_sk']; ?>
-                                                    </td>
-                                                    <td style="vertical-align: middle;"><?= $row['peringkat']; ?>
-                                                    </td>
-                                                    <td style="vertical-align: middle;"><?= $row['tgl_kadaluarsa']; ?>
-                                                    </td>
+                                                    <!-- <td style="vertical-align: middle;"><?= $row['prodi_id']; ?></td> -->
+                                                    <td style="vertical-align: middle;"><?= $row['no_sk']; ?></td>
+                                                    <td style="vertical-align: middle;"><?= $row['thn_sk']; ?></td>
+                                                    <td style="vertical-align: middle;"><?= $row['peringkat']; ?></td>
+                                                    <td style="vertical-align: middle;"><?= $row['tgl_kadaluarsa']; ?></td>
                                                     <td style="vertical-align: middle;">
                                                         <div class="btn-group">
                                                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">

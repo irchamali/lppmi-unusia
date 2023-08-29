@@ -65,6 +65,9 @@ $routes->get('category/(:segment)', 'CategoryController::index/$1');
 // AboutController
 $routes->get('about', 'AboutController::index');
 
+// AkreditasiController
+$routes->get('akreditasi', 'AkreditasiController::index');
+
 // DocumentController
 $routes->get('document', 'DocumentController::index');
 

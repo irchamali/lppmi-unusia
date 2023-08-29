@@ -9,7 +9,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title><?= $site['site_title']; ?></title>
+    <title><?= $title; ?> - <?= $site['site_title']; ?></title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -31,7 +31,7 @@
     <link href="/assets/elixir/vendors/loaders.css/loaders.min.css" rel="stylesheet">
     <link href="/assets/elixir/assets/css/theme.css" rel="stylesheet" />
     <link href="/assets/elixir/assets/css/user.css" rel="stylesheet" />
-
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;family=Open+Sans:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
