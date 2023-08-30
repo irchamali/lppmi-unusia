@@ -62,8 +62,8 @@
                                                 <th>No</th>
                                                 <th>Name</th>
                                                 <th>Unit</th>
+                                                <th>No.SK</th>
                                                 <th>Tahun</th>
-                                                <th>Link</th>
                                                 <th>Category</th>
                                                 <th>Action</th>
                                             </tr>
@@ -80,10 +80,11 @@
                                                     </td>
                                                     <td style="vertical-align: middle;"><?= $row['docs_unit']; ?>
                                                     </td>
+                                                    <td style="vertical-align: middle;"><a href="<?= $row['docs_link']; ?>"><?= $row['docs_sk']; ?></a>
+                                                    </td>
                                                     <td style="vertical-align: middle;"><?= $row['docs_year']; ?>
                                                     </td>
-                                                    <td style="vertical-align: middle;"><?= $row['docs_link']; ?>
-                                                    </td>
+                                                    
                                                     <td style="vertical-align: middle;"><?= $row['docs_category_id']; ?>
                                                     </td>
                                                     <td style="vertical-align: middle;">
@@ -136,6 +137,9 @@
                                     <input type="text" name="unit" class="form-control" placeholder="Nama Institusi/Lembaga/Unit/Fakultas/Prodi" required>
                                 </div>
                                 <div class="form-group">
+                                    <input type="text" name="sk" class="form-control" placeholder="No.SK" required>
+                                </div>
+                                <div class="form-group">
                                     <input type="text" name="year" class="form-control" placeholder="Tahun Pembuatan: YYYY" required>
                                 </div>
                                 <div class="form-group">
@@ -185,6 +189,9 @@
                                     </div>
                                     <div class="form-group">
                                         <input type="text" name="unit" value="<?= $row['docs_unit']; ?>" class="form-control" placeholder="Institusi/Lembaga/Unit/Fakultas/Prodi" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="sk" value="<?= $row['docs_sk']; ?>" class="form-control" placeholder="No. SK" required>
                                     </div>
                                     <div class="form-group">
                                         <input type="text" name="year" value="<?= $row['docs_year']; ?>" class="form-control" placeholder="Tahun Pembuatan YYYY" required>
