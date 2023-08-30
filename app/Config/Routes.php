@@ -61,6 +61,8 @@ $routes->post('post/send_comment', 'PostController::send_comment');
 
 // CategoryController
 $routes->get('category/(:segment)', 'CategoryController::index/$1');
+$routes->get('document/(:segment)', 'CategoryDocsController::index/$1');
+// $routes->get('laporan/(:segment)', 'LapController::index/$1');
 
 // AboutController
 $routes->get('about', 'AboutController::index');

@@ -10,7 +10,7 @@ class DocsCategoryModel extends Model
     protected $primaryKey       = 'docscategory_id';
     protected $allowedFields    = ['docscategory_name', 'docscategory_slug'];
 
-    public function get_post_by_category($slug)
+    public function getDocs_by_category($slug)
     {
         $query = $this->db->query("SELECT tbl_document.*,tbl_docscategory.* FROM
 			tbl_document LEFT JOIN tbl_docscategory ON docs_category_id=docscategory_id 
