@@ -74,11 +74,14 @@
                 <li class="nav-item dropdown"><a class="nav-link" href="/document" role="button">Dokumen</a>
                 </li>
 
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle dropdown-indicator" href="JavaScript:void(0)" role="button" data-bs-toggle="dropdown" aria-expanded="false">Laporan</a>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle dropdown-indicator" href="/laporan" role="button" data-bs-toggle="dropdown" aria-expanded="false">Laporan</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Hasil Survei</a></li>
-                        <li><a class="dropdown-item" href="#">Laporan Monitoring dan Evaluasi</a></li>
-                        <li><a class="dropdown-item" href="#">Laporan Audit</a></li>
+                        <li><a class="dropdown-item" href="/laporan/hasil-survei">Hasil Survei</a></li>
+                        <li><a class="dropdown-item" href="/laporan/tracer-study">Tracer Study</a></li>
+                        <li><a class="dropdown-item" href="/laporan/monev-akademik">Monev Akademik</a></li>
+                        <li><a class="dropdown-item" href="/laporan/monev-nonakademik">Monev Non Akademik</a></li>
+                        <li><a class="dropdown-item" href="/laporan/audit-akademik">Audit Akademik</a></li>
+                        <li><a class="dropdown-item" href="/laporan/audit-nonakademik">Audit Non Akademik</a></li>
                     </ul>
                 </li>
               
@@ -86,7 +89,7 @@
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">Daftar Tilik AMI</a></li>
                     <li><a class="dropdown-item" href="#">Daftar Tilik Audit Non Akademik</a></li>
-                    <li><a class="dropdown-item" href="#">Formulir x</a></li>
+                    <li><a class="dropdown-item" href="#">Formulir ...</a></li>
                     <li><a class="dropdown-item" href="#">Template Renstra</a></li>
                     <li><a class="dropdown-item" href="#">Template RENOP</a></li>
                     <li><a class="dropdown-item" href="#">Template LAKIN</a></li>

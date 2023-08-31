@@ -38,6 +38,7 @@ class CategoryDocsController extends BaseController
             'about' => $this->aboutModel->find(1),
             'documents' => $this->docscategoryModel->getDocs_by_category($slug),
             'title' => 'Document',
+            'url' => 'document',
             'keyword' => $keyword,
             'documents' => $documents,
             'active' => 'Document'

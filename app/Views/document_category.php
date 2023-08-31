@@ -4,7 +4,7 @@
 <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <?= $this->include('layout/breadcrumbs1'); ?>
+    <?= $this->include('layout/breadcrumbs2'); ?>
     <!-- End Breadcrumbs -->
 
     <section id="services" class="services">
@@ -13,10 +13,9 @@
         <div id="main-wrapper">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="bg-white panel panel-white">
+                        <div class="panel panel-white">
 
                             <div class="panel-body">
-                                <!-- <button type="button" class="btn btn-success m-b-sm" data-toggle="modal" data-target="#myModal">Add New Member</button> -->
                                 <div class="table-responsive">
                                     <table id="mytable" class="display table table-striped table-hover" style="width: 100%; ">
                                         <thead>

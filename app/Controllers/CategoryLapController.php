@@ -38,6 +38,7 @@ class CategoryLapController extends BaseController
             'about' => $this->aboutModel->find(1),
             'documents' => $this->lapcategoryModel->getLap_by_category($slug),
             'title' => 'Laporan',
+            'url' => 'laporan',
             'keyword' => $keyword,
             'documents' => $documents,
             'active' => 'Laporan'
