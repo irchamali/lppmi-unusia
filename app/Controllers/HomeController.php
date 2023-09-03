@@ -7,6 +7,7 @@ use App\Models\HomeModel;
 use App\Models\SiteModel;
 use App\Models\SliderModel;
 use App\Models\TestimonialModel;
+use App\Models\MemberModel;
 use App\Models\PostModel;
 
 class HomeController extends BaseController
@@ -18,6 +19,7 @@ class HomeController extends BaseController
         $this->aboutModel = new AboutModel();
         $this->sliderModel = new SliderModel();
         $this->testimonialModel = new TestimonialModel();
+        $this->memberModel = new MemberModel();
         $this->postModel = new PostModel();
     }
     public function index()
@@ -27,6 +29,7 @@ class HomeController extends BaseController
             'home' => $this->homeModel->find(1),
             'about' => $this->aboutModel->find(1),
             'testimonials' => $this->testimonialModel->findAll(),
+            'members' => $this->memberModel->findAll(),
             'sliders' => $this->sliderModel->findAll(),
             'latest_posts' => $this->postModel->getLatestPosts(),
             // 'posts' => $this->postModel->paginate(3, 'posts'),

@@ -96,13 +96,9 @@
           <div class="container">
               <div class="swiper theme-slider" data-swiper='{"autoplay":true,"spaceBetween":30,"loop":true,"slidesPerView":3,"breakpoints":{"670":{"slidesPerView":4},"1200":{"slidesPerView":5}}}'>
                   <div class="swiper-wrapper" data-zanim-timeline="{}" data-zanim-trigger="scroll">
-                  <!-- <div class="swiper-wrapper row align-items-center" data-zanim-timeline="{}" data-zanim-trigger="scroll"> -->
-                    <div class="swiper-slide col-4 col-md-2 my-3 overflow-hidden"><img class="img-fluid" src="/assets/elixir/assets/img/partner/logo2.png" alt="partnerco" data-zanim-xs="{}" /></div>
-                    <div class="swiper-slide col-4 col-md-2 my-3 overflow-hidden"><img class="img-fluid" src="/assets/elixir/assets/img/partner/logo1.png" alt="tvc" data-zanim-xs="{}" /></div>
-                    <div class="swiper-slide col-4 col-md-2 my-3 overflow-hidden"><img class="img-fluid" src="/assets/elixir/assets/img/partner/logo6.png" alt="arcade" data-zanim-xs="{}" /></div>
-                    <div class="swiper-slide col-4 col-md-2 my-3 overflow-hidden"><img class="img-fluid" src="/assets/elixir/assets/img/partner/logo3.png" alt="bearbrand" data-zanim-xs="{}" /></div>
-                    <div class="swiper-slide col-4 col-md-2 my-3 overflow-hidden"><img class="img-fluid" src="/assets/elixir/assets/img/partner/logo5.png" alt="fast brothers" data-zanim-xs="{}" /></div>
-                    <div class="swiper-slide col-4 col-md-2 my-3 overflow-hidden"><img class="img-fluid" src="/assets/elixir/assets/img/partner/logo4.png" alt="harculis beards" data-zanim-xs="{}" /></div>
+                    <?php foreach ($members as $member) : ?>
+                      <div class="swiper-slide col-4 col-md-2 my-3 overflow-hidden"><img class="img-fluid" src="<?= 'assets/backend/images/member/' . $member['member_image']; ?>" alt="partnerco" data-zanim-xs="{}" /></div>
+                    <?php endforeach; ?>
                   </div>
                 </div>
           </div>
