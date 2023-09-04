@@ -66,6 +66,7 @@ $routes->get('laporan/(:segment)', 'CategoryLapController::index/$1');
 
 // AboutController
 $routes->get('about', 'AboutController::index');
+$routes->get('strategymap', 'StrategymapController::index');
 
 // AkreditasiController
 $routes->get('akreditasi', 'AkreditasiController::index');

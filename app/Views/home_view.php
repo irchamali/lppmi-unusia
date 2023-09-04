@@ -95,7 +95,8 @@
       <div class="bg-200 py-6">
           <div class="container">
               <div class="swiper theme-slider" data-swiper='{"autoplay":true,"spaceBetween":30,"loop":true,"slidesPerView":3,"breakpoints":{"670":{"slidesPerView":4},"1200":{"slidesPerView":5}}}'>
-                  <div class="swiper-wrapper" data-zanim-timeline="{}" data-zanim-trigger="scroll">
+                  <!-- <div class="swiper-wrapper" data-zanim-timeline="{}" data-zanim-trigger="scroll"> -->
+                  <div class="swiper-wrapper">
                     <?php foreach ($members as $member) : ?>
                       <div class="swiper-slide col-4 col-md-2 my-3 overflow-hidden"><img class="img-fluid" src="<?= 'assets/backend/images/member/' . $member['member_image']; ?>" alt="partnerco" data-zanim-xs="{}" /></div>
                     <?php endforeach; ?>

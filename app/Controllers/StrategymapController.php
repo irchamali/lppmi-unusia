@@ -9,7 +9,7 @@ use App\Models\SiteModel;
 // use App\Models\DocumentModel;
 // use App\Models\DocsModel;
 
-class AboutController extends BaseController
+class StrategymapController extends BaseController
 {
     public function __construct()
     {
@@ -26,9 +26,9 @@ class AboutController extends BaseController
             'home' => $this->homeModel->find(1),
             'about' => $this->aboutModel->find(1),
             
-            'title' => 'About',
-            'active' => 'About'
+            'title' => 'Strategy Map',
+            'active' => 'Strategy Map'
         ];
-        return view('about/profile_view', $data);
+        return view('about/stramap_view', $data);
     }
 }
