@@ -48,9 +48,6 @@ $routes->post('subscribe', 'SubscribeController::index');
 // GalleryController
 $routes->get('gallery', 'GalleryController::index');
 
-// TeamController
-$routes->get('team', 'TeamController::index');
-
 // PostController
 $routes->get('search', 'PostController::search');
 $routes->get('post', 'PostController::index');
@@ -68,6 +65,11 @@ $routes->get('laporan/(:segment)', 'CategoryLapController::index/$1');
 $routes->get('about', 'AboutController::index');
 $routes->get('strategymap', 'StrategymapController::index');
 $routes->get('milestone', 'MilestoneController::index');
+$routes->get('fungsidantugas', 'FungsitugasController::index');
+$routes->get('strukturorganisasi', 'StrukturorgController::index');
+$routes->get('team', 'TeamController::index');
+$routes->get('alurkerja', 'AlurkerjaController::index');
+$routes->get('monevrutin', 'MonevrutinController::index');
 
 // AkreditasiController
 $routes->get('akreditasi', 'AkreditasiController::index');
