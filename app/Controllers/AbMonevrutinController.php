@@ -6,18 +6,15 @@ use App\Controllers\BaseController;
 use App\Models\AboutModel;
 use App\Models\HomeModel;
 use App\Models\SiteModel;
-// use App\Models\DocumentModel;
-// use App\Models\DocsModel;
 
-class StrategymapController extends BaseController
+class AbMonevrutinController extends BaseController
 {
     public function __construct()
     {
         $this->homeModel = new HomeModel();
         $this->siteModel = new SiteModel();
         $this->aboutModel = new AboutModel();
-        // $this->documentModel = new DocumentModel();
-        // $this->docsModel = new DocsModel();
+        
     }
     public function index()
     {
@@ -26,9 +23,9 @@ class StrategymapController extends BaseController
             'home' => $this->homeModel->find(1),
             'about' => $this->aboutModel->find(1),
             
-            'title' => 'Strategy Map',
-            'active' => 'Strategy Map'
+            'title' => 'Monev Rutin',
+            'active' => 'Monev Rutin'
         ];
-        return view('about/stramap_view', $data);
+        return view('about/monev_view', $data);
     }
 }

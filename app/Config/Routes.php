@@ -63,13 +63,13 @@ $routes->get('laporan/(:segment)', 'CategoryLapController::index/$1');
 
 // AboutController
 $routes->get('about', 'AboutController::index');
-$routes->get('strategymap', 'StrategymapController::index');
-$routes->get('milestone', 'MilestoneController::index');
-$routes->get('fungsidantugas', 'FungsitugasController::index');
-$routes->get('strukturorganisasi', 'StrukturorgController::index');
-$routes->get('team', 'TeamController::index');
-$routes->get('alurkerja', 'AlurkerjaController::index');
-$routes->get('monevrutin', 'MonevrutinController::index');
+$routes->get('strategymap', 'AbStrategymapController::index');
+$routes->get('milestone', 'AbMilestoneController::index');
+$routes->get('fungsidantugas', 'AbFungtugasController::index');
+$routes->get('strukturorganisasi', 'AbStrukturorgController::index');
+$routes->get('team', 'AbTeamController::index');
+$routes->get('alurkerja', 'AbAlurkerjaController::index');
+$routes->get('monevrutin', 'AbMonevrutinController::index');
 
 // AkreditasiController
 $routes->get('akreditasi', 'AkreditasiController::index');
