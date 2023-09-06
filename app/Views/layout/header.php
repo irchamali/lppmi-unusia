@@ -48,8 +48,8 @@
   <section id="topbar" class="topbar d-flex align-items-center">
     <div class="container d-flex justify-content-center justify-content-md-between">
       <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:<?= $site['site_mail']; ?>"><?= $site['site_mail']; ?></a></i>
-        <i class="bi bi-phone d-flex align-items-center ms-4"><span><?= $site['site_wa']; ?></span></i>
+        <i class="bi bi-star d-flex align-items-center"><span>PRIOKSITAS</span></i>
+        <i class="bi bi-envelope d-flex align-items-center ms-4"><span><a href="mailto:<?= $site['site_mail']; ?>"><?= $site['site_mail']; ?></a></span></i>
       </div>
       <div class="social-links d-none d-md-flex align-items-center">
         <a href="<?= $site['site_twitter']; ?>" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -75,16 +75,18 @@
           <li class="dropdown"><a href="/about"><span>Tentang</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="/about">Profil</a></li>
-              <li><a href="#">Strategy Map</a></li>
-              <li><a href="#">Milestone</a></li>
-              <li><a href="#">Fungsi dan Tugas</a></li>
-              <li><a href="#">Struktur Organisasi</a></li>
-              <li><a href="#">Alur Kerja</a></li>
-              <li><a href="#">Monev Rutin</a></li>
+              <li><a href="/strategymap">Strategy Map</a></li>
+              <li><a href="/milestone">Milestone</a></li>
+              <li><a href="/fungsidantugas">Fungsi dan Tugas</a></li>
+              <li><a href="/strukturorganisasi">Struktur Organisasi</a></li>
+              <li><a href="/team">Personil LPPMI</a></li>
+              <li><a href="/alurkerja">Alur Kerja</a></li>
+              <li><a href="/monevrutin">Monev Rutin</a></li>
             </ul>
           </li>
           <li><a href="/akreditasi">Akreditasi</a></li>
-          <li class="dropdown"><a href="/document"><span>Dokumen</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li><a href="/document">Dokumen</a></li>
+          <!-- <li class="dropdown"><a href="/document"><span>Dokumen</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
               <li class="dropdown"><a href="#"><span>Drop Down 2</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
@@ -105,37 +107,48 @@
               <li><a href="#">Drop Down 3</a></li>
               <li><a href="#">Drop Down 4</a></li>
             </ul>
-          </li>
-          <li class="dropdown"><a href="#"><span>Laporan</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          </li> -->
+          <li class="dropdown"><a href="/laporan"><span>Laporan</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Drop Down 2</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <li><a href="/laporan/hasil-survei">Hasil Survei</a></li>
+              <li><a href="/laporan/tracer-study">Tracer Study</a></li>
+              <li><a href="/laporan/monev-akademik">Monev Akademik</a></li>
+              <li><a href="/laporan/monev-nonakademik">Monev Non Akademik</a></li>
+              <li><a href="/laporan/audit-akademik">Audit Akademik</a></li>
+              <li><a href="/laporan/audit-nonakademik">Audit Non Akademik</a></li>
+              <!-- <li class="dropdown"><a href="#"><span>Drop Down 2</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                 <ul>
                   <li><a href="#">Sub Drop Down 1</a></li>
                   <li><a href="#">Sub Drop Down 2</a></li>
                   <li><a href="#">Sub Drop Down 3</a></li>
                   <li><a href="#">Sub Drop Down 4</a></li>
                 </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
+              </li> -->
             </ul>
           </li>
           <li class="dropdown"><a href="#"><span>Formulir</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
+              <li><a href="#">Daftar Tilik AMI</a></li>
+              <li><a href="#">Daftar Tilik Audit Non Akademik</a></li>
+              <li><a href="#">Formulir ...</a></li>
+              <li><a href="#">Template Renstra</a></li>
+              <li><a href="#">Template RENOP</a></li>
+              <li><a href="#">Template LAKIN</a></li>
+              <li><a href="#">Formulir Buku 4</a></li>
             </ul>
           </li>
-          <!-- <li><a href="#about">SDM</a></li> -->
-          <li><a href="/team">SDM</a></li>
+          <li class="dropdown"><a href="#"><span>Data</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="https://unusia.ac.id/pimpinan">Pimpinan Universitas</a></li>
+              <li><a href="https://unusia.ac.id/pendidikan">Pengelola Fakultas</a></li>
+              <li><a href="https://unusia.ac.id/prodi">Pengelola Prodi</a></li>
+            </ul>
+          </li>
           <li><a href="/post">Berita</a></li>
-          <li><a href="/pengaduan">Pengaduan</a></li>
           <li><a href="/gallery">Galeri</a></li>
           <li><a href="/contact">Kontak</a></li>
+          <li><a href="/pengaduan">Pengaduan</a></li>
+          
         </ul>
       </nav><!-- .navbar -->
 
