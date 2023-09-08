@@ -77,7 +77,7 @@
               <li><a href="/about">Profil</a></li>
               <li><a href="/strategymap">Strategy Map</a></li>
               <li><a href="/milestone">Milestone</a></li>
-              <li><a href="/fungsidantugas">Fungsi dan Tugas</a></li>
+              <li><a href="/deskripsitugas">Deskripsi Tugas</a></li>
               <li><a href="/strukturorganisasi">Struktur Organisasi</a></li>
               <li><a href="/team">Personil LPPMI</a></li>
               <li><a href="/alurkerja">Alur Kerja</a></li>
@@ -113,9 +113,9 @@
               <li><a href="/laporan/hasil-survei">Hasil Survei</a></li>
               <li><a href="/laporan/tracer-study">Tracer Study</a></li>
               <li><a href="/laporan/monev-akademik">Monev Akademik</a></li>
-              <li><a href="/laporan/monev-nonakademik">Monev Non Akademik</a></li>
+              <li><a href="/laporan/monev-nonakademik">Monev Nonakademik</a></li>
               <li><a href="/laporan/audit-akademik">Audit Akademik</a></li>
-              <li><a href="/laporan/audit-nonakademik">Audit Non Akademik</a></li>
+              <li><a href="/laporan/audit-nonakademik">Audit Nonakademik</a></li>
               <!-- <li class="dropdown"><a href="#"><span>Drop Down 2</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                 <ul>
                   <li><a href="#">Sub Drop Down 1</a></li>
@@ -128,8 +128,8 @@
           </li>
           <li class="dropdown"><a href="#"><span>Formulir</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="#">Daftar Tilik AMI</a></li>
-              <li><a href="#">Daftar Tilik Audit Non Akademik</a></li>
+              <li><a href="/ami">Daftar Tilik AMI</a></li>
+              <li><a href="#">Daftar Tilik Audit Nonakademik</a></li>
               <li><a href="#">Formulir ...</a></li>
               <li><a href="#">Template Renstra</a></li>
               <li><a href="#">Template RENOP</a></li>

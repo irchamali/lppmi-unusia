@@ -8,7 +8,7 @@ class ProdiModel extends Model
 {
     protected $table            = 'tbl_prodi';
     protected $primaryKey       = 'prodi_id';
-    protected $allowedFields    = ['prodi_nama', 'prodi_slug','prodi_kode','prodi_strata'];
+    protected $allowedFields    = ['prodi_nama', 'prodi_slug','prodi_kode','prodi_strata','prodi_link'];
 
     public function get_post_by_category($slug)
     {

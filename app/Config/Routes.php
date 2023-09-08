@@ -74,6 +74,9 @@ $routes->get('monevrutin', 'AbMonevrutinController::index');
 // AkreditasiController
 $routes->get('akreditasi', 'AkreditasiController::index');
 
+// DaftartilikController
+$routes->get('ami', 'AmiController::index');
+
 // DocumentController
 $routes->get('document', 'DocumentController::index');
 
