@@ -33,8 +33,8 @@
                 </div>
                 <div class="col-12">
                     <div class="bg-white px-3 mt-6 px-0 py-5 px-lg-5 rounded-3">
-                    <img src="/assets/backend/images/about/fungtugas.png" alt="Image show" width="100%" height="100%"><br>
-                       
+                    <!-- <img src="/assets/backend/images/about/fungtugas.png" alt="Image show" width="100%" height="100%"><br> -->
+                    <iframe src="https://drive.google.com/file/d/1Nj1oAtGcsHc7rczcckCmM2bFDSomZOF2/preview" width="100%" height="580" allow="autoplay"></iframe>
                     </div>
                 </div>
             </div>

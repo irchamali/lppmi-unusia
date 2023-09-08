@@ -65,7 +65,7 @@ $routes->get('laporan/(:segment)', 'CategoryLapController::index/$1');
 $routes->get('about', 'AboutController::index');
 $routes->get('strategymap', 'AbStrategymapController::index');
 $routes->get('milestone', 'AbMilestoneController::index');
-$routes->get('fungsidantugas', 'AbFungtugasController::index');
+$routes->get('deskripsitugas', 'AbFungtugasController::index');
 $routes->get('strukturorganisasi', 'AbStrukturorgController::index');
 $routes->get('team', 'AbTeamController::index');
 $routes->get('alurkerja', 'AbAlurkerjaController::index');

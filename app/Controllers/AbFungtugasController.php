@@ -23,7 +23,7 @@ class AbFungtugasController extends BaseController
             'home' => $this->homeModel->find(1),
             'about' => $this->aboutModel->find(1),
             
-            'title' => 'Fungsi dan Tugas',
+            'title' => 'Deskripsi Tugas Kerja LPPMI Unusia',
             'active' => 'Fungsi dan Tugas'
         ];
         return view('about/fungtugas_view', $data);

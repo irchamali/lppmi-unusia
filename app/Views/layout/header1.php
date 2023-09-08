@@ -60,7 +60,7 @@
                         <li><a class="dropdown-item" href="/about">Profil</a></li>
                         <li><a class="dropdown-item" href="/strategymap">Strategy Map</a></li>
                         <li><a class="dropdown-item" href="/milestone">Milestone</a></li>
-                        <li><a class="dropdown-item" href="/fungsidantugas">Fungsi dan Tugas</a></li>
+                        <li><a class="dropdown-item" href="/deskripsitugas">Deskripsi Tugas Kerja</a></li>
                         <li><a class="dropdown-item" href="/strukturorganisasi">Struktur Organisasi</a></li>
                         <li><a class="dropdown-item" href="/team">Personel LPPMI</a></li>
                         <li><a class="dropdown-item" href="/alurkerja">Alur Kerja dan PJ</a></li>
@@ -79,16 +79,16 @@
                         <li><a class="dropdown-item" href="/laporan/hasil-survei">Hasil Survei</a></li>
                         <li><a class="dropdown-item" href="/laporan/tracer-study">Tracer Study</a></li>
                         <li><a class="dropdown-item" href="/laporan/monev-akademik">Monev Akademik</a></li>
-                        <li><a class="dropdown-item" href="/laporan/monev-nonakademik">Monev Non Akademik</a></li>
+                        <li><a class="dropdown-item" href="/laporan/monev-nonakademik">Monev Nonakademik</a></li>
                         <li><a class="dropdown-item" href="/laporan/audit-akademik">Audit Akademik</a></li>
-                        <li><a class="dropdown-item" href="/laporan/audit-nonakademik">Audit Non Akademik</a></li>
+                        <li><a class="dropdown-item" href="/laporan/audit-nonakademik">Audit Nonakademik</a></li>
                     </ul>
                 </li>
               
               <li class="nav-item dropdown"><a class="nav-link dropdown-toggle dropdown-indicator" href="JavaScript:void(0)" role="button" data-bs-toggle="dropdown" aria-expanded="false">Formulir</a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">Daftar Tilik AMI</a></li>
-                    <li><a class="dropdown-item" href="#">Daftar Tilik Audit Non Akademik</a></li>
+                    <li><a class="dropdown-item" href="#">Daftar Tilik Audit Nonakademik</a></li>
                     <li><a class="dropdown-item" href="#">Formulir ...</a></li>
                     <li><a class="dropdown-item" href="#">Template Renstra</a></li>
                     <li><a class="dropdown-item" href="#">Template RENOP</a></li>
