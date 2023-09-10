@@ -29,6 +29,6 @@ class AbTeamController extends BaseController
             'title' => 'Team',
             'active' => 'Team'
         ];
-        return view('team_view', $data);
+        return view('about/person_view', $data);
     }
 }

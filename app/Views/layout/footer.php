@@ -19,10 +19,10 @@
             <div class="col-lg-2 col-6 footer-links">
                 <h4>Useful Links</h4>
                 <ul>
-                    <li><a href="#">Tentang</a></li>
-                    <li><a href="#">Akreditasi</a></li>
-                    <li><a href="#">Dokumen</a></li>
-                    <li><a href="#">Laporan</a></li>
+                    <li><a href="/about">Tentang</a></li>
+                    <li><a href="/akreditasi">Akreditasi</a></li>
+                    <li><a href="/document">Dokumen</a></li>
+                    <li><a href="/laporan">Laporan</a></li>
                     <!-- <li><a href="#">Privacy policy</a></li> -->
                 </ul>
             </div>
@@ -30,10 +30,10 @@
             <div class="col-lg-2 col-6 footer-links">
                 <h4>Our Services</h4>
                 <ul>
-                    <li><a href="#">Formulir</a></li>
-                    <li><a href="#">SDM</a></li>
-                    <li><a href="#">Pengaduan</a></li>
-                    <li><a href="#">Galeri</a></li>
+                    <li><a href="/ami">Formulir</a></li>
+                    <li><a href="/team">SDM</a></li>
+                    <li><a href="/pengaduan">Pengaduan</a></li>
+                    <li><a href="/gallery">Galeri</a></li>
                     <!-- <li><a href="#">Graphic Design</a></li> -->
                 </ul>
             </div>

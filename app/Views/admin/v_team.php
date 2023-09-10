@@ -58,7 +58,7 @@
                                             <th>Photo</th>
                                             <th>Name</th>
                                             <th>Jabatan</th>
-                                            <th>twitter</th>
+                                            <th>CV</th>
                                             <th>facebook</th>
                                             <th>instagram</th>
                                             <th>linkedin</th>
@@ -146,7 +146,7 @@
                                     <input type="text" name="jabatan" class="form-control" placeholder="Jabatan" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="twitter" class="form-control" placeholder="https://twitter.com/" required>
+                                    <input type="text" name="twitter" class="form-control" placeholder="link cv anda!" required>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" name="facebook" class="form-control" placeholder="https://facebook.com/" required>
@@ -199,7 +199,7 @@
                                         <input type="text" name="jabatan" value="<?= $row['team_jabatan']; ?>" class="form-control" placeholder="Jabatan" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="twitter" value="<?= $row['team_twitter']; ?>" class="form-control" placeholder="https://twitter.com/" required>
+                                        <input type="text" name="twitter" value="<?= $row['team_twitter']; ?>" class="form-control" placeholder="link cv anda!" required>
                                     </div>
                                     <div class="form-group">
                                         <input type="text" name="facebook" value="<?= $row['team_facebook']; ?>" class="form-control" placeholder="https://facebook.com/" required>

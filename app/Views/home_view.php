@@ -81,7 +81,7 @@
             </div>
             <div class="col-sm-6 col-lg-3 mt-4" data-zanim-timeline="{}" data-zanim-trigger="scroll">
               <div class="ring-icon mx-auto" data-zanim-xs='{"delay":0}'><a href="/"><span class="fas fa-headset"></span></a></div>
-              <h5 class="mt-4" data-zanim-xs='{"delay":0.1}'><a href="/">Instrumen</a></h5>
+              <h5 class="mt-4" data-zanim-xs='{"delay":0.1}'><a href="/ami">Instrumen</a></h5>
               <!-- <p class="mb-0 mt-3 px-3" data-zanim-xs='{"delay":0.2}'>Experience unparalleled service, from beginning <br /> to final construction.</p> -->
             </div>
           </div>

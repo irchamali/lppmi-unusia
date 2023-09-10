@@ -38,17 +38,16 @@ class TeamAdminController extends BaseController
     {
         if (!$this->validate([
             'nama' => [
-                'rules' => 'required|alpha_space',
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'Kolom {field} harus diisi!',
-                    'alpha_space' => 'inputan tidak boleh mengandung karakter aneh'
+                    'required' => 'Kolom {field} harus diisi!'
+                    // 'alpha_space' => 'inputan tidak boleh mengandung karakter aneh'
                 ]
             ],
             'jabatan' => [
-                'rules' => 'required|alpha_space',
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'Kolom {field} harus diisi!',
-                    'alpha_space' => 'inputan tidak boleh mengandung karakter aneh'
+                    'required' => 'Kolom {field} harus diisi!'
                 ]
             ],
             'twitter' => [
@@ -121,17 +120,15 @@ class TeamAdminController extends BaseController
     {
         if (!$this->validate([
             'nama' => [
-                'rules' => 'required|alpha_space',
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'Kolom {field} harus diisi!',
-                    'alpha_space' => 'inputan tidak boleh mengandung karakter aneh'
+                    'required' => 'Kolom {field} harus diisi!'
                 ]
             ],
             'jabatan' => [
-                'rules' => 'required|alpha_space',
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'Kolom {field} harus diisi!',
-                    'alpha_space' => 'inputan tidak boleh mengandung karakter aneh'
+                    'required' => 'Kolom {field} harus diisi!'
                 ]
             ],
             'twitter' => [
