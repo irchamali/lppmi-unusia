@@ -1,26 +1,20 @@
-<!-- <section> begin ============================-->
-<section>
-
-<div class="bg-holder overlay" style="background-image:url(/assets/elixir/assets/img/background-2.jpg);background-position:center bottom;">
-</div>
-<!--/.bg-holder-->
-
-<div class="container">
-  <div class="row pt-6" data-inertia='{"weight":1.5}'>
-    <div class="col-md-8 text-white" data-zanim-timeline="{}" data-zanim-trigger="scroll">
-      <div class="overflow-hidden">
-        <h1 class="text-white fs-4 fs-md-5 mb-0 lh-1" data-zanim-xs='{"delay":0}'><?= $title; ?></h1>
-        <div class="nav" aria-label="breadcrumb" role="navigation" data-zanim-xs='{"delay":0.1}'>
-          <ol class="breadcrumb fs-1 ps-0 fw-bold">
-            <li class="breadcrumb-item"><a class="text-white" href="#!">Home</a></li>
-            <li class="breadcrumb-item"><a class="text-white" href="/<?= $url; ?>"><?= $title; ?></a></li>
-            <!-- <li class="breadcrumb-item active" aria-current="page"></li> -->
-          </ol>
+<!-- ======= Breadcrumbs ======= -->
+<div class="breadcrumbs">
+    <div class="page-header d-flex align-items-center" style="background-image: url('');">
+        <div class="container position-relative">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <h2>Rilis Berita</h2>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</div>
-<!-- end of .container-->
-
-</section>
+    <nav>
+        <div class="container">
+            <ol>
+                <li><a href="/">Home</a></li>
+                <li><?= $title; ?></li>
+            </ol>
+        </div>
+    </nav>
+</div><!-- End Breadcrumbs -->

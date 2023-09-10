@@ -11,8 +11,8 @@
         <div class="container" data-aos="fade-up">
 
             <div class="section-header">
-                <h2>Contact</h2>
-                <p>lorem text</p>
+                <h2>Contact Us</h2>
+                <p><?= $site['site_title']; ?></p>
             </div>
 
             <div class="row gx-lg-0 gy-4">

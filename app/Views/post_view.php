@@ -4,7 +4,7 @@
 <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <?= $this->include('layout/breadcrumbs'); ?>
+    <?= $this->include('layout/breadcrumbs2'); ?>
     <!-- End Breadcrumbs -->
 
     <!-- ======= Blog Section ======= -->

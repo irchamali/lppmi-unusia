@@ -32,7 +32,7 @@ class PostController extends BaseController
                 'posts' => $this->postModel->getAllPosts(),
                 // 'posts' => $this->postModel->paginate(3, 'posts'),
                 'pager' => $this->postModel->pager,
-                'title' => 'Post',
+                'title' => 'Rilis Berita',
                 'active' => 'Post'
             ];
             return view('post_view', $data);
