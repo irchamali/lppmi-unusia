@@ -186,7 +186,7 @@ $routes->group('admin', ['filter' => 'authadmin'], static function ($routes) {
     $routes->group('prodi', static function ($routes) {
         $routes->get('', 'Admin\ProdiAdminController::index');
         $routes->post('', 'Admin\ProdiAdminController::insert');
-        $routes->put('', 'Admin\ProdiAdminController::edit');
+        $routes->put('', 'Admin\ProdiAdminController::update');
         $routes->delete('', 'Admin\ProdiAdminController::delete');
     });
     // Slider Route

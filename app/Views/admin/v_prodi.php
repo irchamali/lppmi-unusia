@@ -65,7 +65,7 @@
                                         <tbody id="body-table">
                                             <?php
                                             $no = 0;
-                                            foreach ($categories as $row) :
+                                            foreach ($pstudies as $row) :
                                                 $no++;
                                             ?>
                                                 <tr>
@@ -75,8 +75,8 @@
                                                     <td><?= $row['prodi_kode']; ?></td>
                                                     <td><?= $row['prodi_strata']; ?></td>
                                                     <td style="text-align: center;">
-                                                        <a href="javascript:void(0);" class="btn btn-xs btn-edit" data-id="<?= $row['prodi_id']; ?>" data-prodi="<?= $row['prodi_nama']; ?>"><span class="fa fa-pencil"></span></a>
-                                                        <a href="javascript:void(0);" class="btn btn-xs btn-delete" data-id="<?= $row['prodi_id']; ?>"><span class="fa fa-trash"></span></a>
+                                                        <a href="javascript:void(0);" data-toggle="modal" data-target="#ModalEdit<?= $row['prodi_id']; ?>"><span class="icon-pencil"></span> Edit</a>
+                                                        <a href="javascript:void(0);" class="btn btn-xs btn-delete" data-id="<?= $row['prodi_id']; ?>"><span class="fa fa-trash"></span> Del</a>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
@@ -126,30 +126,54 @@
 
     <!--EDIT RECORD MODAL-->
     
-    <form action="/<?= session('role'); ?>/prodi" method="POST">
-        <input type="hidden" name="_method" value="PUT">
-        <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Edit Data Prodi</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <input type="text" name="prodiedit" class="form-control" placeholder="Nama Prodi" required>
+    <?php
+    foreach ($pstudies as $row) :
+    ?>
+        <!-- Modal Edit -->
+        <form id="add-row-form" action="/<?= session('role'); ?>/prodi" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="_method" value="PUT">
+            <div class="modal fade" id="ModalEdit<?= $row['prodi_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Edit Prodi</h4>
                         </div>
-                        
-                    </div>
-                    <div class="modal-footer">
-                        <input type="hidden" name="kode" required>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-success">Edit</button>
+                        <div class="modal-body">
+
+                            <div class="row">
+                                
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" name="nama" value="<?= $row['prodi_nama']; ?>" class="form-control" placeholder="Nama Prodi" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="kode" value="<?= $row['prodi_kode']; ?>" class="form-control" placeholder="Kode Prodi" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="strata" value="<?= $row['prodi_strata']; ?>" class="form-control" placeholder="S1/S2/S3" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea name="link" class="form-control" rows="2" placeholder="Link Prodi" required><?= $row['prodi_link']; ?></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="email" value="<?= $row['prodi_email']; ?>" class="form-control" placeholder="Email Prodi" required>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <input type="hidden" name="prodi_id" value="<?= $row['prodi_id']; ?>" required>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-success">Update</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
+    <?php endforeach; ?>
     
 
     <!--DELETE RECORD MODAL-->

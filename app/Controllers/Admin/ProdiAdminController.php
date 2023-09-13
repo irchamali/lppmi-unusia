@@ -29,7 +29,7 @@ class ProdiAdminController extends BaseController
             'helper_text' => helper('text'),
             'breadcrumbs' => $this->request->getUri()->getSegments(),
 
-            'categories' => $this->prodiModel->findAll()
+            'pstudies' => $this->prodiModel->findAll()
         ];
 
         return view('admin/v_prodi', $data);
@@ -52,6 +52,71 @@ class ProdiAdminController extends BaseController
             'prodi_strata' => $strata
         ]);
         return redirect()->to('admin/prodi')->with('msg', 'info');
+    }
+
+    public function update()
+    {
+        if (!$this->validate([
+            'nama' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kolom {field} harus diisi!'
+                ]
+            ],
+            'kode' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kolom {field} harus diisi!'
+                ]
+            ],
+            'strata' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kolom {field} harus diisi!'
+                ]
+            ],
+            'link' => [
+                'rules' => 'required|valid_url_strict',
+                'errors' => [
+                    'required' => 'Kolom {field} harus diisi!',
+                    'valid_url_strict' => 'inputan harus berupa link'
+                ]
+            ],
+            'email' => [
+                'rules' => 'required|valid_email',
+                'errors' => [
+                    'required' => 'Kolom {field} harus diisi!',
+                    'valid_email' => 'Kolom {field} harus berformat email'
+                ]
+            ]
+        ])) {
+            return redirect()->to('/admin/prodi')->with('msg', 'error');
+        }
+        $prodi_id = strip_tags(htmlspecialchars($this->request->getPost('prodi_id'), ENT_QUOTES));
+        $nama = strip_tags(htmlspecialchars($this->request->getPost('nama'), ENT_QUOTES));
+        $kode = strip_tags(htmlspecialchars($this->request->getPost('kode'), ENT_QUOTES));
+        $strata = strip_tags(htmlspecialchars($this->request->getPost('strata'), ENT_QUOTES));
+        $link = strip_tags(htmlspecialchars($this->request->getPost('link'), ENT_QUOTES));
+        $email = strip_tags(htmlspecialchars($this->request->getPost('email'), ENT_QUOTES));
+        // Cek Foto
+        $prodi = $this->prodiModel->find($prodi_id);
+        // $fotoAwal = $slider['slider_image'];
+        // $fileFoto = $this->request->getFile('filefoto');
+        // if ($fileFoto->getName() == '') {
+        //     $namaFotoUpload = $fotoAwal;
+        // } else {
+        //     $namaFotoUpload = $fileFoto->getRandomName();
+        //     $fileFoto->move('assets/backend/images/slider/', $namaFotoUpload);
+        // }
+        // Simpan ke database
+        $this->prodiModel->update($prodi_id, [
+            'prodi_nama' => $nama,
+            'prodi_kode' => $kode,
+            'prodi_strata' => $strata,
+            'prodi_link' => $link,
+            'prodi_email' => $email
+        ]);
+        return redirect()->to('/admin/prodi')->with('msg', 'info');
     }
 
     public function delete()
