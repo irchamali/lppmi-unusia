@@ -4,9 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class PostModel extends Model
+class PostviewModel extends Model
 {
-    protected $table            = 'tbl_post';
+    protected $table            = 'v_post';
     protected $primaryKey       = 'post_id';
     protected $allowedFields    = ['post_title', 'post_description', 'post_contents', 'post_image', 'post_category_id', 'post_tags', 'post_slug', 'post_status', 'post_views', 'post_user_id'];
     protected $useTimestamps = true;
@@ -40,6 +40,24 @@ class PostModel extends Model
 			WHERE post_category_id='$category_id' AND NOT post_id='$kode' ORDER BY post_views DESC LIMIT 4");
         return $query;
     }
+
+    // Fungsi untuk mendapatkan latest_post dengan pagination dan batasan 3 post
+    public function getLatestPosts($limit = 3)
+    {
+        $this->orderBy('post_date', 'DESC')
+             ->where(['post_status' => 1]);
+
+        return $this->paginate($limit, 'posts');
+    }
+
+    public function getAllPosts($limit = 3)
+    {
+        $this->orderBy('post_date', 'DESC')
+             ->where(['post_status' => 1]);
+
+        return $this->paginate($limit, 'posts');
+    }
+
     public function search_post($query)
     {
         $result = $this->db->query("SELECT tbl_post.*,user_name,user_photo FROM tbl_post
@@ -48,8 +66,9 @@ class PostModel extends Model
 			WHERE post_title LIKE '%$query%' OR category_name LIKE '%$query%' OR post_tags LIKE '%$query%' LIMIT 12");
         return $result;
     }
+    
     public function get_all_post($user_id = null)
-    {
+    { 
         if ($user_id == null) {
             $result = $this->db->query("SELECT post_id,post_title,post_slug,post_user_id,post_image,DATE_FORMAT(post_date,'%d %M %Y') AS post_date,category_name,post_tags,post_status,post_views FROM tbl_post JOIN tbl_category ON post_category_id=category_id");
             return $result;

@@ -6,7 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\AboutModel;
 use App\Models\CommentModel;
 use App\Models\HomeModel;
-use App\Models\PostModel;
+use App\Models\PostviewModel;
 use App\Models\SiteModel;
 use App\Models\TagModel;
 
@@ -17,7 +17,7 @@ class PostController extends BaseController
         $this->homeModel = new HomeModel();
         $this->siteModel = new SiteModel();
         $this->aboutModel = new AboutModel();
-        $this->postModel = new PostModel();
+        $this->postviewModel = new PostviewModel();
         $this->tagModel = new TagModel();
         $this->commentModel = new CommentModel();
     }
@@ -28,26 +28,26 @@ class PostController extends BaseController
                 'site' => $this->siteModel->find(1),
                 'home' => $this->homeModel->find(1),
                 'about' => $this->aboutModel->find(1),
-                // 'posts' => $this->postModel->findAll(),
-                'posts' => $this->postModel->getAllPosts(),
-                // 'posts' => $this->postModel->paginate(3, 'posts'),
-                'pager' => $this->postModel->pager,
+                // 'posts' => $this->postviewModel->findAll(),
+                'posts' => $this->postviewModel->getAllPosts(),
+                // 'posts' => $this->postviewModel->paginate(3, 'posts'),
+                'pager' => $this->postviewModel->pager,
                 'title' => 'Rilis Berita',
                 'active' => 'Post'
             ];
             return view('post_view', $data);
         }
-        if (!$this->postModel->get_post_by_slug($slug)->getRowArray()) {
+        if (!$this->postviewModel->get_post_by_slug($slug)->getRowArray()) {
             return redirect()->to('post');
         }
-        $post = $this->postModel->get_post_by_slug($slug)->getRowArray();
+        $post = $this->postviewModel->get_post_by_slug($slug)->getRowArray();
         $post_tags = explode(',', $post['post_tags']);
         $post_id = $post['post_id'];
         $category_id = $post['category_id'];
         $user_ip = $_SERVER['REMOTE_ADDR'];
-        $cek_ip = $this->postModel->query("SELECT * FROM tbl_post_views WHERE view_ip='$user_ip' AND view_post_id='$post_id' AND DATE(view_date)=CURDATE()")->getNumRows();
+        $cek_ip = $this->postviewModel->query("SELECT * FROM tbl_post_views WHERE view_ip='$user_ip' AND view_post_id='$post_id' AND DATE(view_date)=CURDATE()")->getNumRows();
         if ($cek_ip < 1) {
-            $this->postModel->count_views($user_ip, $post_id);
+            $this->postviewModel->count_views($user_ip, $post_id);
         }
         $data = [
             'site' => $this->siteModel->find(1),
@@ -55,7 +55,7 @@ class PostController extends BaseController
             'about' => $this->aboutModel->find(1),
             'post' => $post,
             'post_tags' => $post_tags,
-            'related_post' => $this->postModel->get_related_post($category_id, $post_id)->getResultArray(),
+            'related_post' => $this->postviewModel->get_related_post($category_id, $post_id)->getResultArray(),
             'tags' => $this->tagModel->findAll(),
             'comments' => $this->commentModel->show_comments($post_id)->getResultArray(),
             'title' => 'Post',
@@ -69,7 +69,7 @@ class PostController extends BaseController
         if (!$query) {
             return redirect()->to('/post');
         }
-        $result = $this->postModel->search_post($query);
+        $result = $this->postviewModel->search_post($query);
         if ($result->getNumRows() < 1) {
             $posts = $result->getResultArray();
             $keyword = "Keyword '$query' tidak ditemukan";
@@ -159,7 +159,7 @@ class PostController extends BaseController
     }
     public function author($user_id)
     {
-        $posts = $this->postModel->where('post_user_id', $user_id)->get();
+        $posts = $this->postviewModel->where('post_user_id', $user_id)->get();
         if ($posts->getNumRows() < 1) {
             $posts = $posts->getResultArray();
             $keyword = "Postingan Author tidak ditemukan";

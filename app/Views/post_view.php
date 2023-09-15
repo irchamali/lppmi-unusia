@@ -32,7 +32,7 @@
                             <div class="post-meta">
                                 <p class="post-author-list"><?= $post['user_name']; ?></p>
                                 <p class="post-date">
-                                    <time datetime="2022-01-01"><?= date('d M Y', strtotime($post['post_date'])); ?></time>
+                                    <time datetime="2022-01-01"><?= date('d M Y', strtotime($post['post_date'])); ?></time> | <?= $post['post_views']; ?> views
                                 </p>
                             </div>
                         </div>

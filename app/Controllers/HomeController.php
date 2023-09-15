@@ -8,7 +8,7 @@ use App\Models\SiteModel;
 use App\Models\SliderModel;
 use App\Models\TestimonialModel;
 use App\Models\MemberModel;
-use App\Models\PostModel;
+use App\Models\PostviewModel;
 
 class HomeController extends BaseController
 {
@@ -20,7 +20,7 @@ class HomeController extends BaseController
         $this->sliderModel = new SliderModel();
         $this->testimonialModel = new TestimonialModel();
         $this->memberModel = new MemberModel();
-        $this->postModel = new PostModel();
+        $this->postviewModel = new PostviewModel();
     }
     public function index()
     {
@@ -31,9 +31,9 @@ class HomeController extends BaseController
             'testimonials' => $this->testimonialModel->findAll(),
             'members' => $this->memberModel->findAll(),
             'sliders' => $this->sliderModel->findAll(),
-            'latest_posts' => $this->postModel->getLatestPosts(),
-            // 'posts' => $this->postModel->paginate(3, 'posts'),
-            'pager' => $this->postModel->pager,
+            'latest_posts' => $this->postviewModel->getLatestPosts(),
+            // 'posts' => $this->postviewModel->paginate(3, 'posts'),
+            'pager' => $this->postviewModel->pager,
             'validation' => \Config\Services::validation(),
             'title' => 'Home',
             'active' => 'Home'
