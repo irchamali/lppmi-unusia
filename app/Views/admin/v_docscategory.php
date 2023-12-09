@@ -102,7 +102,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <input type="text" name="categoryadd" class="form-control" placeholder="Category Name" required>
+                            <input type="text" name="category" class="form-control" placeholder="Category Name" required>
                         </div>
                     </div>
                     <div class="modal-footer">

@@ -34,6 +34,19 @@ class DocsCategoryAdminController extends BaseController
 
         return view('admin/v_docscategory', $data);
     }
+
+    public function save(){
+        $category = strip_tags(htmlspecialchars($this->request->getPost('category'), ENT_QUOTES));
+        $string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $category);
+        $trim     = trim($string);
+        $slug     = strtolower(str_replace(" ", "-", $trim));
+        $this->docscategoryModel->save([
+            'docscategory_name' => $category,
+            'docscategory_slug' => $slug
+        ]);
+
+        return redirect()->to('admin/docscategory')->with('msg', 'success');
+    }
     
     public function edit()
     {
@@ -58,17 +71,4 @@ class DocsCategoryAdminController extends BaseController
         return redirect()->to('admin/docscategory')->with('msg', 'success-delete');
     }
 
-    public function insert(){
-        $id = $this->request->getPost('id');
-        $category = strip_tags(htmlspecialchars($this->request->getPost('categoryadd'), ENT_QUOTES));
-        $string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $category);
-        $trim     = trim($string);
-        $slug     = strtolower(str_replace(" ", "-", $trim));
-        $this->docscategoryModel->save([
-            'docscategory_name' => $category,
-            'docscategory_slug' => $slug
-        ]);
-
-        return redirect()->to('admin/docscategory')->with('msg', 'success');
-    }
 }
