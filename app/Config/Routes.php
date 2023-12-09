@@ -157,7 +157,7 @@ $routes->group('admin', ['filter' => 'authadmin'], static function ($routes) {
     // Documents Category Route
     $routes->group('docscategory', static function ($routes) {
         $routes->get('', 'Admin\DocsCategoryAdminController::index');
-        $routes->post('', 'Admin\DocsCategoryAdminController::insert');
+        $routes->post('', 'Admin\DocsCategoryAdminController::save');
         $routes->put('', 'Admin\DocsCategoryAdminController::edit');
         $routes->delete('', 'Admin\DocsCategoryAdminController::delete');
     });
@@ -171,7 +171,7 @@ $routes->group('admin', ['filter' => 'authadmin'], static function ($routes) {
     // Laporan Category Route
     $routes->group('lapcategory', static function ($routes) {
         $routes->get('', 'Admin\LapCategoryAdminController::index');
-        $routes->post('', 'Admin\LapCategoryAdminController::insert');
+        $routes->post('', 'Admin\LapCategoryAdminController::save');
         $routes->put('', 'Admin\LapCategoryAdminController::edit');
         $routes->delete('', 'Admin\LapCategoryAdminController::delete');
     });
