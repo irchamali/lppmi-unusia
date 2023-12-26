@@ -13,6 +13,14 @@
   <link href="/assets/frontend/img/favicon.png" rel="icon">
   <link href="/assets/frontend/img/apple-touch-icon.png" rel="apple-touch-icon">
 
+  <!-- SEO Tag -->
+  <meta property="og:type" content="website" />
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image" content="<?= base_url('/assets/backend/images/post/') . $post['post_image']; ?>">
+  <meta property="og:image:secure_url" content="<?= base_url('/assets/backend/images/post/') . $post['post_image']; ?>" />
+  <meta property="og:image:width" content="300" />
+  <meta property="og:image:height" content="300" />
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
