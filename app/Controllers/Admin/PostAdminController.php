@@ -109,14 +109,19 @@ class PostAdminController extends BaseController
             // Ambil File foto
             $fotoUpload = $this->request->getFile('filefoto');
 
+            // Simpan nama file yang akan digunakan
+            $namaFotoUpload = $fotoUpload->getRandomName();
+
             // Kompresi gambar
             $image = \Config\Services::image()
-            ->withFile($fotoUpload)
-            ->resize(600, 400, true) // Ubah ukuran sesuai kebutuhan
-            ->save('assets/backend/images/post/compressed/' . $fotoUpload->getRandomName());
+                ->withFile($fotoUpload)
+                ->resize(1000, 800, true) // Ubah ukuran sesuai kebutuhan
+                ->save('assets/backend/images/post/' . $namaFotoUpload);
 
-            $namaFotoUpload = $fotoUpload->getRandomName();
-            $fotoUpload->move('assets/backend/images/post/', $namaFotoUpload);
+            // Hapus file asli jika proses kompresi selesai
+            if (file_exists('assets/backend/images/post/' . $fotoUpload->getName())) {
+                unlink('assets/backend/images/post/' . $fotoUpload->getName());
+            }
         } else {
             $namaFotoUpload = 'default-post.png';
         }
