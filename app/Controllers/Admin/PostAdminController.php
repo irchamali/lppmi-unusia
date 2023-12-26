@@ -103,15 +103,24 @@ class PostAdminController extends BaseController
         ])) {
             return redirect()->to('/admin/post/add_new')->withInput()->with('peringatan', 'Data gagal disimpan dikarenakan ada penginputan yang tidak sesuai. silakan coba lagi!');
         }
+        
         // Cek foto
         if ($this->request->getFile('filefoto')->isValid()) {
             // Ambil File foto
             $fotoUpload = $this->request->getFile('filefoto');
+
+            // Kompresi gambar
+            $image = \Config\Services::image()
+            ->withFile($fotoUpload)
+            ->resize(600, 400, true) // Ubah ukuran sesuai kebutuhan
+            ->save('assets/backend/images/post/compressed/' . $fotoUpload->getRandomName());
+
             $namaFotoUpload = $fotoUpload->getRandomName();
             $fotoUpload->move('assets/backend/images/post/', $namaFotoUpload);
         } else {
             $namaFotoUpload = 'default-post.png';
         }
+
         $title = strip_tags(htmlspecialchars($this->request->getPost('title'), ENT_QUOTES));
         $contents = $this->request->getPost('contents');
         $category = strip_tags(htmlspecialchars($this->request->getPost('category'), ENT_QUOTES));
