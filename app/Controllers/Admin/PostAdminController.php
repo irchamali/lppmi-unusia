@@ -258,8 +258,8 @@ class PostAdminController extends BaseController
             // Hapus foto lama jika bukan foto default dan bukan sama dengan foto baru
             if ($fotoAwal != 'default-post.png' && $fotoAwal != $fileFoto->getName()) {
                 $pathToFotoAwal = 'assets/backend/images/post/' . $fotoAwal;
-                if (file_exists($pathToFotoAwal)) {
-                    unlink($pathToFotoAwal);
+                if (file_exists($pathToFotoAwal) && is_file($pathToFotoAwal)) {
+                    unlink($pathToFotoAwal); // Hapus hanya jika itu adalah file, bukan direktori
                 }
             }
 
