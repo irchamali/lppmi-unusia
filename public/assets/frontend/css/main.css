@@ -2141,6 +2141,16 @@ section {
   border-radius: 10px 10px 0 0;
 }
 
+.blog .blog-details .post-img img {
+  transition: 0.3s;
+  position: relative;
+  z-index: 1;
+}
+
+.blog .post-img:hover img {
+  transform: scale(1.1);
+}
+
 .blog .blog-details .title {
   font-size: 28px;
   font-weight: 700;
