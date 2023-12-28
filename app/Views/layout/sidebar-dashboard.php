@@ -162,16 +162,16 @@
                     <li class="<?= ($title === "All Tag") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/tag">Tag</a></li>
                 </ul>
             </li>
+            
+            <?php if (session('role') == 'admin') : ?>
             <li class="droplink <?= ($title === "All Document") ? 'active open' : '' ?><?= ($title === "Category of Document") ? 'active open' : '' ?>"><a
                     href="/<?= session('role'); ?>/document" class="waves-effect waves-button"><span
                         class="menu-icon icon-link"></span>
                     <p>Documents</p><span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <?php if (session('role') == 'admin') : ?>
                     <li class="<?= ($title === "All Document") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/document">Document</a></li>
                     <li class="<?= ($title === "Category of Document") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/docscategory">Category</a></li>
-                    <?php endif; ?>
                 </ul>
             </li>
             <li class="droplink <?= ($title === "Semua Laporan") ? 'active open' : '' ?><?= ($title === "Kategori Laporan") ? 'active open' : '' ?>"><a
@@ -179,11 +179,9 @@
                         class="menu-icon icon-eye"></span>
                     <p>Laporan</p><span class="arrow"></span>
                 </a>
-                <ul class="sub-menu">
-                    <?php if (session('role') == 'admin') : ?>
+                <ul class="sub-menu">                    
                     <li class="<?= ($title === "Semua Laporan") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/laporan">Laporan</a></li>
-                    <li class="<?= ($title === "Kategori Laporan") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/lapcategory">Kategori</a></li>
-                    <?php endif; ?>
+                    <li class="<?= ($title === "Kategori Laporan") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/lapcategory">Kategori</a></li>                    
                 </ul>
             </li>
             <li class="droplink <?= ($title === "Data Akreditasi") ? 'active open' : '' ?><?= ($title === "Data Program Studi") ? 'active open' : '' ?>"><a
@@ -191,14 +189,11 @@
                         class="menu-icon icon-flag"></span>
                     <p>Pusat Data</p><span class="arrow"></span>
                 </a>
-                <ul class="sub-menu">
-                    <?php if (session('role') == 'admin') : ?>
+                <ul class="sub-menu">                    
                     <li class="<?= ($title === "Data Akreditasi") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/akreditasi">Akreditasi</a></li>
-                    <li class="<?= ($title === "Data Program Studi") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/prodi">Program Studi</a></li>
-                    <?php endif; ?>
+                    <li class="<?= ($title === "Data Program Studi") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/prodi">Program Studi</a></li>                    
                 </ul>
             </li>
-            <?php if (session('role') == 'admin') : ?>
             <li class="<?= ($active == 'inbox') ? 'active' : '' ?>">
                 <a href="/<?= session('role'); ?>/inbox" class="waves-effect waves-button"><span
                         class="menu-icon icon-envelope"></span>
@@ -206,6 +201,7 @@
                 </a>
             </li>
             <?php endif; ?>
+
             <li class="<?= ($active == 'comment') ? 'active' : '' ?>">
                 <a href="/<?= session('role'); ?>/comment" class="waves-effect waves-button"><span
                         class="menu-icon icon-bubbles"></span>
