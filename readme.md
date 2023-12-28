@@ -44,8 +44,9 @@ Teknologi yang digunakan untuk membangun web ini diantaranya:
 32. [weather-icons 1.3](http://erikflowers.github.io/weather-icons/)
 33. [metrojs](http://drewgreenwell.com/projects/metrojs)
 34. [chartjs 1.0.2](http://chartjs.org/)
-35. [frontend template](https://bootstrapmade.com/impact-bootstrap-business-website-template/)
-36. And more...
+35. [frontend template](https://themewagon.com/themes/elixir-elegant-html5-bootstrap-template-consultancy-agency-website/)
+36. [blog template](https://bootstrapmade.com/impact-bootstrap-business-website-template/)
+37. And more...
 
 <hr>
 
@@ -55,17 +56,25 @@ Fitur pada web ini meliputi:
 
 1. Halaman Depan
 
-   - Home
-   - Gallery
-   - Team
-   - All Post
-   - Post by Category
-   - Post by Author
-   - Post by Tag
-   - Post by Search
-   - Document
-   - Contact
-   - Login
+    - Home
+    - Tentang
+      - Profil
+      - Strategy Map
+      - Milestone
+      - Deskripsi Tugas Kerja
+      - Struktur Organisasi
+      - Personel
+      - Alur Kerja dan PJ
+      - Monev Rutin
+    - Akreditasi
+    - Dokumen
+    - Laporan 
+    - Formulir
+    - Data 
+    - Berita
+    - Kontak
+    - Pengaduan
+    - Login
 
 2. Halaman Dashboard Admin
 
