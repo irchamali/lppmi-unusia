@@ -89,11 +89,11 @@
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/ami">Daftar Tilik AMI</a></li>
                     <li><a class="dropdown-item" href="#">Daftar Tilik Audit Nonakademik</a></li>
-                    <li><a class="dropdown-item" href="#">Formulir ...</a></li>
                     <li><a class="dropdown-item" href="#">Template Renstra</a></li>
-                    <li><a class="dropdown-item" href="#">Template RENOP</a></li>
-                    <li><a class="dropdown-item" href="#">Template LAKIN</a></li>
-                    <li><a class="dropdown-item" href="#">Formulir Buku 4</a></li>
+                    <li><a class="dropdown-item" href="#">Rencana Operasional</a></li>
+                    <li><a class="dropdown-item" href="#">Laporan Kinerja</a></li>
+                    <li><a class="dropdown-item" href="#">Laporan Progres</a></li>
+                    <li><a class="dropdown-item" href="#">Formulir SPMI</a></li>
                   
                 </ul>
               </li>

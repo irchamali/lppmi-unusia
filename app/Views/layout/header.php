@@ -130,11 +130,11 @@
             <ul>
               <li><a href="/ami">Daftar Tilik AMI</a></li>
               <li><a href="#">Daftar Tilik Audit Nonakademik</a></li>
-              <li><a href="#">Formulir ...</a></li>
               <li><a href="#">Template Renstra</a></li>
-              <li><a href="#">Template RENOP</a></li>
-              <li><a href="#">Template LAKIN</a></li>
-              <li><a href="#">Formulir Buku 4</a></li>
+              <li><a href="#">Rencana Operasional</a></li>
+              <li><a href="#">Laporan Kinerja</a></li>
+              <li><a href="#">Laporan Progres</a></li>
+              <li><a href="#">Formulir Renstra</a></li>
             </ul>
           </li>
           <li class="dropdown"><a href="#"><span>Data</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
