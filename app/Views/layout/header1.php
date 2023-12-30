@@ -88,13 +88,12 @@
               <li class="nav-item dropdown"><a class="nav-link dropdown-toggle dropdown-indicator" href="JavaScript:void(0)" role="button" data-bs-toggle="dropdown" aria-expanded="false">Formulir</a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/ami">Daftar Tilik AMI</a></li>
-                    <li><a class="dropdown-item" href="#">Daftar Tilik Audit Nonakademik</a></li>
-                    <li><a class="dropdown-item" href="#">Template Renstra</a></li>
-                    <li><a class="dropdown-item" href="#">Rencana Operasional</a></li>
-                    <li><a class="dropdown-item" href="#">Laporan Kinerja</a></li>
-                    <li><a class="dropdown-item" href="#">Laporan Progres</a></li>
-                    <li><a class="dropdown-item" href="#">Formulir SPMI</a></li>
-                  
+                    <li><a class="dropdown-item" href="/auditnonakademik">Daftar Tilik Audit Nonakademik</a></li>
+                    <li><a class="dropdown-item" href="/renstra">Template Renstra</a></li>
+                    <li><a class="dropdown-item" href="/renop">Rencana Operasional</a></li>
+                    <li><a class="dropdown-item" href="/lakin">Laporan Kinerja</a></li>
+                    <li><a class="dropdown-item" href="/progressreport">Laporan Progres</a></li>
+                    <li><a class="dropdown-item" href="/formspmi">Formulir SPMI</a></li>
                 </ul>
               </li>
 
