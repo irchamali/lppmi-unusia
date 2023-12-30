@@ -27,6 +27,6 @@ class FrenstraController extends BaseController
             'title' => 'Rencana Strategis',
             'active' => 'Rencana Strategis'
         ];
-        return view('formulir/progress_view', $data);
+        return view('formulir/renstra_view', $data);
     }
 }
