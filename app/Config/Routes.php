@@ -74,8 +74,14 @@ $routes->get('monevrutin', 'AbMonevrutinController::index');
 // AkreditasiController
 $routes->get('akreditasi', 'AkreditasiController::index');
 
-// DaftartilikController
+// Controller pada Sub Menu Formulir
 $routes->get('ami', 'AmiController::index');
+$routes->get('auditnonakademik', 'FauditnonController::index');
+$routes->get('renstra', 'FrenstraController::index');
+$routes->get('renop', 'FrenopController::index');
+$routes->get('lakin', 'FlakinController::index');
+$routes->get('progressreport', 'FprogressController::index');
+$routes->get('formspmi', 'FormspmiController::index');
 
 // DocumentController
 $routes->get('document', 'DocumentController::index');
