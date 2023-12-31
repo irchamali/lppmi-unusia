@@ -31,8 +31,7 @@
                 <div class="col-12">
                     <div class="bg-white px-3 mt-6 px-0 py-5 px-lg-5 rounded-3">
                         <p>Keterangan lebih lanjut..</p>
-                    <!-- <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQxX5y-t7qsIEgjX3FewikfFAhVrCmJnLWaV2NQFT_2tTh28l5Tth0e8Se1D8t13rs_EgTDnO_An-ji/pubhtml?gid=292417879&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="580"></iframe> -->
-                    
+                        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRsmVMwm_bEKBzE3Z-28xjsbkaHOp3XMYxPbZ20_yZNDBW1bL_GXhLx01glu0IiW9nTRHBJuUDQddHj/pubhtml?gid=558627838&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="580"></iframe>
                     </div>
                 </div>
             </div>
