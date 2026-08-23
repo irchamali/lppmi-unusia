@@ -137,10 +137,10 @@ class PostAdminController extends BaseController
             $slug = $slug . '-' . $uniqe_num;
         }
 
-        $tags[] = $this->request->getPost('tag');
-        foreach ($tags as $tag) {
-            $tags = implode(",", $tag);
-        }
+        $tagInput = $this->request->getPost('tag');
+        $tagList = is_array($tagInput) ? $tagInput : [$tagInput];
+        $tagList = array_filter(array_map(static fn ($item) => trim((string) $item), $tagList), static fn ($item) => $item !== '');
+        $tags = implode(',', $tagList);
 
         // Simpan ke database
         $this->postModel->save([
@@ -241,10 +241,10 @@ class PostAdminController extends BaseController
             $slug = $slug . '-' . $uniqe_num;
         }
 
-        $tags[] = $this->request->getPost('tag');
-        foreach ($tags as $tag) {
-            $tags = implode(",", $tag);
-        }
+        $tagInput = $this->request->getPost('tag');
+        $tagList = is_array($tagInput) ? $tagInput : [$tagInput];
+        $tagList = array_filter(array_map(static fn ($item) => trim((string) $item), $tagList), static fn ($item) => $item !== '');
+        $tags = implode(',', $tagList);
         
         // Cek foto
         $postAwal = $this->postModel->find($post_id);

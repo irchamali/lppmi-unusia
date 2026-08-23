@@ -12,22 +12,31 @@ class VisitorModel extends Model
 
     public function count_visitor($user_ip, $agent)
     {
-        $cek_ip = $this->db->query("SELECT * FROM tbl_visitors WHERE visit_ip='$user_ip' AND DATE(visit_date)=CURDATE()")->getNumRows();
-        if ($cek_ip < 1) {
-            $hsl = $this->db->query("INSERT INTO tbl_visitors (visit_ip,visit_platform) VALUES('$user_ip','$agent')");
-            return $hsl;
+        $exists = $this->db->table($this->table)
+            ->where('visit_ip', $user_ip)
+            ->where('DATE(visit_date)', 'CURDATE()', false)
+            ->countAllResults();
+
+        if ($exists < 1) {
+            return $this->db->table($this->table)->insert([
+                'visit_ip'       => $user_ip,
+                'visit_platform' => $agent,
+            ]);
         }
+
+        return true;
     }
+
     function visitor_statistics()
     {
-        $query = $this->db->query("SELECT DATE_FORMAT(visit_date,'%d') AS tgl,COUNT(visit_ip) AS jumlah FROM tbl_visitors WHERE MONTH(visit_date)=MONTH(CURDATE()) GROUP BY DATE(visit_date)");
-
-        if ($query->getNumRows() > 0) {
-            foreach ($query->getResult() as $data) {
-                $result[] = $data;
-            }
-            return $result;
-        }
+        return $this->db->table($this->table)
+            ->select("DATE_FORMAT(visit_date, '%d') AS tgl", false)
+            ->select('COUNT(visit_ip) AS jumlah')
+            ->where('MONTH(visit_date)', 'MONTH(CURDATE())', false)
+            ->groupBy("DATE_FORMAT(visit_date, '%d')", false)
+            ->orderBy('tgl', 'ASC')
+            ->get()
+            ->getResult();
     }
 
     function count_all_visitors()

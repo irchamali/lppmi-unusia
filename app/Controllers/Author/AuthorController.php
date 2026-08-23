@@ -17,12 +17,16 @@ class AuthorController extends BaseController
     public function index()
     {
         $visitor = $this->visitorModel->visitor_statistics();
+        $bulan   = [];
+        $value   = [];
+
         foreach ($visitor as $result) {
             $bulan[] = $result->tgl;
             $value[] = (float) $result->jumlah;
         }
 
         $monthly_visitors = $this->visitorModel->count_visitor_this_month();
+        $visitor_this_month = 0;
         if ($monthly_visitors->getNumRows() > 0) {
             $row = $monthly_visitors->getRowArray();
             $visitor_this_month = $row['tot_visitor'];
@@ -31,7 +35,7 @@ class AuthorController extends BaseController
         if ($chrome_visitors->getNumRows() > 0) {
             $row = $chrome_visitors->getRowArray();
             $visitor_chrome = $row['chrome_visitor'];
-            $chrome_visitor = ($visitor_chrome / $visitor_this_month) * 100;
+            $chrome_visitor = $visitor_this_month > 0 ? ($visitor_chrome / $visitor_this_month) * 100 : 0;
         } else {
             $chrome_visitor = 0;
         }
@@ -39,7 +43,7 @@ class AuthorController extends BaseController
         if ($firefox_visitors->getNumRows() > 0) {
             $row = $firefox_visitors->getRowArray();
             $visitor_firefox = $row['firefox_visitor'];
-            $firefox_visitor = ($visitor_firefox / $visitor_this_month) * 100;
+            $firefox_visitor = $visitor_this_month > 0 ? ($visitor_firefox / $visitor_this_month) * 100 : 0;
         } else {
             $firefox_visitor = 0;
         }
@@ -47,7 +51,7 @@ class AuthorController extends BaseController
         if ($explorer_visitors->getNumRows() > 0) {
             $row = $explorer_visitors->getRowArray();
             $visitor_explorer = $row['explorer_visitor'];
-            $explorer_visitor = ($visitor_explorer / $visitor_this_month) * 100;
+            $explorer_visitor = $visitor_this_month > 0 ? ($visitor_explorer / $visitor_this_month) * 100 : 0;
         } else {
             $explorer_visitor = 0;
         }
@@ -55,7 +59,7 @@ class AuthorController extends BaseController
         if ($safari_visitors->getNumRows() > 0) {
             $row = $safari_visitors->getRowArray();
             $visitor_safari = $row['safari_visitor'];
-            $safari_visitor = ($visitor_safari / $visitor_this_month) * 100;
+            $safari_visitor = $visitor_this_month > 0 ? ($visitor_safari / $visitor_this_month) * 100 : 0;
         } else {
             $safari_visitor = 0;
         }
@@ -63,7 +67,7 @@ class AuthorController extends BaseController
         if ($opera_visitors->getNumRows() > 0) {
             $row = $opera_visitors->getRowArray();
             $visitor_opera = $row['opera_visitor'];
-            $opera_visitor = ($visitor_opera / $visitor_this_month) * 100;
+            $opera_visitor = $visitor_this_month > 0 ? ($visitor_opera / $visitor_this_month) * 100 : 0;
         } else {
             $opera_visitor = 0;
         }
@@ -71,7 +75,7 @@ class AuthorController extends BaseController
         if ($robot_visitors->getNumRows() > 0) {
             $row = $robot_visitors->getRowArray();
             $visitor_robot = $row['robot_visitor'];
-            $robot_visitor = ($visitor_robot / $visitor_this_month) * 100;
+            $robot_visitor = $visitor_this_month > 0 ? ($visitor_robot / $visitor_this_month) * 100 : 0;
         } else {
             $robot_visitor = 0;
         }
@@ -79,7 +83,7 @@ class AuthorController extends BaseController
         if ($other_visitors->getNumRows() > 0) {
             $row = $other_visitors->getRowArray();
             $visitor_other = $row['other_visitor'];
-            $other_visitor = ($visitor_other / $visitor_this_month) * 100;
+            $other_visitor = $visitor_this_month > 0 ? ($visitor_other / $visitor_this_month) * 100 : 0;
         } else {
             $other_visitor = 0;
         }

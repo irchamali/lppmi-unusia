@@ -12,12 +12,13 @@ class CategoryModel extends Model
 
     public function get_post_by_category($slug)
     {
-        $query = $this->db->query("SELECT tbl_post.*,tbl_category.*,user_name,user_photo FROM
-			tbl_post LEFT JOIN tbl_category ON post_category_id=category_id 
-			LEFT JOIN tbl_user ON post_user_id=user_id WHERE category_slug='$slug'
-            ORDER BY tbl_post.post_date DESC"); // Menambahkan klausa ORDER BY
-            
-        return $query;
+        return $this->db->table('tbl_post')
+            ->select('tbl_post.*, tbl_category.*, tbl_user.user_name, tbl_user.user_photo')
+            ->join('tbl_category', 'tbl_post.post_category_id = tbl_category.category_id', 'left')
+            ->join('tbl_user', 'tbl_post.post_user_id = tbl_user.user_id', 'left')
+            ->where('tbl_category.category_slug', $slug)
+            ->orderBy('tbl_post.post_date', 'DESC')
+            ->get();
     }
     
 }

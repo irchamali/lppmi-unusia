@@ -6,19 +6,21 @@ use CodeIgniter\Model;
 
 class LapModel extends Model
 {
-    protected $table         = 'v_report';
+    protected $table         = 'tbl_laporan';
     protected $primaryKey    = 'lap_id';
     protected $allowedFields = ['lap_name','lap_unit','lap_link','lap_category_id'];
     protected $useTimestamps = true;
     protected $createdField  = 'lap_created_at';
     protected $updatedField  = 'lap_updated_at';
 
-    public function getAllLap($limit = 3)
+    public function getAllLap(): array
     {
-        $this->orderBy('lap_created_at', 'DESC')
-             ->where(['lap_updated_at' => 1]);
-
-        return $this->paginate($limit, 'documents');
+        return $this->db->table('tbl_laporan')
+            ->select('tbl_laporan.*, tbl_lapcategory.lapcategory_name, tbl_lapcategory.lapcategory_slug')
+            ->join('tbl_lapcategory', 'tbl_laporan.lap_category_id = tbl_lapcategory.lapcategory_id', 'left')
+            ->orderBy('tbl_laporan.lap_created_at', 'DESC')
+            ->get()
+            ->getResultArray();
     }
 
 }

@@ -40,6 +40,63 @@ abstract class BaseController extends Controller
     protected $helpers = [];
 
     /**
+     * Session instance.
+     *
+     * @var \CodeIgniter\Session\SessionInterface
+     */
+    protected $session;
+
+    /**
+     * Account model for logged-in user.
+     *
+     * @var \App\Models\UserModel|null
+     */
+    protected $akunModel;
+
+    /**
+     * Logged-in user data.
+     *
+     * @var array|null
+     */
+    protected $akun;
+
+    /**
+     * Active menu key.
+     *
+     * @var string|null
+     */
+    protected $active;
+
+    /**
+     * Model instances used across controllers to avoid dynamic properties on PHP 8.2+.
+     */
+    protected $aboutModel;
+    protected $akreditasiModel;
+    protected $apsModel;
+    protected $categoryModel;
+    protected $commentModel;
+    protected $docsModel;
+    protected $docscategoryModel;
+    protected $documentModel;
+    protected $homeModel;
+    protected $inboxModel;
+    protected $lapModel;
+    protected $lapcategoryModel;
+    protected $laporanModel;
+    protected $memberModel;
+    protected $postModel;
+    protected $postviewModel;
+    protected $prodiModel;
+    protected $siteModel;
+    protected $sliderModel;
+    protected $subscribeModel;
+    protected $tagModel;
+    protected $teamModel;
+    protected $testimonialModel;
+    protected $userModel;
+    protected $visitorModel;
+
+    /**
      * Constructor.
      */
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)

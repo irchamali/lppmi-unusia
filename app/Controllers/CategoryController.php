@@ -7,6 +7,7 @@ use App\Models\AboutModel;
 use App\Models\CategoryModel;
 use App\Models\HomeModel;
 use App\Models\PostModel;
+use App\Models\PostviewModel;
 use App\Models\SiteModel;
 
 class CategoryController extends BaseController
@@ -18,30 +19,27 @@ class CategoryController extends BaseController
         $this->aboutModel = new AboutModel();
         $this->postModel = new PostModel();
         $this->categoryModel = new CategoryModel();
+        $this->postviewModel = new PostviewModel();
     }
     public function index($slug = null)
     {
         if ($slug == null) {
-            return redirect()->to('/post');
+            return redirect()->to('/posts');
         }
-        $posts = $this->categoryModel->get_post_by_category($slug);
-        if ($posts->getNumRows() < 1) {
-            $posts = $posts->getResultArray();
+        $posts = $this->postviewModel->getPostsByCategoryPaginated($slug);
+        if (count($posts) < 1) {
             $keyword = "Category '$slug' tidak ditemukan";
         } else {
-            $posts = $posts->getResultArray();
             $keyword = "Category: $slug ";
         }
         $data = [
             'site' => $this->siteModel->find(1),
             'home' => $this->homeModel->find(1),
             'about' => $this->aboutModel->find(1),
-            // 'posts' => $this->categoryModel->findAll(),
-            'posts' => $this->categoryModel->get_post_by_category($slug),
-            // 'pager' => $this->categoryModel->pager,
+            'posts' => $posts,
+            'pager' => $this->postviewModel->pager,
             'title' => 'Category',
             'keyword' => $keyword,
-            'posts' => $posts,
             'active' => 'Post'
         ];
         return view('post_category', $data);

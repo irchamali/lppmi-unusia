@@ -25,7 +25,7 @@ class AkreditasiController extends BaseController
             'site' => $this->siteModel->find(1),
             'home' => $this->homeModel->find(1),
             'about' => $this->aboutModel->find(1),
-            'documents' => $this->akreditasiModel->findAll(),
+            'documents' => $this->akreditasiModel->getAllAps(),
             // 'documents' => $this->docsModel->getAllDocs(),
             'pager' => $this->akreditasiModel->pager,
             'title' => 'Akreditasi',

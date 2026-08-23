@@ -22,7 +22,7 @@ class CategoryDocsController extends BaseController
     public function index($slug = null)
     {
         if ($slug == null) {
-            return redirect()->to('/document');
+            return redirect()->to('/d');
         }
         $documents = $this->docscategoryModel->getDocs_by_category($slug);
         if ($documents->getNumRows() < 1) {
@@ -38,7 +38,7 @@ class CategoryDocsController extends BaseController
             'about' => $this->aboutModel->find(1),
             'documents' => $this->docscategoryModel->getDocs_by_category($slug),
             'title' => 'Document',
-            'url' => 'document',
+            'url' => 'd',
             'keyword' => $keyword,
             'documents' => $documents,
             'active' => 'Document'

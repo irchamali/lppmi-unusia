@@ -24,7 +24,7 @@ class TagController extends BaseController
     public function index($slug = null)
     {
         if ($slug == null) {
-            return redirect()->to('/post');
+            return redirect()->to('/posts');
         }
         $posts = $this->tagModel->get_post_by_tags($slug);
         if ($posts->getNumRows() < 1) {

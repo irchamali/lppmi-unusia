@@ -25,8 +25,7 @@ class LaporanController extends BaseController
             'site' => $this->siteModel->find(1),
             'home' => $this->homeModel->find(1),
             'about' => $this->aboutModel->find(1),
-            'documents' => $this->lapModel->findAll(),
-            // 'documents' => $this->docsModel->getAllDocs(),
+            'documents' => $this->lapModel->getAllLap(),
             'pager' => $this->lapModel->pager,
             'title' => 'Laporan',
             'active' => 'Laporan'

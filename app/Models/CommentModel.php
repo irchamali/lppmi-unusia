@@ -12,28 +12,45 @@ class CommentModel extends Model
 
     public function show_comments($post_id)
     {
-        $query = $this->db->query("SELECT * FROM tbl_comment WHERE comment_post_id='$post_id' AND comment_status='1' AND comment_parent='0'");
-        return $query;
+        return $this->db->table('tbl_comment')
+            ->where('comment_post_id', $post_id)
+            ->where('comment_status', 1)
+            ->where('comment_parent', 0)
+            ->get();
     }
     public function show_comments_reply($comment_id)
     {
-        $query = $this->db->query("SELECT * FROM tbl_comment WHERE comment_status='1' AND comment_parent='$comment_id'");
-        return $query;
+        return $this->db->table('tbl_comment')
+            ->where('comment_status', 1)
+            ->where('comment_parent', $comment_id)
+            ->get();
     }
     public function get_all_comment()
     {
-        $result = $this->db->query("SELECT comment_id,DATE_FORMAT(comment_date,'%d %M %Y %H:%i') AS comment_date,comment_name,comment_email,comment_status,comment_message,comment_image,post_id,post_title,post_slug FROM tbl_comment JOIN tbl_post ON comment_post_id=post_id WHERE comment_parent='0' ORDER BY comment_id DESC");
-        return $result;
+        return $this->db->table('tbl_comment')
+            ->select("tbl_comment.comment_id, DATE_FORMAT(tbl_comment.comment_date,'%d %M %Y %H:%i') AS comment_date, tbl_comment.comment_name, tbl_comment.comment_email, tbl_comment.comment_status, tbl_comment.comment_message, tbl_comment.comment_image, tbl_post.post_id, tbl_post.post_title, tbl_post.post_slug", false)
+            ->join('tbl_post', 'tbl_comment.comment_post_id = tbl_post.post_id')
+            ->where('tbl_comment.comment_parent', 0)
+            ->orderBy('tbl_comment.comment_id', 'DESC')
+            ->get();
     }
     public function get_all_comment_unpublish()
     {
-        $result = $this->db->query("SELECT comment_id,DATE_FORMAT(comment_date,'%d %M %Y %H:%i') AS comment_date,comment_name,comment_email,comment_status,comment_message,comment_image,post_id,post_title,post_slug FROM tbl_comment JOIN tbl_post ON comment_post_id=post_id WHERE comment_status='0' ORDER BY comment_id DESC");
-        return $result;
+        return $this->db->table('tbl_comment')
+            ->select("tbl_comment.comment_id, DATE_FORMAT(tbl_comment.comment_date,'%d %M %Y %H:%i') AS comment_date, tbl_comment.comment_name, tbl_comment.comment_email, tbl_comment.comment_status, tbl_comment.comment_message, tbl_comment.comment_image, tbl_post.post_id, tbl_post.post_title, tbl_post.post_slug", false)
+            ->join('tbl_post', 'tbl_comment.comment_post_id = tbl_post.post_id')
+            ->where('tbl_comment.comment_status', 0)
+            ->orderBy('tbl_comment.comment_id', 'DESC')
+            ->get();
     }
     public function get_replies_post($comment_id)
     {
-        $result = $this->db->query("SELECT comment_id,DATE_FORMAT(comment_date,'%d %M %Y %H:%i') AS comment_date,comment_name,comment_email,comment_message,comment_image,post_id,post_title,post_slug FROM tbl_comment JOIN tbl_post ON comment_post_id=post_id WHERE comment_parent='$comment_id' ORDER BY comment_id ASC");
-        return $result;
+        return $this->db->table('tbl_comment')
+            ->select("tbl_comment.comment_id, DATE_FORMAT(tbl_comment.comment_date,'%d %M %Y %H:%i') AS comment_date, tbl_comment.comment_name, tbl_comment.comment_email, tbl_comment.comment_message, tbl_comment.comment_image, tbl_post.post_id, tbl_post.post_title, tbl_post.post_slug", false)
+            ->join('tbl_post', 'tbl_comment.comment_post_id = tbl_post.post_id')
+            ->where('tbl_comment.comment_parent', $comment_id)
+            ->orderBy('tbl_comment.comment_id', 'ASC')
+            ->get();
     }
     public function getCommentsAuthor($user_id)
     {

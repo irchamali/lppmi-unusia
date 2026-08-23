@@ -22,7 +22,7 @@ class CategoryLapController extends BaseController
     public function index($slug = null)
     {
         if ($slug == null) {
-            return redirect()->to('/laporan');
+            return redirect()->to('/r');
         }
         $documents = $this->lapcategoryModel->getLap_by_category($slug);
         if ($documents->getNumRows() < 1) {
@@ -38,7 +38,7 @@ class CategoryLapController extends BaseController
             'about' => $this->aboutModel->find(1),
             'documents' => $this->lapcategoryModel->getLap_by_category($slug),
             'title' => 'Laporan',
-            'url' => 'laporan',
+            'url' => 'r',
             'keyword' => $keyword,
             'documents' => $documents,
             'active' => 'Laporan'

@@ -10,12 +10,13 @@ class TagModel extends Model
     protected $primaryKey       = 'tag_id';
     protected $allowedFields    = ['tag_name'];
 
-    function get_post_by_tags($tag)
+    public function get_post_by_tags($tag)
     {
-        $query = $this->db->query("SELECT tbl_post.*,user_name,user_photo FROM tbl_post
-			LEFT JOIN tbl_user ON post_user_id=user_id
-			WHERE post_tags LIKE '%$tag%'
-            ORDER BY tbl_post.post_date DESC"); // Menambahkan klausa ORDER BY
-        return $query;
+        return $this->db->table('tbl_post')
+            ->select('tbl_post.*, tbl_user.user_name, tbl_user.user_photo')
+            ->join('tbl_user', 'tbl_post.post_user_id = tbl_user.user_id', 'left')
+            ->like('tbl_post.post_tags', $tag)
+            ->orderBy('tbl_post.post_date', 'DESC')
+            ->get();
     }
 }

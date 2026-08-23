@@ -15,11 +15,11 @@ class LaporanModel extends Model
 
     public function getLap_by_category($slug)
     {
-        $query = $this->db->query("SELECT tbl_laporan.*,tbl_lapcategory.* FROM
-			tbl_laporan LEFT JOIN tbl_lapcategory ON lap_category_id=lapcategory_id 
-			WHERE lapcategory_slug='$slug'
-            ORDER BY tbl_laporan.lap_created_at DESC"); // Menambahkan klausa ORDER BY
-            
-        return $query;
+        return $this->db->table('tbl_laporan')
+            ->select('tbl_laporan.*, tbl_lapcategory.*')
+            ->join('tbl_lapcategory', 'tbl_laporan.lap_category_id = tbl_lapcategory.lapcategory_id', 'left')
+            ->where('tbl_lapcategory.lapcategory_slug', $slug)
+            ->orderBy('tbl_laporan.lap_created_at', 'DESC')
+            ->get();
     }
 }

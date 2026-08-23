@@ -25,9 +25,7 @@ class DocumentController extends BaseController
             'site' => $this->siteModel->find(1),
             'home' => $this->homeModel->find(1),
             'about' => $this->aboutModel->find(1),
-            // 'documents' => $this->documentModel->findAll(),
-            'documents' => $this->docsModel->findAll(),
-            // 'documents' => $this->docsModel->getAllDocs(),
+            'documents' => $this->docsModel->getAllDocs(),
             'pager' => $this->docsModel->pager,
             'title' => 'Document',
             'active' => 'Document'
