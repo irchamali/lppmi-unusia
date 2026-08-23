@@ -27,6 +27,13 @@ class App extends BaseConfig
     public $baseURL = 'http://localhost:8080/';
 
     /**
+     * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
+     *
+     * @var string[]
+     */
+    public $allowedHostnames = [];
+
+    /**
      * --------------------------------------------------------------------------
      * Index File
      * --------------------------------------------------------------------------
@@ -57,6 +64,18 @@ class App extends BaseConfig
      * @var string
      */
     public $uriProtocol = 'REQUEST_URI';
+
+    /**
+     * --------------------------------------------------------------------------
+     * Allowed URL Characters
+     * --------------------------------------------------------------------------
+     *
+     * This lets you specify which characters are permitted within your URLs.
+     * When left empty, all characters are allowed (legacy behavior).
+     *
+     * @var string
+     */
+    public $permittedURIChars = '';
 
     /**
      * --------------------------------------------------------------------------
@@ -343,7 +362,7 @@ class App extends BaseConfig
      *
      * @var string|string[]
      */
-    public $proxyIPs = '';
+    public $proxyIPs = [];
 
     /**
      * --------------------------------------------------------------------------

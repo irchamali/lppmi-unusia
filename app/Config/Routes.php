@@ -48,18 +48,46 @@ $routes->post('subscribe', 'SubscribeController::index');
 // GalleryController
 $routes->get('gallery', 'GalleryController::index');
 
-// PostController
-$routes->get('search', 'PostController::search');
-$routes->get('post', 'PostController::index');
-$routes->get('post/(:segment)', 'PostController::index/$1');
-$routes->get('author/(:num)', 'PostController::author/$1');
-$routes->get('tag/(:segment)', 'PostController::tag/$1');
-$routes->post('post/send_comment', 'PostController::send_comment');
+// PostController (canonical plural routes)
+$routes->get('posts', 'PostController::index');
+$routes->get('posts/search', 'PostController::search');
+$routes->get('p/(:segment)', 'PostController::index/$1');
+$routes->get('posts/(:segment)', 'PostController::index/$1');
+$routes->get('authors/(:num)', 'PostController::author/$1');
+$routes->get('tags/(:segment)', 'PostController::tag/$1');
 
-// CategoryController
-$routes->get('category/(:segment)', 'CategoryController::index/$1');
-$routes->get('document/(:segment)', 'CategoryDocsController::index/$1');
-$routes->get('laporan/(:segment)', 'CategoryLapController::index/$1');
+// CategoryController (canonical plural routes)
+$routes->get('categories/(:segment)', 'CategoryController::index/$1');
+$routes->get('d', 'DocumentController::index');
+$routes->get('d/(:segment)', 'CategoryDocsController::index/$1');
+$routes->get('documents/(:segment)', 'CategoryDocsController::index/$1');
+$routes->get('r', 'LaporanController::index');
+$routes->get('r/(:segment)', 'CategoryLapController::index/$1');
+$routes->get('reports/(:segment)', 'CategoryLapController::index/$1');
+
+// Legacy singular aliases (backward compatibility)
+$routes->get('search', 'PostController::search');
+$routes->get('post', static function () {
+    return redirect()->to('/posts');
+});
+$routes->get('post/(:segment)', static function ($slug) {
+    return redirect()->to('/posts/' . $slug);
+});
+$routes->get('author/(:num)', static function ($id) {
+    return redirect()->to('/authors/' . $id);
+});
+$routes->get('tag/(:segment)', static function ($tag) {
+    return redirect()->to('/tags/' . $tag);
+});
+$routes->get('category/(:segment)', static function ($slug) {
+    return redirect()->to('/categories/' . $slug);
+});
+$routes->get('document/(:segment)', static function ($slug) {
+    return redirect()->to('/documents/' . $slug);
+});
+$routes->get('laporan/(:segment)', static function ($slug) {
+    return redirect()->to('/reports/' . $slug);
+});
 
 // AboutController
 $routes->get('about', 'AboutController::index');
@@ -84,10 +112,18 @@ $routes->get('progressreport', 'FprogressController::index');
 $routes->get('formspmi', 'FormspmiController::index');
 
 // DocumentController
-$routes->get('document', 'DocumentController::index');
+$routes->get('documents', 'DocumentController::index');
 
 // LaporanController
-$routes->get('laporan', 'LaporanController::index');
+$routes->get('reports', 'LaporanController::index');
+
+// Legacy singular aliases (backward compatibility)
+$routes->get('document', static function () {
+    return redirect()->to('/documents');
+});
+$routes->get('laporan', static function () {
+    return redirect()->to('/reports');
+});
 
 // ContactController
 $routes->get('contact', 'ContactController::index');

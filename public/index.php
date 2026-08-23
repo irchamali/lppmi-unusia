@@ -1,7 +1,10 @@
 <?php
 
+// Composer autoload for CodeIgniter core classes, including CodeIgniter\Boot
+require __DIR__ . '/../vendor/autoload.php';
+
 // Check PHP version.
-$minPhpVersion = '7.4'; // If you update this, don't forget to update `spark`.
+$minPhpVersion = '8.2'; // If you update this, don't forget to update `spark`.
 if (version_compare(PHP_VERSION, $minPhpVersion, '<')) {
     $message = sprintf(
         'Your PHP version must be %s or higher to run CodeIgniter. Current version: %s',
@@ -34,34 +37,5 @@ require FCPATH . '../app/Config/Paths.php';
 
 $paths = new Config\Paths();
 
-// Location of the framework bootstrap file.
-require rtrim($paths->systemDirectory, '\\/ ') . DIRECTORY_SEPARATOR . 'bootstrap.php';
-
-// Load environment settings from .env files into $_SERVER and $_ENV
-require_once SYSTEMPATH . 'Config/DotEnv.php';
-(new CodeIgniter\Config\DotEnv(ROOTPATH))->load();
-
-/*
- * ---------------------------------------------------------------
- * GRAB OUR CODEIGNITER INSTANCE
- * ---------------------------------------------------------------
- *
- * The CodeIgniter class contains the core functionality to make
- * the application run, and does all of the dirty work to get
- * the pieces all working together.
- */
-
-$app = Config\Services::codeigniter();
-$app->initialize();
-$context = is_cli() ? 'php-cli' : 'web';
-$app->setContext($context);
-
-/*
- *---------------------------------------------------------------
- * LAUNCH THE APPLICATION
- *---------------------------------------------------------------
- * Now that everything is setup, it's time to actually fire
- * up the engines and make this app do its thang.
- */
-
-$app->run();
+// Bootstrap through the new CodeIgniter Boot class.
+exit(CodeIgniter\Boot::bootWeb($paths));
