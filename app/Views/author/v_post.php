@@ -48,7 +48,7 @@
                     <div class="col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-body">
-                                <a href="/<?= session('role'); ?>/posts/add_new" class="btn btn-success m-b-sm">Add New Post</a>
+                                <a href="/<?= session('role'); ?>/post/add_new" class="btn btn-success m-b-sm">Add New Post</a>
                                 <div class="table-responsive">
                                     <table id="data-table" class="display table" style="width: 100%; ">
                                         <thead>
@@ -75,7 +75,7 @@
                                                     <td><?= $post['post_views']; ?></td>
                                                     <td style="text-align: center;">
                                                         <a href="/p/<?= $post['post_slug']; ?>" class="btn btn-xs" target="_blank"><span class="fa fa-eye"></span></a>
-                                                        <a href="/<?= session('role'); ?>/posts/<?= $post['post_id']; ?>/edit" class="btn btn-xs"><span class="fa fa-pencil"></span></a>
+                                                        <a href="/<?= session('role'); ?>/post/<?= $post['post_id']; ?>/edit" class="btn btn-xs"><span class="fa fa-pencil"></span></a>
                                                         <a href="javascript:void(0);" class="btn btn-xs btn-delete" data-id="<?= $post['post_id']; ?>"><span class="fa fa-trash"></span></a>
                                                     </td>
                                                 </tr>
