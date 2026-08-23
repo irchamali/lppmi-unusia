@@ -157,7 +157,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="<?= ($title === "All Post") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/post">All Post</a></li>
-                    <li class="<?= ($title === "Add New Post") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/post/add_new">Add New</a></li>
+                    <li class="<?= ($title === "Add New Post") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/posts/add_new">Add New</a></li>
                     <li class="<?= ($title === "All Category") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/category">Category</a></li>
                     <li class="<?= ($title === "All Tag") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/tag">Tag</a></li>
                 </ul>

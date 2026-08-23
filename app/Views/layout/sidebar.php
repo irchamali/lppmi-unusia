@@ -27,10 +27,10 @@
         <div class="mt-3">
         <?php foreach ($related_post as $row) : ?>
             <div class="post-item mt-3">
-            <a href="/post/<?= $row['post_slug']; ?>">
+            <a href="/p/<?= $row['post_slug']; ?>">
                 <img src="/assets/backend/images/post/<?= $row['post_image']; ?>" alt="">
                 <div>
-                    <h4><a href="/post/<?= $row['post_slug']; ?>"><?= $row['post_title']; ?></a></h4>
+                    <h4><a href="/p/<?= $row['post_slug']; ?>"><?= $row['post_title']; ?></a></h4>
                     <time datetime="2020-01-01"><?= date('d M Y', strtotime($row['post_date'])); ?></time>
                 </div>
                 </a>
@@ -44,7 +44,7 @@
         <h3 class="sidebar-title">Tags</h3>
         <ul class="mt-3">
         <?php foreach ($tags as $tag) : ?>
-                <li><a href="/tag/<?= $tag['tag_name']; ?>"><?= $tag['tag_name']; ?></a>
+                <li><a href="/tags/<?= $tag['tag_name']; ?>"><?= $tag['tag_name']; ?></a>
                 </li>
             <?php endforeach; ?>
         </ul>

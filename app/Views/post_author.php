@@ -25,9 +25,9 @@
                                 |
                                 <?= $row['post_views'] . ' views'; ?>
                             </span>
-                            <h3 class="post-title"><a href="/post/<?= $row['post_slug']; ?>"><?= $row['post_title']; ?></a>
+                            <h3 class="post-title"><a href="/p/<?= $row['post_slug']; ?>"><?= $row['post_title']; ?></a>
                             </h3>
-                            <a href="/post/<?= $row['post_slug']; ?>" class="readmore stretched-link mt-auto"><span>Read More</span><i class="bi bi-arrow-right"></i></a><br>
+                            <a href="/p/<?= $row['post_slug']; ?>" class="readmore stretched-link mt-auto"><span>Read More</span><i class="bi bi-arrow-right"></i></a><br>
                         </div>
                     </div>
                 <?php endforeach; ?>

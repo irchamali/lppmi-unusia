@@ -1,43 +1,51 @@
-<?= $this->extend('layout/template-home'); ?>
+<?= $this->extend('layout/template-page'); ?>
 <?= $this->section('content'); ?>
 
-<main id="main" data-aos="fade-up">
+<section>
+    <div class="bg-holder overlay" style="background-image:url(/assets/elixir/assets/img/background-2.jpg);background-position:center bottom;"></div>
+    <div class="container">
+        <div class="row pt-6">
+            <div class="col-md-8 text-white" data-zanim-timeline="{}" data-zanim-trigger="scroll">
+                <div class="overflow-hidden">
+                    <h1 class="text-white fs-4 fs-md-5 mb-0 lh-1" data-zanim-xs='{"delay":0}'>Search Result</h1>
+                    <p class="mb-0" data-zanim-xs='{"delay":0.1}'><?= esc($keyword); ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <!-- ======= Breadcrumbs ======= -->
-    <?= $this->include('layout/breadcrumbs'); ?>
-    <!-- End Breadcrumbs -->
-
-    <section id="recent-blog-posts" class="recent-blog-posts">
-
-        <div class="container" data-aos="fade-up">
-
-            <header class="section-header">
-                <h2 class="text-center"><?= $keyword; ?></h2>
-            </header><br>
-
-            <div class="row">
-                <?php foreach ($posts as $row) : ?>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="post-box">
-                            <div class="post-img"><img src="/assets/backend/images/post/<?= $row['post_image']; ?>" class="img-fluid" alt=""></div>
-                            <span class="post-date">
-                                <?= date('d M Y', strtotime($row['post_date'])); ?>
-                                |
-                                <?= $row['post_views'] . ' views'; ?>
-                            </span>
-                            <h3 class="post-title"><a href="/post/<?= $row['post_slug']; ?>"><?= $row['post_title']; ?></a>
-                            </h3>
-                            <a href="/post/<?= $row['post_slug']; ?>" class="readmore stretched-link mt-auto"><span>Read More</span><i class="bi bi-arrow-right"></i></a><br>
+<section class="bg-100">
+    <div class="container">
+        <div class="row g-4">
+            <?php foreach ($posts as $post) : ?>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <a href="/p/<?= esc($post['post_slug']); ?>"><img class="card-img-top" src="/assets/backend/images/post/<?= esc($post['post_image']); ?>" alt="<?= esc($post['post_title']); ?>" /></a>
+                        <div class="card-body" data-zanim-timeline="{}" data-zanim-trigger="scroll">
+                            <div class="overflow-hidden">
+                                <p class="text-500 mb-1" data-zanim-xs='{"delay":0}'><?= esc($post['category_name'] ?? '-'); ?></p>
+                            </div>
+                            <div class="overflow-hidden"><a href="/p/<?= esc($post['post_slug']); ?>">
+                                    <h5 data-zanim-xs='{"delay":0.1}'><?= esc($post['post_title']); ?></h5>
+                                </a></div>
+                            <div class="overflow-hidden">
+                                <p class="text-500" data-zanim-xs='{"delay":0.2}'>By <?= esc($post['user_name']); ?> | <time datetime="<?= esc($post['post_date']); ?>"><?= date('d M Y', strtotime($post['post_date'])); ?></time> | <?= (int) ($post['post_views'] ?? 0); ?> views</p>
+                            </div>
                         </div>
                     </div>
-                <?php endforeach; ?>
-            </div><br><br>
-
+                </div>
+            <?php endforeach; ?>
         </div>
 
-    </section>
-    <!-- End Recent Blog Posts Section -->
-
-</main><!-- End #main -->
+        <div class="row">
+            <div class="col-auto mx-auto mt-4">
+                <nav class="mt-4" aria-label="Search pagination">
+                    <?= $pager->links('search_posts', 'post_pagination'); ?>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
 
 <?= $this->endSection(); ?>

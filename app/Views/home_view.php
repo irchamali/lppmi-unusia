@@ -65,13 +65,13 @@
           </div>
           <div class="row mt-4 mt-md-5">
             <div class="col-sm-6 col-lg-3 mt-4" data-zanim-timeline="{}" data-zanim-trigger="scroll">
-              <div class="ring-icon mx-auto" data-zanim-xs='{"delay":0}'><a href="/document"><span class="far fa-chart-bar"></span></a></div>
-              <h5 class="mt-4" data-zanim-xs='{"delay":0.1}'><a href="/document">Dokumen</a></h5>
+              <div class="ring-icon mx-auto" data-zanim-xs='{"delay":0}'><a href="/d"><span class="far fa-chart-bar"></span></a></div>
+              <h5 class="mt-4" data-zanim-xs='{"delay":0.1}'><a href="/d">Dokumen</a></h5>
               <!-- <p class="mb-0 mt-3 px-3" data-zanim-xs='{"delay":0.2}'>Solution for every business related problems, readily <br /> and skillfully.</p> -->
             </div>
             <div class="col-sm-6 col-lg-3 mt-4" data-zanim-timeline="{}" data-zanim-trigger="scroll">
-              <div class="ring-icon mx-auto" data-zanim-xs='{"delay":0}'><a href="/laporan"><span class="far fa-bell"></span></a></div>
-              <h5 class="mt-4" data-zanim-xs='{"delay":0.1}'><a href="/laporan">Laporan</a></h5>
+              <div class="ring-icon mx-auto" data-zanim-xs='{"delay":0}'><a href="/r"><span class="far fa-bell"></span></a></div>
+              <h5 class="mt-4" data-zanim-xs='{"delay":0.1}'><a href="/r">Laporan</a></h5>
               <!-- <p class="mb-0 mt-3 px-3" data-zanim-xs='{"delay":0.2}'>Calculate every possible risk in your business, take <br /> control over them.</p> -->
             </div>
             <div class="col-sm-6 col-lg-3 mt-4" data-zanim-timeline="{}" data-zanim-trigger="scroll">
@@ -117,16 +117,16 @@
           <div class="row g-4">
           <?php foreach ($latest_posts as $post) : ?>
             <div class="col-md-6 col-lg-4">
-              <div class="card"><a href="/post/<?= $post['post_slug']; ?>"><img class="card-img-top" src="/assets/backend/images/post/<?= $post['post_image']; ?>" alt="<?= $post['post_title']; ?>" /></a>
+              <div class="card"><a href="/p/<?= $post['post_slug']; ?>"><img class="card-img-top" src="/assets/backend/images/post/<?= $post['post_image']; ?>" alt="<?= $post['post_title']; ?>" /></a>
                 <div class="card-body" data-zanim-timeline="{}" data-zanim-trigger="scroll">
                   <div class="overflow-hidden"><a href="news/news.html">
-                      <h5 data-zanim-xs='{"delay":0}'><a href="/post/<?= $post['post_slug']; ?>"><?= $post['post_title']; ?></a></h5>
+                      <h5 data-zanim-xs='{"delay":0}'><a href="/p/<?= $post['post_slug']; ?>"><?= $post['post_title']; ?></a></h5>
                     </a></div>
                   <div class="overflow-hidden">
                     <p class="text-500" data-zanim-xs='{"delay":0.1}'><?= $post['user_name']; ?> | <time datetime="2022-01-01"><?= date('d M Y', strtotime($post['post_date'])); ?></time></p> 
                   </div>
                   <div class="overflow-hidden">
-                    <div class="d-inline-block" data-zanim-xs='{"delay":0.3}'><a class="d-flex align-items-center" href="/post/<?= $post['post_slug']; ?>">Learn More
+                    <div class="d-inline-block" data-zanim-xs='{"delay":0.3}'><a class="d-flex align-items-center" href="/p/<?= $post['post_slug']; ?>">Learn More
                         <div class="overflow-hidden ms-2" data-zanim-xs='{"from":{"opacity":0,"x":-30},"to":{"opacity":1,"x":0},"delay":0.8}'><span class="d-inline-block fw-medium">&xrarr;</span></div>
                       </a></div>
                   </div>

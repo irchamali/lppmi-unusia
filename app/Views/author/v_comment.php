@@ -81,7 +81,7 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <h3 class="no-m"><a href="/post/<?= $row['post_slug']; ?>" target="_blank"><?= $row['post_title']; ?></a></h3>
+                                                    <h3 class="no-m"><a href="/p/<?= $row['post_slug']; ?>" target="_blank"><?= $row['post_title']; ?></a></h3>
                                                     <a href="javascript:void(0);" class="search-link"><b><?= $row['comment_name'] ?></b>, <?= $row['comment_date']; ?></a>
                                                     <?php if ($row['comment_status'] == '0') {
                                                         echo "<span class='label label-danger'>Unpublish</span>";
@@ -114,7 +114,7 @@
                                                                     </ul>
                                                                 </div>
                                                             </div>
-                                                            <h3 class="no-m"><a href="/post/<?= $row['post_slug']; ?>" target="_blank"><?= $row['post_title']; ?></a></h3>
+                                                            <h3 class="no-m"><a href="/p/<?= $row['post_slug']; ?>" target="_blank"><?= $row['post_title']; ?></a></h3>
                                                             <a href="javascript:void(0);" class="search-link"><b><?= $row['comment_name'] ?></b>, <?= $row['comment_date']; ?></a>
                                                             <div style="margin-left: 7%;">
                                                                 <p><?= $row['comment_message']; ?></p>

@@ -12,6 +12,7 @@
 
             <div class="row">
                 <?php foreach ($teams as $team) : ?>
+                    <?php $teamJabatan = $team['team_jabatan'] ?? $team['jabatan'] ?? '-'; ?>
                     <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
                         <div class="member">
                             <div class="member-img">
@@ -25,7 +26,7 @@
                             </div>
                             <div class="member-info">
                                 <h4><?php echo $team['team_name']; ?></h4>
-                                <span><?php echo $team['team_jabatan']; ?></span>
+                                <span><?php echo $teamJabatan; ?></span>
                             </div>
                         </div>
                     </div>

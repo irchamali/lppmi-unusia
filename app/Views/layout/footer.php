@@ -21,8 +21,8 @@
                 <ul>
                     <li><a href="/about">Tentang</a></li>
                     <li><a href="/akreditasi">Akreditasi</a></li>
-                    <li><a href="/document">Dokumen</a></li>
-                    <li><a href="/laporan">Laporan</a></li>
+                    <li><a href="/d">Dokumen</a></li>
+                    <li><a href="/r">Laporan</a></li>
                     <!-- <li><a href="#">Privacy policy</a></li> -->
                 </ul>
             </div>

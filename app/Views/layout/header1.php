@@ -71,17 +71,17 @@
                 <li class="nav-item dropdown"><a class="nav-link" href="/akreditasi" role="button">Akreditasi</a>
                 </li>
 
-                <li class="nav-item dropdown"><a class="nav-link" href="/document" role="button">Dokumen</a>
+                <li class="nav-item dropdown"><a class="nav-link" href="/d" role="button">Dokumen</a>
                 </li>
 
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle dropdown-indicator" href="/laporan" role="button" data-bs-toggle="dropdown" aria-expanded="false">Laporan</a>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle dropdown-indicator" href="/r" role="button" data-bs-toggle="dropdown" aria-expanded="false">Laporan</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/laporan/hasil-survei">Hasil Survei</a></li>
-                        <li><a class="dropdown-item" href="/laporan/tracer-study">Tracer Study</a></li>
-                        <li><a class="dropdown-item" href="/laporan/monev-akademik">Monev Akademik</a></li>
-                        <li><a class="dropdown-item" href="/laporan/monev-nonakademik">Monev Nonakademik</a></li>
-                        <li><a class="dropdown-item" href="/laporan/audit-akademik">Audit Akademik</a></li>
-                        <li><a class="dropdown-item" href="/laporan/audit-nonakademik">Audit Nonakademik</a></li>
+                        <li><a class="dropdown-item" href="/r/hasil-survei">Hasil Survei</a></li>
+                        <li><a class="dropdown-item" href="/r/tracer-study">Tracer Study</a></li>
+                        <li><a class="dropdown-item" href="/r/monev-akademik">Monev Akademik</a></li>
+                        <li><a class="dropdown-item" href="/r/monev-nonakademik">Monev Nonakademik</a></li>
+                        <li><a class="dropdown-item" href="/r/audit-akademik">Audit Akademik</a></li>
+                        <li><a class="dropdown-item" href="/r/audit-nonakademik">Audit Nonakademik</a></li>
                     </ul>
                 </li>
               
@@ -105,7 +105,7 @@
                     </ul>
                 </li>
               
-              <li class="nav-item dropdown"><a class="nav-link" href="/post" role="button">Berita</a>
+              <li class="nav-item dropdown"><a class="nav-link" href="/posts" role="button">Berita</a>
               </li>
 
               <li class="nav-item dropdown"><a class="nav-link" href="/contact" role="button">Kontak</a>

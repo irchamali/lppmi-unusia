@@ -21,8 +21,8 @@
               <div class="col-6 col-lg-4 text-white ms-lg-auto">
                 <ul class="list-unstyled">
                   <li class="mb-3"><a class="text-white" href="/about">Tentang</a></li>
-                  <li class="mb-3"><a class="text-white" href="/document">Dokumen</a></li>
-                  <li class="mb-3"><a class="text-white" href="/laporan">Laporan</a></li>
+                  <li class="mb-3"><a class="text-white" href="/d">Dokumen</a></li>
+                  <li class="mb-3"><a class="text-white" href="/r">Laporan</a></li>
                   <li class="mb-3"><a class="text-white" href="/data">Data</a></li>
                   <li class="mb-3"><a class="text-white" href="/pengaduan">Pengaduan</a></li>
                 </ul>

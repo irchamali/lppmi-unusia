@@ -29,7 +29,7 @@
               <div class="portfolio-wrap">
                 <a href="/assets/backend/images/post/<?= $post['post_image']; ?>" data-gallery="portfolio-gallery-app" class="glightbox"><img src="/assets/backend/images/post/<?= $post['post_image']; ?>" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
-                  <h4><a href="/post/<?= $post['post_slug']; ?>" title="More Details"><?= $post['post_title']; ?></a></h4>
+                  <h4><a href="/p/<?= $post['post_slug']; ?>" title="More Details"><?= $post['post_title']; ?></a></h4>
                   <!-- <p>Lorem ipsum, dolor sit amet consectetur</p> -->
                 </div>
               </div>

@@ -1,56 +1,51 @@
-<?= $this->extend('layout/template-home'); ?>
+<?= $this->extend('layout/template-page'); ?>
 <?= $this->section('content'); ?>
 
-<main id="main">
+<section>
+    <div class="bg-holder overlay" style="background-image:url(/assets/elixir/assets/img/background-2.jpg);background-position:center bottom;"></div>
+    <div class="container">
+        <div class="row pt-6">
+            <div class="col-md-8 text-white" data-zanim-timeline="{}" data-zanim-trigger="scroll">
+                <div class="overflow-hidden">
+                    <h1 class="text-white fs-4 fs-md-5 mb-0 lh-1" data-zanim-xs='{"delay":0}'>Category Posts</h1>
+                    <p class="mb-0" data-zanim-xs='{"delay":0.1}'><?= esc($keyword); ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <!-- ======= Breadcrumbs ======= -->
-    <?= $this->include('layout/breadcrumbs'); ?>
-    <!-- End Breadcrumbs -->
-
-    <!-- ======= Blog Section ======= -->
-    <section id="blog" class="blog">
-        <div class="container" data-aos="fade-up">
-
-            <header class="section-header">
-                <h2 class="text-center"><?= $keyword; ?></h2>
-            </header><br>
-
-            <div class="row gy-4 posts-list">
-                <?php foreach ($posts as $post) : ?>
-                <div class="col-xl-4 col-md-6">
-                    <article>
-
-                        <div class="post-img">
-                            <img src="/assets/backend/images/post/<?= $post['post_image']; ?>" alt="<?= $post['post_title']; ?>" class="img-fluid">
-                        </div>
-
-                        <p class="post-category"><?= $post['category_name']; ?></p>
-
-                        <h2 class="title">
-                            <a href="/post/<?= $post['post_slug']; ?>"><?= $post['post_title']; ?></a>
-                        </h2>
-
-                        <div class="d-flex align-items-center">
-                            <img src="/assets/backend/images/users/<?= $post['user_photo']; ?>" alt="<?= $post['post_title']; ?>"
-                                class="img-fluid post-author-img flex-shrink-0">
-                            <div class="post-meta">
-                                <p class="post-author-list"><?= $post['user_name']; ?></p>
-                                <p class="post-date">
-                                    <time datetime="2022-01-01"><?= date('d M Y', strtotime($post['post_date'])); ?></time>
-                                </p>
+<section class="bg-100">
+    <div class="container">
+        <div class="row g-4">
+            <?php foreach ($posts as $post) : ?>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <a href="/p/<?= esc($post['post_slug']); ?>"><img class="card-img-top" src="/assets/backend/images/post/<?= esc($post['post_image']); ?>" alt="<?= esc($post['post_title']); ?>" /></a>
+                        <div class="card-body" data-zanim-timeline="{}" data-zanim-trigger="scroll">
+                            <div class="overflow-hidden">
+                                <p class="text-500 mb-1" data-zanim-xs='{"delay":0}'><?= esc($post['category_name'] ?? '-'); ?></p>
+                            </div>
+                            <div class="overflow-hidden"><a href="/p/<?= esc($post['post_slug']); ?>">
+                                    <h5 data-zanim-xs='{"delay":0.1}'><?= esc($post['post_title']); ?></h5>
+                                </a></div>
+                            <div class="overflow-hidden">
+                                <p class="text-500" data-zanim-xs='{"delay":0.2}'>By <?= esc($post['user_name']); ?> | <time datetime="<?= esc($post['post_date']); ?>"><?= date('d M Y', strtotime($post['post_date'])); ?></time> | <?= (int) ($post['post_views'] ?? 0); ?> views</p>
                             </div>
                         </div>
-
-                    </article>
-                </div><!-- End post list item -->
-                <?php endforeach; ?>
-            </div><!-- End blog posts list -->
-            
-            <!-- End blog pagination -->
-
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
-    </section><!-- End Blog Section -->
 
-</main><!-- End #main -->
+        <div class="row">
+            <div class="col-auto mx-auto mt-4">
+                <nav class="mt-4" aria-label="Category pagination">
+                    <?= $pager->links('category_posts', 'post_pagination'); ?>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
 
 <?= $this->endSection(); ?>

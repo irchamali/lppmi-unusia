@@ -170,7 +170,7 @@
                 $.ajax({
                     data: data,
                     type: "POST",
-                    url: "<?= site_url() ?>backend/post/upload_image",
+                    url: "<?= site_url() ?>backend/posts/upload_image",
                     cache: false,
                     contentType: false,
                     processData: false,

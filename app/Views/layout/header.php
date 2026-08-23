@@ -85,8 +85,8 @@
             </ul>
           </li>
           <li><a href="/akreditasi">Akreditasi</a></li>
-          <li><a href="/document">Dokumen</a></li>
-          <!-- <li class="dropdown"><a href="/document"><span>Dokumen</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li><a href="/d">Dokumen</a></li>
+          <!-- <li class="dropdown"><a href="/d"><span>Dokumen</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
               <li class="dropdown"><a href="#"><span>Drop Down 2</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
@@ -108,14 +108,14 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li> -->
-          <li class="dropdown"><a href="/laporan"><span>Laporan</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li class="dropdown"><a href="/r"><span>Laporan</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="/laporan/hasil-survei">Hasil Survei</a></li>
-              <li><a href="/laporan/tracer-study">Tracer Study</a></li>
-              <li><a href="/laporan/monev-akademik">Monev Akademik</a></li>
-              <li><a href="/laporan/monev-nonakademik">Monev Nonakademik</a></li>
-              <li><a href="/laporan/audit-akademik">Audit Akademik</a></li>
-              <li><a href="/laporan/audit-nonakademik">Audit Nonakademik</a></li>
+              <li><a href="/r/hasil-survei">Hasil Survei</a></li>
+              <li><a href="/r/tracer-study">Tracer Study</a></li>
+              <li><a href="/r/monev-akademik">Monev Akademik</a></li>
+              <li><a href="/r/monev-nonakademik">Monev Nonakademik</a></li>
+              <li><a href="/r/audit-akademik">Audit Akademik</a></li>
+              <li><a href="/r/audit-nonakademik">Audit Nonakademik</a></li>
               <!-- <li class="dropdown"><a href="#"><span>Drop Down 2</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                 <ul>
                   <li><a href="#">Sub Drop Down 1</a></li>
@@ -144,7 +144,7 @@
               <li><a href="https://unusia.ac.id/prodi">Pengelola Prodi</a></li>
             </ul>
           </li>
-          <li><a href="/post">Berita</a></li>
+          <li><a href="/posts">Berita</a></li>
           <li><a href="/gallery">Galeri</a></li>
           <li><a href="/contact">Kontak</a></li>
           <li><a href="/pengaduan">Pengaduan</a></li>
