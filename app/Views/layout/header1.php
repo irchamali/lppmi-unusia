@@ -42,7 +42,7 @@
     <div class="bg-primary py-3 d-none d-sm-block text-white fw-bold">
       <div class="container">
         <div class="row align-items-center gx-4">
-          <div class="col-auto d-none d-lg-block fs--1"><span class="fas fa-star text-warning me-2" data-fa-transform="grow-3"></span>P R I O K S I T A S</div>
+          <div class="col-auto d-none d-lg-block fs--1"><span class="fas fa-graduation-cap text-warning me-2" data-fa-transform="grow-3"></span>Lembaga Pengawasan dan Penjaminan Mutu Internal</div>
           <div class="col-auto ms-md-auto order-md-2 d-none d-sm-flex fs--1 align-items-center"><span class="fas fa-map-marker-alt text-warning me-2" data-fa-transform="grow-3"></span><a class="ms-2 fs--1 d-inline text-white fw-bold" href="https://goo.gl/maps/CwfyWxpz9bTSWzgm9"><?= $site['site_address']; ?></a></div>
           <div class="col-auto"><span class="far fa-envelope text-warning" data-fa-transform="shrink-3"></span><a class="ms-2 fs--1 d-inline text-white fw-bold" href="mailto:<?= $site['site_mail']; ?>"><?= $site['site_mail']; ?></a></div>
         </div>

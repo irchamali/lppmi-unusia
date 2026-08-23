@@ -1,3 +1,4 @@
-<?= $this->include('layout/header'); ?>
+<?php $publicLayout = 'classic'; ?>
+<?= $this->include('layout/public-header'); ?>
 <?= $this->renderSection('content'); ?>
-<?= $this->include('layout/footer'); ?>
+<?= $this->include('layout/public-footer'); ?>

@@ -1,3 +1,4 @@
-<?= $this->include('layout/header1'); ?>
+<?php $publicLayout = 'elixir'; ?>
+<?= $this->include('layout/public-header'); ?>
 <?= $this->renderSection('content'); ?>
-<?= $this->include('layout/footer1'); ?>
+<?= $this->include('layout/public-footer'); ?>
