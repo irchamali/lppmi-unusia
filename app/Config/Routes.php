@@ -59,10 +59,11 @@ $routes->get('tags/(:segment)', 'PostController::tag/$1');
 // CategoryController (canonical plural routes)
 $routes->get('categories/(:segment)', 'CategoryController::index/$1');
 $routes->get('d', 'DocumentController::index');
-$routes->get('d/(:segment)', 'CategoryDocsController::index/$1');
+$routes->get('d/(:segment)', 'DocumentController::detail/$1');
 $routes->get('documents/(:segment)', 'CategoryDocsController::index/$1');
 $routes->get('r', 'LaporanController::index');
-$routes->get('r/(:segment)', 'CategoryLapController::index/$1');
+$routes->get('reports/detail/(:segment)', 'LaporanController::detail/$1');
+$routes->get('r/(:segment)', 'LaporanController::detail/$1');
 $routes->get('reports/(:segment)', 'CategoryLapController::index/$1');
 
 // Legacy singular aliases (backward compatibility)
@@ -87,6 +88,12 @@ $routes->get('document/(:segment)', static function ($slug) {
 });
 $routes->get('laporan/(:segment)', static function ($slug) {
     return redirect()->to('/reports/' . $slug);
+});
+$routes->get('report/(:segment)', static function ($slug) {
+    return redirect()->to('/r/' . $slug);
+});
+$routes->get('report/detail/(:segment)', static function ($slug) {
+    return redirect()->to('/r/' . $slug);
 });
 
 // AboutController
@@ -113,6 +120,7 @@ $routes->get('formspmi', 'FormspmiController::index');
 
 // DocumentController
 $routes->get('documents', 'DocumentController::index');
+$routes->get('documents/detail/(:segment)', 'DocumentController::detail/$1');
 
 // LaporanController
 $routes->get('reports', 'LaporanController::index');
@@ -120,6 +128,9 @@ $routes->get('reports', 'LaporanController::index');
 // Legacy singular aliases (backward compatibility)
 $routes->get('document', static function () {
     return redirect()->to('/documents');
+});
+$routes->get('document/detail/(:segment)', static function ($slug) {
+    return redirect()->to('/d/' . $slug);
 });
 $routes->get('laporan', static function () {
     return redirect()->to('/reports');
@@ -144,6 +155,14 @@ $routes->group('admin', ['filter' => 'authadmin'], static function ($routes) {
     $routes->get('', 'Admin\AdminController::index');
     // Post Route
     $routes->group('post', static function ($routes) {
+        $routes->get('', 'Admin\PostAdminController::index');
+        $routes->post('', 'Admin\PostAdminController::publish');
+        $routes->delete('', 'Admin\PostAdminController::delete');
+        $routes->put('', 'Admin\PostAdminController::update');
+        $routes->get('add_new', 'Admin\PostAdminController::add_new');
+        $routes->get('(:num)/edit', 'Admin\PostAdminController::edit/$1');
+    });
+    $routes->group('posts', static function ($routes) {
         $routes->get('', 'Admin\PostAdminController::index');
         $routes->post('', 'Admin\PostAdminController::publish');
         $routes->delete('', 'Admin\PostAdminController::delete');
@@ -296,6 +315,14 @@ $routes->group('author', ['filter' => 'authauthor'], static function ($routes) {
     $routes->get('', 'Author\AuthorController::index');
     // Post Route
     $routes->group('post', static function ($routes) {
+        $routes->get('', 'Author\PostAuthorController::index');
+        $routes->post('', 'Author\PostAuthorController::publish');
+        $routes->delete('', 'Author\PostAuthorController::delete');
+        $routes->put('', 'Author\PostAuthorController::update');
+        $routes->get('add_new', 'Author\PostAuthorController::add_new');
+        $routes->get('(:num)/edit', 'Author\PostAuthorController::edit/$1');
+    });
+    $routes->group('posts', static function ($routes) {
         $routes->get('', 'Author\PostAuthorController::index');
         $routes->post('', 'Author\PostAuthorController::publish');
         $routes->delete('', 'Author\PostAuthorController::delete');

@@ -1,6 +1,14 @@
 <?= $this->extend('layout/template-page'); ?>
 <?= $this->section('content'); ?>
 
+<?php
+$today = new DateTimeImmutable('today');
+
+$formatDuration = static function (DateInterval $diff): string {
+    return $diff->y . ' tahun ' . $diff->m . ' bulan ' . $diff->d . ' hari';
+};
+?>
+
     <!-- ======= Breadcrumbs ======= -->
     
     <!-- End Breadcrumbs -->
@@ -42,6 +50,7 @@
                                             <th>Nama Prodi</th>                    
                                             <th>Peringkat</th>
                                             <th>Kadaluarsa</th>
+                                            <th>Masa Berlaku</th>
                                         </tr>
                                     </thead>
                                     <tbody id="body-table">
@@ -49,6 +58,33 @@
                                         $no = 0;
                                         foreach ($documents as $row) :
                                             $no++;
+
+                                            $validityText = '-';
+                                            $validityClass = 'bg-secondary';
+                                            $expiredDateText = trim((string) ($row['tgl_kadaluarsa'] ?? ''));
+
+                                            if ($expiredDateText !== '') {
+                                                try {
+                                                    $expiredDate = new DateTimeImmutable($expiredDateText);
+                                                    $diff = $today->diff($expiredDate);
+                                                    $days = (int) $diff->format('%a');
+                                                    $durationText = $formatDuration($diff);
+
+                                                    if ($diff->invert === 1) {
+                                                        $validityText = 'Kadaluarsa sejak ' . $durationText;
+                                                        $validityClass = 'bg-danger';
+                                                    } elseif ($days <= 90) {
+                                                        $validityText = 'Sisa ' . $durationText;
+                                                        $validityClass = 'bg-warning text-dark';
+                                                    } else {
+                                                        $validityText = 'Aktif (' . $durationText . ' lagi)';
+                                                        $validityClass = 'bg-success';
+                                                    }
+                                                } catch (Exception $e) {
+                                                    $validityText = 'Format tanggal tidak valid';
+                                                    $validityClass = 'bg-secondary';
+                                                }
+                                            }
                                         ?>
                                             <tr>
                                                 <td style="vertical-align: middle; text-align: center;"><?= $no; ?></td>
@@ -56,6 +92,9 @@
                                                 <td style="vertical-align: middle;"><?= $row['prodi_nama']; ?></td>
                                                 <td style="vertical-align: middle;"><?= $row['peringkat']; ?></td>
                                                 <td style="vertical-align: middle;"><?= $row['tgl_kadaluarsa']; ?></td>
+                                                <td style="vertical-align: middle;">
+                                                    <span class="badge rounded-pill <?= esc($validityClass); ?>"><?= esc($validityText); ?></span>
+                                                </td>
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>

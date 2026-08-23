@@ -32,6 +32,12 @@ class CategoryDocsController extends BaseController
             $documents = $documents->getResultArray();
             $keyword = "Dokumen: $slug ";
         }
+
+        foreach ($documents as &$document) {
+            $document['docs_slug'] = $this->createDocumentSlug($document);
+        }
+        unset($document);
+
         $data = [
             'site' => $this->siteModel->find(1),
             'home' => $this->homeModel->find(1),
@@ -44,5 +50,39 @@ class CategoryDocsController extends BaseController
             'active' => 'Document'
         ];
         return view('document_category', $data);
+    }
+
+    private function createDocumentSlug(array $document): string
+    {
+        $year = trim((string) ($document['docs_year'] ?? ''));
+        $name = trim((string) ($document['docs_name'] ?? ''));
+        $shortName = $this->shortenName($name, 6);
+        $slugSource = trim($year . ' ' . $shortName);
+
+        if ($slugSource === '') {
+            $slugSource = (string) ($document['docs_id'] ?? 'dokumen');
+        }
+
+        return $this->slugify($slugSource);
+    }
+
+    private function shortenName(string $name, int $maxWords): string
+    {
+        $words = preg_split('/\s+/', trim($name), -1, PREG_SPLIT_NO_EMPTY);
+
+        if ($words === false || $words === []) {
+            return '';
+        }
+
+        return implode(' ', array_slice($words, 0, $maxWords));
+    }
+
+    private function slugify(string $value): string
+    {
+        $value = strtolower($value);
+        $value = preg_replace('/[^a-z0-9]+/i', '-', $value) ?? '';
+        $value = trim($value, '-');
+
+        return $value !== '' ? $value : 'dokumen';
     }
 }

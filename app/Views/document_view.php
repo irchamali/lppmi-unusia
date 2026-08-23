@@ -54,12 +54,12 @@
                                             <tr>
                                                 <td style="vertical-align: middle;"><?= $no; ?></td>
                                                 <td style="vertical-align: middle;"><?= $row['docs_year']; ?></td>
-                                                <td style="vertical-align: middle;"><a href="<?= $row['docs_link']; ?>"><?= $row['docs_name']; ?></a></td>
+                                                <td style="vertical-align: middle;"><a href="<?= base_url('d/' . $row['docs_slug']); ?>"><?= $row['docs_name']; ?></a></td>
                                                 <td style="vertical-align: middle;"><?= $row['docs_unit']; ?></td>
                                                 <td style="vertical-align: middle;"><?= $row['docscategory_name']; ?></td>
                                                 <td style="vertical-align: middle;">
                                                     <div class="btn-group">
-                                                        <a class="btn-sm btn btn-outline-primary" href="<?= $row['docs_link']; ?>"><i class="fas fa-eye"></i></a>
+                                                        <a class="btn-sm btn btn-outline-primary" href="<?= base_url('d/' . $row['docs_slug']); ?>"><i class="fas fa-eye"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>

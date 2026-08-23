@@ -33,4 +33,17 @@ class DocsModel extends Model
             ->get();
     }
 
+    public function getDocById(int $id): ?array
+    {
+        $row = $this->db->table('tbl_document')
+            ->select('tbl_document.*, tbl_docscategory.docscategory_name, tbl_docscategory.docscategory_slug')
+            ->join('tbl_docscategory', 'tbl_document.docs_category_id = tbl_docscategory.docscategory_id', 'left')
+            ->where('tbl_document.docs_id', $id)
+            ->limit(1)
+            ->get()
+            ->getRowArray();
+
+        return $row ?: null;
+    }
+
 }

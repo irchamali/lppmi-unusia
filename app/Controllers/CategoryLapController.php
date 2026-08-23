@@ -32,17 +32,41 @@ class CategoryLapController extends BaseController
             $documents = $documents->getResultArray();
             $keyword = "Laporan: $slug ";
         }
+
+        foreach ($documents as &$document) {
+            $document['report_slug'] = $this->createReportSlug($document);
+        }
+        unset($document);
+
         $data = [
             'site' => $this->siteModel->find(1),
             'home' => $this->homeModel->find(1),
             'about' => $this->aboutModel->find(1),
             'documents' => $this->lapcategoryModel->getLap_by_category($slug),
-            'title' => 'Laporan',
+            'title' => 'Report',
             'url' => 'r',
             'keyword' => $keyword,
             'documents' => $documents,
-            'active' => 'Laporan'
+            'active' => 'Report'
         ];
-        return view('laporan_category', $data);
+        return view('report_category', $data);
+    }
+
+    private function createReportSlug(array $report): string
+    {
+        $year = trim((string) ($report['lap_year'] ?? ''));
+        $name = trim((string) ($report['lap_name'] ?? ''));
+        $words = preg_split('/\s+/', trim($name), -1, PREG_SPLIT_NO_EMPTY);
+        $shortName = ($words === false || $words === []) ? '' : implode(' ', array_slice($words, 0, 6));
+        $slugSource = trim($year . ' ' . $shortName);
+
+        if ($slugSource === '') {
+            $slugSource = (string) ($report['lap_id'] ?? 'report');
+        }
+
+        $slug = strtolower($slugSource);
+        $slug = preg_replace('/[^a-z0-9]+/i', '-', $slug) ?? '';
+
+        return trim($slug, '-') !== '' ? trim($slug, '-') : 'report';
     }
 }
