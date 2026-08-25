@@ -132,11 +132,11 @@
         <div class="row pt-6" data-inertia='{"weight":1.5}'>
           <div class="col-md-8 text-white" data-zanim-timeline="{}" data-zanim-trigger="scroll">
             <div class="overflow-hidden">
-              <h1 class="text-white fs-4 fs-md-5 mb-0 lh-1" data-zanim-xs='{"delay":0}'>Google Map</h1>
+              <h1 class="text-white fs-4 fs-md-5 mb-0 lh-1" data-zanim-xs='{"delay":0}'>Gulp</h1>
               <div class="nav" aria-label="breadcrumb" role="navigation" data-zanim-xs='{"delay":0.1}'>
                 <ol class="breadcrumb fs-1 ps-0 fw-bold">
                   <li class="breadcrumb-item"><a class="text-white" href="#!">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Google Map</li>
+                  <li class="breadcrumb-item active" aria-current="page">Gulp</li>
                 </ol>
               </div>
             </div>
@@ -173,99 +173,99 @@
       <section>
 
         <div class="container">
-          <!-- Google Map-->
-          <div class="mb-5">
-            <div class="pb-3">
-              <h5>Example</h5>
-              <p>To enable the map view in your component, add
-                <code>data-gmap="data-gmap"</code> attribute in your HTML element.
-                Next, generate your custom map styles in the
-                <a href='https://console.cloud.google.com/google/maps-apis' target='_blank'>Google Maps Platform</a>
-                by visiting the Map Styles section, then create a Map ID from the Map Management panel.
-                Once, your Map ID is ready, include it in your HTML using the <code>data-mapid="YOUR_MAP_ID"</code> attribute.
-                This Map ID is required to properly render Google Maps API v3 with the <code>AdvancedMarkerElement</code>.
-              </p>
-            </div>
-            <div>
-              <div class="googlemap min-vh-50" data-gmap="data-gmap" data-latlng="48.8583701,2.2922873,17" data-scrollwheel="false" data-mapid="a2a07f618947e1cca5b1a9b0" data-icon="../assets/img/map-marker.png" data-zoom="17" data-theme="Tripitty">
-                <div class="marker-content py-3">
-                  <h5>Eiffel Tower</h5>
-                  <p class="mb-0">Gustave Eiffel's iconic, wrought-iron 1889 tower,<br /> with steps and elevators to observation decks.</p>
-                </div>
+          <div class="row justify-content-between">
+            <div class="d-none d-lg-block col-3 mb-5">
+              <div class="sticky-sidebar pt-3 z-index-1">
+                <ul class="components-nav list-unstyled" id="component-nav">
+                  <li>
+                    <h5 class="text-uppercase">Docs</h5>
+                  </li>
+                  <li class="mb-1"><a href="../docs/getting-started.html">Getting Started</a></li>
+                  <li class="mb-1"><a href="../docs/file-structure.html">File Structure</a></li>
+                  <li class="mb-1"><a href="../docs/customization.html">Customization</a></li>
+                  <li class="mb-1"><a class="text-black" href="../docs/gulp.html">Gulp</a></li>
+                  <li class="mb-1"><a href="../docs/rtl.html">RTL</a></li>
+                  <li class="mb-1"><a href="../docs/plugins.html">Plugins</a></li>
+                  <li class="mb-1"><a href="../docs/changelog.html">Changelog</a></li>
+                </ul>
               </div>
             </div>
-          </div>
-          <h5 class="mt-5">HTML</h5>
-          <div class="mb-5">
-            <pre><code class="language-html">&lt;div class=&quot;googlemap min-vh-50&quot; data-gmap=&quot;data-gmap&quot; data-latlng=&quot;48.8583701,2.2922873,17&quot; data-scrollwheel=&quot;false&quot; data-mapid=&quot;a2a07f618947e1cca5b1a9b0&quot; data-icon=&quot;../assets/img/map-marker.png&quot; data-zoom=&quot;17&quot; data-theme=&quot;Tripitty&quot;&gt;
-  &lt;div class=&quot;marker-content py-3&quot;&gt;
-    &lt;h5&gt;Eiffel Tower&lt;/h5&gt;
-    &lt;p class=&quot;mb-0&quot;&gt;Gustave Eiffel's iconic, wrought-iron 1889 tower,&lt;br /&gt; with steps and elevators to observation decks.&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-          </div>
-          <div class="mb-5">
-            <div class="pb-3">
-              <h5>Example of Street View Map</h5>
-              <p>To enable Street View Panorama mode, simply add the <code>data-theme="streetview"</code>
-                attribute to your HTML element, Additionally, to fully enable Street View functionality through the
-                Google Maps API, make sure to include the required library <code>streetView</code> in the script tag
-                when loading the Google Maps API. This ensures that the Street View components and features load correctly.
-              </p>
-            </div>
-            <div>
-              <div class="googlemap min-vh-50" data-gmap="data-gmap" data-latlng="48.8583701,2.2922873,17" data-pov='{"heading":120,"pitch":0}' data-scrollwheel="false" data-icon="../assets/img/map-marker.png" data-zoom="1" data-theme="streetview"></div>
-            </div>
-          </div>
-          <h5 class="mt-5">HTML</h5>
-          <div class="mb-5">
-            <pre><code class="language-html">&lt;div class=&quot;googlemap min-vh-50&quot; data-gmap=&quot;data-gmap&quot; data-latlng=&quot;48.8583701,2.2922873,17&quot; data-pov='{&quot;heading&quot;:120,&quot;pitch&quot;:0}' data-scrollwheel=&quot;false&quot; data-icon=&quot;../assets/img/map-marker.png&quot; data-zoom=&quot;1&quot; data-theme=&quot;streetview&quot;&gt;&lt;/div&gt;</code></pre>
-          </div>
-          <div class="card border-1">
-            <div class="card-header">
-              <h5 class="mb-1"> Setup Google Maps </h5>
-            </div>
-            <div class="card-body">
-              <ul class="ps-0 bullet-inside">
-                <li class="mb-3"> <a class="font-sans-serif" href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">Get your API key</a><span class="d-inline-block ms-1">&xrarr;</span></li>
-                <li class="mb-3">Add the script to your page
-                  <div class="mb-0 mb-0">
-                    <pre><code class="language-html">&lt;script&gt;
-  (g =&gt; {
-    var h, a, k, p = &quot;The Google Maps JavaScript API&quot;,
-      c = &quot;google&quot;,
-      l = &quot;importLibrary&quot;,
-      q = &quot;__ib__&quot;,
-      m = document,
-      b = window;
-    b = b[c] || (b[c] = {});
-    var d = b.maps || (b.maps = {}),
-      r = new Set(),
-      e = new URLSearchParams,
-      u = () =&gt; h || (h = new Promise(async (f, n) =&gt; {
-        await (a = m.createElement(&quot;script&quot;));
-        e.set(&quot;libraries&quot;, [...r] + &quot;&quot;);
-        for (k in g)
-          e.set(k.replace(/[A-Z]/g, t =&gt; &quot;_&quot; + t[0].toLowerCase()), g[k]);
-        e.set(&quot;callback&quot;, c + &quot;.maps.&quot; + q);
-        a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
-        d[q] = f;
-        a.onerror = () =&gt; h = n(Error(p + &quot; could not load.&quot;));
-        a.nonce = m.querySelector(&quot;script[nonce]&quot;)?.nonce || &quot;&quot;;
-        m.head.append(a);
-      }));
-    d[l] ?
-      console.warn(p + &quot; only loads once. Ignoring:&quot;, g) :
-      d[l] = (f, ...n) =&gt; r.add(f) &amp;&amp; u().then(() =&gt; d[l](f, ...n))
-  })({
-    key: 'YOUR_API_KEY',
-    v: &quot;weekly&quot;,
-    libraries: &quot;marker,streetView&quot; // Libraries to load
-  });
-&lt;/script&gt;</code></pre>
-                  </div>
-                </li>
-              </ul>
+            <div class="col-lg-9 py-3">
+              <h5 data-anchor="data-anchor">To start your project run:</h5><code class="fs-2 border rounded-1 py-2 px-3 d-block border-300 bg-light">gulp</code>
+              <p class="mt-4">The <code>gulp</code> command will build, serve and watch the project with the following gulp tasks:</p>
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead class="bg-300 text-center font-sans-serif">
+                    <tr>
+                      <th class="text-nowrap">Task</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-nowrap"><code>clean</code></td>
+                      <td>Delete the following directories:
+                        <pre><code class="lang-html">public/assets/css
+public/assets/js
+public/vendors // packages which are included in vendors.json
+public/**/*.html
+</code></pre>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-nowrap"><code>style</code></td>
+                      <td>Compiles <code>scss/theme.scss</code> and generates <code>theme.css, theme.min.css, theme-rlt.css, theme-rtl.min.css</code> and <code>theme.css.map, theme.min.css.map, theme-rlt.css.map, theme-rtl.min.css.map</code> to the <code>public/assets/css/ </code> directory.</td>
+                    </tr>
+                    <tr>
+                      <td class="text-nowrap"><code>script</code></td>
+                      <td>Concat the <code>js</code> files from <code>src/js/</code> and transpiles with babel to <code>theme.js</code>, <code>theme.min.js</code> to the <code>public/assets/js/</code> directory.</td>
+                    </tr>
+                    <tr>
+                      <td class="text-nowrap"><code>compile</code></td>
+                      <td>Compiles all the <code>js, </code><code>scss, </code><code>pug </code>files from the <code>src</code> directory.</td>
+                    </tr>
+                    <tr>
+                      <td class="text-nowrap"><code>vendor</code></td>
+                      <td>Runs <code>vendor:clean</code> and <code>vendor:move</code> in series.</td>
+                    </tr>
+                    <tr>
+                      <td class="text-nowrap"><code>vendor:clean</code></td>
+                      <td>Delete the vendors from <code>public/vendors</code> directory which are included in <code>vendors.json</code>.</td>
+                    </tr>
+                    <tr>
+                      <td class="text-nowrap"><code>vendor:move</code></td>
+                      <td>Copies the vendors from <code>node_modules/</code> directory to <code>public/vendors</code> directory according to the <code>vendors.json</code>.</td>
+                    </tr>
+                    <tr>
+                      <td class="text-nowrap"><code>watch</code></td>
+                      <td>All of the following folders are monitored for changes, which will tell the browser to reload automatically after any changes are made:
+                        <pre><code class="lang-html">public/assets/img
+public/assets/video
+public/vendors/
+src/pug 
+src/scss
+src/js</code></pre>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-nowrap"><code>build</code></td>
+                      <td>Will delete previous build directory and generate a new compressed version to deploy
+                        <pre><code class="lang-html">build/assets/img
+build/assets/video
+build/assets/css
+build/assets/js
+build/vendors/
+build/**/*.html
+</code></pre>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-nowrap"><code>build:test</code></td>
+                      <td>Will run the build version in port:3000</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -368,36 +368,6 @@
     <script src="../vendors/popper/popper.min.js"></script>
     <script src="../vendors/bootstrap/bootstrap.min.js"></script>
     <script src="../vendors/is/is.min.js"></script>
-    <script>
-      (g => {
-        var h, a, k, p = "The Google Maps JavaScript API",
-          c = "google",
-          l = "importLibrary",
-          q = "__ib__",
-          m = document,
-          b = window;
-        b = b[c] || (b[c] = {});
-        var d = b.maps || (b.maps = {}),
-          r = new Set,
-          e = new URLSearchParams,
-          u = () => h || (h = new Promise(async (f, n) => {
-            await (a = m.createElement("script"));
-            e.set("libraries", [...r] + "");
-            for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]);
-            e.set("callback", c + ".maps." + q);
-            a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
-            d[q] = f;
-            a.onerror = () => h = n(Error(p + " could not load."));
-            a.nonce = m.querySelector("script[nonce]")?.nonce || "";
-            m.head.append(a)
-          }));
-        d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n))
-      })({
-        key: 'AIzaSyDbaQGvhe7Af-uOMJz68NWHnO34UjjE7Lo',
-        v: "weekly",
-        libraries: "marker,streetView"
-      });
-    </script>
     <script src="../vendors/prism/prism.js"></script>
     <script src="../vendors/fontawesome/all.min.js"></script>
     <script src="../vendors/lodash/lodash.min.js"></script>

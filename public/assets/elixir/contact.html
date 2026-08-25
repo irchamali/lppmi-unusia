@@ -90,6 +90,7 @@
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="elements/buttons.html">Buttons</a></li>
                   <li><a class="dropdown-item" href="elements/colors.html">Colors</a></li>
+                  <li><a class="dropdown-item" href="elements/form-processor.html">Form Processor</a></li>
                   <li><a class="dropdown-item" href="elements/googlemap.html">Google Map</a></li>
                   <li><a class="dropdown-item" href="elements/grid.html">Grid</a></li>
                   <li><a class="dropdown-item" href="elements/icons.html">Icons</a></li>
@@ -100,6 +101,17 @@
                 </ul>
               </li>
               <li class="nav-item dropdown"><a class="nav-link" href="contact.html" role="button">Contact</a>
+              </li>
+              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle dropdown-indicator" href="JavaScript:void(0)" role="button" data-bs-toggle="dropdown" aria-expanded="false">Docs</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="docs/getting-started.html">Getting Started</a></li>
+                  <li><a class="dropdown-item" href="docs/file-structure.html">File Structure</a></li>
+                  <li><a class="dropdown-item" href="docs/customization.html">Customization</a></li>
+                  <li><a class="dropdown-item" href="docs/gulp.html">Gulp</a></li>
+                  <li><a class="dropdown-item" href="docs/rtl.html">RTL</a></li>
+                  <li><a class="dropdown-item" href="docs/plugins.html">Plugins</a></li>
+                  <li><a class="dropdown-item" href="docs/changelog.html">Changelog</a></li>
+                </ul>
               </li>
             </ul><a class="btn btn-outline-primary rounded-pill btn-sm border-2 d-block d-lg-inline-block ms-auto my-3 my-lg-0" href="https://themewagon.com/themes/elixir/" target="_blank">Purchase</a>
           </div>
@@ -190,7 +202,7 @@
           </div>
           <div class="card mb-4">
             <div class="card-body p-5 h-100">
-              <div class="googlemap" data-gmap="data-gmap" data-latlng="48.8583701,2.2922873,17" data-scrollwheel="false" data-icon="assets/img/map-marker.png" data-zoom="17" data-theme="Tripitty">
+              <div class="googlemap min-vh-50" data-gmap="data-gmap" data-latlng="48.8583701,2.2922873,17" data-scrollwheel="false" data-mapid="a2a07f618947e1cca5b1a9b0" data-icon="assets/img/map-marker.png" data-zoom="17" data-theme="Tripitty">
                 <div class="marker-content py-3">
                   <h5>Eiffel Tower</h5>
                   <p class="mb-0">Gustave Eiffel's iconic, wrought-iron 1889 tower,<br /> with steps and elevators to observation decks.</p>
@@ -241,11 +253,11 @@
             <div class="bg-primary text-white p-5 p-lg-6 rounded-3">
               <h4 class="text-white fs-1 fs-lg-2 mb-1">Sign up for email alerts</h4>
               <p class="text-white">Stay current with our latest insights</p>
-              <form class="mt-4">
+              <form class="mt-4" onsubmit="return false">
                 <div class="row align-items-center">
                   <div class="col-md-7 pe-md-0">
                     <div class="input-group">
-                      <input class="form-control" type="email" placeholder="Enter Email Here" />
+                      <input class="form-control" id="emailExample" type="email" name="emailAddress" placeholder="Enter Email Here" />
                     </div>
                   </div>
                   <div class="col-md-5 mt-3 mt-md-0">
@@ -299,11 +311,11 @@
     <footer class="footer bg-primary text-center py-4">
       <div class="container">
         <div class="row align-items-center opacity-85 text-white">
-          <div class="col-sm-3 text-sm-start"><a href="index.html"><img src="assets/img/logo-light.png" alt="logo" /></a></div>
-          <div class="col-sm-6 mt-3 mt-sm-0">
-            <p class="lh-lg mb-0 fw-semi-bold">&copy; Copyright 2021 Elixir Inc.</p>
+          <div class="col-md-3 text-md-start"><a href="index.html"><img src="assets/img/logo-light.png" alt="logo" /></a></div>
+          <div class="col-md mt-3 mt-md-0">
+            <p class="lh-lg mb-0 fw-semi-bold">&copy; Copyright 2025 Elixir Inc.</p>
           </div>
-          <div class="col text-sm-end mt-3 mt-sm-0"><span class="fw-semi-bold">Designed by </span><a class="text-white" href="https://themewagon.com/" target="_blank">Themewagon</a></div>
+          <div class="col-md-5 col-lg-4 text-md-end mt-3 mt-md-0"><span class="fw-semi-bold">Made with ❤️ by </span><a class="text-white" href="https://themewagon.com/" target="_blank">ThemeWagon</a></div>
         </div>
       </div>
     </footer>
@@ -315,7 +327,36 @@
     <script src="vendors/popper/popper.min.js"></script>
     <script src="vendors/bootstrap/bootstrap.min.js"></script>
     <script src="vendors/is/is.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARdVcREeBK44lIWnv5-iPijKqvlSAVwbw&callback=initMap" async></script>
+    <script>
+      (g => {
+        var h, a, k, p = "The Google Maps JavaScript API",
+          c = "google",
+          l = "importLibrary",
+          q = "__ib__",
+          m = document,
+          b = window;
+        b = b[c] || (b[c] = {});
+        var d = b.maps || (b.maps = {}),
+          r = new Set,
+          e = new URLSearchParams,
+          u = () => h || (h = new Promise(async (f, n) => {
+            await (a = m.createElement("script"));
+            e.set("libraries", [...r] + "");
+            for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]);
+            e.set("callback", c + ".maps." + q);
+            a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+            d[q] = f;
+            a.onerror = () => h = n(Error(p + " could not load."));
+            a.nonce = m.querySelector("script[nonce]")?.nonce || "";
+            m.head.append(a)
+          }));
+        d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n))
+      })({
+        key: 'AIzaSyDbaQGvhe7Af-uOMJz68NWHnO34UjjE7Lo',
+        v: "weekly",
+        libraries: "marker,streetView"
+      });
+    </script>
     <script src="vendors/prism/prism.js"></script>
     <script src="vendors/fontawesome/all.min.js"></script>
     <script src="vendors/lodash/lodash.min.js"></script>

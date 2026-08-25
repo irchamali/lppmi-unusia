@@ -110,7 +110,7 @@ var BigPicture = (function () {
 
 	function BigPicture (options) {
 		// initialize called on initial open to create elements / style / event handlers
-		initialized || initialize();
+		initialized || initialize(options);
 
 		// clear currently loading stuff
 		if (isLoading) {
@@ -182,14 +182,17 @@ var BigPicture = (function () {
 		document.body[appendEl](container);
 		return {
 			close: close,
+			opts: opts,
+			updateDimensions: updateDimensions,
+			display: displayElement,
 			next: function () { return updateGallery(1); },
 			prev: function () { return updateGallery(-1); },
 		}
 	}
 
 	// create all needed methods / store dom elements on first use
-	function initialize() {
-		var startX;
+	function initialize(options) {
+		var startX, isPinch;
 		// return close button elements
 		function createCloseButton(className) {
 			var el = document[createEl]('button');
@@ -214,8 +217,9 @@ var BigPicture = (function () {
 
 		// add style - if you want to tweak, run through beautifier
 		var style = document[createEl]('STYLE');
+		var containerColor = (options && options.overlayColor) ? options.overlayColor : 'rgba(0,0,0,.7)';
 		style.innerHTML =
-			'#bp_caption,#bp_container{bottom:0;left:0;right:0;position:fixed;opacity:0}#bp_container>*,#bp_loader{position:absolute;right:0;z-index:10}#bp_container,#bp_caption,#bp_container svg{pointer-events:none}#bp_container{top:0;z-index:9999;background:rgba(0,0,0,.7);opacity:0;transition:opacity .35s}#bp_loader{top:0;left:0;bottom:0;display:flex;align-items:center;cursor:wait;background:0;z-index:9}#bp_loader svg{width:50%;max-width:300px;max-height:50%;margin:auto;animation:bpturn 1s infinite linear}#bp_aud,#bp_container img,#bp_sv,#bp_vid{user-select:none;max-height:96%;max-width:96%;top:0;bottom:0;left:0;margin:auto;box-shadow:0 0 3em rgba(0,0,0,.4);z-index:-1}#bp_sv{background:#111}#bp_sv svg{width:66px}#bp_caption{font-size:.9em;padding:1.3em;background:rgba(15,15,15,.94);color:#fff;text-align:center;transition:opacity .3s}#bp_aud{width:650px;top:calc(50% - 20px);bottom:auto;box-shadow:none}#bp_count{left:0;right:auto;padding:14px;color:rgba(255,255,255,.7);font-size:22px;cursor:default}#bp_container button{position:absolute;border:0;outline:0;background:0;cursor:pointer;transition:all .1s}#bp_container>.bp-x{padding:0;height:41px;width:41px;border-radius:100%;top:8px;right:14px;opacity:.8;line-height:1}#bp_container>.bp-x:focus,#bp_container>.bp-x:hover{background:rgba(255,255,255,.2)}.bp-x svg,.bp-xc svg{height:21px;width:20px;fill:#fff;vertical-align:top;}.bp-xc svg{width:16px}#bp_container .bp-xc{left:2%;bottom:100%;padding:9px 20px 7px;background:#d04444;border-radius:2px 2px 0 0;opacity:.85}#bp_container .bp-xc:focus,#bp_container .bp-xc:hover{opacity:1}.bp-lr{top:50%;top:calc(50% - 130px);padding:99px 0;width:6%;background:0;border:0;opacity:.4;transition:opacity .1s}.bp-lr:focus,.bp-lr:hover{opacity:.8}@keyframes bpf{50%{transform:translatex(15px)}100%{transform:none}}@keyframes bpl{50%{transform:translatex(-15px)}100%{transform:none}}@keyframes bpfl{0%{opacity:0;transform:translatex(70px)}100%{opacity:1;transform:none}}@keyframes bpfr{0%{opacity:0;transform:translatex(-70px)}100%{opacity:1;transform:none}}@keyframes bpfol{0%{opacity:1;transform:none}100%{opacity:0;transform:translatex(-70px)}}@keyframes bpfor{0%{opacity:1;transform:none}100%{opacity:0;transform:translatex(70px)}}@keyframes bpturn{0%{transform:none}100%{transform:rotate(360deg)}}@media (max-width:600px){.bp-lr{font-size:15vw}}';
+			"#bp_caption,#bp_container{bottom:0;left:0;right:0;position:fixed;opacity:0}#bp_container>*,#bp_loader{position:absolute;right:0;z-index:10}#bp_container,#bp_caption,#bp_container svg{pointer-events:none}#bp_container{top:0;z-index:9999;background:" + containerColor + ";opacity:0;transition:opacity .35s}#bp_loader{top:0;left:0;bottom:0;display:flex;align-items:center;cursor:wait;background:0;z-index:9}#bp_loader svg{width:50%;max-width:300px;max-height:50%;margin:auto;animation:bpturn 1s infinite linear}#bp_aud,#bp_container img,#bp_sv,#bp_vid{user-select:none;max-height:96%;max-width:96%;top:0;bottom:0;left:0;margin:auto;box-shadow:0 0 3em rgba(0,0,0,.4);z-index:-1}#bp_sv{background:#111}#bp_sv svg{width:66px}#bp_caption{font-size:.9em;padding:1.3em;background:rgba(15,15,15,.94);color:#fff;text-align:center;transition:opacity .3s}#bp_aud{width:650px;top:calc(50% - 20px);bottom:auto;box-shadow:none}#bp_count{left:0;right:auto;padding:14px;color:rgba(255,255,255,.7);font-size:22px;cursor:default}#bp_container button{position:absolute;border:0;outline:0;background:0;cursor:pointer;transition:all .1s}#bp_container>.bp-x{padding:0;height:41px;width:41px;border-radius:100%;top:8px;right:14px;opacity:.8;line-height:1}#bp_container>.bp-x:focus,#bp_container>.bp-x:hover{background:rgba(255,255,255,.2)}.bp-x svg,.bp-xc svg{display:inline;height:21px;width:20px;fill:#fff;vertical-align:top;}.bp-xc svg{width:16px}#bp_container .bp-xc{left:2%;bottom:100%;padding:9px 20px 7px;background:#d04444;border-radius:2px 2px 0 0;opacity:.85}#bp_container .bp-xc:focus,#bp_container .bp-xc:hover{opacity:1}.bp-lr{top:50%;top:calc(50% - 130px);padding:99px 0;width:6%;background:0;border:0;opacity:.4;transition:opacity .1s}.bp-lr:focus,.bp-lr:hover{opacity:.8}@keyframes bpf{50%{transform:translatex(15px)}100%{transform:none}}@keyframes bpl{50%{transform:translatex(-15px)}100%{transform:none}}@keyframes bpfl{0%{opacity:0;transform:translatex(70px)}100%{opacity:1;transform:none}}@keyframes bpfr{0%{opacity:0;transform:translatex(-70px)}100%{opacity:1;transform:none}}@keyframes bpfol{0%{opacity:1;transform:none}100%{opacity:0;transform:translatex(-70px)}}@keyframes bpfor{0%{opacity:1;transform:none}100%{opacity:0;transform:translatex(70px)}}@keyframes bpturn{0%{transform:none}100%{transform:rotate(360deg)}}@media (max-width:600px){.bp-lr{font-size:15vw}}";
 		document.head[appendEl](style);
 
 		// create container element
@@ -224,28 +228,26 @@ var BigPicture = (function () {
 		container.onclick = close;
 		closeButton = createCloseButton('bp-x');
 		container[appendEl](closeButton);
-		// gallery swipe listeners
-		if ('ontouchstart' in window) {
+		// gallery touch listeners
+		if ('ontouchend' in window && window.visualViewport) {
 			supportsTouch = true;
 			container.ontouchstart = function (ref) {
+				var touches = ref.touches;
 				var changedTouches = ref.changedTouches;
 
+				isPinch = touches.length > 1;
 				startX = changedTouches[0].pageX;
-			};
-			container.ontouchmove = function (e) {
-				e.preventDefault();
 			};
 			container.ontouchend = function (ref) {
 				var changedTouches = ref.changedTouches;
 
-				if (!galleryOpen) {
-					return
+				if (galleryOpen && !isPinch && window.visualViewport.scale <= 1) {
+					var distX = changedTouches[0].pageX - startX;
+					// swipe right
+					distX < -30 && updateGallery(1);
+					// swipe left
+					distX > 30 && updateGallery(-1);
 				}
-				var distX = changedTouches[0].pageX - startX;
-				// swipe right
-				distX < -30 && updateGallery(1);
-				// swipe left
-				distX > 30 && updateGallery(-1);
 			};
 		}
 
@@ -311,7 +313,7 @@ var BigPicture = (function () {
 			// adjust loader position on window resize
 			galleryOpen || (isLoading && toggleLoadingIcon(true));
 			// adjust iframe dimensions
-			displayElement === iframeContainer && updateIframeDimensions();
+			displayElement === iframeContainer && updateDimensions();
 		});
 
 		// close container on escape key press and arrow buttons for gallery
@@ -550,12 +552,12 @@ var BigPicture = (function () {
 		// set iframe src to url
 		iframeSiteVid.src = url;
 
-		updateIframeDimensions();
+		updateDimensions();
 
 		setTimeout(open, 9);
 	}
 
-	function updateIframeDimensions() {
+	function updateDimensions() {
 		var height;
 		var width;
 

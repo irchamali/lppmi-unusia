@@ -1,27 +1,33 @@
 "use strict";
 
 var _excluded = ["endValue"];
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _objectWithoutProperties(e, t) { if (null == e) return {}; var o, r, i = _objectWithoutPropertiesLoose(e, t); if (Object.getOwnPropertySymbols) { var n = Object.getOwnPropertySymbols(e); for (r = 0; r < n.length; r++) o = n[r], -1 === t.indexOf(o) && {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]); } return i; }
+function _objectWithoutPropertiesLoose(r, e) { if (null == r) return {}; var t = {}; for (var n in r) if ({}.hasOwnProperty.call(r, n)) { if (-1 !== e.indexOf(n)) continue; t[n] = r[n]; } return t; }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 /* -------------------------------------------------------------------------- */
-
 /*                                    Utils                                   */
-
 /* -------------------------------------------------------------------------- */
 var docReady = function docReady(fn) {
   // see if DOM is already available
@@ -31,26 +37,21 @@ var docReady = function docReady(fn) {
     setTimeout(fn, 1);
   }
 };
-
 var isRTL = function isRTL() {
   return document.querySelector('html').getAttribute('dir') === 'rtl';
 };
-
 var resize = function resize(fn) {
   return window.addEventListener('resize', fn);
 };
-
 var isIterableArray = function isIterableArray(array) {
   return Array.isArray(array) && !!array.length;
 };
-
 var camelize = function camelize(str) {
   var text = str.replace(/[-_\s.]+(.)?/g, function (_, c) {
     return c ? c.toUpperCase() : '';
   });
   return "".concat(text.substr(0, 1).toLowerCase()).concat(text.substr(1));
 };
-
 var getData = function getData(el, data) {
   try {
     return JSON.parse(el.dataset[camelize(data)]);
@@ -58,33 +59,31 @@ var getData = function getData(el, data) {
     return el.dataset[camelize(data)];
   }
 };
-/* ----------------------------- Colors function ---------------------------- */
 
+/* ----------------------------- Colors function ---------------------------- */
 
 var hexToRgb = function hexToRgb(hexValue) {
   var hex;
-  hexValue.indexOf('#') === 0 ? hex = hexValue.substring(1) : hex = hexValue; // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
-
+  hexValue.indexOf('#') === 0 ? hex = hexValue.substring(1) : hex = hexValue;
+  // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
   var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex.replace(shorthandRegex, function (m, r, g, b) {
     return r + r + g + g + b + b;
   }));
   return result ? [parseInt(result[1], 16), parseInt(result[2], 16), parseInt(result[3], 16)] : null;
 };
-
 var rgbaColor = function rgbaColor() {
   var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '#fff';
   var alpha = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.5;
   return "rgba(".concat(hexToRgb(color), ", ").concat(alpha, ")");
 };
-/* --------------------------------- Colors --------------------------------- */
 
+/* --------------------------------- Colors --------------------------------- */
 
 var getColor = function getColor(name) {
   var dom = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document.documentElement;
   return getComputedStyle(dom).getPropertyValue("--falcon-".concat(name)).trim();
 };
-
 var getColors = function getColors(dom) {
   return {
     primary: getColor('primary', dom),
@@ -97,7 +96,6 @@ var getColors = function getColors(dom) {
     dark: getColor('dark', dom)
   };
 };
-
 var getSoftColors = function getSoftColors(dom) {
   return {
     primary: getColor('soft-primary', dom),
@@ -110,7 +108,6 @@ var getSoftColors = function getSoftColors(dom) {
     dark: getColor('soft-dark', dom)
   };
 };
-
 var getGrays = function getGrays(dom) {
   return {
     white: getColor('white', dom),
@@ -128,16 +125,13 @@ var getGrays = function getGrays(dom) {
     black: getColor('black', dom)
   };
 };
-
 var hasClass = function hasClass(el, className) {
   !el && false;
   return el.classList.value.includes(className);
 };
-
 var addClass = function addClass(el, className) {
   el.classList.add(className);
 };
-
 var getOffset = function getOffset(el) {
   var rect = el.getBoundingClientRect();
   var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
@@ -147,7 +141,6 @@ var getOffset = function getOffset(el) {
     left: rect.left + scrollLeft
   };
 };
-
 function isScrolledIntoView(el) {
   var rect = el.getBoundingClientRect();
   var windowHeight = window.innerHeight || document.documentElement.clientHeight;
@@ -156,20 +149,18 @@ function isScrolledIntoView(el) {
   var horInView = rect.left <= windowWidth && rect.left + rect.width >= 0;
   return vertInView && horInView;
 }
-
 var isElementIntoView = function isElementIntoView(el) {
-  var position = el.getBoundingClientRect(); // checking whether fully visible
-
+  var position = el.getBoundingClientRect();
+  // checking whether fully visible
   if (position.top >= 0 && position.bottom <= window.innerHeight) {
     return true;
-  } // checking for partial visibility
+  }
 
-
+  // checking for partial visibility
   if (position.top < window.innerHeight && position.bottom >= 0) {
     return true;
   }
 };
-
 var breakpoints = {
   xs: 0,
   sm: 576,
@@ -178,23 +169,18 @@ var breakpoints = {
   xl: 1200,
   xxl: 1540
 };
-
 var getBreakpoint = function getBreakpoint(el) {
   var classes = el && el.classList.value;
   var breakpoint;
-
   if (classes) {
     breakpoint = breakpoints[classes.split(' ').filter(function (cls) {
       return cls.includes('navbar-expand-');
     }).pop().split('-').pop()];
   }
-
   return breakpoint;
 };
-
 var getCurrentScreenBreakpoint = function getCurrentScreenBreakpoint() {
   var currentBreakpoint = '';
-
   if (window.innerWidth >= breakpoints.xl) {
     currentBreakpoint = 'xl';
   } else if (window.innerWidth >= breakpoints.lg) {
@@ -204,27 +190,24 @@ var getCurrentScreenBreakpoint = function getCurrentScreenBreakpoint() {
   } else {
     currentBreakpoint = 'sm';
   }
-
   var breakpointStartVal = breakpoints[currentBreakpoint];
   return {
     currentBreakpoint: currentBreakpoint,
     breakpointStartVal: breakpointStartVal
   };
 };
-/* --------------------------------- Cookie --------------------------------- */
 
+/* --------------------------------- Cookie --------------------------------- */
 
 var setCookie = function setCookie(name, value, expire) {
   var expires = new Date();
   expires.setTime(expires.getTime() + expire);
   document.cookie = "".concat(name, "=").concat(value, ";expires=").concat(expires.toUTCString());
 };
-
 var getCookie = function getCookie(name) {
   var keyValue = document.cookie.match("(^|;) ?".concat(name, "=([^;]*)(;|$)"));
   return keyValue ? keyValue[2] : keyValue;
 };
-
 var settings = {
   tinymce: {
     theme: 'oxide'
@@ -233,36 +216,34 @@ var settings = {
     borderColor: 'rgba(255, 255, 255, 0.8)'
   }
 };
+
 /* -------------------------- Chart Initialization -------------------------- */
 
 var newChart = function newChart(chart, config) {
   var ctx = chart.getContext('2d');
   return new window.Chart(ctx, config);
 };
-/* ---------------------------------- Store --------------------------------- */
 
+/* ---------------------------------- Store --------------------------------- */
 
 var getItemFromStore = function getItemFromStore(key, defaultValue) {
   var store = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : localStorage;
-
   try {
     return JSON.parse(store.getItem(key)) || defaultValue;
   } catch (_unused) {
     return store.getItem(key) || defaultValue;
   }
 };
-
 var setItemToStore = function setItemToStore(key, payload) {
   var store = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : localStorage;
   return store.setItem(key, payload);
 };
-
 var getStoreSpace = function getStoreSpace() {
   var store = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : localStorage;
   return parseFloat((escape(encodeURIComponent(JSON.stringify(store))).length / (1024 * 1024)).toFixed(2));
 };
-/* get Dates between */
 
+/* get Dates between */
 
 var getDates = function getDates(startDate, endDate) {
   var interval = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1000 * 60 * 60 * 24;
@@ -274,39 +255,31 @@ var getDates = function getDates(startDate, endDate) {
     return new Date(startDate.valueOf() + interval * i);
   });
 };
-
 var getPastDates = function getPastDates(duration) {
   var days;
-
   switch (duration) {
     case 'week':
       days = 7;
       break;
-
     case 'month':
       days = 30;
       break;
-
     case 'year':
       days = 365;
       break;
-
     default:
       days = duration;
   }
-
   var date = new Date();
   var endDate = date;
   var startDate = new Date(new Date().setDate(date.getDate() - (days - 1)));
   return getDates(startDate, endDate);
 };
+
 /* Get Random Number */
-
-
 var getRandomNumber = function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 };
-
 var utils = {
   docReady: docReady,
   breakpoints: breakpoints,
@@ -339,15 +312,14 @@ var utils = {
   getPastDates: getPastDates,
   getRandomNumber: getRandomNumber
 };
+
 /* -------------------------------------------------------------------------- */
-
 /*                                  Detector                                  */
-
 /* -------------------------------------------------------------------------- */
 
 var detectorInit = function detectorInit() {
   var _window = window,
-      is = _window.is;
+    is = _window.is;
   var html = document.querySelector('html');
   is.opera() && addClass(html, 'opera');
   is.mobile() && addClass(html, 'mobile');
@@ -363,19 +335,16 @@ var detectorInit = function detectorInit() {
   is.windows() && addClass(html, 'windows');
   navigator.userAgent.match('CriOS') && addClass(html, 'chrome');
 };
+
 /*-----------------------------------------------
 |   DomNode
 -----------------------------------------------*/
-
-
 var DomNode = /*#__PURE__*/function () {
   function DomNode(node) {
     _classCallCheck(this, DomNode);
-
     this.node = node;
   }
-
-  _createClass(DomNode, [{
+  return _createClass(DomNode, [{
     key: "addClass",
     value: function addClass(className) {
       this.isValidNode() && this.node.classList.add(className);
@@ -405,7 +374,6 @@ var DomNode = /*#__PURE__*/function () {
           return this.node.dataset[this.camelize(key)];
         }
       }
-
       return null;
     }
   }, {
@@ -437,8 +405,9 @@ var DomNode = /*#__PURE__*/function () {
     key: "isValidNode",
     value: function isValidNode() {
       return !!this.node;
-    } // eslint-disable-next-line class-methods-use-this
+    }
 
+    // eslint-disable-next-line class-methods-use-this
   }, {
     key: "camelize",
     value: function camelize(str) {
@@ -448,14 +417,10 @@ var DomNode = /*#__PURE__*/function () {
       return "".concat(text.substr(0, 1).toLowerCase()).concat(text.substr(1));
     }
   }]);
-
-  return DomNode;
 }();
 /* --------------------------------------------------------------------------
 |                                 bg player
 --------------------------------------------------------------------------- */
-
-
 var bgPlayerInit = function bgPlayerInit() {
   var Selector = {
     DATA_YOUTUBE_EMBED: '[data-youtube-embed]',
@@ -473,7 +438,6 @@ var bgPlayerInit = function bgPlayerInit() {
     DOM_CONTENT_LOADED: 'DOMContentLoaded'
   };
   var youtubeEmbedElements = document.querySelectorAll(Selector.DATA_YOUTUBE_EMBED);
-
   var loadVideo = function loadVideo() {
     function setupPlayer() {
       window.YT.ready(function () {
@@ -484,9 +448,7 @@ var bgPlayerInit = function bgPlayerInit() {
             startSeconds: 1,
             endSeconds: 50
           };
-
           var options = window._.merge(defaultOptions, userOptions);
-
           var youTubePlayer = function youTubePlayer() {
             // eslint-disable-next-line
             new YT.Player(youtubeEmbedElement, {
@@ -514,11 +476,9 @@ var bgPlayerInit = function bgPlayerInit() {
                       embedElement.classList.add(ClassName.LOADED);
                     });
                   }
-
                   if (e.data === window.YT.PlayerState.PAUSED) {
                     e.target.playVideo();
                   }
-
                   if (e.data === window.YT.PlayerState.ENDED) {
                     // Loop from starting point
                     e.target.seekTo(options.startSeconds);
@@ -527,19 +487,16 @@ var bgPlayerInit = function bgPlayerInit() {
               }
             });
           };
-
           youTubePlayer();
         });
       });
     }
-
     var tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     tag.onload = setupPlayer;
   };
-
   if (document.readyState !== Events.LOADING) {
     loadVideo();
   } else {
@@ -547,10 +504,10 @@ var bgPlayerInit = function bgPlayerInit() {
       return loadVideo();
     });
   }
+
   /* --------------------------------------------------------------------------
    |                                 Adjust BG Ratio
    --------------------------------------------------------------------------- */
-
 
   var adjustBackgroundRatio = function adjustBackgroundRatio() {
     var ytElements = document.querySelectorAll(Selector.YT_VIDEO);
@@ -566,54 +523,45 @@ var bgPlayerInit = function bgPlayerInit() {
       ytElement.style.minWidth = "".concat(minWidth, "px");
     });
   };
-
   adjustBackgroundRatio();
   document.addEventListener(Events.SCROLL, function () {
     return adjustBackgroundRatio();
   });
 };
-/* -------------------------------------------------------------------------- */
 
+/* -------------------------------------------------------------------------- */
 /*                                  Count Up                                  */
-
 /* -------------------------------------------------------------------------- */
-
 
 var countupInit = function countupInit() {
   if (window.countUp) {
     var countups = document.querySelectorAll('[data-countup]');
     countups.forEach(function (node) {
       var _utils$getData = utils.getData(node, 'countup'),
-          endValue = _utils$getData.endValue,
-          options = _objectWithoutProperties(_utils$getData, _excluded);
-
-      var fireCountUp = function fireCountUp() {
+        endValue = _utils$getData.endValue,
+        options = _objectWithoutProperties(_utils$getData, _excluded);
+      var _fireCountUp = function fireCountUp() {
         var isInView = utils.isScrolledIntoView(node);
-
         if (isInView) {
           var countUp = new window.countUp.CountUp(node, endValue, _objectSpread({
             duration: 5
           }, options));
-
           if (!countUp.error) {
             countUp.start();
           } else {
             console.error(countUp.error);
           }
-
-          window.removeEventListener('scroll', fireCountUp);
+          window.removeEventListener('scroll', _fireCountUp);
         }
       };
-
-      window.addEventListener('scroll', fireCountUp);
+      window.addEventListener('scroll', _fireCountUp);
     });
   }
 };
+
 /*-----------------------------------------------
 |   Dashboard Table dropdown
 -----------------------------------------------*/
-
-
 var dropdownMenuInit = function dropdownMenuInit() {
   // Only for ios
   if (window.is.ios()) {
@@ -628,7 +576,6 @@ var dropdownMenuInit = function dropdownMenuInit() {
     document.querySelectorAll(Selector.TABLE_RESPONSIVE).forEach(function (table) {
       table.addEventListener(Event.SHOWN_BS_DROPDOWN, function (e) {
         var t = e.currentTarget;
-
         if (t.scrollWidth > t.clientWidth) {
           t.style.paddingBottom = "".concat(e.target.nextElementSibling.clientHeight, "px");
         }
@@ -638,32 +585,27 @@ var dropdownMenuInit = function dropdownMenuInit() {
       });
     });
   }
-}; // Reference
+};
+
+// Reference
 // https://github.com/twbs/bootstrap/issues/11037#issuecomment-274870381
 
 /* -------------------------------------------------------------------------- */
-
 /*                           Open dropdown on hover                           */
-
 /* -------------------------------------------------------------------------- */
-
 
 var dropdownOnHover = function dropdownOnHover() {
   var navbarArea = document.querySelectorAll('[data-bs-toggle="dropdown"]');
-
   if (navbarArea) {
     navbarArea.forEach(function (navbarItem) {
       navbarItem.addEventListener('mouseover', function (e) {
         if (e.target.className.includes('dropdown-toggle') && window.innerWidth > 992) {
           var dropdownInstance = new window.bootstrap.Dropdown(e.target);
+
           /* eslint-disable no-underscore-dangle */
-
           dropdownInstance._element.classList.add('show');
-
           dropdownInstance._menu.classList.add('show');
-
           dropdownInstance._menu.setAttribute('data-bs-popper', 'none');
-
           e.target.parentNode.addEventListener('mouseleave', function () {
             dropdownInstance.hide();
           });
@@ -672,983 +614,168 @@ var dropdownOnHover = function dropdownOnHover() {
     });
   }
 };
+
+/* -------------------------------------------------------------------------- */
+/*                               Form-Processor                               */
+/* -------------------------------------------------------------------------- */
+
+var formInit = function formInit() {
+  var zforms = document.querySelectorAll('[data-form]');
+  if (zforms.length) {
+    zforms.forEach(function (form) {
+      form.addEventListener('submit', /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(e) {
+          var feedbackEl, formData, response, result, _t;
+          return _regenerator().w(function (_context) {
+            while (1) switch (_context.p = _context.n) {
+              case 0:
+                e.preventDefault();
+                feedbackEl = form.querySelector('.feedback');
+                formData = new FormData(form);
+                _context.p = 1;
+                _context.n = 2;
+                return fetch("https://formspree.io/f/".concat('YOUR_FORM_ID'), {
+                  method: 'POST',
+                  body: formData,
+                  headers: {
+                    Accept: 'application/json'
+                  }
+                });
+              case 2:
+                response = _context.v;
+                _context.n = 3;
+                return response.json();
+              case 3:
+                result = _context.v;
+                if (response.ok) {
+                  feedbackEl.innerHTML = "\n            <div class=\"alert alert-success\">\n              Your message has been sent successfully.\n            </div>";
+                  form.reset();
+                } else {
+                  feedbackEl.innerHTML = "\n            <div class=\"alert alert-danger\">\n              ".concat(result.error || 'Something went wrong', "\n            </div>");
+                }
+                _context.n = 5;
+                break;
+              case 4:
+                _context.p = 4;
+                _t = _context.v;
+                feedbackEl.innerHTML = "\n          <div class=\"alert alert-danger\">\n            Network error. Please try again.\n          </div>";
+              case 5:
+                _context.p = 5;
+                setTimeout(function () {
+                  feedbackEl.innerHTML = null;
+                }, 3000);
+                return _context.f(5);
+              case 6:
+                return _context.a(2);
+            }
+          }, _callee, null, [[1, 4, 5, 6]]);
+        }));
+        return function (_x) {
+          return _ref.apply(this, arguments);
+        };
+      }());
+    });
+  }
+};
+
 /*-----------------------------------------------
-|   Gooogle Map
+|   Google Map
 -----------------------------------------------*/
 
-
+var mapInstances = [];
+var panoramaInstances = [];
+function destroyMap(map) {
+  if (map) {
+    window.google.maps.event.clearInstanceListeners(map);
+  }
+}
+function destroyAll() {
+  mapInstances.forEach(destroyMap);
+  mapInstances.length = 0;
+  panoramaInstances.length = 0;
+}
 function initMap() {
   var themeController = document.body;
-  var $googlemaps = document.querySelectorAll('.googlemap');
-
-  if ($googlemaps.length && window.google) {
-    // Visit https://snazzymaps.com/ for more themes
-    var mapStyles = {
-      Default: [{
-        featureType: 'water',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#e9e9e9'
-        }, {
-          lightness: 17
-        }]
-      }, {
-        featureType: 'landscape',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#f5f5f5'
-        }, {
-          lightness: 20
-        }]
-      }, {
-        featureType: 'road.highway',
-        elementType: 'geometry.fill',
-        stylers: [{
-          color: '#ffffff'
-        }, {
-          lightness: 17
-        }]
-      }, {
-        featureType: 'road.highway',
-        elementType: 'geometry.stroke',
-        stylers: [{
-          color: '#ffffff'
-        }, {
-          lightness: 29
-        }, {
-          weight: 0.2
-        }]
-      }, {
-        featureType: 'road.arterial',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#ffffff'
-        }, {
-          lightness: 18
-        }]
-      }, {
-        featureType: 'road.local',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#ffffff'
-        }, {
-          lightness: 16
-        }]
-      }, {
-        featureType: 'poi',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#f5f5f5'
-        }, {
-          lightness: 21
-        }]
-      }, {
-        featureType: 'poi.park',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#dedede'
-        }, {
-          lightness: 21
-        }]
-      }, {
-        elementType: 'labels.text.stroke',
-        stylers: [{
-          visibility: 'on'
-        }, {
-          color: '#ffffff'
-        }, {
-          lightness: 16
-        }]
-      }, {
-        elementType: 'labels.text.fill',
-        stylers: [{
-          saturation: 36
-        }, {
-          color: '#333333'
-        }, {
-          lightness: 40
-        }]
-      }, {
-        elementType: 'labels.icon',
-        stylers: [{
-          visibility: 'off'
-        }]
-      }, {
-        featureType: 'transit',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#f2f2f2'
-        }, {
-          lightness: 19
-        }]
-      }, {
-        featureType: 'administrative',
-        elementType: 'geometry.fill',
-        stylers: [{
-          color: '#fefefe'
-        }, {
-          lightness: 20
-        }]
-      }, {
-        featureType: 'administrative',
-        elementType: 'geometry.stroke',
-        stylers: [{
-          color: '#fefefe'
-        }, {
-          lightness: 17
-        }, {
-          weight: 1.2
-        }]
-      }],
-      Gray: [{
-        featureType: 'all',
-        elementType: 'labels.text.fill',
-        stylers: [{
-          saturation: 36
-        }, {
-          color: '#000000'
-        }, {
-          lightness: 40
-        }]
-      }, {
-        featureType: 'all',
-        elementType: 'labels.text.stroke',
-        stylers: [{
-          visibility: 'on'
-        }, {
-          color: '#000000'
-        }, {
-          lightness: 16
-        }]
-      }, {
-        featureType: 'all',
-        elementType: 'labels.icon',
-        stylers: [{
-          visibility: 'off'
-        }]
-      }, {
-        featureType: 'administrative',
-        elementType: 'geometry.fill',
-        stylers: [{
-          color: '#000000'
-        }, {
-          lightness: 20
-        }]
-      }, {
-        featureType: 'administrative',
-        elementType: 'geometry.stroke',
-        stylers: [{
-          color: '#000000'
-        }, {
-          lightness: 17
-        }, {
-          weight: 1.2
-        }]
-      }, {
-        featureType: 'landscape',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#000000'
-        }, {
-          lightness: 20
-        }]
-      }, {
-        featureType: 'poi',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#000000'
-        }, {
-          lightness: 21
-        }]
-      }, {
-        featureType: 'road.highway',
-        elementType: 'geometry.fill',
-        stylers: [{
-          color: '#000000'
-        }, {
-          lightness: 17
-        }]
-      }, {
-        featureType: 'road.highway',
-        elementType: 'geometry.stroke',
-        stylers: [{
-          color: '#000000'
-        }, {
-          lightness: 29
-        }, {
-          weight: 0.2
-        }]
-      }, {
-        featureType: 'road.arterial',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#000000'
-        }, {
-          lightness: 18
-        }]
-      }, {
-        featureType: 'road.local',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#000000'
-        }, {
-          lightness: 16
-        }]
-      }, {
-        featureType: 'transit',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#000000'
-        }, {
-          lightness: 19
-        }]
-      }, {
-        featureType: 'water',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#000000'
-        }, {
-          lightness: 17
-        }]
-      }],
-      Midnight: [{
-        featureType: 'all',
-        elementType: 'labels.text.fill',
-        stylers: [{
-          color: '#ffffff'
-        }]
-      }, {
-        featureType: 'all',
-        elementType: 'labels.text.stroke',
-        stylers: [{
-          color: '#000000'
-        }, {
-          lightness: 13
-        }]
-      }, {
-        featureType: 'administrative',
-        elementType: 'geometry.fill',
-        stylers: [{
-          color: '#000000'
-        }]
-      }, {
-        featureType: 'administrative',
-        elementType: 'geometry.stroke',
-        stylers: [{
-          color: '#144b53'
-        }, {
-          lightness: 14
-        }, {
-          weight: 1.4
-        }]
-      }, {
-        featureType: 'landscape',
-        elementType: 'all',
-        stylers: [{
-          color: '#08304b'
-        }]
-      }, {
-        featureType: 'poi',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#0c4152'
-        }, {
-          lightness: 5
-        }]
-      }, {
-        featureType: 'road.highway',
-        elementType: 'geometry.fill',
-        stylers: [{
-          color: '#000000'
-        }]
-      }, {
-        featureType: 'road.highway',
-        elementType: 'geometry.stroke',
-        stylers: [{
-          color: '#0b434f'
-        }, {
-          lightness: 25
-        }]
-      }, {
-        featureType: 'road.arterial',
-        elementType: 'geometry.fill',
-        stylers: [{
-          color: '#000000'
-        }]
-      }, {
-        featureType: 'road.arterial',
-        elementType: 'geometry.stroke',
-        stylers: [{
-          color: '#0b3d51'
-        }, {
-          lightness: 16
-        }]
-      }, {
-        featureType: 'road.local',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#000000'
-        }]
-      }, {
-        featureType: 'transit',
-        elementType: 'all',
-        stylers: [{
-          color: '#146474'
-        }]
-      }, {
-        featureType: 'water',
-        elementType: 'all',
-        stylers: [{
-          color: '#021019'
-        }]
-      }],
-      Hopper: [{
-        featureType: 'water',
-        elementType: 'geometry',
-        stylers: [{
-          hue: '#165c64'
-        }, {
-          saturation: 34
-        }, {
-          lightness: -69
-        }, {
-          visibility: 'on'
-        }]
-      }, {
-        featureType: 'landscape',
-        elementType: 'geometry',
-        stylers: [{
-          hue: '#b7caaa'
-        }, {
-          saturation: -14
-        }, {
-          lightness: -18
-        }, {
-          visibility: 'on'
-        }]
-      }, {
-        featureType: 'landscape.man_made',
-        elementType: 'all',
-        stylers: [{
-          hue: '#cbdac1'
-        }, {
-          saturation: -6
-        }, {
-          lightness: -9
-        }, {
-          visibility: 'on'
-        }]
-      }, {
-        featureType: 'road',
-        elementType: 'geometry',
-        stylers: [{
-          hue: '#8d9b83'
-        }, {
-          saturation: -89
-        }, {
-          lightness: -12
-        }, {
-          visibility: 'on'
-        }]
-      }, {
-        featureType: 'road.highway',
-        elementType: 'geometry',
-        stylers: [{
-          hue: '#d4dad0'
-        }, {
-          saturation: -88
-        }, {
-          lightness: 54
-        }, {
-          visibility: 'simplified'
-        }]
-      }, {
-        featureType: 'road.arterial',
-        elementType: 'geometry',
-        stylers: [{
-          hue: '#bdc5b6'
-        }, {
-          saturation: -89
-        }, {
-          lightness: -3
-        }, {
-          visibility: 'simplified'
-        }]
-      }, {
-        featureType: 'road.local',
-        elementType: 'geometry',
-        stylers: [{
-          hue: '#bdc5b6'
-        }, {
-          saturation: -89
-        }, {
-          lightness: -26
-        }, {
-          visibility: 'on'
-        }]
-      }, {
-        featureType: 'poi',
-        elementType: 'geometry',
-        stylers: [{
-          hue: '#c17118'
-        }, {
-          saturation: 61
-        }, {
-          lightness: -45
-        }, {
-          visibility: 'on'
-        }]
-      }, {
-        featureType: 'poi.park',
-        elementType: 'all',
-        stylers: [{
-          hue: '#8ba975'
-        }, {
-          saturation: -46
-        }, {
-          lightness: -28
-        }, {
-          visibility: 'on'
-        }]
-      }, {
-        featureType: 'transit',
-        elementType: 'geometry',
-        stylers: [{
-          hue: '#a43218'
-        }, {
-          saturation: 74
-        }, {
-          lightness: -51
-        }, {
-          visibility: 'simplified'
-        }]
-      }, {
-        featureType: 'administrative.province',
-        elementType: 'all',
-        stylers: [{
-          hue: '#ffffff'
-        }, {
-          saturation: 0
-        }, {
-          lightness: 100
-        }, {
-          visibility: 'simplified'
-        }]
-      }, {
-        featureType: 'administrative.neighborhood',
-        elementType: 'all',
-        stylers: [{
-          hue: '#ffffff'
-        }, {
-          saturation: 0
-        }, {
-          lightness: 100
-        }, {
-          visibility: 'off'
-        }]
-      }, {
-        featureType: 'administrative.locality',
-        elementType: 'labels',
-        stylers: [{
-          hue: '#ffffff'
-        }, {
-          saturation: 0
-        }, {
-          lightness: 100
-        }, {
-          visibility: 'off'
-        }]
-      }, {
-        featureType: 'administrative.land_parcel',
-        elementType: 'all',
-        stylers: [{
-          hue: '#ffffff'
-        }, {
-          saturation: 0
-        }, {
-          lightness: 100
-        }, {
-          visibility: 'off'
-        }]
-      }, {
-        featureType: 'administrative',
-        elementType: 'all',
-        stylers: [{
-          hue: '#3a3935'
-        }, {
-          saturation: 5
-        }, {
-          lightness: -57
-        }, {
-          visibility: 'off'
-        }]
-      }, {
-        featureType: 'poi.medical',
-        elementType: 'geometry',
-        stylers: [{
-          hue: '#cba923'
-        }, {
-          saturation: 50
-        }, {
-          lightness: -46
-        }, {
-          visibility: 'on'
-        }]
-      }],
-      Beard: [{
-        featureType: 'poi.business',
-        elementType: 'labels.text',
-        stylers: [{
-          visibility: 'on'
-        }, {
-          color: '#333333'
-        }]
-      }],
-      AssassianCreed: [{
-        featureType: 'all',
-        elementType: 'all',
-        stylers: [{
-          visibility: 'on'
-        }]
-      }, {
-        featureType: 'all',
-        elementType: 'labels',
-        stylers: [{
-          visibility: 'off'
-        }, {
-          saturation: '-100'
-        }]
-      }, {
-        featureType: 'all',
-        elementType: 'labels.text.fill',
-        stylers: [{
-          saturation: 36
-        }, {
-          color: '#000000'
-        }, {
-          lightness: 40
-        }, {
-          visibility: 'off'
-        }]
-      }, {
-        featureType: 'all',
-        elementType: 'labels.text.stroke',
-        stylers: [{
-          visibility: 'off'
-        }, {
-          color: '#000000'
-        }, {
-          lightness: 16
-        }]
-      }, {
-        featureType: 'all',
-        elementType: 'labels.icon',
-        stylers: [{
-          visibility: 'off'
-        }]
-      }, {
-        featureType: 'administrative',
-        elementType: 'geometry.fill',
-        stylers: [{
-          color: '#000000'
-        }, {
-          lightness: 20
-        }]
-      }, {
-        featureType: 'administrative',
-        elementType: 'geometry.stroke',
-        stylers: [{
-          color: '#000000'
-        }, {
-          lightness: 17
-        }, {
-          weight: 1.2
-        }]
-      }, {
-        featureType: 'landscape',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#000000'
-        }, {
-          lightness: 20
-        }]
-      }, {
-        featureType: 'landscape',
-        elementType: 'geometry.fill',
-        stylers: [{
-          color: '#4d6059'
-        }]
-      }, {
-        featureType: 'landscape',
-        elementType: 'geometry.stroke',
-        stylers: [{
-          color: '#4d6059'
-        }]
-      }, {
-        featureType: 'landscape.natural',
-        elementType: 'geometry.fill',
-        stylers: [{
-          color: '#4d6059'
-        }]
-      }, {
-        featureType: 'poi',
-        elementType: 'geometry',
-        stylers: [{
-          lightness: 21
-        }]
-      }, {
-        featureType: 'poi',
-        elementType: 'geometry.fill',
-        stylers: [{
-          color: '#4d6059'
-        }]
-      }, {
-        featureType: 'poi',
-        elementType: 'geometry.stroke',
-        stylers: [{
-          color: '#4d6059'
-        }]
-      }, {
-        featureType: 'road',
-        elementType: 'geometry',
-        stylers: [{
-          visibility: 'on'
-        }, {
-          color: '#7f8d89'
-        }]
-      }, {
-        featureType: 'road',
-        elementType: 'geometry.fill',
-        stylers: [{
-          color: '#7f8d89'
-        }]
-      }, {
-        featureType: 'road.highway',
-        elementType: 'geometry.fill',
-        stylers: [{
-          color: '#7f8d89'
-        }, {
-          lightness: 17
-        }]
-      }, {
-        featureType: 'road.highway',
-        elementType: 'geometry.stroke',
-        stylers: [{
-          color: '#7f8d89'
-        }, {
-          lightness: 29
-        }, {
-          weight: 0.2
-        }]
-      }, {
-        featureType: 'road.arterial',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#000000'
-        }, {
-          lightness: 18
-        }]
-      }, {
-        featureType: 'road.arterial',
-        elementType: 'geometry.fill',
-        stylers: [{
-          color: '#7f8d89'
-        }]
-      }, {
-        featureType: 'road.arterial',
-        elementType: 'geometry.stroke',
-        stylers: [{
-          color: '#7f8d89'
-        }]
-      }, {
-        featureType: 'road.local',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#000000'
-        }, {
-          lightness: 16
-        }]
-      }, {
-        featureType: 'road.local',
-        elementType: 'geometry.fill',
-        stylers: [{
-          color: '#7f8d89'
-        }]
-      }, {
-        featureType: 'road.local',
-        elementType: 'geometry.stroke',
-        stylers: [{
-          color: '#7f8d89'
-        }]
-      }, {
-        featureType: 'transit',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#000000'
-        }, {
-          lightness: 19
-        }]
-      }, {
-        featureType: 'water',
-        elementType: 'all',
-        stylers: [{
-          color: '#2b3638'
-        }, {
-          visibility: 'on'
-        }]
-      }, {
-        featureType: 'water',
-        elementType: 'geometry',
-        stylers: [{
-          color: '#2b3638'
-        }, {
-          lightness: 17
-        }]
-      }, {
-        featureType: 'water',
-        elementType: 'geometry.fill',
-        stylers: [{
-          color: '#24282b'
-        }]
-      }, {
-        featureType: 'water',
-        elementType: 'geometry.stroke',
-        stylers: [{
-          color: '#24282b'
-        }]
-      }, {
-        featureType: 'water',
-        elementType: 'labels',
-        stylers: [{
-          visibility: 'off'
-        }]
-      }, {
-        featureType: 'water',
-        elementType: 'labels.text',
-        stylers: [{
-          visibility: 'off '
-        }]
-      }, {
-        featureType: 'water',
-        elementType: 'labels.text.fill',
-        stylers: [{
-          visibility: 'off'
-        }]
-      }, {
-        featureType: 'water',
-        elementType: 'labels.text.stroke',
-        stylers: [{
-          visibility: 'off'
-        }]
-      }, {
-        featureType: 'water',
-        elementType: 'labels.icon',
-        stylers: [{
-          visibility: 'off'
-        }]
-      }],
-      SubtleGray: [{
-        featureType: 'administrative',
-        elementType: 'all',
-        stylers: [{
-          saturation: '-100'
-        }]
-      }, {
-        featureType: 'administrative.province',
-        elementType: 'all',
-        stylers: [{
-          visibility: 'off'
-        }]
-      }, {
-        featureType: 'landscape',
-        elementType: 'all',
-        stylers: [{
-          saturation: -100
-        }, {
-          lightness: 65
-        }, {
-          visibility: 'on'
-        }]
-      }, {
-        featureType: 'poi',
-        elementType: 'all',
-        stylers: [{
-          saturation: -100
-        }, {
-          lightness: '50'
-        }, {
-          visibility: 'simplified'
-        }]
-      }, {
-        featureType: 'road',
-        elementType: 'all',
-        stylers: [{
-          saturation: -100
-        }]
-      }, {
-        featureType: 'road.highway',
-        elementType: 'all',
-        stylers: [{
-          visibility: 'simplified'
-        }]
-      }, {
-        featureType: 'road.arterial',
-        elementType: 'all',
-        stylers: [{
-          lightness: '30'
-        }]
-      }, {
-        featureType: 'road.local',
-        elementType: 'all',
-        stylers: [{
-          lightness: '40'
-        }]
-      }, {
-        featureType: 'transit',
-        elementType: 'all',
-        stylers: [{
-          saturation: -100
-        }, {
-          visibility: 'simplified'
-        }]
-      }, {
-        featureType: 'water',
-        elementType: 'geometry',
-        stylers: [{
-          hue: '#ffff00'
-        }, {
-          lightness: -25
-        }, {
-          saturation: -97
-        }]
-      }, {
-        featureType: 'water',
-        elementType: 'labels',
-        stylers: [{
-          lightness: -25
-        }, {
-          saturation: -100
-        }]
-      }],
-      Tripitty: [{
-        featureType: 'all',
-        elementType: 'labels',
-        stylers: [{
-          visibility: 'off'
-        }]
-      }, {
-        featureType: 'administrative',
-        elementType: 'all',
-        stylers: [{
-          visibility: 'off'
-        }]
-      }, {
-        featureType: 'landscape',
-        elementType: 'all',
-        stylers: [{
-          color: '#2c5ca5'
-        }]
-      }, {
-        featureType: 'poi',
-        elementType: 'all',
-        stylers: [{
-          color: '#2c5ca5'
-        }]
-      }, {
-        featureType: 'road',
-        elementType: 'all',
-        stylers: [{
-          visibility: 'off'
-        }]
-      }, {
-        featureType: 'transit',
-        elementType: 'all',
-        stylers: [{
-          visibility: 'off'
-        }]
-      }, {
-        featureType: 'water',
-        elementType: 'all',
-        stylers: [{
-          color: '#193a70'
-        }, {
-          visibility: 'on'
-        }]
-      }],
-      Cobalt: [{
-        featureType: 'all',
-        elementType: 'all',
-        stylers: [{
-          invert_lightness: true
-        }, {
-          saturation: 10
-        }, {
-          lightness: 30
-        }, {
-          gamma: 0.5
-        }, {
-          hue: '#435158'
-        }]
-      }]
-    };
+  var $googlemaps = _toConsumableArray(document.querySelectorAll('[data-gmap]'));
+  if (!$googlemaps.length || !window.google) return;
+  Promise.all([window.google.maps.importLibrary('maps'), window.google.maps.importLibrary('marker'), window.google.maps.importLibrary('core')]).then(function (_ref2) {
+    var _ref3 = _slicedToArray(_ref2, 3),
+      mapsLib = _ref3[0],
+      markerLib = _ref3[1],
+      coreLib = _ref3[2];
+    var Map = mapsLib.Map,
+      InfoWindow = mapsLib.InfoWindow;
+    var AdvancedMarkerElement = markerLib.AdvancedMarkerElement;
+    var ColorScheme = coreLib.ColorScheme;
     $googlemaps.forEach(function (itm) {
       var latLng = utils.getData(itm, 'latlng').split(',');
-      var markerPopup = itm.innerHTML;
-      var icon = utils.getData(itm, 'icon') ? utils.getData(itm, 'icon') : 'https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi.png';
       var zoom = utils.getData(itm, 'zoom');
-      var mapElement = itm;
-      var mapStyle = utils.getData(itm, 'theme');
+      var mapId = utils.getData(itm, 'mapid');
+      var markerPopup = itm.innerHTML;
+      var lightIconUrl = utils.getData(itm, 'icon') || 'https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi.png';
+      var darkIconUrl = utils.getData(itm, 'dark-icon') || lightIconUrl;
 
+      /* ---------- Street View ---------- */
       if (utils.getData(itm, 'theme') === 'streetview') {
-        var pov = utils.getData(itm, 'pov');
-        var _mapOptions = {
+        var panorama = new window.google.maps.StreetViewPanorama(itm, {
           position: {
-            lat: Number(latLng[0]),
-            lng: Number(latLng[1])
+            lat: +latLng[0],
+            lng: +latLng[1]
           },
-          pov: pov,
+          pov: utils.getData(itm, 'pov'),
           zoom: zoom,
           gestureHandling: 'none',
-          scrollwheel: false
-        };
-        return new window.google.maps.StreetViewPanorama(mapElement, _mapOptions);
+          scrollwheel: false,
+          visible: true
+        });
+        panoramaInstances.push(panorama);
+        return;
       }
 
-      var mapOptions = {
+      /* ---------- Map ---------- */
+      var map = new Map(itm, {
+        mapId: mapId,
         zoom: zoom,
+        center: {
+          lat: +latLng[0],
+          lng: +latLng[1]
+        },
         scrollwheel: utils.getData(itm, 'scrollwheel'),
-        center: new window.google.maps.LatLng(latLng[0], latLng[1]),
-        styles: localStorage.getItem('theme') === 'dark' ? mapStyles.Cobalt : mapStyles[mapStyle]
-      };
-      var map = new window.google.maps.Map(mapElement, mapOptions);
-      var infowindow = new window.google.maps.InfoWindow({
+        colorScheme: localStorage.getItem('theme') === 'dark' ? ColorScheme.DARK : ColorScheme.LIGHT
+      });
+      mapInstances.push(map);
+      var infowindow = new InfoWindow({
         content: markerPopup
       });
-      var marker = new window.google.maps.Marker({
-        position: new window.google.maps.LatLng(latLng[0], latLng[1]),
-        icon: icon,
-        map: map
+      var iconImage = document.createElement('img');
+      iconImage.src = localStorage.getItem('theme') === 'dark' ? darkIconUrl : lightIconUrl;
+      var marker = new AdvancedMarkerElement({
+        map: map,
+        position: {
+          lat: +latLng[0],
+          lng: +latLng[1]
+        },
+        content: iconImage
       });
       marker.addListener('click', function () {
         infowindow.open(map, marker);
       });
-      themeController && themeController.addEventListener('clickControl', function (_ref) {
-        var _ref$detail = _ref.detail,
-            control = _ref$detail.control,
-            value = _ref$detail.value;
-
-        if (control === 'theme') {
-          map.set('styles', value === 'dark' ? mapStyles.Cobalt : mapStyles[mapStyle]);
-        }
-      });
-      return null;
     });
-  }
+
+    /* ---------- Theme switch listener (ONCE) ---------- */
+    themeController === null || themeController === void 0 || themeController.addEventListener('clickControl', function (_ref4) {
+      var detail = _ref4.detail;
+      if (detail.control === 'theme') {
+        destroyAll();
+        initMap();
+      }
+    });
+  });
 }
+
 /*-----------------------------------------------
 |   Hamburger
 -----------------------------------------------*/
-
 
 var hamburgerInit = function hamburgerInit() {
   var Selector = {
@@ -1657,20 +784,17 @@ var hamburgerInit = function hamburgerInit() {
   };
   var hamburger = document.querySelector(Selector.HAMBURGER);
   var navbarCollapse = document.querySelector(Selector.NAVBAR_COLLAPSE);
-
   if (hamburger) {
     navbarCollapse.addEventListener('show.bs.collapse', function () {
       hamburger.classList.add('is-active');
     });
   }
-
   if (hamburger) {
     navbarCollapse.addEventListener('hide.bs.collapse', function () {
       hamburger.classList.remove('is-active');
     });
   }
 };
-
 function inertiaInit() {
   var Selector = {
     DATA_INERTIA: '[data-inertia]'
@@ -1697,10 +821,10 @@ function inertiaInit() {
       duration: 0.7,
       ease: 'Power3.easeOut'
     };
-    Object.assign(controller, options); // eslint-disable-next-line no-param-reassign
+    Object.assign(controller, options);
 
+    // eslint-disable-next-line no-param-reassign
     el.style.transform = "translateY(".concat(initialTranslate, "px);");
-
     var inertiaEffect = function inertiaEffect() {
       currentPosition = window.pageYOffset;
       y = controller.weight * (offsetTop - currentPosition) * 100 / winHeight;
@@ -1711,17 +835,14 @@ function inertiaInit() {
       });
       previousPosition = currentPosition;
     };
-
     window.addEventListener(Events.SCROLL, inertiaEffect);
     window.addEventListener(Events.RESIZE, inertiaEffect);
   });
 }
-/* -------------------------------------------------------------------------- */
 
+/* -------------------------------------------------------------------------- */
 /*                                 bigPicture                                 */
-
 /* -------------------------------------------------------------------------- */
-
 
 var lightboxInit = function lightboxInit() {
   if (window.BigPicture) {
@@ -1731,19 +852,17 @@ var lightboxInit = function lightboxInit() {
       var defaultOptions = {
         el: bpItem
       };
-
       var options = window._.merge(defaultOptions, userOptions);
-
       bpItem.addEventListener('click', function () {
         window.BigPicture(options);
       });
     });
   }
 };
+
 /*-----------------------------------------------
 |   Inline Player [plyr]
 -----------------------------------------------*/
-
 
 var plyrInit = function plyrInit() {
   if (window.Plyr) {
@@ -1755,19 +874,15 @@ var plyrInit = function plyrInit() {
           active: true
         }
       };
-
       var options = window._.merge(defaultOptions, userOptions);
-
       return new window.Plyr(plyr, options);
     });
   }
 };
-/* -------------------------------------------------------------------------- */
 
+/* -------------------------------------------------------------------------- */
 /*                                   Popover                                  */
-
 /* -------------------------------------------------------------------------- */
-
 
 var popoverInit = function popoverInit() {
   var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
@@ -1775,35 +890,30 @@ var popoverInit = function popoverInit() {
     return new window.bootstrap.Popover(popoverTriggerEl);
   });
 };
-/* -------------------------------------------------------------------------- */
 
+/* -------------------------------------------------------------------------- */
 /*                                  Preloader                                 */
-
 /* -------------------------------------------------------------------------- */
-
 
 var preloaderInit = function preloaderInit() {
   var bodyElement = document.querySelector('body');
   window.imagesLoaded(bodyElement, function () {
     var preloader = document.querySelector('.preloader');
-    preloader === null || preloader === void 0 ? void 0 : preloader.classList.add('loaded');
+    preloader === null || preloader === void 0 || preloader.classList.add('loaded');
     setTimeout(function () {
-      preloader === null || preloader === void 0 ? void 0 : preloader.remove();
+      preloader === null || preloader === void 0 || preloader.remove();
     }, 900);
   });
 };
-/* -------------------------------------------------------------------------- */
 
+/* -------------------------------------------------------------------------- */
 /*                                Scroll To Top                               */
-
 /* -------------------------------------------------------------------------- */
-
 
 var scrollToTop = function scrollToTop() {
   document.querySelectorAll('[data-anchor] > a, [data-scroll-to]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {
       var _utils$getData2;
-
       e.preventDefault();
       var el = e.target;
       var id = utils.getData(el, 'scroll-to') || el.getAttribute('href');
@@ -1816,12 +926,10 @@ var scrollToTop = function scrollToTop() {
     });
   });
 };
-/* -------------------------------------------------------------------------- */
 
+/* -------------------------------------------------------------------------- */
 /*                                 Scrollbars                                 */
-
 /* -------------------------------------------------------------------------- */
-
 
 var scrollbarInit = function scrollbarInit() {
   Array.prototype.forEach.call(document.querySelectorAll('.scrollbar-overlay'), function (el) {
@@ -1833,11 +941,10 @@ var scrollbarInit = function scrollbarInit() {
     });
   });
 };
+
 /*-----------------------------------------------
 |  Swiper
 -----------------------------------------------*/
-
-
 var swiperInit = function swiperInit() {
   var Selector = {
     DATA_SWIPER: '[data-swiper]',
@@ -1854,13 +961,11 @@ var swiperInit = function swiperInit() {
     SLIDE_CHANGE: 'slideChange'
   };
   var swipers = document.querySelectorAll(Selector.DATA_SWIPER);
-
   if (swipers.length) {
     swipers.forEach(function (swiper) {
       var options = utils.getData(swiper, DATA_KEY.SWIPER);
       var thumbsOptions = options.thumb;
       var thumbsInit;
-
       if (thumbsOptions) {
         var thumbImages = swiper.querySelectorAll(Selector.IMG);
         var slides = '';
@@ -1870,17 +975,14 @@ var swiperInit = function swiperInit() {
         var thumbs = document.createElement('div');
         thumbs.setAttribute('class', 'swiper thumb');
         thumbs.innerHTML = "<div class='swiper-wrapper'>".concat(slides, "</div>");
-
         if (thumbsOptions.parent) {
           var parent = document.querySelector(thumbsOptions.parent);
           parent.parentNode.appendChild(thumbs);
         } else {
           swiper.parentNode.appendChild(thumbs);
         }
-
         thumbsInit = new window.Swiper(thumbs, thumbsOptions);
       }
-
       var swiperNav = swiper.querySelector(Selector.SWIPER_NAV);
       var newSwiper = new window.Swiper(swiper, _objectSpread(_objectSpread({}, options), {}, {
         navigation: {
@@ -1902,8 +1004,9 @@ var swiperInit = function swiperInit() {
             });
           }
         }
-      })); //- zanimation effect start
+      }));
 
+      //- zanimation effect start
       if (swiper) {
         newSwiper.on(Events.SLIDE_CHANGE, function () {
           var timelineElements = swiper.querySelectorAll(Selector.DATA_ZANIM_TIMELINE);
@@ -1915,17 +1018,15 @@ var swiperInit = function swiperInit() {
             });
           });
         });
-      } //- zanimation effect end
-
+      }
+      //- zanimation effect end
     });
   }
 };
-/* -------------------------------------------------------------------------- */
 
+/* -------------------------------------------------------------------------- */
 /*                                    Toast                                   */
-
 /* -------------------------------------------------------------------------- */
-
 
 var toastInit = function toastInit() {
   var toastElList = [].slice.call(document.querySelectorAll('.toast'));
@@ -1933,7 +1034,6 @@ var toastInit = function toastInit() {
     return new window.bootstrap.Toast(toastEl);
   });
   var liveToastBtn = document.getElementById('liveToastBtn');
-
   if (liveToastBtn) {
     var liveToast = new window.bootstrap.Toast(document.getElementById('liveToast'));
     liveToastBtn.addEventListener('click', function () {
@@ -1941,13 +1041,10 @@ var toastInit = function toastInit() {
     });
   }
 };
-/* -------------------------------------------------------------------------- */
 
+/* -------------------------------------------------------------------------- */
 /*                                   Tooltip                                  */
-
 /* -------------------------------------------------------------------------- */
-
-
 var tooltipInit = function tooltipInit() {
   var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
   tooltipTriggerList.map(function (tooltipTriggerEl) {
@@ -1956,6 +1053,7 @@ var tooltipInit = function tooltipInit() {
     });
   });
 };
+
 /*-----------------------------------------------
 |                 Zanimation
 -----------------------------------------------*/
@@ -1963,24 +1061,19 @@ var tooltipInit = function tooltipInit() {
 /*
 global CustomEase, gsap
 */
-
-
 CustomEase.create('CubicBezier', '.77,0,.18,1');
+
 /*-----------------------------------------------
 |   Global Functions
 -----------------------------------------------*/
-
 var filterBlur = function filterBlur() {
   var blur = 'blur(5px)';
   var isIpadIphoneMacFirefox = (window.is.ios() || window.is.mac()) && window.is.firefox();
-
   if (isIpadIphoneMacFirefox) {
     blur = 'blur(0px)';
   }
-
   return blur;
 };
-
 var zanimationEffects = {
   "default": {
     from: {
@@ -2112,7 +1205,6 @@ var zanimationEffects = {
     duration: 0.8
   }
 };
-
 if (utils.isRTL()) {
   Object.keys(zanimationEffects).forEach(function (key) {
     if (zanimationEffects[key].from.x) {
@@ -2120,7 +1212,6 @@ if (utils.isRTL()) {
     }
   });
 }
-
 var zanimation = function zanimation(el, callback) {
   var Selector = {
     DATA_ZANIM_TIMELINE: '[data-zanim-timeline]',
@@ -2129,18 +1220,16 @@ var zanimation = function zanimation(el, callback) {
   var DATA_KEY = {
     DATA_ZANIM_TRIGGER: 'data-zanim-trigger'
   };
+
   /*-----------------------------------------------
    |   Get Controller
    -----------------------------------------------*/
-
   var controllerZanim;
   var currentBreakpointName = utils.getCurrentScreenBreakpoint().currentBreakpoint;
   var currentBreakpointVal = utils.getCurrentScreenBreakpoint().breakpointStartVal;
-
   var getController = function getController(element) {
     var options = {};
     var controller = {};
-
     if (element.hasAttribute("data-zanim-".concat(currentBreakpointName))) {
       controllerZanim = "zanim-".concat(currentBreakpointName);
     } else {
@@ -2152,7 +1241,6 @@ var zanimation = function zanimation(el, callback) {
       attributes.forEach(function (attribute) {
         if (attribute !== DATA_KEY.DATA_ZANIM_TRIGGER && attribute.startsWith('data-zanim-')) {
           var breakPointName = attribute.split('data-zanim-')[1];
-
           if (utils.breakpoints[breakPointName] < currentBreakpointVal) {
             animationBreakpoints.push({
               name: breakPointName,
@@ -2162,7 +1250,6 @@ var zanimation = function zanimation(el, callback) {
         }
       });
       controllerZanim = undefined;
-
       if (animationBreakpoints.length !== 0) {
         animationBreakpoints = animationBreakpoints.sort(function (a, b) {
           return a.size - b.size;
@@ -2171,10 +1258,8 @@ var zanimation = function zanimation(el, callback) {
         controllerZanim = "zanim-".concat(activeBreakpoint.name);
       }
     }
-
     var userOptions = utils.getData(element, controllerZanim);
     controller = window._.merge(options, userOptions);
-
     if (!(controllerZanim === undefined)) {
       if (userOptions.animation) {
         options = zanimationEffects[userOptions.animation];
@@ -2182,7 +1267,6 @@ var zanimation = function zanimation(el, callback) {
         options = zanimationEffects["default"];
       }
     }
-
     if (controllerZanim === undefined) {
       options = {
         delay: 0,
@@ -2192,22 +1276,19 @@ var zanimation = function zanimation(el, callback) {
         to: {}
       };
     }
+
     /*-----------------------------------------------
       |   populating the controller
       -----------------------------------------------*/
-
-
     controller.delay || (controller.delay = options.delay);
     controller.duration || (controller.duration = options.duration);
     controller.from || (controller.from = options.from);
     controller.to || (controller.to = options.to);
-
     if (controller.ease) {
       controller.to.ease = controller.ease;
     } else {
       controller.to.ease = options.ease;
     }
-
     return controller;
   };
   /*-----------------------------------------------
@@ -2218,9 +1299,7 @@ var zanimation = function zanimation(el, callback) {
    |   For Timeline
    -----------------------------------------------*/
 
-
   var zanimTimeline = el.hasAttribute('data-zanim-timeline');
-
   if (zanimTimeline) {
     var timelineOption = utils.getData(el, 'zanim-timeline');
     var timeline = gsap.timeline(timelineOption);
@@ -2237,13 +1316,12 @@ var zanimation = function zanimation(el, callback) {
     var controller = getController(el);
     callback(gsap.fromTo(el, controller.duration, controller.from, controller.to).delay(controller.delay).pause());
   }
-
   callback(gsap.timeline());
 };
+
 /*-----------------------------------------------
 |    Zanimation Init
 -----------------------------------------------*/
-
 
 var zanimationInit = function zanimationInit() {
   var Selector = {
@@ -2256,10 +1334,10 @@ var zanimationInit = function zanimationInit() {
   var Events = {
     SCROLL: 'scroll'
   };
+
   /*-----------------------------------------------
    |   Triggering zanimation when the element enters in the view
    -----------------------------------------------*/
-
   var triggerZanimation = function triggerZanimation() {
     var triggerElement = document.querySelectorAll(Selector.DATA_ZANIM_TRIGGER);
     triggerElement.forEach(function (el) {
@@ -2267,30 +1345,25 @@ var zanimationInit = function zanimationInit() {
         zanimation(el, function (animation) {
           return animation.play();
         });
-
         if (!document.querySelector(Selector.DATA_ZANIM_REPEAT)) {
           el.removeAttribute(DATA_KEY.DATA_ZANIM_TRIGGER);
         }
       }
     });
   };
-
   triggerZanimation();
   window.addEventListener(Events.SCROLL, function () {
     return triggerZanimation();
   });
 };
-
 var gsapAnimation = {
   zanimationInit: zanimationInit,
   zanimation: zanimation
 };
-/* -------------------------------------------------------------------------- */
 
+/* -------------------------------------------------------------------------- */
 /*                            Theme Initialization                            */
-
 /* -------------------------------------------------------------------------- */
-
 docReady(detectorInit);
 docReady(tooltipInit);
 docReady(popoverInit);
@@ -2309,4 +1382,5 @@ docReady(hamburgerInit);
 docReady(zanimationInit);
 docReady(inertiaInit);
 docReady(preloaderInit);
+docReady(formInit);
 //# sourceMappingURL=theme.js.map
