@@ -1,10 +1,10 @@
-<?= $this->extend('layout/template-home'); ?>
+<?= $this->extend('layouts/template-home'); ?>
 <?= $this->section('content'); ?>
 
 <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <?= $this->include('layout/breadcrumbs'); ?>
+    <?= $this->include('layouts/breadcrumbs'); ?>
     <!-- End Breadcrumbs -->
 
     <section id="team" class="team">

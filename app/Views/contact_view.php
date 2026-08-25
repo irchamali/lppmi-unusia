@@ -1,8 +1,8 @@
-<?= $this->extend('layout/template-page'); ?>
+<?= $this->extend('layouts/template-page'); ?>
 <?= $this->section('content'); ?>
 
 <section>
-  <div class="bg-holder overlay" style="background-image:url(/assets/elixir/assets/img/background-2.jpg);background-position:center bottom;"></div>
+  <div class="bg-holder overlay" style="background-image:url(/assets/elixir/assets/img/background-14.jpg);background-position:center bottom;"></div>
   <div class="container">
     <div class="row pt-6">
       <div class="col-md-8 text-white" data-zanim-timeline="{}" data-zanim-trigger="scroll">
@@ -66,7 +66,7 @@
       </div>
     </div>
 
-    <div class="card">
+    <!-- <div class="card">
       <div class="card-body h-100 p-5">
         <h5 class="mb-3">Write to us</h5>
         <form method="post" action="/contact">
@@ -86,7 +86,7 @@
           <button class="btn btn-md-lg btn-primary" type="submit"><span class="text-white fw-600">Send Now</span></button>
         </form>
       </div>
-    </div>
+    </div> -->
   </div>
 </section>
 

@@ -1,4 +1,4 @@
-<?= $this->extend('layout/template-home'); ?>
+<?= $this->extend('layouts/template-home'); ?>
 <?= $this->section('content'); ?>
 
 <main id="main" data-aos="fade-up">

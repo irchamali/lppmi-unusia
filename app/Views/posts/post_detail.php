@@ -1,4 +1,4 @@
-<?= $this->extend('layout/template-page'); ?>
+<?= $this->extend('layouts/template-page'); ?>
 <?= $this->section('content'); ?>
 
 <section>
@@ -53,11 +53,6 @@
           </div>
         </div>
 
-        <div class="card mb-4">
-          <div class="card-body p-4 p-lg-5">
-            <h5 class="mb-0">Komentar dinonaktifkan untuk menjaga keamanan konten.</h5>
-          </div>
-        </div>
       </div>
 
       <div class="col-lg-4 mt-5 mt-lg-0">

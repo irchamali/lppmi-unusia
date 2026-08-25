@@ -33,7 +33,7 @@ class PostController extends BaseController
                 'title' => 'Rilis Berita',
                 'active' => 'Post'
             ];
-            return view('post_view', $data);
+            return view('posts/post_view', $data);
         }
         $postQuery = $this->postviewModel->get_post_by_slug($slug);
         $post = $postQuery->getRowArray();
@@ -66,7 +66,7 @@ class PostController extends BaseController
             'title' => $post['post_title'] ?? 'Post',
             'active' => 'Post'
         ];
-        return view('post_detail', $data);
+        return view('posts/post_detail', $data);
     }
     public function search()
     {
@@ -110,7 +110,7 @@ class PostController extends BaseController
             'pager' => $this->postviewModel->pager,
             'active' => 'Post'
         ];
-        return view('post_tag', $data);
+        return view('posts/post_tag', $data);
     }
     public function author($user_id)
     {
@@ -131,6 +131,6 @@ class PostController extends BaseController
             'posts' => $posts,
             'active' => 'Post'
         ];
-        return view('post_author', $data);
+        return view('posts/post_author', $data);
     }
 }

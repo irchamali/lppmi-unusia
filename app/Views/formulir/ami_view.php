@@ -1,4 +1,4 @@
-<?= $this->extend('layout/template-page'); ?>
+<?= $this->extend('layouts/template-page'); ?>
 <?= $this->section('content'); ?>
 
     <!-- ======= Breadcrumbs ======= -->
@@ -24,7 +24,7 @@
 
         <div class="container">
             <!-- slider menu -->
-            <?= $this->include('layout/slider-form'); ?>
+            <?= $this->include('layouts/slider-form'); ?>
             
             <div class="row mt-6">
                 <div class="col">

@@ -1,8 +1,8 @@
-<?= $this->extend('layout/template-page'); ?>
+<?= $this->extend('layouts/template-page'); ?>
 <?= $this->section('content'); ?>
 
 <section>
-    <div class="bg-holder overlay" style="background-image:url(/assets/elixir/assets/img/background-2.jpg);background-position:center bottom;"></div>
+    <div class="bg-holder overlay" style="background-image:url(/assets/elixir/assets/img/background-15.jpg);background-position:center bottom;"></div>
     <div class="container">
         <div class="row pt-6">
             <div class="col-md-8 text-white" data-zanim-timeline="{}" data-zanim-trigger="scroll">
