@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\SiteModel;
 use App\Models\CommentModel;
 use App\Models\InboxModel;
 use App\Models\TeamModel;
@@ -13,12 +14,13 @@ class TeamAdminController extends BaseController
     {
         $this->inboxModel = new InboxModel();
         $this->commentModel = new CommentModel();
-
+        $this->siteModel = new SiteModel();
         $this->teamModel = new TeamModel();
     }
     public function index()
     {
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'All Team',
             'active' => $this->active,
@@ -51,17 +53,15 @@ class TeamAdminController extends BaseController
                 ]
             ],
             'twitter' => [
-                'rules' => 'required|valid_url_strict',
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'Kolom {field} harus diisi!',
-                    'valid_url_strict' => 'Inputan harus berformat url'
+                    'required' => 'Kolom {field} harus diisi!'
                 ]
             ],
             'facebook' => [
-                'rules' => 'required|valid_url_strict',
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'Kolom {field} harus diisi!',
-                    'valid_url_strict' => 'Inputan harus berformat url'
+                    'required' => 'Kolom {field} harus diisi!'
                 ]
             ],
             'instagram' => [
@@ -132,17 +132,15 @@ class TeamAdminController extends BaseController
                 ]
             ],
             'twitter' => [
-                'rules' => 'required|valid_url_strict',
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'Kolom {field} harus diisi!',
-                    'valid_url_strict' => 'Inputan harus berformat url'
+                    'required' => 'Kolom {field} harus diisi!'
                 ]
             ],
             'facebook' => [
-                'rules' => 'required|valid_url_strict',
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'Kolom {field} harus diisi!',
-                    'valid_url_strict' => 'Inputan harus berformat url'
+                    'required' => 'Kolom {field} harus diisi!'
                 ]
             ],
             'instagram' => [
@@ -181,12 +179,30 @@ class TeamAdminController extends BaseController
         $team = $this->teamModel->find($team_id);
         $fotoAwal = $team['team_image'];
         $fileFoto = $this->request->getFile('filefoto');
-        if ($fileFoto->getName() == '') {
-            $namaFotoUpload = $fotoAwal;
+
+        // if ($fileFoto->getName() == '') {
+        //     $namaFotoUpload = $fotoAwal;
+        // } else {
+        //     $namaFotoUpload = $fileFoto->getRandomName();
+        //     $fileFoto->move('assets/backend/images/team/', $namaFotoUpload);
+        // }
+
+        // Jika tidak ada file yang diunggah
+        if ($fileFoto->getError() == UPLOAD_ERR_NO_FILE) {
+            $namaFotoUpload = $fotoAwal; // Gunakan foto lama
         } else {
+            // Hapus foto lama jika bukan foto default dan bukan sama dengan foto baru
+            if ($fotoAwal != 'user_blank.jpg' && $fotoAwal != $fileFoto->getName()) {
+                $pathToFotoAwal = 'assets/backend/images/team/' . $fotoAwal;
+                if (file_exists($pathToFotoAwal) && is_file($pathToFotoAwal)) {
+                    unlink($pathToFotoAwal); // Hapus hanya jika itu adalah file, bukan direktori
+                }
+            }
+            // Simpan gambar baru
             $namaFotoUpload = $fileFoto->getRandomName();
             $fileFoto->move('assets/backend/images/team/', $namaFotoUpload);
         }
+        
         // Simpan ke database
         $this->teamModel->update($team_id, [
             'team_name' => $nama,

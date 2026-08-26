@@ -4,13 +4,12 @@
 <head>
     <!-- Title -->
     <title><?= $title; ?></title>
-
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta charset="UTF-8">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="author" content="Ircham Ali" />
-    <link rel="shortcut icon" href="/assets/frontend/img/apple-touch-icon.png">
+    <link rel="shortcut icon" href="<?= base_url(''); ?>assets/backend/images/favicons/apple-touch-icon.png">
 
     <!-- Styles -->
     <link href="/assets/backend/plugins/pace-master/themes/blue/pace-theme-flash.css" rel="stylesheet" />
@@ -25,14 +24,12 @@
     <link href="/assets/backend/plugins/slidepushmenus/css/component.css" rel="stylesheet" type="text/css" />
     <link href="/assets/backend/plugins/summernote-master/summernote.css" rel="stylesheet" type="text/css" />
     <link href="/assets/backend/plugins/toastr/jquery.toast.min.css" rel="stylesheet" type="text/css" />
-
     <!-- Theme Styles -->
     <link href="/assets/backend/css/modern.min.css" rel="stylesheet" type="text/css" />
     <link href="/assets/backend/css/themes/dark.css" class="theme-color" rel="stylesheet" type="text/css" />
-
+    <!-- plugins -->
     <script src="/assets/backend/plugins/3d-bold-navigation/js/modernizr.js"></script>
     <script src="/assets/backend/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
-
 
 </head>
 
@@ -81,7 +78,7 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <h3 class="no-m"><a href="/p/<?= $row['post_slug']; ?>" target="_blank"><?= $row['post_title']; ?></a></h3>
+                                                    <h3 class="no-m"><a href="/post/<?= $row['post_slug']; ?>" target="_blank"><?= $row['post_title']; ?></a></h3>
                                                     <a href="javascript:void(0);" class="search-link"><b><?= $row['comment_name'] ?></b>, <?= $row['comment_date']; ?></a>
                                                     <?php if ($row['comment_status'] == '0') {
                                                         echo "<span class='label label-danger'>Unpublish</span>";
@@ -114,7 +111,7 @@
                                                                     </ul>
                                                                 </div>
                                                             </div>
-                                                            <h3 class="no-m"><a href="/p/<?= $row['post_slug']; ?>" target="_blank"><?= $row['post_title']; ?></a></h3>
+                                                            <h3 class="no-m"><a href="/post/<?= $row['post_slug']; ?>" target="_blank"><?= $row['post_title']; ?></a></h3>
                                                             <a href="javascript:void(0);" class="search-link"><b><?= $row['comment_name'] ?></b>, <?= $row['comment_date']; ?></a>
                                                             <div style="margin-left: 7%;">
                                                                 <p><?= $row['comment_message']; ?></p>

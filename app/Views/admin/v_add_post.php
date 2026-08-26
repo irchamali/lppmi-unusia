@@ -4,13 +4,12 @@
 <head>
     <!-- Title -->
     <title><?= $title; ?></title>
-
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta charset="UTF-8">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="author" content="Ircham Ali" />
-    <link rel="shortcut icon" href="/assets/frontend/img/apple-touch-icon.png">
+    <link rel="shortcut icon" href="<?= base_url(''); ?>assets/backend/images/favicons/apple-touch-icon.png">
 
     <!-- Styles -->
     <link href="/assets/backend/plugins/pace-master/themes/blue/pace-theme-flash.css" rel="stylesheet" />
@@ -28,14 +27,14 @@
     <link href="/assets/backend/css/dropify.min.css" rel="stylesheet" type="text/css">
     <!-- <link href="/assets/backend/plugins/summernote-master/summernote.css" rel="stylesheet" type="text/css" /> -->
     <link href="/assets/backend/plugins/sum/summernote-lite.min.css" rel="stylesheet">
-
     <!-- Theme Styles -->
     <link href="/assets/backend/css/modern.min.css" rel="stylesheet" type="text/css" />
     <link href="/assets/backend/css/themes/dark.css" class="theme-color" rel="stylesheet" type="text/css" />
     <link href="/assets/backend/css/custom.css" rel="stylesheet" type="text/css" />
-
+    <!-- plugins -->
     <script src="/assets/backend/plugins/3d-bold-navigation/js/modernizr.js"></script>
     <script src="/assets/backend/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
+
 </head>
 
 <body class="page-header-fixed compact-menu pace-done page-sidebar-fixed">
@@ -170,7 +169,7 @@
                 $.ajax({
                     data: data,
                     type: "POST",
-                    url: "<?= site_url() ?>backend/posts/upload_image",
+                    url: "<?= site_url() ?>backend/post/upload_image",
                     cache: false,
                     contentType: false,
                     processData: false,

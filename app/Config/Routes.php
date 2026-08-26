@@ -64,7 +64,7 @@ $routes->get('documents/(:segment)', 'CategoryDocsController::index/$1');
 $routes->get('r', 'LaporanController::index');
 $routes->get('reports/detail/(:segment)', 'LaporanController::detail/$1');
 $routes->get('r/(:segment)', 'LaporanController::detail/$1');
-$routes->get('reports/(:segment)', 'CategoryLapController::index/$1');
+$routes->get('reports/(:segment)', 'LaporanController::show/$1');
 
 // Legacy singular aliases (backward compatibility)
 $routes->get('search', 'PostController::search');
@@ -156,6 +156,7 @@ $routes->group('admin', ['filter' => 'authadmin'], static function ($routes) {
     // Post Route
     $routes->group('post', static function ($routes) {
         $routes->get('', 'Admin\PostAdminController::index');
+        $routes->get('toggle_status/(:num)', 'Admin\PostAdminController::toggle_status/$1');
         $routes->post('', 'Admin\PostAdminController::publish');
         $routes->delete('', 'Admin\PostAdminController::delete');
         $routes->put('', 'Admin\PostAdminController::update');
@@ -164,11 +165,51 @@ $routes->group('admin', ['filter' => 'authadmin'], static function ($routes) {
     });
     $routes->group('posts', static function ($routes) {
         $routes->get('', 'Admin\PostAdminController::index');
+        $routes->get('toggle_status/(:num)', 'Admin\PostAdminController::toggle_status/$1');
         $routes->post('', 'Admin\PostAdminController::publish');
         $routes->delete('', 'Admin\PostAdminController::delete');
         $routes->put('', 'Admin\PostAdminController::update');
         $routes->get('add_new', 'Admin\PostAdminController::add_new');
         $routes->get('(:num)/edit', 'Admin\PostAdminController::edit/$1');
+    });
+    // Program Route
+    $routes->group('program', static function ($routes) {
+        $routes->get('', 'Admin\ProgramAdminController::index');
+        $routes->get('add_new', 'Admin\ProgramAdminController::add_new');
+        $routes->post('', 'Admin\ProgramAdminController::publish');
+        $routes->put('', 'Admin\ProgramAdminController::update');
+        $routes->delete('', 'Admin\ProgramAdminController::delete');
+        $routes->get('toggle_status/(:num)', 'Admin\ProgramAdminController::toggle_status/$1');
+        $routes->get('(:num)/edit', 'Admin\ProgramAdminController::edit/$1');
+    });
+    // Program Category Route
+    $routes->group('procat', static function ($routes) {
+        $routes->get('', 'Admin\ProgramCategoryController::index');
+        $routes->post('', 'Admin\ProgramCategoryController::save');
+        $routes->put('', 'Admin\ProgramCategoryController::edit');
+        $routes->delete('', 'Admin\ProgramCategoryController::delete');
+    });
+    // Partner Route
+    $routes->group('partner', static function ($routes) {
+        $routes->get('', 'Admin\PartnerAdminController::index');
+        $routes->post('', 'Admin\PartnerAdminController::insert');
+        $routes->put('', 'Admin\PartnerAdminController::update');
+        $routes->delete('', 'Admin\PartnerAdminController::delete');
+        $routes->get('toggle_status/(:num)', 'Admin\PartnerAdminController::toggle_status/$1');
+    });
+    // Service Route
+    $routes->group('service', static function ($routes) {
+        $routes->get('', 'Admin\ServiceAdminController::index');
+        $routes->post('', 'Admin\ServiceAdminController::insert');
+        $routes->put('', 'Admin\ServiceAdminController::update');
+        $routes->delete('', 'Admin\ServiceAdminController::delete');
+    });
+    // Partner Category Route
+    $routes->group('partcat', static function ($routes) {
+        $routes->get('', 'Admin\PartnerCategoryController::index');
+        $routes->post('', 'Admin\PartnerCategoryController::save');
+        $routes->put('', 'Admin\PartnerCategoryController::edit');
+        $routes->delete('', 'Admin\PartnerCategoryController::delete');
     });
     // Category Route
     $routes->group('category', static function ($routes) {

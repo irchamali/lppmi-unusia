@@ -6,7 +6,7 @@
             </a>
         </div>
         <div class="logo-box">
-            <a href="/<?= session('role'); ?>" class="logo-text"><span>UNUSIA</span></a>
+            <a href="/<?= session('role'); ?>" class="logo-text"><span><?= $site['site_title']; ?></span></a>
         </div><!-- Logo Box -->
         <div class="topmenu-outer">
             <div class="top-menu">
@@ -142,18 +142,18 @@
                     <p>Settings</p><span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="<?= ($title === "Profile Setting") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/setting/profile">My Profile</a></li>
                     <?php if (session('role') == 'admin') : ?>
                     <li class="<?= ($title === "Website Setting") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/setting/web">Website</a></li>
                     <li class="<?= ($title === "Home Setting") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/setting/home">Home</a></li>
                     <li class="<?= ($title === "All Slider") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/slider">Slider</a></li>
                     <li class="<?= ($title === "About Setting") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/setting/about">About</a></li>
                     <?php endif; ?>
+                    <li class="<?= ($title === "Profile Setting") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/setting/profile">My Profile</a></li>
                 </ul>
             </li>
             <li class="droplink <?= ($title === "All Post") ? 'active open' : '' ?><?= ($title === "Add New Post") ? 'active open' : '' ?><?= ($title === "All Category") ? 'active open' : '' ?><?= ($title === "All Tag") ? 'active open' : '' ?>"><a href="#"
-                    class="waves-effect waves-button"><span class="menu-icon icon-pin"></span>
-                    <p>Post</p><span class="arrow"></span>
+                    class="waves-effect waves-button"><span class="menu-icon icon-book-open"></span>
+                    <p>Posts</p><span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
                     <li class="<?= ($title === "All Post") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/post">All Post</a></li>
@@ -164,6 +164,42 @@
             </li>
             
             <?php if (session('role') == 'admin') : ?>
+            <!-- Programs menu -->
+            <li class="droplink <?= in_array($title, ["All Program", "Add New Program", "Program Categories"]) ? 'active open' : '' ?>">
+                <a href="#" class="waves-effect waves-button">
+                    <span class="menu-icon icon-pin"></span>
+                    <p>Programs</p>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="<?= ($title === "All Program") ? 'active' : '' ?>">
+                        <a href="/<?= session('role'); ?>/program">All Program</a>
+                    </li>
+                    <li class="<?= ($title === "Add New Program") ? 'active' : '' ?>">
+                        <a href="/<?= session('role'); ?>/program/add_new">Add New Program</a>
+                    </li>
+                    <li class="<?= ($title === "Program Categories") ? 'active' : '' ?>">
+                        <a href="/<?= session('role'); ?>/procat">Program Categories</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- Partners menu -->
+            <li class="droplink <?= in_array($title, ["All Partner", "Partner Categories"]) ? 'active open' : '' ?>">
+                <a href="#" class="waves-effect waves-button">
+                    <span class="menu-icon icon-star"></span>
+                    <p>Partners</p>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="<?= ($title === "All Partner") ? 'active' : '' ?>">
+                        <a href="/<?= session('role'); ?>/partner">All Partner</a>
+                    </li>
+                    <li class="<?= ($title === "Partner Categories") ? 'active' : '' ?>">
+                        <a href="/<?= session('role'); ?>/partcat">Partner Categories</a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="droplink <?= ($title === "All Document") ? 'active open' : '' ?><?= ($title === "Category of Document") ? 'active open' : '' ?>"><a
                     href="/<?= session('role'); ?>/document" class="waves-effect waves-button"><span
                         class="menu-icon icon-link"></span>
@@ -177,50 +213,24 @@
             <li class="droplink <?= ($title === "Semua Laporan") ? 'active open' : '' ?><?= ($title === "Kategori Laporan") ? 'active open' : '' ?>"><a
                     href="/<?= session('role'); ?>/laporan" class="waves-effect waves-button"><span
                         class="menu-icon icon-eye"></span>
-                    <p>Laporan</p><span class="arrow"></span>
+                    <p>Reports</p><span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">                    
                     <li class="<?= ($title === "Semua Laporan") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/laporan">Laporan</a></li>
                     <li class="<?= ($title === "Kategori Laporan") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/lapcategory">Kategori</a></li>                    
                 </ul>
             </li>
-            <li class="droplink <?= ($title === "Data Akreditasi") ? 'active open' : '' ?><?= ($title === "Data Program Studi") ? 'active open' : '' ?>"><a
-                    href="/<?= session('role'); ?>/laporan" class="waves-effect waves-button"><span
-                        class="menu-icon icon-flag"></span>
-                    <p>Pusat Data</p><span class="arrow"></span>
-                </a>
-                <ul class="sub-menu">                    
-                    <li class="<?= ($title === "Data Akreditasi") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/akreditasi">Akreditasi</a></li>
-                    <li class="<?= ($title === "Data Program Studi") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/prodi">Program Studi</a></li>                    
-                </ul>
-            </li>
-            <li class="<?= ($active == 'inbox') ? 'active' : '' ?>">
-                <a href="/<?= session('role'); ?>/inbox" class="waves-effect waves-button"><span
-                        class="menu-icon icon-envelope"></span>
-                    <p>Inbox</p>
-                </a>
-            </li>
+            <!-- Additional menu -->
             <?php endif; ?>
-
-            <li class="<?= ($active == 'comment') ? 'active' : '' ?>">
-                <a href="/<?= session('role'); ?>/comment" class="waves-effect waves-button"><span
-                        class="menu-icon icon-bubbles"></span>
-                    <p>Comments</p>
-                </a>
-            </li>
+            
+            
             <?php if (session('role') == 'admin') : ?>
-            <li class="<?= ($active == 'subscriber') ? 'active' : '' ?>">
-                <a href="/<?= session('role'); ?>/subscriber" class="waves-effect waves-button"><span
-                        class="menu-icon icon-users"></span>
-                    <p>Subscribers</p>
+            <li class="<?= ($active == 'service') ? 'active' : '' ?>">
+                <a href="/<?= session('role'); ?>/service" class="waves-effect waves-button"><span
+                        class="menu-icon icon-pencil"></span>
+                    <p>Services</p>
                 </a>
             </li>
-            <!-- <li class="<?= ($active == 'slider') ? 'active' : '' ?>">
-                <a href="/<?= session('role'); ?>/slider" class="waves-effect waves-button"><span
-                        class="menu-icon icon-star"></span>
-                    <p>Slider</p>
-                </a>
-            </li> -->
             <li class="<?= ($active == 'member') ? 'active' : '' ?>">
                 <a href="/<?= session('role'); ?>/member" class="waves-effect waves-button"><span
                         class="menu-icon icon-key"></span>

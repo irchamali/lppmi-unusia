@@ -49,7 +49,7 @@ class CategoryLapController extends BaseController
             'documents' => $documents,
             'active' => 'Report'
         ];
-        return view('report_category', $data);
+        return view('reports/report_category', $data);
     }
 
     private function createReportSlug(array $report): string

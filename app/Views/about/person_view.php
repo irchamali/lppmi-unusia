@@ -37,7 +37,7 @@
                     <h6 class="fw-normal text-500" data-zanim-xs='{"delay":0.1}'><?= $teamJabatan; ?></h6>
                             </div>
                             <div class="btn-sm btn-group" role="group" aria-label="Basic outlined example">
-                                <a class="btn-sm btn btn-outline-primary" href="<?= $team['team_twitter']; ?>"><span class='fas fa-link'></span></a>
+                                <!-- <a class="btn-sm btn btn-outline-primary" href="<?= $team['team_twitter']; ?>"><span class='fas fa-link'></span></a> -->
                                 <a class="btn-sm btn btn-outline-primary" href="<?= $team['team_instagram']; ?>"><span class='fab fa-instagram'></span></a>
                                 <a class="btn-sm btn btn-outline-primary" href="<?= $team['team_linked']; ?>"><span class='fab fa-linkedin'></span></a>
                             </div>

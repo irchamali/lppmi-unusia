@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\SiteModel;
 use App\Models\CommentModel;
 use App\Models\InboxModel;
 
@@ -11,11 +12,13 @@ class CommentAdminController extends BaseController
     public function __construct()
     {
         $this->inboxModel = new InboxModel();
+        $this->siteModel = new SiteModel();
         $this->commentModel = new CommentModel();
     }
     public function index()
     {
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'All Comments',
             'active' => $this->active,
@@ -86,6 +89,7 @@ class CommentAdminController extends BaseController
     function unpublish()
     {
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'All Unpublish Comments',
             'active' => $this->active,

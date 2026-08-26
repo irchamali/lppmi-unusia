@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\SiteModel;
 use App\Models\CommentModel;
 use App\Models\InboxModel;
 use App\Models\SubscribeModel;
@@ -12,12 +13,14 @@ class SubscriberAdminController extends BaseController
     public function __construct()
     {
         $this->inboxModel = new InboxModel();
+        $this->siteModel = new SiteModel();
         $this->commentModel = new CommentModel();
         $this->subscribeModel = new SubscribeModel();
     }
     public function index()
     {
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'All Subscriber',
             'active' => $this->active,

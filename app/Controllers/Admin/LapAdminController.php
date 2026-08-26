@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\SiteModel;
 use App\Models\CommentModel;
 use App\Models\InboxModel;
 use App\Models\LaporanModel;
@@ -13,6 +14,7 @@ class LapAdminController extends BaseController
     public function __construct()
     {
         $this->inboxModel = new InboxModel();
+        $this->siteModel = new SiteModel();
         $this->commentModel = new CommentModel();
         $this->laporanModel = new LaporanModel();
         $this->lapcategoryModel = new LapcategoryModel();
@@ -21,6 +23,7 @@ class LapAdminController extends BaseController
     {
 
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'Semua Laporan',
             'active' => $this->active,

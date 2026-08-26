@@ -2,16 +2,15 @@
 <html>
 
 <head>
-
     <!-- Title -->
     <title><?= $title; ?></title>
-
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta charset="UTF-8">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="author" content="" />
-    <link rel="shortcut icon" href="/assets/frontend/img/apple-touch-icon.png">
+    <link rel="shortcut icon" href="<?= base_url(''); ?>assets/backend/images/favicons/apple-touch-icon.png">
+
     <!-- Styles -->
     <link href="/assets/backend/plugins/pace-master/themes/blue/pace-theme-flash.css" rel="stylesheet" />
     <link href="/assets/backend/plugins/uniform/css/uniform.default.min.css" rel="stylesheet" />
@@ -33,10 +32,9 @@
     <link href="/assets/backend/css/themes/dark.css" class="theme-color" rel="stylesheet" type="text/css" />
     <link href="/assets/backend/css/custom.css" rel="stylesheet" type="text/css" />
     <link href="/assets/backend/css/dropify.min.css" rel="stylesheet" type="text/css">
-
+    <!-- plugins -->
     <script src="/assets/backend/plugins/3d-bold-navigation/js/modernizr.js"></script>
     <script src="/assets/backend/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
-
 
 </head>
 
@@ -60,9 +58,9 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Name</th>
-                                                <th>Unit</th>
-                                                <th>No.SK</th>
+                                                <th>Dokumen</th>
+                                                <th>Pembuat</th>
+                                                <th>Nomor</th>
                                                 <th>Tahun</th>
                                                 <th>Category</th>
                                                 <th>Action</th>
@@ -134,10 +132,10 @@
                                     <input type="text" name="name" class="form-control" placeholder="Nama Dokumen" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="unit" class="form-control" placeholder="Nama Institusi/Lembaga/Unit/Fakultas/Prodi" required>
+                                    <input type="text" name="unit" class="form-control" placeholder="Pembuat" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="sk" class="form-control" placeholder="No.SK" required>
+                                    <input type="text" name="sk" class="form-control" placeholder="Nomor" required>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" name="year" class="form-control" placeholder="Tahun Pembuatan: YYYY" required>

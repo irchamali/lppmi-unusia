@@ -4,13 +4,12 @@
 <head>
     <!-- Title -->
     <title><?= $title; ?></title>
-
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta charset="UTF-8">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="author" content="Ircham Ali" />
-    <link rel="shortcut icon" href="/assets/frontend/img/apple-touch-icon.png">
+    <link rel="shortcut icon" href="<?= base_url(''); ?>assets/backend/images/favicons/apple-touch-icon.png">
 
     <!-- Styles -->
     <link href="/assets/backend/plugins/pace-master/themes/blue/pace-theme-flash.css" rel="stylesheet" />
@@ -31,10 +30,9 @@
     <link href="/assets/backend/css/modern.min.css" rel="stylesheet" type="text/css" />
     <link href="/assets/backend/css/themes/dark.css" class="theme-color" rel="stylesheet" type="text/css" />
     <link href="/assets/backend/css/custom.css" rel="stylesheet" type="text/css" />
-
+    <!-- plugins -->
     <script src="/assets/backend/plugins/3d-bold-navigation/js/modernizr.js"></script>
     <script src="/assets/backend/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
-
 
 </head>
 
@@ -58,6 +56,12 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label for="input1" class="col-sm-2 control-label">Sejarah</label>
+                                        <div class="col-sm-10">
+                                            <textarea name="description" class="form-control" rows="6" placeholder="Description"><?= $abouts['about_description']; ?></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="input1" class="col-sm-2 control-label">Visi</label>
                                         <div class="col-sm-10">
                                             <textarea name="visi" class="form-control" rows="2" placeholder="visi"><?= $abouts['about_visi']; ?></textarea>
@@ -66,21 +70,21 @@
                                     <div class="form-group">
                                         <label for="input1" class="col-sm-2 control-label">Misi</label>
                                         <div class="col-sm-10">
-                                            <textarea name="misi" class="form-control" rows="14" placeholder="Misi"><?= $abouts['about_misi']; ?></textarea>
+                                            <textarea name="misi" class="form-control" rows="6" placeholder="Misi"><?= $abouts['about_misi']; ?></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="input1" class="col-sm-2 control-label">Profil Singkat</label>
+                                        <label for="input1" class="col-sm-2 control-label">Nilai-nilai</label>
                                         <div class="col-sm-10">
-                                            <textarea name="description" class="form-control" rows="6" placeholder="Description"><?= $abouts['about_description']; ?></textarea>
+                                            <textarea name="strategi" class="form-control" rows="6" placeholder="Nilai2"><?= $abouts['about_strategi']; ?></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="input1" class="col-sm-2 control-label">Image</label>
                                         <div class="col-sm-10">
                                             <input type="file" name="img_about" class="form-control" id="input1">
-                                            <p class="help-block">Image Heading harus beresolusi 456 x 470 Pixels.</p>
-                                            <img src="/assets/frontend/img/<?= $abouts['about_image']; ?>" width="300" class="thumbnail">
+                                            <p class="help-block">Image Heading harus beresolusi 743 x 576 Pixels.</p>
+                                            <img src="/assets/backend/images/home/<?= $abouts['about_image']; ?>" width="300" class="thumbnail">
                                         </div>
                                     </div>
                                     <div class="form-group">

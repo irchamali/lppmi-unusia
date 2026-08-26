@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\SiteModel;
 use App\Models\ProdiModel;
 use App\Models\CommentModel;
 use App\Models\InboxModel;
@@ -13,12 +14,13 @@ class ProdiAdminController extends BaseController
     {
         $this->inboxModel = new InboxModel();
         $this->commentModel = new CommentModel();
-
+        $this->siteModel = new SiteModel();
         $this->prodiModel = new ProdiModel();
     }
     public function index()
     {
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'Daftar Program Studi',
             'active' => $this->active,

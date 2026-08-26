@@ -16,7 +16,6 @@ class SettingAdminController extends BaseController
     {
         $this->inboxModel = new InboxModel();
         $this->commentModel = new CommentModel();
-
         $this->siteModel = new SiteModel();
         $this->homeModel = new HomeModel();
         $this->aboutModel = new AboutModel();
@@ -25,6 +24,7 @@ class SettingAdminController extends BaseController
     public function web()
     {
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'Website Setting',
             'active' => $this->active,
@@ -127,14 +127,14 @@ class SettingAdminController extends BaseController
                 ]
             ],
             'logo_header' => [
-                'rules' => 'max_size[logo_icon,2048]|is_image[logo_icon]|mime_in[logo_icon,image/jpg,image/jpeg,image/png]',
+                'rules' => 'max_size[logo_header,2048]|is_image[logo_header]|mime_in[logo_header,image/jpg,image/jpeg,image/png]',
                 'errors' => [
                     'max_size' => 'Ukuran gambar tidak boleh lebih dari 2MB',
                     'is_image' => 'Yang anda pilih bukan gambar',
                     'mime_in' => 'Yang anda pilih bukan gambar'
                 ]
             ], 'logo_big' => [
-                'rules' => 'max_size[logo_icon,2048]|is_image[logo_icon]|mime_in[logo_icon,image/jpg,image/jpeg,image/png]',
+                'rules' => 'max_size[logo_big,2048]|is_image[logo_big]|mime_in[logo_big,image/jpg,image/jpeg,image/png]',
                 'errors' => [
                     'max_size' => 'Ukuran gambar tidak boleh lebih dari 2MB',
                     'is_image' => 'Yang anda pilih bukan gambar',
@@ -205,6 +205,7 @@ class SettingAdminController extends BaseController
     public function home()
     {
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'Home Setting',
             'active' => $this->active,
@@ -273,6 +274,14 @@ class SettingAdminController extends BaseController
                     'is_image' => 'Yang anda pilih bukan gambar',
                     'mime_in' => 'Yang anda pilih bukan gambar'
                 ]
+            ],
+            'img_testimonial3' => [
+                'rules' => 'max_size[img_testimonial3,2048]|is_image[img_testimonial3]|mime_in[img_testimonial3,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'max_size' => 'Ukuran gambar tidak boleh lebih dari 2MB',
+                    'is_image' => 'Yang anda pilih bukan gambar',
+                    'mime_in' => 'Yang anda pilih bukan gambar'
+                ]
             ]
         ])) {
             return redirect()->to("/admin/setting/home")->with('msg', 'error');
@@ -288,26 +297,37 @@ class SettingAdminController extends BaseController
         $imgHeadingAwal = $data['home_bg_heading'];
         $imgTestimonialAwal = $data['home_bg_testimonial'];
         $imgTestimonial2Awal = $data['home_bg_testimonial2'];
+        $imgTestimonial3Awal = $data['home_bg_testimonial3'];
         $fileImgHeading = $this->request->getFile('img_heading');
         $fileImgTestimonial = $this->request->getFile('img_testimonial');
         $fileImgTestimonial2 = $this->request->getFile('img_testimonial2');
+        $fileImgTestimonial3 = $this->request->getFile('img_testimonial3');
         if ($fileImgHeading->getName() == '') {
             $namaImgHeading = $imgHeadingAwal;
         } else {
             $namaImgHeading = $fileImgHeading->getRandomName();
             $fileImgHeading->move('assets/backend/images/home/', $namaImgHeading);
         }
+        
         if ($fileImgTestimonial->getName() == '') {
             $namaImgTestimonial = $imgTestimonialAwal;
         } else {
             $namaImgTestimonial = $fileImgTestimonial->getRandomName();
             $fileImgTestimonial->move('assets/backend/images/home/', $namaImgTestimonial);
         }
+
         if ($fileImgTestimonial2->getName() == '') {
             $namaImgTestimonial2 = $imgTestimonial2Awal;
         } else {
             $namaImgTestimonial2 = $fileImgTestimonial2->getRandomName();
             $fileImgTestimonial2->move('assets/backend/images/home/', $namaImgTestimonial2);
+        }
+
+        if ($fileImgTestimonial3->getName() == '') {
+            $namaImgTestimonial3 = $imgTestimonial3Awal;
+        } else {
+            $namaImgTestimonial3 = $fileImgTestimonial3->getRandomName();
+            $fileImgTestimonial3->move('assets/backend/images/home/', $namaImgTestimonial3);
         }
         // Simpan ke database
         $this->homeModel->update($home_id, [
@@ -316,13 +336,15 @@ class SettingAdminController extends BaseController
             'home_video' => $home_video,
             'home_bg_heading' => $namaImgHeading,
             'home_bg_testimonial' => $namaImgTestimonial,
-            'home_bg_testimonial2' => $namaImgTestimonial2
+            'home_bg_testimonial2' => $namaImgTestimonial2,
+            'home_bg_testimonial3' => $namaImgTestimonial3
         ]);
         return redirect()->to('/admin/setting/home')->with('msg', 'success');
     }
     public function about()
     {
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'About Setting',
             'active' => $this->active,
@@ -368,6 +390,12 @@ class SettingAdminController extends BaseController
                     'required' => 'Kolom {field} harus diisi!'
                 ]
             ],
+            'strategi' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kolom {field} harus diisi!'
+                ]
+            ],
             'description' => [
                 'rules' => 'required',
                 'errors' => [
@@ -390,6 +418,7 @@ class SettingAdminController extends BaseController
         $name = strip_tags(htmlspecialchars($this->request->getPost('name'), ENT_QUOTES));
         $visi = strip_tags(htmlspecialchars($this->request->getPost('visi'), ENT_QUOTES));
         $misi = strip_tags(htmlspecialchars($this->request->getPost('misi'), ENT_QUOTES));
+        $strategi = strip_tags(htmlspecialchars($this->request->getPost('strategi'), ENT_QUOTES));
         $description = strip_tags(htmlspecialchars($this->request->getPost('description'), ENT_QUOTES));
 
         // Cek Foto
@@ -408,13 +437,15 @@ class SettingAdminController extends BaseController
             'about_image' => $namaImgAbout,
             'about_description' => $description,
             'about_visi' => $visi,
-            'about_misi' => $misi
+            'about_misi' => $misi,
+            'about_strategi' => $strategi
         ]);
         return redirect()->to('/admin/setting/about')->with('msg', 'success');
     }
     public function profile()
     {
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'Profile Setting',
             'active' => $this->active,

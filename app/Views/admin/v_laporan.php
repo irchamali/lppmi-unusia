@@ -2,16 +2,14 @@
 <html>
 
 <head>
-
     <!-- Title -->
     <title><?= $title; ?></title>
-
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta charset="UTF-8">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="author" content="" />
-    <link rel="shortcut icon" href="/assets/frontend/img/apple-touch-icon.png">
+    <link rel="shortcut icon" href="<?= base_url(''); ?>assets/backend/images/favicons/apple-touch-icon.png">
     <!-- Styles -->
     <link href="/assets/backend/plugins/pace-master/themes/blue/pace-theme-flash.css" rel="stylesheet" />
     <link href="/assets/backend/plugins/uniform/css/uniform.default.min.css" rel="stylesheet" />
@@ -33,10 +31,9 @@
     <link href="/assets/backend/css/themes/dark.css" class="theme-color" rel="stylesheet" type="text/css" />
     <link href="/assets/backend/css/custom.css" rel="stylesheet" type="text/css" />
     <link href="/assets/backend/css/dropify.min.css" rel="stylesheet" type="text/css">
-
+    <!-- plugins -->
     <script src="/assets/backend/plugins/3d-bold-navigation/js/modernizr.js"></script>
     <script src="/assets/backend/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
-
 
 </head>
 
@@ -60,8 +57,8 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Name</th>
-                                                <th>Unit</th>
+                                                <th>Judul</th>
+                                                <th>Nama</th>
                                                 <th>Tahun</th>
                                                 <th>Link</th>
                                                 <th>Category</th>
@@ -123,20 +120,20 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Tambahkan laporan</h4>
+                        <h4 class="modal-title" id="myModalLabel">Tambahkan data</h4>
                     </div>
                     <div class="modal-body">
 
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" name="name" class="form-control" placeholder="Nama Dokumen" required>
+                                    <input type="text" name="name" class="form-control" placeholder="Judul" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="unit" class="form-control" placeholder="Nama Institusi/Lembaga/Unit/Fakultas/Prodi" required>
+                                    <input type="text" name="unit" class="form-control" placeholder="Nama Ybs" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="year" class="form-control" placeholder="Tahun Pembuatan: YYYY" required>
+                                    <input type="text" name="year" class="form-control" placeholder="Tahun: YYYY" required>
                                 </div>
                                 <div class="form-group">
                                     <textarea type="url" name="link" class="form-control" placeholder="Link misal: https://drive.google.com/" required></textarea>
@@ -181,13 +178,13 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <input type="text" name="name" value="<?= $row['lap_name']; ?>" class="form-control" placeholder="Nama Dokumen" required>
+                                        <input type="text" name="name" value="<?= $row['lap_name']; ?>" class="form-control" placeholder="Judul" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="unit" value="<?= $row['lap_unit']; ?>" class="form-control" placeholder="Institusi/Lembaga/Unit/Fakultas/Prodi" required>
+                                        <input type="text" name="unit" value="<?= $row['lap_unit']; ?>" class="form-control" placeholder="Nama Ybs" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="year" value="<?= $row['lap_year']; ?>" class="form-control" placeholder="Tahun Pembuatan YYYY" required>
+                                        <input type="text" name="year" value="<?= $row['lap_year']; ?>" class="form-control" placeholder="Tahun: YYYY" required>
                                     </div>
                                     <div class="form-group">
                                         <textarea name="link" class="form-control" rows="2" placeholder="Share Link Google Drive" required><?= $row['lap_link']; ?></textarea>

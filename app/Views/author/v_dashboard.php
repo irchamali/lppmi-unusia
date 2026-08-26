@@ -189,8 +189,8 @@
                                             ?>
                                                 <tr>
                                                     <th scope="row"><?= $no; ?></th>
-                                                    <td><?= $row['post_title']; ?></td>
-                                                    <td style="text-align: right;"><?= number_format($row['post_views']); ?></td>
+                                                    <td><?= $row->post_title; ?></td>
+                                                    <td style="text-align: right;"><?= number_format($row->post_views); ?></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>

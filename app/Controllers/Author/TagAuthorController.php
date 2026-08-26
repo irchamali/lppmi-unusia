@@ -3,6 +3,7 @@
 namespace App\Controllers\Author;
 
 use App\Controllers\BaseController;
+use App\Models\SiteModel;
 use App\Models\TagModel;
 use App\Models\CommentModel;
 
@@ -11,12 +12,13 @@ class TagAuthorController extends BaseController
     public function __construct()
     {
         $this->commentModel = new CommentModel();
-
+        $this->siteModel = new SiteModel();
         $this->tagModel = new TagModel();
     }
     public function index()
     {
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'All Tag',
             'active' => $this->active,

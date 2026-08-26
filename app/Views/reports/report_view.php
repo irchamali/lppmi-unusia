@@ -37,12 +37,12 @@
                                                 <tr>
                                                     <td style="vertical-align: middle;"><?= $no; ?></td>
                                                     <td style="vertical-align: middle;"><?= $row['lap_year']; ?></td>
-                                                    <td style="vertical-align: middle;"><a href="<?= base_url('r/' . $row['report_slug']); ?>"><?= $row['lap_name']; ?></a></td>
+                                                    <td style="vertical-align: middle;"><a href="<?= base_url('reports/' . $row['report_slug']); ?>"><?= $row['lap_name']; ?></a></td>
                                                     <td style="vertical-align: middle;"><?= $row['lap_unit']; ?></td>
                                                     <td style="vertical-align: middle;"><?= $row['lapcategory_name']; ?></td>
                                                     <td style="vertical-align: middle;">
                                                         <div class="btn-group">
-                                                        <a class="btn-sm btn btn-outline-primary" href="<?= base_url('r/' . $row['report_slug']); ?>"><i class="fas fa-eye"></i></a>
+                                                        <a class="btn-sm btn btn-outline-primary" href="<?= base_url('reports/' . $row['report_slug']); ?>"><i class="fas fa-eye"></i></a>
                                                         </div>
                                                     </td>
                                                 </tr>

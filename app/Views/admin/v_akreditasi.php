@@ -2,16 +2,15 @@
 <html>
 
 <head>
-
     <!-- Title -->
     <title><?= $title; ?></title>
-
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta charset="UTF-8">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="author" content="" />
-    <link rel="shortcut icon" href="/assets/frontend/img/apple-touch-icon.png">
+    <link rel="shortcut icon" href="<?= base_url(''); ?>assets/backend/images/favicons/apple-touch-icon.png">
+
     <!-- Styles -->
     <link href="/assets/backend/plugins/pace-master/themes/blue/pace-theme-flash.css" rel="stylesheet" />
     <link href="/assets/backend/plugins/uniform/css/uniform.default.min.css" rel="stylesheet" />
@@ -33,10 +32,9 @@
     <link href="/assets/backend/css/themes/dark.css" class="theme-color" rel="stylesheet" type="text/css" />
     <link href="/assets/backend/css/custom.css" rel="stylesheet" type="text/css" />
     <link href="/assets/backend/css/dropify.min.css" rel="stylesheet" type="text/css">
-
+    <!-- plugins -->
     <script src="/assets/backend/plugins/3d-bold-navigation/js/modernizr.js"></script>
     <script src="/assets/backend/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
-
 
 </head>
 
@@ -65,6 +63,7 @@
                                                 <th>Tahun SK</th>
                                                 <th>Peringkat</th>
                                                 <th>Kadaluarsa</th>
+                                                <th>Masa Berlaku</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -81,6 +80,28 @@
                                                     <td style="vertical-align: middle;"><?= $row['thn_sk']; ?></td>
                                                     <td style="vertical-align: middle;"><?= $row['peringkat']; ?></td>
                                                     <td style="vertical-align: middle;"><?= $row['tgl_kadaluarsa']; ?></td>
+                                                    <td style="vertical-align: middle;">
+                                                        <?php
+                                                        $masaBerlaku = '-';
+                                                        if (!empty($row['tgl_kadaluarsa'])) {
+                                                            $tanggalKadaluarsa = date_create($row['tgl_kadaluarsa']);
+                                                            if ($tanggalKadaluarsa !== false) {
+                                                                $hariIni = new DateTime('today');
+                                                                $tanggalKadaluarsa->setTime(0, 0, 0);
+                                                                $selisihHari = (int) $hariIni->diff($tanggalKadaluarsa)->format('%r%a');
+
+                                                                if ($selisihHari > 0) {
+                                                                    $masaBerlaku = $selisihHari . ' hari lagi';
+                                                                } elseif ($selisihHari === 0) {
+                                                                    $masaBerlaku = 'Hari ini';
+                                                                } else {
+                                                                    $masaBerlaku = 'Kedaluwarsa ' . abs($selisihHari) . ' hari lalu';
+                                                                }
+                                                            }
+                                                        }
+                                                        ?>
+                                                        <?= $masaBerlaku; ?>
+                                                    </td>
                                                     <td style="vertical-align: middle;">
                                                         <div class="btn-group">
                                                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">

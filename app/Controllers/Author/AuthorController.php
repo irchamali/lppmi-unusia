@@ -3,6 +3,7 @@
 namespace App\Controllers\Author;
 
 use App\Controllers\BaseController;
+use App\Models\SiteModel;
 use App\Models\CommentModel;
 use App\Models\VisitorModel;
 
@@ -11,84 +12,75 @@ class AuthorController extends BaseController
     public function __construct()
     {
         $this->commentModel = new CommentModel();
-
+        $this->siteModel = new SiteModel();
         $this->visitorModel = new VisitorModel();
     }
     public function index()
     {
         $visitor = $this->visitorModel->visitor_statistics();
-        $bulan   = [];
-        $value   = [];
-
         foreach ($visitor as $result) {
             $bulan[] = $result->tgl;
             $value[] = (float) $result->jumlah;
         }
 
         $monthly_visitors = $this->visitorModel->count_visitor_this_month();
-        $visitor_this_month = 0;
-        if ($monthly_visitors->getNumRows() > 0) {
-            $row = $monthly_visitors->getRowArray();
-            $visitor_this_month = $row['tot_visitor'];
+        if ($monthly_visitors) {
+            $visitor_this_month = $monthly_visitors->tot_visitor;
+        } else {
+            $visitor_this_month = 0;
         }
         $chrome_visitors = $this->visitorModel->count_chrome_visitors();
-        if ($chrome_visitors->getNumRows() > 0) {
-            $row = $chrome_visitors->getRowArray();
-            $visitor_chrome = $row['chrome_visitor'];
+        if ($chrome_visitors) {
+            $visitor_chrome = $chrome_visitors->chrome_visitor;
             $chrome_visitor = $visitor_this_month > 0 ? ($visitor_chrome / $visitor_this_month) * 100 : 0;
         } else {
             $chrome_visitor = 0;
         }
         $firefox_visitors = $this->visitorModel->count_firefox_visitors();
-        if ($firefox_visitors->getNumRows() > 0) {
-            $row = $firefox_visitors->getRowArray();
-            $visitor_firefox = $row['firefox_visitor'];
+        if ($firefox_visitors) {
+            $visitor_firefox = $firefox_visitors->firefox_visitor;
             $firefox_visitor = $visitor_this_month > 0 ? ($visitor_firefox / $visitor_this_month) * 100 : 0;
         } else {
             $firefox_visitor = 0;
         }
         $explorer_visitors = $this->visitorModel->count_explorer_visitors();
-        if ($explorer_visitors->getNumRows() > 0) {
-            $row = $explorer_visitors->getRowArray();
-            $visitor_explorer = $row['explorer_visitor'];
+        if ($explorer_visitors) {
+            $visitor_explorer = $explorer_visitors->explorer_visitor;
             $explorer_visitor = $visitor_this_month > 0 ? ($visitor_explorer / $visitor_this_month) * 100 : 0;
         } else {
             $explorer_visitor = 0;
         }
         $safari_visitors = $this->visitorModel->count_safari_visitors();
-        if ($safari_visitors->getNumRows() > 0) {
-            $row = $safari_visitors->getRowArray();
-            $visitor_safari = $row['safari_visitor'];
+        if ($safari_visitors) {
+            $visitor_safari = $safari_visitors->safari_visitor;
             $safari_visitor = $visitor_this_month > 0 ? ($visitor_safari / $visitor_this_month) * 100 : 0;
         } else {
             $safari_visitor = 0;
         }
         $opera_visitors = $this->visitorModel->count_opera_visitors();
-        if ($opera_visitors->getNumRows() > 0) {
-            $row = $opera_visitors->getRowArray();
-            $visitor_opera = $row['opera_visitor'];
+        if ($opera_visitors) {
+            $visitor_opera = $opera_visitors->opera_visitor;
             $opera_visitor = $visitor_this_month > 0 ? ($visitor_opera / $visitor_this_month) * 100 : 0;
         } else {
             $opera_visitor = 0;
         }
         $robot_visitors = $this->visitorModel->count_robot_visitors();
-        if ($robot_visitors->getNumRows() > 0) {
-            $row = $robot_visitors->getRowArray();
-            $visitor_robot = $row['robot_visitor'];
+        if ($robot_visitors) {
+            $visitor_robot = $robot_visitors->robot_visitor;
             $robot_visitor = $visitor_this_month > 0 ? ($visitor_robot / $visitor_this_month) * 100 : 0;
         } else {
             $robot_visitor = 0;
         }
         $other_visitors = $this->visitorModel->count_other_visitors();
-        if ($other_visitors->getNumRows() > 0) {
-            $row = $other_visitors->getRowArray();
-            $visitor_other = $row['other_visitor'];
+        if ($other_visitors) {
+            $visitor_other = $other_visitors->other_visitor;
             $other_visitor = $visitor_this_month > 0 ? ($visitor_other / $visitor_this_month) * 100 : 0;
         } else {
             $other_visitor = 0;
         }
 
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'Dashboard',
             'active' => $this->active,
@@ -103,7 +95,7 @@ class AuthorController extends BaseController
             'all_post_views' => $this->visitorModel->count_all_post_views(),
             'all_posts' => $this->visitorModel->count_all_posts(),
             'all_comments' => $this->visitorModel->count_all_comments(),
-            'top_five_articles' => $this->visitorModel->top_five_articles()->getResultArray(),
+            'top_five_articles' => $this->visitorModel->top_five_articles(),
             'chrome_visitor' => $chrome_visitor,
             'firefox_visitor' => $firefox_visitor,
             'explorer_visitor' => $explorer_visitor,

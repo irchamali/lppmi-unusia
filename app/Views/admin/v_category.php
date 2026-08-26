@@ -4,13 +4,12 @@
 <head>
     <!-- Title -->
     <title><?= $title; ?></title>
-
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta charset="UTF-8">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="author" content="Ircham Ali" />
-    <link rel="shortcut icon" href="/assets/frontend/img/apple-touch-icon.png">
+    <link rel="shortcut icon" href="<?= base_url(''); ?>assets/backend/images/favicons/apple-touch-icon.png">
 
     <!-- Styles -->
     <link href="/assets/backend/plugins/pace-master/themes/blue/pace-theme-flash.css" rel="stylesheet" />
@@ -30,10 +29,9 @@
     <link href="/assets/backend/css/modern.min.css" rel="stylesheet" type="text/css" />
     <link href="/assets/backend/css/themes/dark.css" class="theme-color" rel="stylesheet" type="text/css" />
     <link href="/assets/backend/css/custom.css" rel="stylesheet" type="text/css" />
-
+    <!-- plugins -->
     <script src="/assets/backend/plugins/3d-bold-navigation/js/modernizr.js"></script>
     <script src="/assets/backend/plugins/offcanvasmenueffects/js/snap.svg-min.js"></script>
-
 
 </head>
 
@@ -57,6 +55,7 @@
                                                 <th>No</th>
                                                 <th>Category</th>
                                                 <th>Slug</th>
+                                                <th>Total Post</th>
                                                 <th style="text-align: center;">Action</th>
                                             </tr>
                                         </thead>
@@ -68,8 +67,9 @@
                                             ?>
                                                 <tr>
                                                     <td><?= $no; ?></td>
-                                                    <td><?= $row['category_name']; ?></td>
-                                                    <td><?= $row['category_slug']; ?></td>
+                                                    <td><?= esc($row['category_name']); ?></td>
+                                                    <td><?= esc($row['category_slug']); ?></td>
+                                                    <td><?= esc($row['total_posts']); ?></td> <!-- Menampilkan total post -->
                                                     <td style="text-align: center;">
                                                         <a href="javascript:void(0);" class="btn btn-xs btn-edit" data-id="<?= $row['category_id']; ?>" data-category="<?= $row['category_name']; ?>"><span class="fa fa-pencil"></span></a>
                                                         <a href="javascript:void(0);" class="btn btn-xs btn-delete" data-id="<?= $row['category_id']; ?>"><span class="fa fa-trash"></span></a>

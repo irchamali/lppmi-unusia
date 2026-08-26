@@ -37,7 +37,42 @@ class LaporanController extends BaseController
             'title' => 'Laporan',
             'active' => 'Laporan'
         ];
-        return view('report_view', $data);
+        return view('reports/report_view', $data);
+    }
+
+    public function show($slug)
+    {
+        $slug = trim((string) $slug);
+
+        if ($slug === '') {
+            return redirect()->to('/reports');
+        }
+
+        $categoryReports = $this->laporanModel->getLap_by_category($slug)->getResultArray();
+        if ($categoryReports !== []) {
+            foreach ($categoryReports as &$report) {
+                $report['report_slug'] = $this->createReportSlug($report);
+            }
+            unset($report);
+
+            return view('reports/report_category', [
+                'site' => $this->siteModel->find(1),
+                'home' => $this->homeModel->find(1),
+                'about' => $this->aboutModel->find(1),
+                'title' => 'Reports',
+                'url' => 'reports',
+                'keyword' => 'Laporan: ' . $slug,
+                'documents' => $categoryReports,
+                'active' => 'Reports',
+            ]);
+        }
+
+        $report = $this->findReportBySlug($slug);
+        if ($report !== null) {
+            return $this->renderDetail($report);
+        }
+
+        throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
     }
 
     public function detail($slug)
@@ -49,6 +84,11 @@ class LaporanController extends BaseController
             return redirect()->to('/reports/' . $slug);
         }
 
+        return $this->renderDetail($report);
+    }
+
+    private function renderDetail(array $report)
+    {
         $data = [
             'site' => $this->siteModel->find(1),
             'home' => $this->homeModel->find(1),
@@ -60,7 +100,7 @@ class LaporanController extends BaseController
             'active' => 'Laporan',
         ];
 
-        return view('report_detail', $data);
+        return view('reposrts/report_detail', $data);
     }
 
     private function findReportBySlug(string $slug): ?array

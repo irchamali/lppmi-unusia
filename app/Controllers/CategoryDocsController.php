@@ -49,7 +49,7 @@ class CategoryDocsController extends BaseController
             'documents' => $documents,
             'active' => 'Document'
         ];
-        return view('document_category', $data);
+        return view('documents/document_category', $data);
     }
 
     private function createDocumentSlug(array $document): string

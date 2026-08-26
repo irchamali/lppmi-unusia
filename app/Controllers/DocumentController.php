@@ -34,10 +34,10 @@ class DocumentController extends BaseController
             'about' => $this->aboutModel->find(1),
             'documents' => $documents,
             'pager' => $this->docsModel->pager,
-            'title' => 'Document',
-            'active' => 'Document'
+            'title' => 'Documents',
+            'active' => 'Documents'
         ];
-        return view('document_view', $data);
+        return view('documents/document_view', $data);
     }
 
     public function detail($slug)
@@ -57,10 +57,10 @@ class DocumentController extends BaseController
             'preview_link' => $this->buildPreviewLink($document['docs_link']),
             'download_link' => $this->buildDownloadLink($document['docs_link']),
             'title' => 'Document Detail',
-            'active' => 'Document',
+            'active' => 'Documents',
         ];
 
-        return view('document_detail', $data);
+        return view('documents/document_detail', $data);
     }
 
     private function findDocumentBySlug(string $slug): ?array

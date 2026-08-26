@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\SiteModel;
 use App\Models\CommentModel;
 use App\Models\InboxModel;
 use App\Models\UserModel;
@@ -13,12 +14,13 @@ class UsersAdminController extends BaseController
     {
         $this->inboxModel = new InboxModel();
         $this->commentModel = new CommentModel();
-
+        $this->siteModel = new SiteModel();
         $this->userModel = new UserModel();
     }
     public function index()
     {
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'All Users',
             'active' => $this->active,
@@ -83,10 +85,10 @@ class UsersAdminController extends BaseController
         // Validasi inputan lainnya
         if (!$this->validate([
             'nama' => [
-                'rules' => 'required|alpha_space',
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'Kolom {field} harus diisi!',
-                    'alpha_space' => 'inputan tidak boleh mengandung karakter aneh'
+                    'required' => 'Kolom {field} harus diisi!'
+                    // 'alpha_space' => 'inputan tidak boleh mengandung karakter aneh'
                 ]
             ],
             'level' => [
@@ -123,86 +125,113 @@ class UsersAdminController extends BaseController
         ]);
         return redirect()->to('/admin/users')->with('msg', 'success');
     }
+    
     public function update()
     {
-        // Validasi Email
-        if (!$this->validate([
-            'email' => [
-                'rules' => 'required|valid_email|is_not_unique[tbl_user.user_email]',
-                'errors' => [
-                    'required' => 'Kolom {field} harus diisi!',
-                    'valid_email' => 'inputan harus berformat email',
-                    'is_not_unique' => 'Email tidak ditemukan'
-                ]
-            ]
-        ])) {
-            return redirect()->to('/admin/users')->with('msg', 'error-email');
-        };
-        // Validasi foto
-        if (!$this->validate([
-            'filefoto' => [
-                'rules' => 'max_size[filefoto,2048]|is_image[filefoto]|mime_in[filefoto,image/jpg,image/jpeg,image/png]',
-                'errors' => [
-                    'max_size' => 'Ukuran gambar tidak boleh lebih dari 2MB',
-                    'is_image' => 'Yang anda pilih bukan gambar',
-                    'mime_in' => 'Yang anda pilih bukan gambar'
-                ]
-            ]
-        ])) {
-            return redirect()->to('/admin/users')->with('msg', 'error-img');
-        };
-        // Validasi inputan lainnya
-        if (!$this->validate([
-            'nama' => [
-                'rules' => 'required|alpha_space',
-                'errors' => [
-                    'required' => 'Kolom {field} harus diisi!',
-                    'alpha_space' => 'inputan tidak boleh mengandung karakter aneh'
-                ]
-            ],
-            'level' => [
-                'rules' => 'required|numeric',
-                'errors' => [
-                    'required' => 'Kolom {field} harus diisi!',
-                    'numeric' => 'Inputan harus berformat angka'
-                ]
-            ]
-        ])) {
-            return redirect()->to('/admin/users')->with('msg', 'error');
-        }
-        $user_id = htmlspecialchars($this->request->getPost('user_id'), ENT_QUOTES);
-        $nama = htmlspecialchars($this->request->getPost('nama'), ENT_QUOTES);
-        $email = htmlspecialchars($this->request->getPost('email'), ENT_QUOTES);
-        $level = htmlspecialchars($this->request->getPost('level'), ENT_QUOTES);
-        // Cek Foto
-        $user = $this->userModel->find($user_id);
-        $fotoAwal = $user['user_photo'];
-        $fileFoto = $this->request->getFile('filefoto');
-        if ($fileFoto->getName() == '') {
-            $namaFotoUpload = $fotoAwal;
-        } else {
-            $namaFotoUpload = $fileFoto->getRandomName();
-            $fileFoto->move('assets/backend/images/users/', $namaFotoUpload);
+        $user_id = $this->request->getPost('user_id');
+
+        if (!$user_id || !$this->userModel->find($user_id)) {
+            return redirect()->to('/admin/users')->with('msg', 'error-user-not-found');
         }
 
-        if ($this->request->getPost('password')) {
-            $this->userModel->update($user_id, [
-                'user_name' => $nama,
-                'user_email' => $email,
-                'user_password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-                'user_level' => $level,
-                'user_photo' => $namaFotoUpload
-            ]);
-        } else {
-            $this->userModel->update($user_id, [
-                'user_name' => $nama,
-                'user_email' => $email,
-                'user_level' => $level,
-                'user_photo' => $namaFotoUpload
-            ]);
+        // Ambil data user lama
+        $user = $this->userModel->find($user_id);
+
+        // Inisialisasi data update
+        $updateData = [];
+
+        // Validasi Email (jika ada perubahan)
+        $user_id = htmlspecialchars($this->request->getPost('user_id'), ENT_QUOTES);
+        $email = $this->request->getPost('email');
+
+        if (!empty($email) && $email !== $user['user_email']) {
+            if (!$this->validate([
+                'email' => [
+                    'rules' => "valid_email|is_unique[tbl_user.user_email,user_id,{$user_id}]",
+                    'errors' => [
+                        'valid_email' => 'Inputan harus berformat email',
+                        'is_unique' => 'Email sudah digunakan oleh pengguna lain'
+                    ]
+                ]
+            ])) {
+                return redirect()->to('/admin/users')->with('msg', 'error-email');
+            }
+            $updateData['user_email'] = htmlspecialchars($email, ENT_QUOTES);
         }
+
+        // Validasi Nama (jika ada perubahan)
+        $nama = $this->request->getPost('nama');
+        if (!empty($nama) && $nama !== $user['user_name']) {
+            if (!$this->validate([
+                'nama' => [
+                    'rules' => 'alpha_space',
+                    'errors' => [
+                        'alpha_space' => 'Nama tidak boleh mengandung karakter aneh'
+                    ]
+                ]
+            ])) {
+                return redirect()->to('/admin/users')->with('msg', 'error-nama');
+            }
+            $updateData['user_name'] = htmlspecialchars($nama, ENT_QUOTES);
+        }
+
+        // Validasi Level (jika ada perubahan)
+        $level = $this->request->getPost('level');
+        if (!empty($level) && $level !== $user['user_level']) {
+            if (!$this->validate([
+                'level' => [
+                    'rules' => 'numeric',
+                    'errors' => [
+                        'numeric' => 'Level harus berupa angka'
+                    ]
+                ]
+            ])) {
+                return redirect()->to('/admin/users')->with('msg', 'error-level');
+            }
+            $updateData['user_level'] = htmlspecialchars($level, ENT_QUOTES);
+        }
+
+        // Validasi dan Update Password (jika ada perubahan)
+        $password = $this->request->getPost('password');
+        if (!empty($password)) {
+            $updateData['user_password'] = password_hash($password, PASSWORD_DEFAULT);
+        }
+
+        // Validasi dan Update Foto (jika ada perubahan)
+        $fileFoto = $this->request->getFile('filefoto');
+        if ($fileFoto && $fileFoto->isValid() && !$fileFoto->hasMoved()) {
+            if (!$this->validate([
+                'filefoto' => [
+                    'rules' => 'max_size[filefoto,2048]|is_image[filefoto]|mime_in[filefoto,image/jpg,image/jpeg,image/png]',
+                    'errors' => [
+                        'max_size' => 'Ukuran gambar tidak boleh lebih dari 2MB',
+                        'is_image' => 'Yang Anda pilih bukan gambar',
+                        'mime_in' => 'Yang Anda pilih bukan gambar'
+                    ]
+                ]
+            ])) {
+                return redirect()->to('/admin/users')->with('msg', 'error-img');
+            }
+
+            // Hapus foto lama jika ada
+            if ($user['user_photo'] && file_exists('assets/backend/images/users/' . $user['user_photo'])) {
+                unlink('assets/backend/images/users/' . $user['user_photo']);
+            }
+
+            // Simpan foto baru
+            $namaFotoUpload = $fileFoto->getRandomName();
+            $fileFoto->move('assets/backend/images/users/', $namaFotoUpload);
+            $updateData['user_photo'] = $namaFotoUpload;
+        }
+
+        // Jika ada perubahan, lakukan update
+        if (!empty($updateData)) {
+            $this->userModel->update($user_id, $updateData);
+        }
+
         return redirect()->to('/admin/users')->with('msg', 'info');
     }
+
     public function delete()
     {
         $user_id = $this->request->getPost('kode');

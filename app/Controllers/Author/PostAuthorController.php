@@ -3,6 +3,7 @@
 namespace App\Controllers\Author;
 
 use App\Controllers\BaseController;
+use App\Models\SiteModel;
 use App\Models\CategoryModel;
 use App\Models\CommentModel;
 use App\Models\PostModel;
@@ -13,7 +14,7 @@ class PostAuthorController extends BaseController
     public function __construct()
     {
         $this->commentModel = new CommentModel();
-
+        $this->siteModel = new SiteModel();
         $this->postModel = new PostModel();
         $this->categoryModel = new CategoryModel();
         $this->tagModel = new TagModel();
@@ -21,6 +22,7 @@ class PostAuthorController extends BaseController
     public function index()
     {
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'All Post',
             'active' => $this->active,
@@ -29,7 +31,7 @@ class PostAuthorController extends BaseController
             'helper_text' => helper('text'),
             'breadcrumbs' => $this->request->getUri()->getSegments(),
 
-            'posts' => $this->postModel->get_all_post(session('id'))->getResultArray()
+            'posts' => $this->postModel->get_all_post(session('id'))
         ];
 
         return view('author/v_post', $data);
@@ -38,6 +40,7 @@ class PostAuthorController extends BaseController
     public function add_new()
     {
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'Add New Post',
             'active' => $this->active,
@@ -46,7 +49,7 @@ class PostAuthorController extends BaseController
             'helper_text' => helper('text'),
             'breadcrumbs' => $this->request->getUri()->getSegments(),
 
-            'categories' => $this->categoryModel->findAll(),
+            'categories' => $this->categoryModel->getAllCategoriesWithPosts(),
             'tags' => $this->tagModel->findAll()
         ];
         return view('author/v_add_post', $data);
@@ -54,17 +57,13 @@ class PostAuthorController extends BaseController
 
     public function publish()
     {
-        // Fallback: jika form edit terkirim sebagai POST, paksa proses ke update.
-        if (!empty($this->request->getPost('post_id'))) {
-            return $this->update();
-        }
-
         if (!$this->validate([
             'title' => [
-                'rules' => 'required|alpha_numeric_space',
+                'rules' => 'required|min_length[3]|max_length[255]',
                 'errors' => [
                     'required' => 'Kolom {field} harus diisi!',
-                    'alpha_numeric_space' => 'inputan tidak boleh mengandung karakter aneh'
+                    'min_length' => 'Judul minimal 3 karakter',
+                    'max_length' => 'Judul maksimal 255 karakter'
                 ]
             ],
             'slug' => [
@@ -78,14 +77,6 @@ class PostAuthorController extends BaseController
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Kolom {field} harus diisi!'
-                ]
-            ],
-            'filefoto' => [
-                'rules' => 'max_size[filefoto,2048]|is_image[filefoto]|mime_in[filefoto,image/jpg,image/jpeg,image/png]',
-                'errors' => [
-                    'max_size' => 'Ukuran gambar tidak boleh lebih dari 2MB',
-                    'is_image' => 'Yang anda pilih bukan gambar',
-                    'mime_in' => 'Yang anda pilih bukan gambar'
                 ]
             ],
             'category' => [
@@ -103,6 +94,22 @@ class PostAuthorController extends BaseController
             ]
         ])) {
             return redirect()->to('/author/post/add_new')->withInput()->with('peringatan', 'Data gagal disimpan dikarenakan ada penginputan yang tidak sesuai. silakan coba lagi!');
+        }
+
+        $uploadedImage = $this->request->getFile('filefoto');
+        if ($uploadedImage && $uploadedImage->getError() !== UPLOAD_ERR_NO_FILE) {
+            if (! $this->validate([
+                'filefoto' => [
+                    'rules' => 'max_size[filefoto,2048]|is_image[filefoto]|mime_in[filefoto,image/jpg,image/jpeg,image/png]',
+                    'errors' => [
+                        'max_size' => 'Ukuran gambar tidak boleh lebih dari 2MB',
+                        'is_image' => 'Yang anda pilih bukan gambar',
+                        'mime_in' => 'Yang anda pilih bukan gambar'
+                    ]
+                ],
+            ])) {
+                return redirect()->to('/author/post/add_new')->withInput()->with('peringatan', 'Data gagal disimpan dikarenakan file gambar tidak valid.');
+            }
         }
         
         // Cek foto
@@ -138,10 +145,10 @@ class PostAuthorController extends BaseController
             $slug = $slug . '-' . $uniqe_num;
         }
 
-        $tagInput = $this->request->getPost('tag');
-        $tagList = is_array($tagInput) ? $tagInput : [$tagInput];
-        $tagList = array_filter(array_map(static fn ($item) => trim((string) $item), $tagList), static fn ($item) => $item !== '');
-        $tags = implode(',', $tagList);
+        $tags[] = $this->request->getPost('tag');
+        foreach ($tags as $tag) {
+            $tags = implode(",", $tag);
+        }
 
         // Simpan ke database
         $this->postModel->save([
@@ -164,6 +171,7 @@ class PostAuthorController extends BaseController
         $post = $this->postModel->find($id);
         $post_tags = explode(',', $post['post_tags']);
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'Edit Post',
             'active' => $this->active,
@@ -172,7 +180,7 @@ class PostAuthorController extends BaseController
             'helper_text' => helper('text'),
             'breadcrumbs' => $this->request->getUri()->getSegments(),
 
-            'categories' => $this->categoryModel->findAll(),
+            'categories' => $this->categoryModel->getAllCategoriesWithPosts(),
             'post' => $post,
             'tags' => $this->tagModel->findAll(),
             'post_tags' => $post_tags
@@ -183,19 +191,14 @@ class PostAuthorController extends BaseController
     public function update()
     {
         $post_id = $this->request->getPost('post_id');
-        $postAwal = $this->postModel->find($post_id);
-
-        if (!$postAwal) {
-            return redirect()->to('/author/post')->with('peringatan', 'Data post tidak ditemukan.');
-        }
-
         // Validasi
         if (!$this->validate([
             'title' => [
-                'rules' => 'required|alpha_numeric_space',
+                'rules' => 'required|min_length[3]|max_length[255]',
                 'errors' => [
                     'required' => 'Kolom {field} harus diisi!',
-                    'alpha_numeric_space' => 'inputan tidak boleh mengandung karakter aneh'
+                    'min_length' => 'Judul minimal 3 karakter',
+                    'max_length' => 'Judul maksimal 255 karakter'
                 ]
             ],
             'slug' => [
@@ -209,14 +212,6 @@ class PostAuthorController extends BaseController
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Kolom {field} harus diisi!'
-                ]
-            ],
-            'filefoto' => [
-                'rules' => 'max_size[filefoto,2048]|is_image[filefoto]|mime_in[filefoto,image/jpg,image/jpeg,image/png]',
-                'errors' => [
-                    'max_size' => 'Ukuran gambar tidak boleh lebih dari 2MB',
-                    'is_image' => 'Yang anda pilih bukan gambar',
-                    'mime_in' => 'Yang anda pilih bukan gambar'
                 ]
             ],
             'category' => [
@@ -235,6 +230,22 @@ class PostAuthorController extends BaseController
         ])) {
             return redirect()->to("/author/post/$post_id/edit")->withInput()->with('peringatan', 'Data gagal disimpan dikarenakan ada penginputan yang tidak sesuai. silakan coba lagi!');
         }
+
+        $uploadedImage = $this->request->getFile('filefoto');
+        if ($uploadedImage && $uploadedImage->getError() !== UPLOAD_ERR_NO_FILE) {
+            if (! $this->validate([
+                'filefoto' => [
+                    'rules' => 'max_size[filefoto,2048]|is_image[filefoto]|mime_in[filefoto,image/jpg,image/jpeg,image/png]',
+                    'errors' => [
+                        'max_size' => 'Ukuran gambar tidak boleh lebih dari 2MB',
+                        'is_image' => 'Yang anda pilih bukan gambar',
+                        'mime_in' => 'Yang anda pilih bukan gambar'
+                    ]
+                ],
+            ])) {
+                return redirect()->to("/author/post/$post_id/edit")->withInput()->with('peringatan', 'Data gagal disimpan dikarenakan file gambar tidak valid.');
+            }
+        }
         // Inisiasi
         $title = strip_tags(htmlspecialchars($this->request->getPost('title'), ENT_QUOTES));
         $contents = $this->request->getPost('contents');
@@ -247,39 +258,38 @@ class PostAuthorController extends BaseController
             $slug = $slug . '-' . $uniqe_num;
         }
 
-        $tagInput = $this->request->getPost('tag');
-        $tagList = is_array($tagInput) ? $tagInput : [$tagInput];
-        $tagList = array_filter(array_map(static fn ($item) => trim((string) $item), $tagList), static fn ($item) => $item !== '');
-        $tags = implode(',', $tagList);
+        $tags[] = $this->request->getPost('tag');
+        foreach ($tags as $tag) {
+            $tags = implode(",", $tag);
+        }
         
         // Cek foto
-        $fotoAwal = $postAwal['post_image'] ?? 'default-post.png';
+        $postAwal = $this->postModel->find($post_id);
+        $fotoAwal = $postAwal['post_image'];
         $fileFoto = $this->request->getFile('filefoto');
 
-        // Jika tidak ada file yang diunggah, gunakan foto lama.
-        if ($fileFoto === null || $fileFoto->getError() === UPLOAD_ERR_NO_FILE) {
-            $namaFotoUpload = $fotoAwal;
+        // Jika tidak ada file yang diunggah
+        if ($fileFoto->getError() == UPLOAD_ERR_NO_FILE) {
+            $namaFotoUpload = $fotoAwal; // Gunakan foto lama
         } else {
-            $namaFotoUpload = $fileFoto->getRandomName();
-            $targetPath = 'assets/backend/images/post/' . $namaFotoUpload;
-
-            // Simpan versi terkompresi langsung ke direktori backend.
-            \Config\Services::image()
-                ->withFile($fileFoto)
-                ->resize(1000, 800, true)
-                ->save($targetPath);
-
-            // Hapus foto lama jika bukan default.
-            if ($fotoAwal !== 'default-post.png') {
+            // Hapus foto lama jika bukan foto default dan bukan sama dengan foto baru
+            if ($fotoAwal != 'default-post.png' && $fotoAwal != $fileFoto->getName()) {
                 $pathToFotoAwal = 'assets/backend/images/post/' . $fotoAwal;
-                if (is_file($pathToFotoAwal)) {
-                    unlink($pathToFotoAwal);
+                if (file_exists($pathToFotoAwal) && is_file($pathToFotoAwal)) {
+                    unlink($pathToFotoAwal); // Hapus hanya jika itu adalah file, bukan direktori
                 }
             }
+
+            // Simpan gambar baru
+            $namaFotoUpload = $fileFoto->getRandomName();
+            $fileFoto->move('assets/backend/images/post/', $namaFotoUpload);
         }
 
-        // Simpan ke database
-        $this->postModel->update($post_id, [
+        $postViews = $postAwal['post_views']; // Ambil jumlah views sebelumnya
+
+        // Simpan ke database tanpa mengubah views
+        $this->postModel->save([
+            'post_id' => $post_id,
             'post_title' => $title,
             'post_description' => $description,
             'post_contents' => $contents,
@@ -287,9 +297,11 @@ class PostAuthorController extends BaseController
             'post_category_id' => $category,
             'post_tags' => $tags,
             'post_slug' => $slug,
-            'post_status' => (int) ($postAwal['post_status'] ?? 1),
-            'post_user_id' => (int) ($postAwal['post_user_id'] ?? session('id'))
+            'post_status' => 1,
+            'post_views' => $postViews, // Gunakan nilai views sebelumnya
+            'post_user_id' => session('id')
         ]);
+
         return redirect()->to('/author/post')->with('msg', 'success');
     }
 

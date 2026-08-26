@@ -3,6 +3,7 @@
 namespace App\Controllers\Author;
 
 use App\Controllers\BaseController;
+use App\Models\SiteModel;
 use App\Models\CommentModel;
 
 class CommentAuthorController extends BaseController
@@ -10,10 +11,12 @@ class CommentAuthorController extends BaseController
     public function __construct()
     {
         $this->commentModel = new CommentModel();
+        $this->siteModel = new SiteModel();
     }
     public function index()
     {
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'All Comments',
             'active' => $this->active,
@@ -82,6 +85,7 @@ class CommentAuthorController extends BaseController
     function unpublish()
     {
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'All Unpublish Comments',
             'active' => $this->active,

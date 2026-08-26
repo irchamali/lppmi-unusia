@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\CommentModel;
 use App\Models\InboxModel;
+use App\Models\SiteModel;
 use App\Models\DocumentModel;
 use App\Models\DocsCategoryModel;
 
@@ -14,6 +15,7 @@ class DocsAdminController extends BaseController
     {
         $this->inboxModel = new InboxModel();
         $this->commentModel = new CommentModel();
+        $this->siteModel = new SiteModel();
         $this->documentModel = new DocumentModel();
         $this->docscategoryModel = new DocscategoryModel();
     }
@@ -21,6 +23,7 @@ class DocsAdminController extends BaseController
     {
 
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'All Document',
             'active' => $this->active,

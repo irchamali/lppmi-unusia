@@ -9,4 +9,9 @@ class MemberModel extends Model
     protected $table            = 'tbl_member';
     protected $primaryKey       = 'member_id';
     protected $allowedFields    = ['member_name', 'member_link', 'member_desc', 'member_image'];
+
+    public function getAllMembers()
+    {
+        return $this->orderBy('member_id', 'DESC')->findAll();
+    }
 }

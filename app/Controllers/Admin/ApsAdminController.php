@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\SiteModel;
 use App\Models\CommentModel;
 use App\Models\InboxModel;
 use App\Models\ApsModel;
@@ -14,6 +15,7 @@ class ApsAdminController extends BaseController
     {
         $this->inboxModel = new InboxModel();
         $this->commentModel = new CommentModel();
+        $this->siteModel = new SiteModel();
         $this->apsModel = new ApsModel();
         $this->prodiModel = new ProdiModel();
     }
@@ -22,6 +24,7 @@ class ApsAdminController extends BaseController
 
         $data = [
             'akun' => $this->akun,
+            'site' => $this->siteModel->find(1),
             'title' => 'Data Akreditasi',
             'active' => $this->active,
             'total_inbox' => $this->inboxModel->where('inbox_status', 0)->get()->getNumRows(),

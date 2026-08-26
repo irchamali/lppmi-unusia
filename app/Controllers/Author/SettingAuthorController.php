@@ -14,12 +14,13 @@ class SettingAuthorController extends BaseController
     public function __construct()
     {
         $this->commentModel = new CommentModel();
-
+        $this->siteModel = new SiteModel();
         $this->userModel = new UserModel();
     }
     public function profile()
     {
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'Profile Setting',
             'active' => $this->active,

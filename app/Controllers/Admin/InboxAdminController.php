@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\SiteModel;
 use App\Models\CommentModel;
 use App\Models\InboxModel;
 use Inbox;
@@ -12,11 +13,13 @@ class InboxAdminController extends BaseController
     public function __construct()
     {
         $this->inboxModel = new InboxModel();
+        $this->siteModel = new SiteModel();
         $this->commentModel = new CommentModel();
     }
     public function index()
     {
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'All Inbox',
             'active' => $this->active,
@@ -43,6 +46,7 @@ class InboxAdminController extends BaseController
             $this->inboxModel->update($id, ['inbox_status' => 1]);
         }
         $data = [
+            'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
             'title' => 'Inbox Detail',
             'active' => $this->active,
