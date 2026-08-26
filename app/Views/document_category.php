@@ -4,7 +4,7 @@
 <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <?= $this->include('layout/breadcrumbs2'); ?>
+    <?= $this->include('layouts/breadcrumbs1'); ?>
     <!-- End Breadcrumbs -->
 
     <section id="services" class="services">

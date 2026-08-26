@@ -42,6 +42,6 @@ class CategoryController extends BaseController
             'keyword' => $keyword,
             'active' => 'Post'
         ];
-        return view('post_category', $data);
+        return view('posts/post_category', $data);
     }
 }

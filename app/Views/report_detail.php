@@ -21,7 +21,7 @@ $updatedAt = !empty($report['lap_updated_at']) ? date('d M Y H:i', strtotime((st
 
   <section class="bg-100 py-5">
     <div class="container">
-      <div class="row mt-4">
+      <div class="row mt-6 mb-6">
         <div class="col">
           <h3 class="text-center fs-2 fs-md-3">Detail Laporan</h3>
           <hr class="short" data-zanim-xs='{"from":{"opacity":0,"width":0},"to":{"opacity":1,"width":"4.20873rem"},"duration":0.8}' data-zanim-trigger="scroll" />
