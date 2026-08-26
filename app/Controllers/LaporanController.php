@@ -100,7 +100,7 @@ class LaporanController extends BaseController
             'active' => 'Laporan',
         ];
 
-        return view('reposrts/report_detail', $data);
+        return view('reports/report_detail', $data);
     }
 
     private function findReportBySlug(string $slug): ?array

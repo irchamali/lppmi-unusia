@@ -10,7 +10,7 @@
             <div class="bg-primary text-white p-5 p-lg-6 rounded-3">
               <h4 class="text-white fs-1 fs-lg-2 mb-1"><?= $site['site_name']; ?></h4><br>
               <ul class="list-unstyled">
-                <li class="mb-0"><a class="text-decoration-none d-flex align-items-center" href="#"> <span class="brand-icon me-3"><span class="fas fa-star"></span></span>
+                <li class="mb-0"><a class="text-decoration-none d-flex align-items-center" href="#"> <span class="brand-icon me-3"><span class="fas fa-graduation-cap text-warning"></span></span>
                   <p class="fs-0 text-white mb-0 d-inline-block"><?= $site['site_description']; ?></p>
                 </a></li>
               </ul>

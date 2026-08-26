@@ -65,6 +65,9 @@ $routes->get('r', 'LaporanController::index');
 $routes->get('reports/detail/(:segment)', 'LaporanController::detail/$1');
 $routes->get('r/(:segment)', 'LaporanController::detail/$1');
 $routes->get('reports/(:segment)', 'LaporanController::show/$1');
+$routes->get('aps', 'AkreditasiController::index');
+$routes->get('aps/(:segment)', 'AkreditasiController::detail/$1');
+$routes->get('aps/(:segment)', 'CategoryApsController::index/$1');
 
 // Legacy singular aliases (backward compatibility)
 $routes->get('search', 'PostController::search');
@@ -108,6 +111,8 @@ $routes->get('monevrutin', 'AbMonevrutinController::index');
 
 // AkreditasiController
 $routes->get('akreditasi', 'AkreditasiController::index');
+$routes->get('akreditasi/detail/(:segment)', 'AkreditasiController::detail/$1');
+$routes->get('akreditasi/(:segment)', 'AkreditasiController::detail/$1');
 
 // Controller pada Sub Menu Formulir
 $routes->get('ami', 'AmiController::index');
