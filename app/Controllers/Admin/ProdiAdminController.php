@@ -19,6 +19,19 @@ class ProdiAdminController extends BaseController
     }
     public function index()
     {
+        $fakultas = $this->prodiModel->db->table('tbl_fakultas')
+            ->select('fak_id, fak_name')
+            ->orderBy('fak_name', 'ASC')
+            ->get()
+            ->getResultArray();
+
+        $pstudies = $this->prodiModel->db->table('tbl_prodi')
+            ->select('tbl_prodi.*, tbl_fakultas.fak_name')
+            ->join('tbl_fakultas', 'tbl_fakultas.fak_id = tbl_prodi.fak_id', 'left')
+            ->orderBy('tbl_prodi.prodi_nama', 'ASC')
+            ->get()
+            ->getResultArray();
+
         $data = [
             'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
@@ -30,8 +43,8 @@ class ProdiAdminController extends BaseController
             'comments' => $this->commentModel->where('comment_status', 0)->findAll(),
             'helper_text' => helper('text'),
             'breadcrumbs' => $this->request->getUri()->getSegments(),
-
-            'pstudies' => $this->prodiModel->findAll()
+            'fakultas' => $fakultas,
+            'pstudies' => $pstudies
         ];
 
         return view('admin/v_prodi', $data);
@@ -44,10 +57,12 @@ class ProdiAdminController extends BaseController
         $string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $prodi);
         $trim     = trim($string);
         $slug     = strtolower(str_replace(" ", "-", $trim));
+        $fakId    = (int) ($this->request->getPost('fak_id') ?? 0);
         $kodeps   = strip_tags(htmlspecialchars($this->request->getPost('kodeps'), ENT_QUOTES));
         $strata   = strip_tags(htmlspecialchars($this->request->getPost('strata'), ENT_QUOTES));
         $this->prodiModel->save([
             'prodi_id' => $id,
+            'fak_id' => $fakId,
             'prodi_nama' => $prodi,
             'prodi_slug' => $slug,
             'prodi_kode' => $kodeps,
@@ -69,6 +84,13 @@ class ProdiAdminController extends BaseController
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Kolom {field} harus diisi!'
+                ]
+            ],
+            'fak_id' => [
+                'rules' => 'required|integer',
+                'errors' => [
+                    'required' => 'Kolom Fakultas harus diisi!',
+                    'integer' => 'Kolom Fakultas tidak valid!'
                 ]
             ],
             'strata' => [
@@ -95,6 +117,7 @@ class ProdiAdminController extends BaseController
             return redirect()->to('/admin/prodi')->with('msg', 'error');
         }
         $prodi_id = strip_tags(htmlspecialchars($this->request->getPost('prodi_id'), ENT_QUOTES));
+        $fakId = (int) ($this->request->getPost('fak_id') ?? 0);
         $nama = strip_tags(htmlspecialchars($this->request->getPost('nama'), ENT_QUOTES));
         $kode = strip_tags(htmlspecialchars($this->request->getPost('kode'), ENT_QUOTES));
         $strata = strip_tags(htmlspecialchars($this->request->getPost('strata'), ENT_QUOTES));
@@ -112,6 +135,7 @@ class ProdiAdminController extends BaseController
         // }
         // Simpan ke database
         $this->prodiModel->update($prodi_id, [
+            'fak_id' => $fakId,
             'prodi_nama' => $nama,
             'prodi_kode' => $kode,
             'prodi_strata' => $strata,
@@ -135,9 +159,11 @@ class ProdiAdminController extends BaseController
         $string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $prodi);
         $trim     = trim($string);
         $slug     = strtolower(str_replace(" ", "-", $trim));
+        $fakId    = (int) ($this->request->getPost('fak_id') ?? 0);
         $kodeps   = strip_tags(htmlspecialchars($this->request->getPost('kodeps'), ENT_QUOTES));
         $strata   = strip_tags(htmlspecialchars($this->request->getPost('strata'), ENT_QUOTES));
         $this->prodiModel->save([
+            'fak_id' => $fakId,
             'prodi_nama' => $prodi,
             'prodi_slug' => $slug,
             'prodi_kode' => $kodeps,

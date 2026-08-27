@@ -9,7 +9,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title><?= $title; ?> | <?= $site['site_title']; ?></title>
+    <title><?= $title; ?> | <?= $site['site_name']; ?></title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -58,13 +58,13 @@
                 <li class="nav-item dropdown"><a class="nav-link dropdown-toggle dropdown-indicator" href="JavaScript:void(0)" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tentang</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/about">Profil</a></li>
-                        <li><a class="dropdown-item" href="/strategymap">Strategy Map</a></li>
-                        <li><a class="dropdown-item" href="/milestone">Milestone</a></li>
+                        <!-- <li><a class="dropdown-item" href="/strategymap">Strategy Map</a></li>
+                        <li><a class="dropdown-item" href="/milestone">Milestone</a></li> -->
                         <li><a class="dropdown-item" href="/deskripsitugas">Deskripsi Tugas Kerja</a></li>
                         <li><a class="dropdown-item" href="/strukturorganisasi">Struktur Organisasi</a></li>
-                        <li><a class="dropdown-item" href="/team">Personel LPPMI</a></li>
-                        <li><a class="dropdown-item" href="/alurkerja">Alur Kerja dan PJ</a></li>
-                        <li><a class="dropdown-item" href="/monevrutin">Monev Rutin</a></li>                    
+                        <li><a class="dropdown-item" href="/team">Tim LPPMI</a></li>
+                        <!-- <li><a class="dropdown-item" href="/alurkerja">Alur Kerja dan PJ</a></li> -->
+                        <!-- <li><a class="dropdown-item" href="/monevrutin">Monev Rutin</a></li>                     -->
                     </ul>
                 </li>
 

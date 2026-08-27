@@ -17,12 +17,31 @@ $formatDate = static function (?string $date): string {
         return trim($date);
     }
 };
+
+$getStatusBadge = static function (?string $date): array {
+    if ($date === null || trim($date) === '') {
+        return ['label' => 'Belum ada data', 'class' => 'bg-secondary'];
+    }
+
+    try {
+        $expiredDate = new DateTimeImmutable($date);
+        $today = new DateTimeImmutable('today');
+
+        if ($expiredDate < $today) {
+            return ['label' => 'Kadaluarsa', 'class' => 'bg-danger'];
+        }
+
+        return ['label' => 'Aktif', 'class' => 'bg-success'];
+    } catch (Exception $e) {
+        return ['label' => 'Aktif', 'class' => 'bg-success'];
+    }
+};
 ?>
 
 <main class="main" id="top">
 
     <?= $this->include('layouts/breadcrumbs'); ?>
-    
+
   <section class="bg-100 py-5">
     <div class="container">
       <div class="row mt-3">
@@ -54,11 +73,12 @@ $formatDate = static function (?string $date): string {
             </div>
 
             <?php if ($latestRecord): ?>
+              <?php $latestStatus = $getStatusBadge($latestRecord['tgl_kadaluarsa'] ?? null); ?>
               <div class="card border-0 shadow-sm mb-4">
                 <div class="card-body">
                   <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
                     <h5 class="mb-0">Akreditasi Terbaru</h5>
-                    <span class="badge bg-success rounded-pill">Status: Aktif</span>
+                    <span class="badge <?= esc($latestStatus['class']); ?> rounded-pill">Status: <?= esc($latestStatus['label']); ?></span>
                   </div>
 
                   <div class="row g-3 align-items-end">

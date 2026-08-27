@@ -8,5 +8,5 @@ class ProdiModel extends Model
 {
     protected $table            = 'tbl_prodi';
     protected $primaryKey       = 'prodi_id';
-    protected $allowedFields    = ['prodi_nama', 'prodi_slug', 'prodi_kode', 'prodi_strata', 'prodi_link', 'prodi_email'];
+    protected $allowedFields    = ['fak_id', 'prodi_nama', 'prodi_slug', 'prodi_kode', 'prodi_strata', 'prodi_link', 'prodi_email'];
 }

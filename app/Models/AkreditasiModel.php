@@ -13,11 +13,18 @@ class AkreditasiModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
 
-    public function getAllAps(): array
+    public function getAllAps(?string $fakultasSlug = null): array
     {
-        $rows = $this->db->table('tbl_akreditasi')
-            ->select('tbl_akreditasi.*, tbl_prodi.prodi_nama, tbl_prodi.prodi_slug, tbl_prodi.prodi_kode, tbl_prodi.prodi_strata, tbl_prodi.prodi_link')
+        $builder = $this->db->table('tbl_akreditasi')
+            ->select('tbl_akreditasi.*, tbl_prodi.fak_id, tbl_prodi.prodi_nama, tbl_prodi.prodi_slug, tbl_prodi.prodi_kode, tbl_prodi.prodi_strata, tbl_prodi.prodi_link, tbl_fakultas.fak_name, tbl_fakultas.fak_slug')
             ->join('tbl_prodi', 'tbl_akreditasi.prodi_id = tbl_prodi.prodi_id', 'left')
+            ->join('tbl_fakultas', 'tbl_fakultas.fak_id = tbl_prodi.fak_id', 'left');
+
+        if ($fakultasSlug !== null && $fakultasSlug !== '') {
+            $builder->where('tbl_fakultas.fak_slug', $fakultasSlug);
+        }
+
+        $rows = $builder
             ->orderBy('tbl_akreditasi.thn_sk', 'DESC')
             ->orderBy('tbl_akreditasi.tgl_kadaluarsa', 'DESC')
             ->orderBy('tbl_akreditasi.created_at', 'DESC')
@@ -25,6 +32,17 @@ class AkreditasiModel extends Model
             ->getResultArray();
 
         return $this->getLatestApsPerProdi($rows);
+    }
+
+    public function getFakultasOptions(): array
+    {
+        return $this->db->table('tbl_fakultas')
+            ->select('tbl_fakultas.fak_id, tbl_fakultas.fak_slug, tbl_fakultas.fak_name, COUNT(tbl_prodi.prodi_id) AS total_prodi')
+            ->join('tbl_prodi', 'tbl_prodi.fak_id = tbl_fakultas.fak_id', 'left')
+            ->groupBy('tbl_fakultas.fak_id, tbl_fakultas.fak_slug, tbl_fakultas.fak_name')
+            ->orderBy('tbl_fakultas.fak_name', 'ASC')
+            ->get()
+            ->getResultArray();
     }
 
     public function getLatestApsPerProdi(?array $rows = null): array

@@ -41,13 +41,23 @@ $formatDuration = static function (DateInterval $diff): string {
                     <div class="bg-white px-3 mt-6 px-0 py-5 px-lg-5 rounded-3">
                         <div class="mb-4">
                             <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
-                                <h5 class="mb-0">Filter Program Studi</h5>
-                                <span class="text-muted small"><?= count($documents); ?> prodi terdaftar</span>
+                                <div>
+                                    <h5 class="mb-0">Filter Fakultas</h5>
+                                    <?php if (!empty($selectedFakultas['fak_name'])): ?>
+                                        <span class="text-muted small">Menampilkan prodi pada fakultas <?= esc($selectedFakultas['fak_name']); ?></span>
+                                    <?php else: ?>
+                                        <span class="text-muted small">Menampilkan seluruh prodi terakreditasi</span>
+                                    <?php endif; ?>
+                                </div>
+                                <span class="text-muted small"><?= count($documents); ?> prodi tampil</span>
                             </div>
                             <div class="d-flex flex-wrap gap-2">
-                                <?php foreach ($documents as $row): ?>
-                                    <a href="/akreditasi/<?= esc($row['prodi_slug'] ?? $row['prodi_id'], 'url'); ?>" class="btn btn-sm btn-outline-primary rounded-pill">
-                                        <?= esc($row['prodi_nama']); ?>
+                                <a href="/akreditasi" class="btn btn-sm rounded-pill <?= empty($selectedFakultas) ? 'btn-primary' : 'btn-outline-primary'; ?>">
+                                    Semua Fakultas
+                                </a>
+                                <?php foreach ($fakultas as $row): ?>
+                                    <a href="/akreditasi?fakultas=<?= esc($row['fak_slug'], 'url'); ?>" class="btn btn-sm rounded-pill <?= !empty($selectedFakultas) && (string) $selectedFakultas['fak_slug'] === (string) $row['fak_slug'] ? 'btn-primary' : 'btn-outline-primary'; ?>">
+                                        <?= esc($row['fak_name']); ?>
                                     </a>
                                 <?php endforeach; ?>
                             </div>
@@ -61,7 +71,8 @@ $formatDuration = static function (DateInterval $diff): string {
                                             <tr>
                                                 <th>No.</th>
                                                 <th>Nomor SK</th>
-                                                <th>Nama Prodi</th>
+                                                <!-- <th>Fakultas</th> -->
+                                                <th>Prodi</th>
                                                 <th>Peringkat</th>
                                                 <th>Kadaluarsa</th>
                                                 <th>Masa Berlaku</th>
@@ -103,6 +114,7 @@ $formatDuration = static function (DateInterval $diff): string {
                                                 <tr>
                                                     <td style="vertical-align: middle; text-align: center;"><?= $no; ?></td>
                                                     <td style="vertical-align: middle;"><?= esc($row['no_sk']); ?></td>
+                                                    <!-- <td style="vertical-align: middle;"><?= esc($row['fak_name'] ?? '-'); ?></td> -->
                                                     <td style="vertical-align: middle;">
                                                         <a href="/akreditasi/<?= esc($row['prodi_slug'] ?? $row['prodi_id'], 'url'); ?>"><?= esc($row['prodi_nama']); ?></a>
                                                     </td>

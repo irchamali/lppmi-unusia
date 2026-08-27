@@ -23,11 +23,32 @@ class AkreditasiController extends BaseController
 
     public function index()
     {
+        $requestedFakultasSlug = trim((string) ($this->request->getGet('fakultas') ?? ''));
+        $selectedFakultasSlug = $requestedFakultasSlug !== '' ? $requestedFakultasSlug : null;
+
+        $fakultas = $this->akreditasiModel->getFakultasOptions();
+        $selectedFakultas = null;
+
+        if ($selectedFakultasSlug !== null) {
+            foreach ($fakultas as $row) {
+                if ((string) ($row['fak_slug'] ?? '') === $selectedFakultasSlug) {
+                    $selectedFakultas = $row;
+                    break;
+                }
+            }
+
+            if ($selectedFakultas === null) {
+                $selectedFakultasSlug = null;
+            }
+        }
+
         $data = [
             'site' => $this->siteModel->find(1),
             'home' => $this->homeModel->find(1),
             'about' => $this->aboutModel->find(1),
-            'documents' => $this->akreditasiModel->getAllAps(),
+            'documents' => $this->akreditasiModel->getAllAps($selectedFakultasSlug),
+            'fakultas' => $fakultas,
+            'selectedFakultas' => $selectedFakultas,
             'pager' => $this->akreditasiModel->pager,
             'title' => 'Akreditasi',
             'active' => 'Akreditasi'

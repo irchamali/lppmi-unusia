@@ -53,6 +53,7 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
+                                                <th>Fakultas</th>
                                                 <th>Prodi</th>
                                                 <th>Slug</th>
                                                 <th>Kode</th>
@@ -68,6 +69,7 @@
                                             ?>
                                                 <tr>
                                                     <td><?= $no; ?></td>
+                                                    <td><?= esc($row['fak_name'] ?? '-'); ?></td>
                                                     <td><?= $row['prodi_nama']; ?></td>
                                                     <td><?= $row['prodi_slug']; ?></td>
                                                     <td><?= $row['prodi_kode']; ?></td>
@@ -103,6 +105,14 @@
                         <h4 class="modal-title" id="myModalLabel">Add Data Prodi</h4>
                     </div>
                     <div class="modal-body">
+                        <div class="form-group">
+                            <select name="fak_id" class="form-control" required>
+                                <option value="">- Pilih Fakultas -</option>
+                                <?php foreach ($fakultas as $fak): ?>
+                                    <option value="<?= (int) $fak['fak_id']; ?>"><?= esc($fak['fak_name']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <input type="text" name="prodiadd" class="form-control" placeholder="Nama Prodi" required>
                         </div>
@@ -142,6 +152,14 @@
                             <div class="row">
                                 
                                 <div class="col-md-12">
+                                    <div class="form-group">
+                                        <select name="fak_id" class="form-control" required>
+                                            <option value="">- Pilih Fakultas -</option>
+                                            <?php foreach ($fakultas as $fak): ?>
+                                                <option value="<?= (int) $fak['fak_id']; ?>" <?= (int) ($row['fak_id'] ?? 0) === (int) $fak['fak_id'] ? 'selected' : ''; ?>><?= esc($fak['fak_name']); ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
                                     <div class="form-group">
                                         <input type="text" name="nama" value="<?= $row['prodi_nama']; ?>" class="form-control" placeholder="Nama Prodi" required>
                                     </div>

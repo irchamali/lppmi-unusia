@@ -183,6 +183,22 @@
                     </li>
                 </ul>
             </li>
+            <!-- Prodi menu -->
+            <li class="droplink <?= in_array($title, ["Daftar Program Studi", "Data Akreditasi"]) ? 'active open' : '' ?>">
+                <a href="#" class="waves-effect waves-button">
+                    <span class="menu-icon icon-star"></span>
+                    <p>Prodi</p>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="<?= ($title === "Daftar Program Studi") ? 'active' : '' ?>">
+                        <a href="/<?= session('role'); ?>/prodi">Semua Prodi</a>
+                    </li>
+                    <li class="<?= ($title === "Data Akreditasi") ? 'active' : '' ?>">
+                        <a href="/<?= session('role'); ?>/akreditasi">Data Akreditasi</a>
+                    </li>
+                </ul>
+            </li>
             <!-- Partners menu -->
             <li class="droplink <?= in_array($title, ["All Partner", "Partner Categories"]) ? 'active open' : '' ?>">
                 <a href="#" class="waves-effect waves-button">
