@@ -114,12 +114,10 @@ class PostController extends BaseController
     }
     public function author($user_id)
     {
-        $posts = $this->postviewModel->where('post_user_id', $user_id)->get();
-        if ($posts->getNumRows() < 1) {
-            $posts = $posts->getResultArray();
-            $keyword = "Postingan Author tidak ditemukan";
+        $posts = $this->postviewModel->getPostsByAuthorPaginated($user_id);
+        if (count($posts) < 1) {
+            $keyword = "Author $user_id tidak ditemukan";
         } else {
-            $posts = $posts->getResultArray();
             $keyword = "Author: $user_id";
         }
         $data = [
@@ -129,6 +127,7 @@ class PostController extends BaseController
             'title' => "Author $user_id",
             'keyword' => $keyword,
             'posts' => $posts,
+            'pager' => $this->postviewModel->pager,
             'active' => 'Post'
         ];
         return view('posts/post_author', $data);

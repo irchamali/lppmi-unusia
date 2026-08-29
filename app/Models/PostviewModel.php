@@ -50,7 +50,7 @@ class PostviewModel extends Model
             ->where('tbl_post.post_category_id', $category_id)
             ->where('tbl_post.post_id !=', $kode)
             ->orderBy('tbl_post.post_views', 'DESC')
-            ->limit(4)
+            ->limit(3)
             ->get();
     }
 
@@ -114,6 +114,18 @@ class PostviewModel extends Model
             ->orderBy('tbl_post.post_date', 'DESC');
 
         return $this->paginate($limit, 'tag_posts');
+    }
+
+    public function getPostsByAuthorPaginated($user_id, $limit = 6)
+    {
+        $this->select('tbl_post.*, tbl_user.user_name, tbl_user.user_photo, tbl_category.category_name, tbl_category.category_slug')
+            ->join('tbl_user', 'tbl_post.post_user_id = tbl_user.user_id', 'left')
+            ->join('tbl_category', 'tbl_post.post_category_id = tbl_category.category_id', 'left')
+            ->where('tbl_post.post_user_id', $user_id)
+            ->where('tbl_post.post_status', 1)
+            ->orderBy('tbl_post.post_date', 'DESC');
+
+        return $this->paginate($limit, 'author_posts');
     }
 
     public function getPostsBySearchPaginated($query, $limit = 6)

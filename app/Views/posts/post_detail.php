@@ -59,23 +59,45 @@
         <div class="card mb-4">
           <div class="card-body p-4 text-center">
             <img class="rounded-circle mb-3" src="/assets/backend/images/users/<?= esc($post['user_photo']); ?>" alt="Author" width="96" height="96" />
-            <h5 class="text-capitalize mb-1"><?= esc($post['user_name']); ?></h5>
-            <p class="mb-0 text-500">Artikel dari kontributor LPPMI UNUSIA.</p>
+            <h5 class="text-capitalize mb-1"><a href="/authors/<?= (int) $post['post_user_id']; ?>"><?= esc($post['user_name']); ?></a></h5>
+            <p class="mb-0 text-500"><?php if (!empty($post['category_slug'])) : ?>
+                <?= esc($post['category_name'] ?? $post['category_slug']); ?>
+              <?php endif; ?> dari kontributor LPPMI UNUSIA.</p>
           </div>
         </div>
 
-        <div class="mb-4">
-          <h5 class="mb-3">Related Articles</h5>
-          <?php foreach (($related_post ?? []) as $related) : ?>
-            <div class="card mb-3">
-              <a href="/p/<?= esc($related['post_slug']); ?>"><img class="card-img-top" src="/assets/backend/images/post/<?= esc($related['post_image']); ?>" alt="<?= esc($related['post_title']); ?>" /></a>
-              <div class="card-body">
-                <h6 class="mb-1"><a href="/p/<?= esc($related['post_slug']); ?>"><?= esc($related['post_title']); ?></a></h6>
-                <p class="text-500 fs--1 mb-0">By <?= esc($related['user_name']); ?></p>
-              </div>
-            </div>
-          <?php endforeach; ?>
-        </div>
+        <div class="mb-5">
+                  <h5 class="mb-4">Related Articles</h5>
+                  <div class="bg-white pb-5 rounded-3">
+                    <div class="swiper news-slider pb-4" data-swiper='{"loop":true,"slidesPerView":1,"pagination":{"el":".swiper-pagination","type":"bullets","clickable":true}}'>
+                      <div class="swiper-wrapper">
+                      <?php foreach (($related_post ?? []) as $related) : ?>  
+                        <div class="swiper-slide">
+                          <div class="card"><a href="/p/<?= esc($related['post_slug']); ?>"><img class="card-img-top" src="/assets/backend/images/post/<?= esc($related['post_image']); ?>" alt="Featured Image" /></a>
+                            <div class="card-body" data-zanim-timeline="{}" data-zanim-trigger="scroll">
+                              <div class="overflow-hidden"><a href="/p/<?= esc($related['post_slug']); ?>">
+                                  <h5 data-zanim-xs='{"delay":0}'><?= esc($related['post_title']); ?></h5>
+                                </a></div>
+                              <div class="overflow-hidden">
+                                <p class="text-500" data-zanim-xs='{"delay":0.1}'>by <?= esc($related['user_name']); ?></p>
+                              </div>
+                              <div class="overflow-hidden">
+                                <p class="mt-3" data-zanim-xs='{"delay":0.2}'><?= esc($related['post_description']); ?></p>
+                              </div>
+                              <div class="overflow-hidden">
+                                <div class="d-inline-block" data-zanim-xs='{"delay":0.3}'><a class="d-flex align-items-center" href="/p/<?= esc($related['post_slug']); ?>">Learn More
+                                    <div class="overflow-hidden ms-2" data-zanim-xs='{"from":{"opacity":0,"x":-30},"to":{"opacity":1,"x":0},"delay":0.8}'><span class="d-inline-block fw-medium">&xrarr;</span></div>
+                                  </a></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      <?php endforeach; ?>  
+                      </div>
+                      <div class="swiper-pagination"></div>
+                    </div>
+                  </div>
+                </div>
 
         <div class="card">
           <div class="card-body p-4">
