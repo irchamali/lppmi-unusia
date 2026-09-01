@@ -10,6 +10,7 @@ use App\Models\DocumentModel;
 use App\Models\DocumentCategoryModel;
 use App\Models\DocumentScopeModel;
 use App\Models\DocumentTypeModel;
+use App\Models\ProdiModel;
 
 class DocsAdminController extends BaseController
 {
@@ -20,6 +21,7 @@ class DocsAdminController extends BaseController
     protected $docscategoryModel;
     protected $scopeModel;
     protected $typeModel;
+    protected $prodiModel;
 
     public function __construct()
     {
@@ -30,9 +32,13 @@ class DocsAdminController extends BaseController
         $this->docscategoryModel = new DocumentCategoryModel();
         $this->scopeModel = new DocumentScopeModel();
         $this->typeModel = new DocumentTypeModel();
+        $this->prodiModel = new ProdiModel();
     }
     public function index()
     {
+        $documents = session('role') === 'manager'
+            ? $this->documentModel->getDocumentsByUser((int) session('id'))
+            : $this->documentModel->getAllDocuments();
 
         $data = [
             'site' => $this->siteModel->find(1),
@@ -48,7 +54,9 @@ class DocsAdminController extends BaseController
             'categories' => $this->docscategoryModel->findAll(),
             'scopes'     => $this->scopeModel->findAll(),
             'types'      => $this->typeModel->findAll(),
-            'documents'  => $this->documentModel->getAllDocuments()
+            'fakultas'   => $this->prodiModel->db->table('tbl_fakultas')->orderBy('fak_name', 'ASC')->get()->getResultArray(),
+            'prodi'      => $this->prodiModel->orderBy('prodi_nama', 'ASC')->findAll(),
+            'documents'  => $documents
         ];
 
         return view('admin/v_document', $data);
@@ -100,9 +108,13 @@ class DocsAdminController extends BaseController
                 ]
             ]
         ])) {
-            return redirect()->to('/admin/document')->with('msg', 'error');
+            return redirect()->to($this->documentPath())->with('msg', 'error');
         }
-        
+        $unitData = $this->getUnitData();
+        if ($unitData === null || !$this->canSubmitToUnit($unitData)) {
+            return redirect()->to($this->documentPath())->with('msg', 'error-unit');
+        }
+
         // Simpan ke database
         $this->documentModel->save([
             'document_title' => strip_tags(htmlspecialchars($this->request->getPost('title'), ENT_QUOTES)),
@@ -112,16 +124,22 @@ class DocsAdminController extends BaseController
             'category_id'    => strip_tags(htmlspecialchars($this->request->getPost('category_id'), ENT_QUOTES)),
             'type_id'        => strip_tags(htmlspecialchars($this->request->getPost('type_id'), ENT_QUOTES)),
             'scope_id'       => strip_tags(htmlspecialchars($this->request->getPost('scope_id'), ENT_QUOTES)),
+            'fak_id'         => $unitData['fak_id'],
+            'prodi_id'       => $unitData['prodi_id'],
+            'document_description' => strip_tags(htmlspecialchars($this->request->getPost('document_description'), ENT_QUOTES)),
             'ppepp_stage'    => strip_tags(htmlspecialchars($this->request->getPost('ppepp_stage'), ENT_QUOTES)) ?: null,
-            'user_id'        => session('user_id') ?: 1, // Default 1 if no session user_id for safety
+            'user_id'        => session('id'),
             'status'         => 'submitted'
 
         ]);
-        return redirect()->to('/admin/document')->with('msg', 'success');
+        return redirect()->to($this->documentPath())->with('msg', 'success');
     }
     public function update()
     {
         $document_id = $this->request->getPost('document_id');
+        if (!$this->canManageDocument($document_id)) {
+            return redirect()->to($this->documentPath())->with('msg', 'error-document-not-found');
+        }
         // Validasi
         if (!$this->validate([
             'title' => [
@@ -171,7 +189,11 @@ class DocsAdminController extends BaseController
                 ]
             ]
         ])) {
-            return redirect()->to('/admin/document')->with('msg', 'error');
+            return redirect()->to($this->documentPath())->with('msg', 'error');
+        }
+        $unitData = $this->getUnitData();
+        if ($unitData === null || !$this->canSubmitToUnit($unitData)) {
+            return redirect()->to($this->documentPath())->with('msg', 'error-unit');
         }
 
         $this->documentModel->update($document_id, [
@@ -182,16 +204,73 @@ class DocsAdminController extends BaseController
             'category_id'    => strip_tags(htmlspecialchars($this->request->getPost('category_id'), ENT_QUOTES)),
             'type_id'        => strip_tags(htmlspecialchars($this->request->getPost('type_id'), ENT_QUOTES)),
             'scope_id'       => strip_tags(htmlspecialchars($this->request->getPost('scope_id'), ENT_QUOTES)),
-            'ppepp_stage'    => strip_tags(htmlspecialchars($this->request->getPost('ppepp_stage'), ENT_QUOTES)) ?: null
+            'fak_id'         => $unitData['fak_id'],
+            'prodi_id'       => $unitData['prodi_id'],
+            'document_description' => strip_tags(htmlspecialchars($this->request->getPost('document_description'), ENT_QUOTES)),
+            'ppepp_stage'    => strip_tags(htmlspecialchars($this->request->getPost('ppepp_stage'), ENT_QUOTES)) ?: null,
+            'status'         => session('role') === 'manager' ? 'submitted' : $this->documentModel->find($document_id)['status'],
+            'validated_by'   => session('role') === 'manager' ? null : $this->documentModel->find($document_id)['validated_by'],
+            'validated_at'   => session('role') === 'manager' ? null : $this->documentModel->find($document_id)['validated_at'],
+            'validation_notes' => session('role') === 'manager' ? null : $this->documentModel->find($document_id)['validation_notes']
             
         ]);
-        return redirect()->to('/admin/document')->with('msg', 'info');
+        return redirect()->to($this->documentPath())->with('msg', 'info');
     }
     
     public function delete()
     {
         $document_id = $this->request->getPost('kode');
+        if (!$this->canManageDocument($document_id)) {
+            return redirect()->to($this->documentPath())->with('msg', 'error-document-not-found');
+        }
         $this->documentModel->delete($document_id);
-        return redirect()->to('/admin/document')->with('msg', 'success-delete');
+        return redirect()->to($this->documentPath())->with('msg', 'success-delete');
+    }
+    protected function documentPath(): string
+    {
+        return '/' . session('role') . '/document';
+    }
+    protected function canManageDocument($documentId): bool
+    {
+        $document = $this->documentModel->find($documentId);
+
+        return $document !== null && (session('role') !== 'manager' || (int) $document['user_id'] === (int) session('id'));
+    }
+    protected function getUnitData(): ?array
+    {
+        $scope = $this->scopeModel->find($this->request->getPost('scope_id'));
+        if ($scope === null) {
+            return null;
+        }
+
+        $scopeSlug = strtolower($scope['scope_slug']);
+        $requiresFakultas = str_contains($scopeSlug, 'fakultas') || str_contains($scopeSlug, 'prodi');
+        $requiresProdi = str_contains($scopeSlug, 'prodi');
+        $fakultasId = (int) $this->request->getPost('fak_id');
+        $prodiId = (int) $this->request->getPost('prodi_id');
+
+        if (!$requiresFakultas) {
+            return ['scope_id' => (int) $scope['scope_id'], 'fak_id' => null, 'prodi_id' => null];
+        }
+        if ($fakultasId < 1 || !$this->prodiModel->db->table('tbl_fakultas')->where('fak_id', $fakultasId)->countAllResults()) {
+            return null;
+        }
+        if (!$requiresProdi) {
+            return ['scope_id' => (int) $scope['scope_id'], 'fak_id' => $fakultasId, 'prodi_id' => null];
+        }
+        if ($prodiId < 1 || !$this->prodiModel->where(['prodi_id' => $prodiId, 'fak_id' => $fakultasId])->first()) {
+            return null;
+        }
+
+        return ['scope_id' => (int) $scope['scope_id'], 'fak_id' => $fakultasId, 'prodi_id' => $prodiId];
+    }
+    protected function canSubmitToUnit(array $unitData): bool
+    {
+        return session('role') !== 'manager' || $this->documentModel->userHasDocumentScope(
+            (int) session('id'),
+            $unitData['scope_id'],
+            $unitData['fak_id'],
+            $unitData['prodi_id']
+        );
     }
 }
