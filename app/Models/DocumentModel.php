@@ -6,20 +6,27 @@ use CodeIgniter\Model;
 
 class DocumentModel extends Model
 {
-    protected $table         = 'tbl_document';
-    protected $primaryKey    = 'docs_id';
-    protected $allowedFields = ['docs_name','docs_unit','docs_sk','docs_year','docs_link','docs_category_id'];
+    protected $table         = 'tbl_documents';
+    protected $primaryKey    = 'document_id';
+    protected $allowedFields = [
+        'document_title', 'document_number', 'category_id', 'type_id',
+        'scope_id', 'ppepp_stage', 'fak_id', 'prodi_id', 'document_description',
+        'document_file', 'document_date', 'status', 'user_id',
+        'validated_by', 'validated_at'
+    ];
     protected $useTimestamps = true;
-    protected $createdField  = 'docs_created_at';
-    protected $updatedField  = 'docs_updated_at';
-
-    public function getDocs_by_category($slug)
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    // Update query relasi untuk datatable
+    public function getAllDocuments()
     {
-        $query = $this->db->query("SELECT tbl_document.*,tbl_docscategory.* FROM
-			tbl_document LEFT JOIN tbl_docscategory ON docs_category_id=docscategory_id 
-			WHERE docscategory_slug='$slug'
-            ORDER BY tbl_document.docs_created_at DESC"); // Menambahkan klausa ORDER BY
-            
-        return $query;
+        return $this->db->table($this->table)
+            ->select('tbl_documents.*, tbl_document_category.category_name, tbl_document_type.type_name, tbl_document_scope.scope_name')
+            ->join('tbl_document_category', 'tbl_documents.category_id = tbl_document_category.category_id', 'left')
+            ->join('tbl_document_type', 'tbl_documents.type_id = tbl_document_type.type_id', 'left')
+            ->join('tbl_document_scope', 'tbl_documents.scope_id = tbl_document_scope.scope_id', 'left')
+            ->orderBy('tbl_documents.created_at', 'DESC')
+            ->get()
+            ->getResultArray();
     }
 }
