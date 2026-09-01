@@ -49,6 +49,12 @@ class LoginController extends BaseController
                     } else if ($user['user_level'] == '2') {
                         $this->setUserSession($user);
                         return redirect()->to('/author');
+                    } else if ($user['user_level'] == '3') {
+                        $this->setManagerSession($user);
+                        return redirect()->to('/manager');
+                    } else if ($user['user_level'] == '4') {
+                        $this->setValidatorSession($user);
+                        return redirect()->to('/validator');
                     } else {
                         return redirect()->to('/');
                     }
@@ -84,6 +90,28 @@ class LoginController extends BaseController
         ];
 
         session()->set($data);
+        return true;
+    }
+    public function setManagerSession($user)
+    {
+        session()->set([
+            'id' => $user['user_id'],
+            'nama' => $user['user_name'],
+            'email' => $user['user_email'],
+            'role' => 'manager'
+        ]);
+
+        return true;
+    }
+    public function setValidatorSession($user)
+    {
+        session()->set([
+            'id' => $user['user_id'],
+            'nama' => $user['user_name'],
+            'email' => $user['user_email'],
+            'role' => 'validator'
+        ]);
+
         return true;
     }
     public function logout()
