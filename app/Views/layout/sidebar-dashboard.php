@@ -125,7 +125,7 @@
                     </div>
                     <div class="sidebar-profile-details">
                         <span><?= $akun['user_name']; ?><br>
-                            <small><?= $akun['user_level'] == 1 ? 'Administrator' : 'Author'; ?></small>
+                            <small><?= ['1' => 'Administrator', '2' => 'Author', '3' => 'Manager', '4' => 'Validator'][$akun['user_level']] ?? 'Unknown'; ?></small>
                         </span>
                     </div>
                 </a>
@@ -136,6 +136,7 @@
                     class="waves-effect waves-button"><span class="menu-icon icon-home"></span>
                     <p>Dashboard</p>
                 </a></li>
+            <?php if (in_array(session('role'), ['admin', 'author'], true)) : ?>
             <li class="droplink <?= ($title === "Profile Setting") ? 'active open' : '' ?><?= ($title === "Website Setting") ? 'active open' : '' ?><?= ($title === "Home Setting") ? 'active open' : '' ?><?= ($title === "All Slider") ? 'active open' : '' ?><?= ($title === "About Setting") ? 'active open' : '' ?>"><a
                     href="/<?= session('role'); ?>/settings" class="waves-effect waves-button"><span
                         class="menu-icon icon-settings"></span>
@@ -162,7 +163,14 @@
                     <li class="<?= ($title === "All Tag") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/tag">Tag</a></li>
                 </ul>
             </li>
-            
+            <?php endif; ?>
+
+            <?php if (session('role') === 'manager') : ?>
+            <li class="<?= ($title === 'All Document') ? 'active' : '' ?>"><a href="/manager/document" class="waves-effect waves-button"><span class="menu-icon icon-link"></span><p>Documents</p></a></li>
+            <?php endif; ?>
+            <?php if (session('role') === 'validator') : ?>
+            <li class="<?= ($title === 'Document Validation') ? 'active' : '' ?>"><a href="/validator/document" class="waves-effect waves-button"><span class="menu-icon icon-check"></span><p>Document Validation</p></a></li>
+            <?php endif; ?>
             <?php if (session('role') == 'admin') : ?>
             <!-- Programs menu -->
             <li class="droplink <?= in_array($title, ["All Program", "Add New Program", "Program Categories"]) ? 'active open' : '' ?>">

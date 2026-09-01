@@ -27,6 +27,8 @@
     <link href="<?= base_url(''); ?>assets/backend/plugins/weather-icons-master/css/weather-icons.min.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url(''); ?>assets/backend/plugins/metrojs/MetroJs.min.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url(''); ?>assets/backend/plugins/toastr/toastr.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url(''); ?>assets/backend/plugins/datatables/css/jquery.datatables.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url(''); ?>assets/backend/plugins/datatables/css/jquery.datatables_themeroller.css" rel="stylesheet" type="text/css" />
 
     <!-- Theme Styles -->
     <link href="<?= base_url(''); ?>assets/backend/css/modern.min.css" rel="stylesheet" type="text/css" />
