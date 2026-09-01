@@ -28,7 +28,7 @@
             <?php foreach ($teams as $team) : ?>
               <?php $teamJabatan = $team['team_jabatan'] ?? $team['jabatan'] ?? '-'; ?>
                 <div class="col-sm-6 col-lg-3 col-md-4 mb-3">
-                    <div class="card h-100"><img class="card-img-top" src="/assets/backend/images/team/<?= $team['team_image']; ?>" alt="Reenal Scott" />
+                    <div class="card h-100"><img class="card-img-top" src="/assets/backend/images/team/<?= $team['team_image']; ?>" alt="Photo" />
                         <div class="card-body" data-zanim-timeline="{}" data-zanim-trigger="scroll">
                             <div class="overflow-hidden">
                             <h6 data-zanim-xs='{"delay":0}'><?= $team['team_name']; ?></h6>

@@ -54,6 +54,7 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Category</th>
+                                                <th>Description</th>
                                                 <th>Slug</th>
                                                 <th style="text-align: center;">Action</th>
                                             </tr>
@@ -66,11 +67,12 @@
                                             ?>
                                                 <tr>
                                                     <td><?= $no; ?></td>
-                                                    <td><?= $row['docscategory_name']; ?></td>
-                                                    <td><?= $row['docscategory_slug']; ?></td>
+                                                    <td><?= $row['category_name']; ?></td>
+                                                    <td><?= $row['category_description']; ?></td>
+                                                    <td><?= $row['category_slug']; ?></td>
                                                     <td style="text-align: center;">
-                                                        <a href="javascript:void(0);" class="btn btn-xs btn-edit" data-id="<?= $row['docscategory_id']; ?>" data-category="<?= $row['docscategory_name']; ?>"><span class="fa fa-pencil"></span></a>
-                                                        <a href="javascript:void(0);" class="btn btn-xs btn-delete" data-id="<?= $row['docscategory_id']; ?>"><span class="fa fa-trash"></span></a>
+                                                        <a href="javascript:void(0);" class="btn btn-xs btn-edit" data-id="<?= $row['category_id']; ?>" data-category="<?= $row['category_name']; ?>" data-description="<?= $row['category_description']; ?>"><span class="fa fa-pencil"></span></a>
+                                                        <a href="javascript:void(0);" class="btn btn-xs btn-delete" data-id="<?= $row['category_id']; ?>"><span class="fa fa-trash"></span></a>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
@@ -102,6 +104,9 @@
                         <div class="form-group">
                             <input type="text" name="category" class="form-control" placeholder="Category Name" required>
                         </div>
+                        <div class="form-group">
+                            <textarea name="description" class="form-control" placeholder="Description"></textarea>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -127,7 +132,9 @@
                         <div class="form-group">
                             <input type="text" name="categoryedit" class="form-control" placeholder="Category Name" required>
                         </div>
-                        <!--  -->
+                        <div class="form-group">
+                            <textarea name="descriptionedit" class="form-control" placeholder="Description"></textarea>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="kode" required>
@@ -190,8 +197,10 @@
             $('.btn-edit').on('click', function() {
                 var id = $(this).data('id');
                 var name = $(this).data('category');
+                var desc = $(this).data('description');
                 $('[name="kode"]').val(id);
                 $('[name="categoryedit"]').val(name);
+                $('[name="descriptionedit"]').val(desc);
                 $('#EditModal').modal('show');
             });
 
