@@ -90,10 +90,12 @@ abstract class BaseController extends Controller
     protected $siteModel;
     protected $sliderModel;
     protected $subscribeModel;
+    protected $scopeModel;
     protected $tagModel;
     protected $teamModel;
     protected $testimonialModel;
     protected $userModel;
+    protected $userDocumentScopeModel;
     protected $visitorModel;
 
     /**

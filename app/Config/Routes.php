@@ -155,6 +155,26 @@ $routes->group('', ['filter' => 'logedin'], static function ($routes) {
 });
 $routes->get('logout', 'LoginController::logout');
 
+// Manager Routes
+$routes->group('manager', ['filter' => 'authmanager'], static function ($routes) {
+    $routes->get('', 'Manager\DocumentManagerController::dashboard');
+    $routes->group('document', static function ($routes) {
+        $routes->get('', 'Manager\DocumentManagerController::index');
+        $routes->post('', 'Manager\DocumentManagerController::insert');
+        $routes->put('', 'Manager\DocumentManagerController::update');
+        $routes->delete('', 'Manager\DocumentManagerController::delete');
+    });
+});
+
+// Validator Routes
+$routes->group('validator', ['filter' => 'authvalidator'], static function ($routes) {
+    $routes->get('', 'Validator\DocumentValidatorController::dashboard');
+    $routes->get('document', 'Validator\DocumentValidatorController::index');
+    $routes->post('document/(:num)/approve', 'Validator\DocumentValidatorController::validateDocument/$1/approved');
+    $routes->post('document/(:num)/revise', 'Validator\DocumentValidatorController::validateDocument/$1/revised');
+    $routes->post('document/(:num)/reject', 'Validator\DocumentValidatorController::validateDocument/$1/rejected');
+});
+
 // Admin Routes
 $routes->group('admin', ['filter' => 'authadmin'], static function ($routes) {
     $routes->get('', 'Admin\AdminController::index');
