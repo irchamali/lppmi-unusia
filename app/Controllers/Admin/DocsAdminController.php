@@ -7,17 +7,29 @@ use App\Models\CommentModel;
 use App\Models\InboxModel;
 use App\Models\SiteModel;
 use App\Models\DocumentModel;
-use App\Models\DocsCategoryModel;
+use App\Models\DocumentCategoryModel;
+use App\Models\DocumentScopeModel;
+use App\Models\DocumentTypeModel;
 
 class DocsAdminController extends BaseController
 {
+    protected $inboxModel;
+    protected $commentModel;
+    protected $siteModel;
+    protected $documentModel;
+    protected $docscategoryModel;
+    protected $scopeModel;
+    protected $typeModel;
+
     public function __construct()
     {
         $this->inboxModel = new InboxModel();
         $this->commentModel = new CommentModel();
         $this->siteModel = new SiteModel();
         $this->documentModel = new DocumentModel();
-        $this->docscategoryModel = new DocscategoryModel();
+        $this->docscategoryModel = new DocumentCategoryModel();
+        $this->scopeModel = new DocumentScopeModel();
+        $this->typeModel = new DocumentTypeModel();
     }
     public function index()
     {
@@ -34,7 +46,9 @@ class DocsAdminController extends BaseController
             'helper_text' => helper('text'),
             'breadcrumbs' => $this->request->getUri()->getSegments(),
             'categories' => $this->docscategoryModel->findAll(),
-            'documents' => $this->documentModel->findAll()
+            'scopes'     => $this->scopeModel->findAll(),
+            'types'      => $this->typeModel->findAll(),
+            'documents'  => $this->documentModel->getAllDocuments()
         ];
 
         return view('admin/v_document', $data);
@@ -42,39 +56,44 @@ class DocsAdminController extends BaseController
     public function insert()
     {
         if (!$this->validate([
-            'name' => [
+            'title' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Kolom {field} harus diisi!'
                 ]
             ],
-            'unit' => [
+            'number' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Kolom {field} harus diisi!'
                 ]
             ],
-            'sk' => [
+            'date' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Kolom {field} harus diisi!'
                 ]
             ],
-            'year' => [
-                'rules' => 'required|numeric',
-                'errors' => [
-                    'required' => 'Kolom {field} harus diisi angka tahun!',
-                    'required' => 'Kolom {field} harus diisi!'
-                ]
-            ],
-            'link' => [
+            'file_link' => [
                 'rules' => 'required|valid_url_strict',
                 'errors' => [
                     'required' => 'Kolom {field} harus diisi!',
                     'valid_url_strict' => 'inputan harus berupa link'
                 ]
             ],
-            'category' => [
+            'category_id' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kolom {field} harus diisi!'
+                ]
+            ],
+            'type_id' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kolom {field} harus diisi!'
+                ]
+            ],
+            'scope_id' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Kolom {field} harus diisi!'
@@ -84,62 +103,67 @@ class DocsAdminController extends BaseController
             return redirect()->to('/admin/document')->with('msg', 'error');
         }
         
-        $name = strip_tags(htmlspecialchars($this->request->getPost('name'), ENT_QUOTES));
-        $unit = strip_tags(htmlspecialchars($this->request->getPost('unit'), ENT_QUOTES));
-        $sk = strip_tags(htmlspecialchars($this->request->getPost('sk'), ENT_QUOTES));
-        $year = strip_tags(htmlspecialchars($this->request->getPost('year'), ENT_QUOTES));
-        $link = strip_tags(htmlspecialchars($this->request->getPost('link'), ENT_QUOTES));
-        $category = strip_tags(htmlspecialchars($this->request->getPost('category'), ENT_QUOTES)); 
         // Simpan ke database
         $this->documentModel->save([
-            'docs_name' => $name,
-            'docs_unit' => $unit,
-            'docs_sk'   => $sk,
-            'docs_year' => $year,
-            'docs_link' => $link,
-            'docs_category_id' => $category
-            
+            'document_title' => strip_tags(htmlspecialchars($this->request->getPost('title'), ENT_QUOTES)),
+            'document_number'=> strip_tags(htmlspecialchars($this->request->getPost('number'), ENT_QUOTES)),
+            'document_date'  => strip_tags(htmlspecialchars($this->request->getPost('date'), ENT_QUOTES)),
+            'document_file'  => strip_tags(htmlspecialchars($this->request->getPost('file_link'), ENT_QUOTES)),
+            'category_id'    => strip_tags(htmlspecialchars($this->request->getPost('category_id'), ENT_QUOTES)),
+            'type_id'        => strip_tags(htmlspecialchars($this->request->getPost('type_id'), ENT_QUOTES)),
+            'scope_id'       => strip_tags(htmlspecialchars($this->request->getPost('scope_id'), ENT_QUOTES)),
+            'ppepp_stage'    => strip_tags(htmlspecialchars($this->request->getPost('ppepp_stage'), ENT_QUOTES)) ?: null,
+            'user_id'        => session('user_id') ?: 1, // Default 1 if no session user_id for safety
+            'status'         => 'submitted'
+
         ]);
         return redirect()->to('/admin/document')->with('msg', 'success');
     }
     public function update()
     {
-        $docs_id = $this->request->getPost('docs_id'); 
+        $document_id = $this->request->getPost('document_id');
         // Validasi
         if (!$this->validate([
-            'name' => [
+            'title' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Kolom {field} harus diisi!'
                 ]
             ],
-            'unit' => [
+            'number' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Kolom {field} harus diisi!'
                 ]
             ],
-            'sk' => [
+            'date' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Kolom {field} harus diisi!'
                 ]
             ],
-            'year' => [
-                'rules' => 'required|numeric',
-                'errors' => [
-                    'required' => 'Kolom {field} harus diisi!',
-                    'numeric' => 'inputan harus angka'
-                ]
-            ],
-            'link' => [
+            'file_link' => [
                 'rules' => 'required|valid_url_strict',
                 'errors' => [
                     'required' => 'Kolom {field} harus diisi!',
                     'valid_url_strict' => 'inputan harus berupa link'
                 ]
             ],
-            'category' => [
+            'category_id' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Kolom {field} harus diisi!',
+                    'numeric' => 'inputan harus angka'
+                ]
+            ],
+            'type_id' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Kolom {field} harus diisi!',
+                    'numeric' => 'inputan harus angka'
+                ]
+            ],
+            'scope_id' => [
                 'rules' => 'required|numeric',
                 'errors' => [
                     'required' => 'Kolom {field} harus diisi!',
@@ -149,24 +173,16 @@ class DocsAdminController extends BaseController
         ])) {
             return redirect()->to('/admin/document')->with('msg', 'error');
         }
-        $docs_id = strip_tags(htmlspecialchars($this->request->getPost('docs_id'), ENT_QUOTES));
-        $name = strip_tags(htmlspecialchars($this->request->getPost('name'), ENT_QUOTES));
-        $unit = strip_tags(htmlspecialchars($this->request->getPost('unit'), ENT_QUOTES));
-        $sk   = strip_tags(htmlspecialchars($this->request->getPost('sk'), ENT_QUOTES));
-        $year = strip_tags(htmlspecialchars($this->request->getPost('year'), ENT_QUOTES));
-        $link = strip_tags(htmlspecialchars($this->request->getPost('link'), ENT_QUOTES));
-        $category = strip_tags(htmlspecialchars($this->request->getPost('category'), ENT_QUOTES));
-        // Cek Foto
 
-        //print_r($category);die();
-
-        $this->documentModel->update($docs_id, [
-            'docs_name' => $name,
-            'docs_unit' => $unit,
-            'docs_sk'   => $sk,
-            'docs_year' => $year,
-            'docs_link' => $link,
-            'docs_category_id' => $category
+        $this->documentModel->update($document_id, [
+            'document_title' => strip_tags(htmlspecialchars($this->request->getPost('title'), ENT_QUOTES)),
+            'document_number'=> strip_tags(htmlspecialchars($this->request->getPost('number'), ENT_QUOTES)),
+            'document_date'  => strip_tags(htmlspecialchars($this->request->getPost('date'), ENT_QUOTES)),
+            'document_file'  => strip_tags(htmlspecialchars($this->request->getPost('file_link'), ENT_QUOTES)),
+            'category_id'    => strip_tags(htmlspecialchars($this->request->getPost('category_id'), ENT_QUOTES)),
+            'type_id'        => strip_tags(htmlspecialchars($this->request->getPost('type_id'), ENT_QUOTES)),
+            'scope_id'       => strip_tags(htmlspecialchars($this->request->getPost('scope_id'), ENT_QUOTES)),
+            'ppepp_stage'    => strip_tags(htmlspecialchars($this->request->getPost('ppepp_stage'), ENT_QUOTES)) ?: null
             
         ]);
         return redirect()->to('/admin/document')->with('msg', 'info');
@@ -174,8 +190,8 @@ class DocsAdminController extends BaseController
     
     public function delete()
     {
-        $docs_id = $this->request->getPost('kode');
-        $this->documentModel->delete($docs_id);
+        $document_id = $this->request->getPost('kode');
+        $this->documentModel->delete($document_id);
         return redirect()->to('/admin/document')->with('msg', 'success-delete');
     }
 }
