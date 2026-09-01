@@ -31,6 +31,14 @@ class Filters extends BaseConfig
             \App\Filters\Auth::class,
             \App\Filters\AuthAuthor::class
         ],
+        'authmanager'    => [
+            \App\Filters\Auth::class,
+            \App\Filters\AuthManager::class
+        ],
+        'authvalidator'  => [
+            \App\Filters\Auth::class,
+            \App\Filters\AuthValidator::class
+        ],
         'logedin'       => \App\Filters\LogedIn::class
     ];
 
