@@ -3,31 +3,31 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\DocumentCategoryModel;
+use App\Models\DocumentRelationTypeModel;
 use App\Models\SiteModel;
 use App\Models\CommentModel;
 use App\Models\InboxModel;
 
-class DocsCategoryAdminController extends BaseController
+class DocRelationTypeAdminController extends BaseController
 {
     protected $inboxModel;
     protected $commentModel;
     protected $siteModel;
-    protected $docscategoryModel;
+    protected $docrelationtypeModel;
 
     public function __construct()
     {
         $this->inboxModel = new InboxModel();
         $this->commentModel = new CommentModel();
         $this->siteModel = new SiteModel();
-        $this->docscategoryModel = new DocumentCategoryModel();
+        $this->docrelationtypeModel = new DocumentRelationTypeModel();
     }
     public function index()
     {
         $data = [
             'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
-            'title' => 'Category of Document',
+            'title' => 'Document Relation Type',
             'active' => $this->active,
             'total_inbox' => $this->inboxModel->where('inbox_status', 0)->get()->getNumRows(),
             'inboxs' => $this->inboxModel->where('inbox_status', 0)->findAll(),
@@ -36,50 +36,50 @@ class DocsCategoryAdminController extends BaseController
             'helper_text' => helper('text'),
             'breadcrumbs' => $this->request->getUri()->getSegments(),
 
-            'categories' => $this->docscategoryModel->findAll()
+            'relationtypes' => $this->docrelationtypeModel->findAll()
         ];
 
-        return view('admin/v_docscategory', $data);
+        return view('admin/v_docrelationtype', $data);
     }
 
     public function save(){
-        $category = strip_tags(htmlspecialchars($this->request->getPost('category'), ENT_QUOTES));
+        $relation = strip_tags(htmlspecialchars($this->request->getPost('relation'), ENT_QUOTES));
         $desc = strip_tags(htmlspecialchars($this->request->getPost('description'), ENT_QUOTES));
-        $string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $category);
+        $string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $relation);
         $trim     = trim($string);
         $slug     = strtolower(str_replace(" ", "-", $trim));
-        $this->docscategoryModel->save([
-            'category_name' => $category,
-            'category_slug' => $slug,
-            'category_description' => $desc
+        $this->docrelationtypeModel->save([
+            'relation_name' => $relation,
+            'relation_slug' => $slug,
+            'relation_description' => $desc
         ]);
 
-        return redirect()->to('admin/docscategory')->with('msg', 'success');
+        return redirect()->to('admin/docrelationtype')->with('msg', 'success');
     }
-    
+
     public function edit()
     {
         $id       = $this->request->getPost('kode');
-        $category = strip_tags(htmlspecialchars($this->request->getPost('categoryedit'), ENT_QUOTES));
+        $relation = strip_tags(htmlspecialchars($this->request->getPost('relationedit'), ENT_QUOTES));
         $desc = strip_tags(htmlspecialchars($this->request->getPost('descriptionedit'), ENT_QUOTES));
-        $string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $category);
+        $string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $relation);
         $trim     = trim($string);
         $slug     = strtolower(str_replace(" ", "-", $trim));
-        $this->docscategoryModel->save([
-            'category_id' => $id,
-            'category_name' => $category,
-            'category_slug' => $slug,
-            'category_description' => $desc
+        $this->docrelationtypeModel->save([
+            'relation_type_id' => $id,
+            'relation_name' => $relation,
+            'relation_slug' => $slug,
+            'relation_description' => $desc
         ]);
-        return redirect()->to('admin/docscategory')->with('msg', 'info');
+        return redirect()->to('admin/docrelationtype')->with('msg', 'info');
     }
 
     public function delete()
     {
         $id = $this->request->getPost('id');
-        $this->docscategoryModel->delete($id);
+        $this->docrelationtypeModel->delete($id);
 
-        return redirect()->to('admin/docscategory')->with('msg', 'success-delete');
+        return redirect()->to('admin/docrelationtype')->with('msg', 'success-delete');
     }
 
 }
