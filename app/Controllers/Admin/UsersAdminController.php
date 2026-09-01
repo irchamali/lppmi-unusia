@@ -6,7 +6,10 @@ use App\Controllers\BaseController;
 use App\Models\SiteModel;
 use App\Models\CommentModel;
 use App\Models\InboxModel;
+use App\Models\DocumentScopeModel;
+use App\Models\ProdiModel;
 use App\Models\UserModel;
+use App\Models\UserDocumentScopeModel;
 
 class UsersAdminController extends BaseController
 {
@@ -16,6 +19,9 @@ class UsersAdminController extends BaseController
         $this->commentModel = new CommentModel();
         $this->siteModel = new SiteModel();
         $this->userModel = new UserModel();
+        $this->scopeModel = new DocumentScopeModel();
+        $this->prodiModel = new ProdiModel();
+        $this->userDocumentScopeModel = new UserDocumentScopeModel();
     }
     public function index()
     {
@@ -31,7 +37,11 @@ class UsersAdminController extends BaseController
             'helper_text' => helper('text'),
             'breadcrumbs' => $this->request->getUri()->getSegments(),
 
-            'users' => $this->userModel->findAll()
+            'users' => $this->userModel->findAll(),
+            'scopes' => $this->scopeModel->findAll(),
+            'fakultas' => $this->prodiModel->db->table('tbl_fakultas')->orderBy('fak_name', 'ASC')->get()->getResultArray(),
+            'prodi' => $this->prodiModel->orderBy('prodi_nama', 'ASC')->findAll(),
+            'userScopes' => $this->getUserScopes()
         ];
 
         return view('admin/v_users', $data);
@@ -92,10 +102,10 @@ class UsersAdminController extends BaseController
                 ]
             ],
             'level' => [
-                'rules' => 'required|numeric',
+                'rules' => 'required|in_list[1,2,3,4]',
                 'errors' => [
                     'required' => 'Kolom {field} harus diisi!',
-                    'numeric' => 'Inputan harus berformat angka'
+                    'in_list' => 'Level pengguna tidak valid'
                 ]
             ]
         ])) {
@@ -115,7 +125,8 @@ class UsersAdminController extends BaseController
         $pass = htmlspecialchars($this->request->getPost('password'), ENT_QUOTES);
         $level = htmlspecialchars($this->request->getPost('level'), ENT_QUOTES);
 
-        $this->userModel->save([
+        $this->userModel->db->transStart();
+        $userId = $this->userModel->insert([
             'user_name' => $nama,
             'user_email' => $email,
             'user_password' => password_hash($pass, PASSWORD_DEFAULT),
@@ -123,6 +134,14 @@ class UsersAdminController extends BaseController
             'user_status' => 1,
             'user_photo' => $namaFotoUpload
         ]);
+        if (!$userId || !$this->syncDocumentScopes((int) $userId, $level)) {
+            $this->userModel->db->transRollback();
+            return redirect()->to('/admin/users')->with('msg', 'error-scope');
+        }
+        $this->userModel->db->transComplete();
+        if ($this->userModel->db->transStatus() === false) {
+            return redirect()->to('/admin/users')->with('msg', 'error-scope');
+        }
         return redirect()->to('/admin/users')->with('msg', 'success');
     }
     
@@ -180,15 +199,19 @@ class UsersAdminController extends BaseController
         if (!empty($level) && $level !== $user['user_level']) {
             if (!$this->validate([
                 'level' => [
-                    'rules' => 'numeric',
+                    'rules' => 'in_list[1,2,3,4]',
                     'errors' => [
-                        'numeric' => 'Level harus berupa angka'
+                        'in_list' => 'Level pengguna tidak valid'
                     ]
                 ]
             ])) {
                 return redirect()->to('/admin/users')->with('msg', 'error-level');
             }
             $updateData['user_level'] = htmlspecialchars($level, ENT_QUOTES);
+        }
+
+        if (!$this->validateDocumentScopes($level)) {
+            return redirect()->to('/admin/users')->with('msg', 'error-scope');
         }
 
         // Validasi dan Update Password (jika ada perubahan)
@@ -225,8 +248,17 @@ class UsersAdminController extends BaseController
         }
 
         // Jika ada perubahan, lakukan update
+        $this->userModel->db->transStart();
         if (!empty($updateData)) {
             $this->userModel->update($user_id, $updateData);
+        }
+        if (!$this->syncDocumentScopes((int) $user_id, $level)) {
+            $this->userModel->db->transRollback();
+            return redirect()->to('/admin/users')->with('msg', 'error-scope');
+        }
+        $this->userModel->db->transComplete();
+        if ($this->userModel->db->transStatus() === false) {
+            return redirect()->to('/admin/users')->with('msg', 'error-scope');
         }
 
         return redirect()->to('/admin/users')->with('msg', 'info');
@@ -247,5 +279,89 @@ class UsersAdminController extends BaseController
     {
         $this->userModel->update($user_id, ['user_status' => 0]);
         return redirect()->to('/admin/users')->with('msg', 'success-deactivate');
+    }
+    protected function getUserScopes(): array
+    {
+        $userScopes = [];
+        foreach ($this->userModel->findAll() as $user) {
+            $userScopes[$user['user_id']] = $this->userDocumentScopeModel->getByUser((int) $user['user_id']);
+        }
+
+        return $userScopes;
+    }
+    protected function syncDocumentScopes(int $userId, string $level): bool
+    {
+        if (!$this->validateDocumentScopes($level)) {
+            return false;
+        }
+
+        $this->userDocumentScopeModel->where('user_id', $userId)->delete();
+        if (!in_array($level, ['3', '4'], true)) {
+            return true;
+        }
+
+        foreach ($this->getRequestedScopes() as $assignment) {
+            $assignment['user_id'] = $userId;
+            $this->userDocumentScopeModel->insert($assignment);
+        }
+
+        return true;
+    }
+    protected function validateDocumentScopes(string $level): bool
+    {
+        if (!in_array($level, ['3', '4'], true)) {
+            return true;
+        }
+
+        $assignments = $this->getRequestedScopes();
+        if ($assignments === []) {
+            return false;
+        }
+
+        foreach ($assignments as $assignment) {
+            $scope = $this->scopeModel->find($assignment['scope_id']);
+            if ($scope === null) {
+                return false;
+            }
+
+            $scopeSlug = strtolower($scope['scope_slug']);
+            $requiresFakultas = str_contains($scopeSlug, 'fakultas') || str_contains($scopeSlug, 'prodi');
+            $requiresProdi = str_contains($scopeSlug, 'prodi');
+            if (!$requiresFakultas && ($assignment['fak_id'] !== null || $assignment['prodi_id'] !== null)) {
+                return false;
+            }
+            if ($requiresFakultas && ($assignment['fak_id'] === null || !$this->prodiModel->db->table('tbl_fakultas')->where('fak_id', $assignment['fak_id'])->countAllResults())) {
+                return false;
+            }
+            if ($requiresProdi && ($assignment['prodi_id'] === null || !$this->prodiModel->where(['prodi_id' => $assignment['prodi_id'], 'fak_id' => $assignment['fak_id']])->first())) {
+                return false;
+            }
+            if (!$requiresProdi && $assignment['prodi_id'] !== null) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    protected function getRequestedScopes(): array
+    {
+        $scopeIds = $this->request->getPost('assignment_scope_id') ?? [];
+        $fakultasIds = $this->request->getPost('assignment_fak_id') ?? [];
+        $prodiIds = $this->request->getPost('assignment_prodi_id') ?? [];
+        $assignments = [];
+
+        foreach ($scopeIds as $index => $scopeId) {
+            if (!$scopeId) {
+                continue;
+            }
+            $assignments[] = [
+                'scope_id' => (int) $scopeId,
+                'fak_id' => !empty($fakultasIds[$index]) ? (int) $fakultasIds[$index] : null,
+                'prodi_id' => !empty($prodiIds[$index]) ? (int) $prodiIds[$index] : null,
+                'scope_status' => 1,
+            ];
+        }
+
+        return $assignments;
     }
 }

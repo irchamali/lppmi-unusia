@@ -60,6 +60,7 @@
                                                 <th>Name</th>
                                                 <th>Email</th>
                                                 <th>Level</th>
+                                                <th>Document Assignments</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -83,12 +84,14 @@
                                                     <td style="vertical-align: middle;"><?= $row['user_email']; ?></td>
                                                     <td style="vertical-align: middle;">
                                                         <?php
-                                                        if ($row['user_level'] == '1') {
-                                                            echo "Administrator";
-                                                        } else {
-                                                            echo "Author";
-                                                        }
+                                                        $roles = ['1' => 'Administrator', '2' => 'Author', '3' => 'Manager', '4' => 'Validator'];
+                                                        echo $roles[$row['user_level']] ?? 'Unknown';
                                                         ?>
+                                                    </td>
+                                                    <td style="vertical-align: middle;">
+                                                        <?php foreach ($userScopes[$row['user_id']] ?? [] as $assignment) : ?>
+                                                            <div><?= esc($assignment['scope_name']); ?><?= !empty($assignment['fak_name']) ? ' - ' . esc($assignment['fak_name']) : ''; ?><?= !empty($assignment['prodi_nama']) ? ' - ' . esc($assignment['prodi_nama']) : ''; ?></div>
+                                                        <?php endforeach; ?>
                                                     </td>
                                                     <?php if ($row['user_status'] == '1') : ?>
                                                         <td style="vertical-align: middle;"><a href="/<?= session('role'); ?>/users/deactivate/<?= $row['user_id']; ?>" class="btn"><span class="fa fa-check-square-o" title="Active"></span></a></td>
@@ -160,7 +163,19 @@
                                         <option value="">No Selected</option>
                                         <option value="1">Administrator</option>
                                         <option value="2">Author</option>
+                                        <option value="3">Manager</option>
+                                        <option value="4">Validator</option>
                                     </select>
+                                </div>
+                                <div class="document-scope-assignments" style="display: none;">
+                                    <label>Document Scope Assignments</label>
+                                    <div class="scope-assignment-row row">
+                                        <div class="col-sm-4"><select class="form-control assignment-scope" name="assignment_scope_id[]"><option value="">Scope</option><?php foreach ($scopes as $scope) : ?><option value="<?= $scope['scope_id']; ?>" data-scope-slug="<?= esc($scope['scope_slug']); ?>"><?= esc($scope['scope_name']); ?></option><?php endforeach; ?></select></div>
+                                        <div class="col-sm-3"><select class="form-control assignment-fakultas" name="assignment_fak_id[]"><option value="">Fakultas</option><?php foreach ($fakultas as $fakultasRow) : ?><option value="<?= $fakultasRow['fak_id']; ?>"><?= esc($fakultasRow['fak_name']); ?></option><?php endforeach; ?></select></div>
+                                        <div class="col-sm-3"><select class="form-control assignment-prodi" name="assignment_prodi_id[]"><option value="">Program Studi</option><?php foreach ($prodi as $prodiRow) : ?><option value="<?= $prodiRow['prodi_id']; ?>" data-fak-id="<?= $prodiRow['fak_id']; ?>"><?= esc($prodiRow['prodi_nama']); ?></option><?php endforeach; ?></select></div>
+                                        <div class="col-sm-2"><button type="button" class="btn btn-danger remove-assignment"><i class="fa fa-trash"></i></button></div>
+                                    </div>
+                                    <button type="button" class="btn btn-default btn-sm add-assignment" onclick="addScopeAssignment(this); return false;"><i class="fa fa-plus"></i> Add Assignment</button>
                                 </div>
                             </div>
                         </div>
@@ -209,14 +224,24 @@
                                     </div>
                                     <div class="form-group">
                                         <select class="form-control" name="level" required>
-                                            <?php if ($row['user_level'] == '1') : ?>
-                                                <option value="1" selected>Administrator</option>
-                                                <option value="2">Author</option>
-                                            <?php else : ?>
-                                                <option value="1">Administrator</option>
-                                                <option value="2" selected>Author</option>
-                                            <?php endif; ?>
+                                            <option value="1" <?= $row['user_level'] == '1' ? 'selected' : ''; ?>>Administrator</option>
+                                            <option value="2" <?= $row['user_level'] == '2' ? 'selected' : ''; ?>>Author</option>
+                                            <option value="3" <?= $row['user_level'] == '3' ? 'selected' : ''; ?>>Manager</option>
+                                            <option value="4" <?= $row['user_level'] == '4' ? 'selected' : ''; ?>>Validator</option>
                                         </select>
+                                    </div>
+                                    <div class="document-scope-assignments" style="display: none;">
+                                        <label>Document Scope Assignments</label>
+                                        <?php $assignments = $userScopes[$row['user_id']] ?? [[]]; ?>
+                                        <?php foreach ($assignments as $assignment) : ?>
+                                        <div class="scope-assignment-row row">
+                                            <div class="col-sm-4"><select class="form-control assignment-scope" name="assignment_scope_id[]"><option value="">Scope</option><?php foreach ($scopes as $scope) : ?><option value="<?= $scope['scope_id']; ?>" data-scope-slug="<?= esc($scope['scope_slug']); ?>" <?= (($assignment['scope_id'] ?? null) == $scope['scope_id']) ? 'selected' : ''; ?>><?= esc($scope['scope_name']); ?></option><?php endforeach; ?></select></div>
+                                            <div class="col-sm-3"><select class="form-control assignment-fakultas" name="assignment_fak_id[]"><option value="">Fakultas</option><?php foreach ($fakultas as $fakultasRow) : ?><option value="<?= $fakultasRow['fak_id']; ?>" <?= (($assignment['fak_id'] ?? null) == $fakultasRow['fak_id']) ? 'selected' : ''; ?>><?= esc($fakultasRow['fak_name']); ?></option><?php endforeach; ?></select></div>
+                                            <div class="col-sm-3"><select class="form-control assignment-prodi" name="assignment_prodi_id[]"><option value="">Program Studi</option><?php foreach ($prodi as $prodiRow) : ?><option value="<?= $prodiRow['prodi_id']; ?>" data-fak-id="<?= $prodiRow['fak_id']; ?>" <?= (($assignment['prodi_id'] ?? null) == $prodiRow['prodi_id']) ? 'selected' : ''; ?>><?= esc($prodiRow['prodi_nama']); ?></option><?php endforeach; ?></select></div>
+                                            <div class="col-sm-2"><button type="button" class="btn btn-danger remove-assignment"><i class="fa fa-trash"></i></button></div>
+                                        </div>
+                                        <?php endforeach; ?>
+                                        <button type="button" class="btn btn-default btn-sm add-assignment" onclick="addScopeAssignment(this); return false;"><i class="fa fa-plus"></i> Add Assignment</button>
                                     </div>
                                 </div>
                             </div>
@@ -299,6 +324,54 @@
                 $('#ModalDelete').modal('show');
                 $('[name="kode"]').val(userid);
             });
+
+            function updateAssignmentRow(row) {
+                var slug = row.find('.assignment-scope option:selected').data('scope-slug') || '';
+                var requiresFakultas = slug.indexOf('fakultas') !== -1 || slug.indexOf('prodi') !== -1;
+                var requiresProdi = slug.indexOf('prodi') !== -1;
+                var fakultas = row.find('.assignment-fakultas');
+                var prodi = row.find('.assignment-prodi');
+                fakultas.closest('.col-sm-3').toggle(requiresFakultas);
+                prodi.closest('.col-sm-3').toggle(requiresProdi);
+                fakultas.prop('required', requiresFakultas);
+                prodi.prop('required', requiresProdi);
+                prodi.find('option[data-fak-id]').each(function() {
+                    $(this).toggle(!requiresProdi || !fakultas.val() || $(this).data('fak-id') == fakultas.val());
+                });
+            }
+
+            function updateAssignments(form) {
+                var enabled = ['3', '4'].indexOf(form.find('[name="level"]').val()) !== -1;
+                form.find('.document-scope-assignments').toggle(enabled);
+                form.find('.scope-assignment-row').each(function() { updateAssignmentRow($(this)); });
+            }
+
+            $('form[action$="/users"]').each(function() { updateAssignments($(this)); });
+            $(document).on('change', '[name="level"], .assignment-scope, .assignment-fakultas', function() {
+                updateAssignments($(this).closest('form'));
+            });
+            window.addScopeAssignment = function(button) {
+                var assignments = $(button).closest('.document-scope-assignments');
+                var firstRow = assignments.find('.scope-assignment-row:first');
+                if (!firstRow.length) {
+                    return;
+                }
+                var row = firstRow.clone(false, false).removeAttr('style').show();
+                row.find('select').val('');
+                row.find('option[data-fak-id]').show();
+                row.find('.assignment-fakultas, .assignment-prodi').closest('.col-sm-3').show();
+                $(button).before(row);
+                updateAssignmentRow(row);
+            };
+            $(document).on('click', '.remove-assignment', function(event) {
+                event.preventDefault();
+                var assignments = $(this).closest('.document-scope-assignments');
+                if (assignments.find('.scope-assignment-row').length > 1) {
+                    $(this).closest('.scope-assignment-row').remove();
+                } else {
+                    $(this).closest('.scope-assignment-row').find('select').val('');
+                }
+            });
         });
     </script>
 
@@ -333,6 +406,18 @@
             $.toast({
                 heading: 'Error',
                 text: "Image Upload Error.",
+                showHideTransition: 'slide',
+                icon: 'error',
+                hideAfter: false,
+                position: 'bottom-right',
+                bgColor: '#FF4859'
+            });
+        </script>
+    <?php elseif (session()->getFlashdata('msg') == 'error-scope') : ?>
+        <script type="text/javascript">
+            $.toast({
+                heading: 'Error',
+                text: "Manager and validator require valid document scope assignments.",
                 showHideTransition: 'slide',
                 icon: 'error',
                 hideAfter: false,
