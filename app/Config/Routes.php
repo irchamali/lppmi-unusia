@@ -268,6 +268,27 @@ $routes->group('admin', ['filter' => 'authadmin'], static function ($routes) {
         $routes->put('', 'Admin\DocsCategoryAdminController::edit');
         $routes->delete('', 'Admin\DocsCategoryAdminController::delete');
     });
+    // Document Type Route
+    $routes->group('doctype', static function ($routes) {
+        $routes->get('', 'Admin\DocTypeAdminController::index');
+        $routes->post('', 'Admin\DocTypeAdminController::save');
+        $routes->put('', 'Admin\DocTypeAdminController::edit');
+        $routes->delete('', 'Admin\DocTypeAdminController::delete');
+    });
+    // Document Scope Route
+    $routes->group('docscope', static function ($routes) {
+        $routes->get('', 'Admin\DocScopeAdminController::index');
+        $routes->post('', 'Admin\DocScopeAdminController::save');
+        $routes->put('', 'Admin\DocScopeAdminController::edit');
+        $routes->delete('', 'Admin\DocScopeAdminController::delete');
+    });
+    // Document Relation Type Route
+    $routes->group('docrelationtype', static function ($routes) {
+        $routes->get('', 'Admin\DocRelationTypeAdminController::index');
+        $routes->post('', 'Admin\DocRelationTypeAdminController::save');
+        $routes->put('', 'Admin\DocRelationTypeAdminController::edit');
+        $routes->delete('', 'Admin\DocRelationTypeAdminController::delete');
+    });
     // Laporan Route
     $routes->group('laporan', static function ($routes) {
         $routes->get('', 'Admin\LapAdminController::index');
