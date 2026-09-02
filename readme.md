@@ -1,114 +1,114 @@
-# LPPMI UNUSIA 
+# LPPMI UNUSIA
 
-## Deskripsi Ringkas
-Web untuk Lembaga Pengawasan dan Penjaminan Mutu Internal di Universitas Nahdlatul Ulama Indonesia (UNUSIA). Web ini dibangun dengan dukungan kerangka pengembangan web pada Framework CodeIgniter 4.x. Selengkapnya baca [Teknologi](#teknologi) dan [Fitur](#fitur) 👋🏻
+LPPMI UNUSIA is the web application for the Internal Quality Assurance and Monitoring Institution of Universitas Nahdlatul Ulama Indonesia (UNUSIA). It provides a public information portal, content publishing tools, and a role-based quality-document workflow.
 
-<hr>
+## Patch 2 and Framework Upgrade
 
+This repository contains **Patch 2**. The application has been upgraded to the current CodeIgniter 4 release line, using **CodeIgniter 4.7+** and **PHP 8.2+**. The upgrade modernizes project dependencies while preserving the public site, dashboard, and document-management workflows.
 
-## Teknologi
+## Features
 
-Teknologi yang digunakan untuk membangun web ini diantaranya:
+### Public Portal
 
-1. [Codeigniter 4](https://codeigniter.com/)
-2. [Bootstrap 5.1.1 => Halaman depan](https://getbootstrap.com/)
-3. [Bootstrap 3.3.5 => Halaman dashboard](https://getbootstrap.com/)
-4. [Bootstrap icon](https://icons.getbootstrap.com/)
-5. [Fontawsome 4.3.0](https://fontawesome.com/)
-6. [jQuery 2.1.4](https://jquery.com/)
-7. [jQueryUI 1.11.4](http://jqueryui.com)
-8. [jQuery blockUI 2.70.0](http://malsup.com/jquery/block/)
-9. [jQuery-slimScroll 1.3.0](http://rocha.la/jQuery-slimScroll)
-10. [jQuery Mockjax 2.0.1](https://github.com/jakerella/jquery-mockjax)
-11. [Datatables 1.10.7](https://datatables.net/)
-12. [MariaDB / MySql](https://mariadb.org/)
-13. [Summernote](https://summernote.org/)
-14. [AOS](http://michalsnik.github.io/aos/)
-15. [Boxicond](https://boxicons.com/)
-16. [Glightbox](https://biati-digital.github.io/glightbox/)
-17. [Swiper 7.0.6](https://swiperjs.com)
-18. [Isotope PACKAGED v3.0.6](https://isotope.metafizzy.co)
-19. [PHP Email Form Validation - v3.1](https://bootstrapmade.com/php-email-form/)
-20. [purecounter.js 1.1.4](https://github.com/srexi/purecounterjs)
-21. [Waypoints 4.0.1](https://github.com/imakewebthings/waypoints)
-22. [pace 1.0.2](https://github.com/CodeByZach/pace/)
-23. [Uniform 2.1.2](http://pixelmatrixdesign.com)
-24. [Line-icons](https://lineicons.com/)
-25. [OffCanvasMenuEffects](https://tympanus.net/Development/OffCanvasMenuEffects/)
-26. [Waves 0.6.5](http://fian.my.id/Waves)
-27. [Switchery](https://abpetkov.github.io/switchery/)
-28. [3d-bold-navigation](https://codyhouse.co/gem/3d-bold-navigation)
-29. [dropify 0.2.1](https://github.com/JeremyFagis/dropify)
-30. [moment.js 2.10.3](https://momentjs.com)
-31. [toastr](https://github.com/CodeSeven/toastr)
-32. [weather-icons 1.3](http://erikflowers.github.io/weather-icons/)
-33. [metrojs](http://drewgreenwell.com/projects/metrojs)
-34. [chartjs 1.0.2](http://chartjs.org/)
-35. [frontend template](https://themewagon.com/themes/elixir-elegant-html5-bootstrap-template-consultancy-agency-website/)
-36. [blog template](https://bootstrapmade.com/impact-bootstrap-business-website-template/)
-37. And more...
+- Home page, institutional profile, strategy map, milestones, work descriptions, organization structure, team, workflow, and routine monitoring information.
+- News posts with search, categories, tags, author archives, comments, and newsletter subscriptions.
+- Accreditation information and programme study data.
+- Document and report catalogues with detail pages and categories.
+- Quality-assurance forms, including AMI, non-academic audit, strategic plan, operational plan, performance report, and SPMI forms.
+- Gallery, contact form, and complaint page.
 
-<hr>
+### Role-Based Dashboards
 
-## Fitur
+| Role | Main responsibilities |
+| --- | --- |
+| Administrator | Manages posts, programmes, partners, services, categories, tags, inbox, comments, subscribers, documents, reports, accreditation, study programmes, homepage content, users, and site settings. |
+| Author | Creates and manages posts, post categories, tags, comments, and the author profile. |
+| Manager | Creates, updates, and manages the documents assigned to the signed-in manager. |
+| Validator | Reviews documents within the validator's assigned scope and approves, requests revision of, or rejects submitted documents. Revision and rejection require validation notes. |
 
-Fitur pada web ini meliputi:
+Document access is protected by authentication and role filters. Validator decisions are recorded with the validator, timestamp, status, and notes.
 
-1. Halaman Depan
+## Architecture
 
-    - Home
-    - Tentang
-      - Profil
-      - Strategy Map
-      - Milestone
-      - Deskripsi Tugas Kerja
-      - Struktur Organisasi
-      - Personel
-      - Alur Kerja dan PJ
-      - Monev Rutin
-    - Akreditasi
-    - Dokumen
-    - Laporan 
-    - Formulir
-    - Data 
-    - Berita
-    - Kontak
-    - Pengaduan
-    - Login
+### Backend
 
-2. Halaman Dashboard Admin
+- PHP 8.2+
+- CodeIgniter 4.7+
+- MariaDB or MySQL
+- CodeIgniter routing, filters, sessions, validation, migrations, and seeders
+- Composer dependency management
+- PHPUnit 9 for automated tests
+- Kint for development debugging
 
-   - Dashboard
-   - Post
-     - All post
-     - Add new
-     - Category
-     - Tag
-   - Inbox
-   - Comment
-   - Subscriber
-   - Member
-   - Testimonial
-   - Team
-   - Users
-   - Settings
-     - My Profile
-     - Website
-     - Home
-     - About
-   - Logout
+### Frontend
 
-3. Halaman Dashboard Author
+- Server-rendered CodeIgniter views for the public portal and dashboards
+- Bootstrap-based public and administrative interfaces
+- jQuery and jQuery UI
+- DataTables, Summernote, Chart.js, Toastr, Moment.js, and Dropify
+- Public-site assets include AOS, GLightbox, Swiper, Isotope, PureCounter, Waypoints, Boxicons, and Bootstrap Icons
 
-   - Dashboard
-   - Post
-     - All post
-     - Add new
-     - Category
-     - Tag
-   - Comment
-   - Settings
-     - My Profile
-   - Logout
+The public template assets are located in `public/assets/elixir`; dashboard assets are located in `public/assets/backend`.
+
+## Installation
+
+1. Install PHP 8.2+, Composer, and MariaDB or MySQL.
+2. Install PHP dependencies:
+
+   ```bash
+   composer install
+   ```
+
+3. Copy the environment template and configure the database connection:
+
+   ```bash
+   cp env .env
+   ```
+
+4. Set `database.default.*` values and `app.baseURL` in `.env`.
+5. Run database migrations when required by your environment:
+
+   ```bash
+   php spark migrate
+   ```
+
+6. Start the local development server:
+
+   ```bash
+   php spark serve
+   ```
+
+The application will be available at `http://localhost:8080` by default.
+
+## Useful Commands
+
+```bash
+# Run the test suite
+composer test
+
+# List registered routes
+php spark routes
+
+# Clear application caches
+php spark cache:clear
+```
+
+## Project Structure
+
+```text
+app/
+  Config/        Application, route, filter, database, and security configuration
+  Controllers/   Public controllers plus Admin, Author, Manager, and Validator areas
+  Models/        Database access and workflow logic
+  Views/         Public portal, dashboard, and authentication views
+  Database/      Migrations and seeders
+public/          Web root and frontend assets
+tests/           PHPUnit tests and test support files
+writable/        Logs, cache, sessions, and uploaded files
+```
+
+## License
+
+See [LICENSE](LICENSE).
 
 <hr>
