@@ -99,7 +99,7 @@
                                         <div class="col-sm-10">
                                             <input type="file" name="img_testimonial3" class="form-control" id="input1">
                                             <p class="help-block">Image struktur organisasi sebaiknya beresolusi 726 x 790 Pixels.</p>
-                                            <img src="/assets/backend/images/home/<?= $homes['home_bg_testimonial3']; ?>" width="560" class="thumbnail">
+                                            <img src="/assets/backend/images/home/<?= $homes['home_bg_testimonial3'] ?? ''; ?>" width="560" class="thumbnail">
                                         </div>
                                     </div>
 

@@ -40,17 +40,17 @@
                         <h5 class="fw-medium ms-3 mb-0"><?= $about['about_visi']; ?></h5>
                         </blockquote><br>
                         <h5>Misi</h5>
-                        <p class="column-lg-6 mb-1">
-                        1. Mewujudkan Good University Governance melalui pengawasan dan penjaminan mutu bidang akademik dan nonakademik.<br> 
-                        2. Memastikan pelaksanaan sistem mutu dan tata kelola yang mengandung prinsip profesional, independen, objektif, kredibel, berintegritas, dan meningkatkan budaya kolaborasi.<br>
-                        3. Menyusun peta risiko (manajemen risiko) bidang akademik dan nonakademik guna perbaikan berkelanjutan.<br>
-                        4. Melakukan pengawasan tata kelola bidang pengelolaan keuangan, perencanaan dan sarana prasarana, sumber daya manusia, kemahasiswaan, kerja sama, serta hal terkait nonakademik lainnya.<br>
-                        5. Menjamin dan mendampingi proses sistem penjaminan mutu akademik dan nonakademik melalui siklus Penetapan, Pelaksanaan, Evaluasi, Pengendalian, dan Peningkatan (PPEPP) satu kali dalam satu tahun akademik.<br>
-                        6. Melakukan reviu, evaluasi, pemantauan, dan bentuk pengawasan lainnya atas kegiatan objek pengawasan dan pemeriksaan kinerja akademik dan nonakademik universitas.<br>
-                        7. Memberikan rekomendasi perbaikan dalam rangka meningkatkan mutu dan tata kelola serta kinerja akademik dan nonakademik universitas.<br>
-                        8. Melaksanakan kegiatan peningkatan kapasitas personel LPPMI UNUSIA.<br> 
-                        9. Bekerja sama dan berkolaborasi dengan lembaga terkait yang berasal dari perguruan tinggi lain ataupun lembaga lain yang terkait guna meningkatkan inovasi dan kinerja LPPMI UNUSIA serta mutu UNUSIA secara keseluruhan.
-                        </p>
+                        <ol class="column-lg-6 mb-4">
+                        <?php foreach (preg_split('/\r\n|\r|\n/', $about['about_misi'], -1, PREG_SPLIT_NO_EMPTY) as $misi) : ?>
+                          <li><?= esc(trim($misi)); ?></li>
+                        <?php endforeach; ?>
+                        </ol>
+                        <!-- <h5>Strategi</h5>
+                        <ol class="column-lg-6 mb-1">
+                        <?php foreach (preg_split('/\r\n|\r|\n/', $about['about_strategi'], -1, PREG_SPLIT_NO_EMPTY) as $strategi) : ?>
+                          <li><?= esc(trim($strategi)); ?></li>
+                        <?php endforeach; ?>
+                        </ol> -->
                     </div>
                 </div>
             </div>

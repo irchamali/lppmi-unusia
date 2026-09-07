@@ -74,9 +74,9 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="input1" class="col-sm-2 control-label">Nilai-nilai</label>
+                                        <label for="input1" class="col-sm-2 control-label">Strategi</label>
                                         <div class="col-sm-10">
-                                            <textarea name="strategi" class="form-control" rows="6" placeholder="Nilai2"><?= $abouts['about_strategi']; ?></textarea>
+                                            <textarea name="strategi" class="form-control" rows="6" placeholder="Nilai2"><?= $abouts['about_strategi'] ?? ''; ?></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
