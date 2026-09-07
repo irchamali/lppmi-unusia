@@ -34,8 +34,12 @@ class ApsAdminController extends BaseController
             'helper_text' => helper('text'),
             'breadcrumbs' => $this->request->getUri()->getSegments(),
             'studies' => $this->prodiModel->findAll(),
-            'aps' => $this->apsModel->findAll()
-            // 'pstudies' => $this->apsModel->getAllAps()->getResultArray()
+            'aps' => $this->apsModel->db->table('tbl_akreditasi')
+                ->select('tbl_akreditasi.*, tbl_prodi.prodi_nama')
+                ->join('tbl_prodi', 'tbl_prodi.prodi_id = tbl_akreditasi.prodi_id', 'left')
+                ->orderBy('tbl_akreditasi.created_at', 'DESC')
+                ->get()
+                ->getResultArray()
         ];
 
         return view('admin/v_akreditasi', $data);

@@ -58,7 +58,7 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <!-- <th>Prodi id</th> -->
+                                                <th>Prodi</th>
                                                 <th>No.SK</th>
                                                 <th>Tahun SK</th>
                                                 <th>Peringkat</th>
@@ -75,7 +75,7 @@
                                             ?>
                                                 <tr>
                                                     <td style="vertical-align: middle;"><?= $no; ?></td>
-                                                    <!-- <td style="vertical-align: middle;"><?= $row['prodi_id']; ?></td> -->
+                                                    <td style="vertical-align: middle;"><?= esc($row['prodi_nama'] ?? '-'); ?></td>
                                                     <td style="vertical-align: middle;"><?= $row['no_sk']; ?></td>
                                                     <td style="vertical-align: middle;"><?= $row['thn_sk']; ?></td>
                                                     <td style="vertical-align: middle;"><?= $row['peringkat']; ?></td>
@@ -164,7 +164,7 @@
                                     <input type="text" name="peringkat" class="form-control" placeholder="Peringkat" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="kadaluarsa" class="form-control" placeholder="Kadaluarsa" required>
+                                    <input type="text" name="kadaluarsa" class="form-control datepicker" placeholder="dd-mm-yyyy" autocomplete="off" readonly required>
                                 </div>
                                 <div class="form-group">
                                     <textarea type="url" name="link" class="form-control" placeholder="Link misal: https://drive.google.com/" required></textarea>
@@ -218,7 +218,7 @@
                                         <input type="text" name="peringkat" value="<?= $row['peringkat']; ?>" class="form-control" placeholder="Peringkat Akreditasi" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="kadaluarsa" value="<?= $row['tgl_kadaluarsa']; ?>" class="form-control" placeholder="Tgl Kadaluarsa Akreditasi" required>
+                                        <input type="text" name="kadaluarsa" value="<?= $row['tgl_kadaluarsa']; ?>" class="form-control datepicker" placeholder="dd-mm-yyyy" autocomplete="off" readonly required>
                                     </div>
                                     <div class="form-group">
                                         <textarea name="link" class="form-control" rows="2" placeholder="Share Link Bukti" required><?= $row['aps_link']; ?></textarea>
@@ -294,6 +294,11 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#mytable').DataTable();
+            $('.datepicker').datepicker({
+                format: 'dd-mm-yyyy',
+                autoclose: true,
+                todayHighlight: true
+            });
             $('.dropify').dropify({
                 defaultFile: '',
                 messages: {

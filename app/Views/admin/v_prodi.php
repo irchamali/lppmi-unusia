@@ -75,8 +75,15 @@
                                                     <td><?= $row['prodi_kode']; ?></td>
                                                     <td><?= $row['prodi_strata']; ?></td>
                                                     <td style="text-align: center;">
-                                                        <a href="javascript:void(0);" data-toggle="modal" data-target="#ModalEdit<?= $row['prodi_id']; ?>"><span class="icon-pencil"></span> Edit</a>
-                                                        <a href="javascript:void(0);" class="btn btn-xs btn-delete" data-id="<?= $row['prodi_id']; ?>"><span class="fa fa-trash"></span> Del</a>
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                                Action <span class="caret"></span>
+                                                            </button>
+                                                            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                                                <li><a href="javascript:void(0);" data-toggle="modal" data-target="#ModalEdit<?= $row['prodi_id']; ?>"><span class="icon-pencil"></span> Edit</a></li>
+                                                                <li><a href="javascript:void(0);" class="btn-delete" data-id="<?= $row['prodi_id']; ?>"><span class="fa fa-trash"></span> Delete</a></li>
+                                                            </ul>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
@@ -120,7 +127,12 @@
                             <input type="text" name="kodeps" class="form-control" placeholder="Kode Prodi" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="strata" class="form-control" placeholder="S1/S2/S3" required>
+                            <select name="strata" class="form-control" required>
+                                <option value="">- Pilih Strata -</option>
+                                <option value="S1">S1</option>
+                                <option value="S2">S2</option>
+                                <option value="S3">S3</option>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -167,7 +179,12 @@
                                         <input type="text" name="kode" value="<?= $row['prodi_kode']; ?>" class="form-control" placeholder="Kode Prodi" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="strata" value="<?= $row['prodi_strata']; ?>" class="form-control" placeholder="S1/S2/S3" required>
+                                        <select name="strata" class="form-control" required>
+                                            <option value="">- Pilih Strata -</option>
+                                            <?php foreach (['S1', 'S2', 'S3'] as $strataOption): ?>
+                                                <option value="<?= $strataOption; ?>" <?= $row['prodi_strata'] === $strataOption ? 'selected' : ''; ?>><?= $strataOption; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <textarea name="link" class="form-control" rows="2" placeholder="Link Prodi" required><?= $row['prodi_link']; ?></textarea>
