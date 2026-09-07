@@ -2,8 +2,15 @@
 <?= $this->section('content'); ?>
 
 <?php
-$createdAt = !empty($document['docs_created_at']) ? date('d M Y H:i', strtotime((string) $document['docs_created_at'])) : '-';
-$updatedAt = !empty($document['docs_updated_at']) ? date('d M Y H:i', strtotime((string) $document['docs_updated_at'])) : '-';
+$documentDate = !empty($document['document_date']) ? date('d M Y', strtotime((string) $document['document_date'])) : '-';
+$ppeppLabels = [
+    'penetapan' => 'Penetapan',
+    'pelaksanaan' => 'Pelaksanaan',
+    'evaluasi' => 'Evaluasi',
+    'pengendalian' => 'Pengendalian',
+    'peningkatan' => 'Peningkatan',
+];
+$ppeppLabel = $ppeppLabels[$document['ppepp_stage'] ?? ''] ?? null;
 ?>
 
 <main class="main" id="top">
@@ -33,13 +40,24 @@ $updatedAt = !empty($document['docs_updated_at']) ? date('d M Y H:i', strtotime(
           <div class="bg-white rounded-3 p-4 h-100 sticky-sidebar">
             <h5 class="text-uppercase mb-3">Informasi Dokumen</h5>
             <ul class="list-unstyled mb-4">
-              <li class="mb-2"><strong>Nama</strong><br><?= esc($document['docs_name']); ?></li>
-              <li class="mb-2"><strong>Pembuat</strong><br><?= esc($document['docs_unit']); ?></li>
-              <li class="mb-2"><strong>No. SK</strong><br><?= esc($document['docs_sk']); ?></li>
-              <li class="mb-2"><strong>Tahun</strong><br><?= esc($document['docs_year']); ?></li>
-              <li class="mb-2"><strong>Kategori</strong><br><?= esc($document['docscategory_name'] ?? '-'); ?></li>
-              <li class="mb-2"><strong>Dibuat</strong><br><?= esc($createdAt); ?></li>
-              <li class="mb-2"><strong>Diperbarui</strong><br><?= esc($updatedAt); ?></li>
+              <li class="mb-2"><strong>Judul</strong><br><?= esc($document['document_title']); ?></li>
+              <li class="mb-2"><strong>Nomor</strong><br><?= esc($document['document_number']); ?></li>
+              <li class="mb-2"><strong>Tanggal</strong><br><?= esc($documentDate); ?></li>
+              <li class="mb-2"><strong>Kategori</strong><br><?= esc($document['category_name'] ?? '-'); ?></li>
+              <li class="mb-2"><strong>Jenis</strong><br><?= esc($document['type_name'] ?? '-'); ?></li>
+              <li class="mb-2"><strong>Lingkup</strong><br><?= esc($document['scope_name'] ?? '-'); ?></li>
+              <?php if (!empty($document['fak_name'])) : ?>
+                <li class="mb-2"><strong>Fakultas</strong><br><?= esc($document['fak_name']); ?></li>
+              <?php endif; ?>
+              <?php if (!empty($document['prodi_nama'])) : ?>
+                <li class="mb-2"><strong>Program Studi</strong><br><?= esc($document['prodi_nama']); ?></li>
+              <?php endif; ?>
+              <?php if ($ppeppLabel !== null) : ?>
+                <li class="mb-2"><strong>Tahap PPEPP</strong><br><?= esc($ppeppLabel); ?></li>
+              <?php endif; ?>
+              <?php if (!empty($document['document_description'])) : ?>
+                <li class="mb-2"><strong>Deskripsi</strong><br><?= nl2br(esc($document['document_description'])); ?></li>
+              <?php endif; ?>
             </ul>
 
             <div class="d-grid gap-2">
@@ -51,12 +69,35 @@ $updatedAt = !empty($document['docs_updated_at']) ? date('d M Y H:i', strtotime(
         </div>
 
         <div class="col-lg-8">
-          <div class="bg-white rounded-3 p-4">
+          <div class="bg-white rounded-3 p-4 mb-4">
             <h5 class="mb-3">Preview Dokumen</h5>
             <p class="mb-3 text-700">Jika preview tidak tampil, gunakan tombol Buka Preview atau Download Dokumen.</p>
             <div class="ratio ratio-16x9" style="min-height: 70vh;">
-              <iframe src="<?= esc($preview_link); ?>" title="Preview <?= esc($document['docs_name']); ?>" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <iframe src="<?= esc($preview_link); ?>" title="Preview <?= esc($document['document_title']); ?>" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
+          </div>
+
+          <div class="bg-white rounded-3 p-4">
+            <h5 class="mb-3">Dokumen Terkait</h5>
+            <?php if (empty($related_documents)) : ?>
+              <p class="text-muted small mb-0">Belum ada dokumen terkait yang tertaut untuk dokumen ini.</p>
+            <?php else : ?>
+              <?php foreach ($related_documents as $relationName => $items) : ?>
+                <div class="mb-3">
+                  <h6 class="text-uppercase text-muted small mb-2"><?= esc($relationName); ?></h6>
+                  <ul class="list-unstyled mb-0">
+                    <?php foreach ($items as $related) : ?>
+                      <li class="mb-2">
+                        <a href="<?= base_url('d/' . $related['docs_slug']); ?>"><?= esc($related['document_title']); ?></a>
+                        <?php if (!empty($related['relation_notes'])) : ?>
+                          <span class="text-muted small d-block"><?= esc($related['relation_notes']); ?></span>
+                        <?php endif; ?>
+                      </li>
+                    <?php endforeach; ?>
+                  </ul>
+                </div>
+              <?php endforeach; ?>
+            <?php endif; ?>
           </div>
         </div>
       </div>

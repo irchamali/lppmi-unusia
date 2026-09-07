@@ -74,7 +74,7 @@
                 <li class="nav-item dropdown"><a class="nav-link" href="/documents" role="button">Dokumen</a>
                 </li>
 
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle dropdown-indicator" href="/reports" role="button" data-bs-toggle="dropdown" aria-expanded="false">Laporan</a>
+                <!-- <li class="nav-item dropdown"><a class="nav-link dropdown-toggle dropdown-indicator" href="/reports" role="button" data-bs-toggle="dropdown" aria-expanded="false">Laporan</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/r/hasil-survei">Hasil Survei</a></li>
                         <li><a class="dropdown-item" href="/r/tracer-study">Tracer Study</a></li>
@@ -95,7 +95,7 @@
                     <li><a class="dropdown-item" href="/progressreport">Laporan Progres</a></li>
                     <li><a class="dropdown-item" href="/formspmi">Formulir SPMI</a></li>
                 </ul>
-              </li>
+              </li> -->
 
               <!-- <li class="nav-item dropdown"><a class="nav-link dropdown-toggle dropdown-indicator" href="JavaScript:void(0)" role="button" data-bs-toggle="dropdown" aria-expanded="false">Data</a>
                     <ul class="dropdown-menu">

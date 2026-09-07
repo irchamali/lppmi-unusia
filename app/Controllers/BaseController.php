@@ -94,6 +94,8 @@ abstract class BaseController extends Controller
     protected $tagModel;
     protected $teamModel;
     protected $testimonialModel;
+    protected $typeModel;
+    protected $relationModel;
     protected $userModel;
     protected $userDocumentScopeModel;
     protected $visitorModel;

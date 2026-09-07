@@ -5,9 +5,12 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\AboutModel;
 use App\Models\HomeModel;
-use App\Models\DocsModel;
-use App\Models\DocsCategoryModel;
 use App\Models\SiteModel;
+use App\Models\DocumentModel;
+use App\Models\DocumentCategoryModel;
+use App\Models\DocumentTypeModel;
+use App\Models\DocumentScopeModel;
+use App\Models\ProdiModel;
 
 class CategoryDocsController extends BaseController
 {
@@ -16,22 +19,30 @@ class CategoryDocsController extends BaseController
         $this->homeModel = new HomeModel();
         $this->siteModel = new SiteModel();
         $this->aboutModel = new AboutModel();
-        $this->docsModel = new DocsModel();
-        $this->docscategoryModel = new DocscategoryModel();
+        $this->documentModel = new DocumentModel();
+        $this->categoryModel = new DocumentCategoryModel();
+        $this->typeModel = new DocumentTypeModel();
+        $this->scopeModel = new DocumentScopeModel();
+        $this->prodiModel = new ProdiModel();
     }
     public function index($slug = null)
     {
         if ($slug == null) {
-            return redirect()->to('/d');
+            return redirect()->to('/documents');
         }
-        $documents = $this->docscategoryModel->getDocs_by_category($slug);
-        if ($documents->getNumRows() < 1) {
-            $documents = $documents->getResultArray();
-            $keyword = "Dokumen '$slug' tidak ditemukan";
-        } else {
-            $documents = $documents->getResultArray();
-            $keyword = "Dokumen: $slug ";
-        }
+
+        $category = $this->categoryModel->where('category_slug', $slug)->first();
+        $filters = [
+            'category' => $slug,
+            'type' => trim((string) ($this->request->getGet('type') ?? '')) ?: null,
+            'scope' => trim((string) ($this->request->getGet('scope') ?? '')) ?: null,
+            'year' => trim((string) ($this->request->getGet('year') ?? '')) ?: null,
+            'fakultas' => trim((string) ($this->request->getGet('fakultas') ?? '')) ?: null,
+            'prodi' => trim((string) ($this->request->getGet('prodi') ?? '')) ?: null,
+        ];
+
+        $documents = $category !== null ? $this->documentModel->getPublicDocuments($filters) : [];
+        $keyword = $category !== null ? 'Dokumen kategori: ' . $category['category_name'] : "Kategori '$slug' tidak ditemukan";
 
         foreach ($documents as &$document) {
             $document['docs_slug'] = $this->createDocumentSlug($document);
@@ -42,28 +53,45 @@ class CategoryDocsController extends BaseController
             'site' => $this->siteModel->find(1),
             'home' => $this->homeModel->find(1),
             'about' => $this->aboutModel->find(1),
-            'documents' => $this->docscategoryModel->getDocs_by_category($slug),
+            'documents' => $documents,
+            'category' => $category,
+            'categories' => $this->categoryModel->where('category_status', 1)->orderBy('category_name', 'ASC')->findAll(),
+            'types' => $this->typeModel->where('type_status', 1)->orderBy('type_name', 'ASC')->findAll(),
+            'scopes' => $this->scopeModel->where('scope_status', 1)->orderBy('scope_name', 'ASC')->findAll(),
+            'years' => $this->documentModel->getPublicDocumentYears(),
+            'fakultasList' => $this->prodiModel->db->table('tbl_fakultas')->orderBy('fak_name', 'ASC')->get()->getResultArray(),
+            'prodiList' => $this->prodiModel->db->table('tbl_prodi')
+                ->select('tbl_prodi.prodi_id, tbl_prodi.prodi_nama, tbl_prodi.prodi_slug, tbl_prodi.fak_id, tbl_fakultas.fak_slug')
+                ->join('tbl_fakultas', 'tbl_fakultas.fak_id = tbl_prodi.fak_id', 'left')
+                ->orderBy('tbl_prodi.prodi_nama', 'ASC')
+                ->get()
+                ->getResultArray(),
+            'filters' => $filters,
+            'hideCategoryFilter' => true,
+            'formAction' => base_url('documents/' . $slug),
             'title' => 'Document',
             'url' => 'd',
             'keyword' => $keyword,
-            'documents' => $documents,
             'active' => 'Document'
         ];
         return view('documents/document_category', $data);
     }
 
+    /**
+     * Slug berisi cuplikan judul+tahun agar mudah dibaca, diakhiri id dokumen agar pencarian efisien & stabil.
+     */
     private function createDocumentSlug(array $document): string
     {
-        $year = trim((string) ($document['docs_year'] ?? ''));
-        $name = trim((string) ($document['docs_name'] ?? ''));
+        $year = !empty($document['document_date']) ? date('Y', strtotime((string) $document['document_date'])) : '';
+        $name = trim((string) ($document['document_title'] ?? ''));
         $shortName = $this->shortenName($name, 6);
         $slugSource = trim($year . ' ' . $shortName);
 
         if ($slugSource === '') {
-            $slugSource = (string) ($document['docs_id'] ?? 'dokumen');
+            $slugSource = 'dokumen';
         }
 
-        return $this->slugify($slugSource);
+        return $this->slugify($slugSource) . '-' . (int) $document['document_id'];
     }
 
     private function shortenName(string $name, int $maxWords): string
@@ -86,3 +114,4 @@ class CategoryDocsController extends BaseController
         return $value !== '' ? $value : 'dokumen';
     }
 }
+

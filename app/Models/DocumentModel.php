@@ -85,10 +85,69 @@ class DocumentModel extends Model
 
         return $summary;
     }
+    /**
+     * Daftar dokumen terpublikasi (status approved) untuk halaman publik, dengan filter berlapis opsional.
+     *
+     * @param array{category: ?string, type: ?string, scope: ?string, year: ?string, fakultas: ?string, prodi: ?string} $filters
+     */
+    public function getPublicDocuments(array $filters = []): array
+    {
+        $builder = $this->documentQuery()->where('tbl_documents.status', 'approved');
+
+        if (!empty($filters['category'])) {
+            $builder->where('tbl_document_category.category_slug', $filters['category']);
+        }
+        if (!empty($filters['type'])) {
+            $builder->where('tbl_document_type.type_slug', $filters['type']);
+        }
+        if (!empty($filters['scope'])) {
+            $builder->where('tbl_document_scope.scope_slug', $filters['scope']);
+        }
+        if (!empty($filters['year'])) {
+            $builder->where('YEAR(tbl_documents.document_date)', (int) $filters['year']);
+        }
+        if (!empty($filters['fakultas'])) {
+            $builder->where('tbl_fakultas.fak_slug', $filters['fakultas']);
+        }
+        if (!empty($filters['prodi'])) {
+            $builder->where('tbl_prodi.prodi_slug', $filters['prodi']);
+        }
+
+        return $builder->orderBy('tbl_documents.document_date', 'DESC')->get()->getResultArray();
+    }
+
+    public function findPublicDocument(int $documentId): ?array
+    {
+        $row = $this->documentQuery()
+            ->where('tbl_documents.status', 'approved')
+            ->where('tbl_documents.document_id', $documentId)
+            ->get()
+            ->getRowArray();
+
+        return $row ?: null;
+    }
+
+    /**
+     * Tahun-tahun yang tersedia dari dokumen terpublikasi, untuk opsi filter.
+     */
+    public function getPublicDocumentYears(): array
+    {
+        $rows = $this->db->table($this->table)
+            ->select('YEAR(document_date) AS year', false)
+            ->where('status', 'approved')
+            ->where('document_date IS NOT NULL')
+            ->groupBy('year')
+            ->orderBy('year', 'DESC')
+            ->get()
+            ->getResultArray();
+
+        return array_values(array_filter(array_column($rows, 'year')));
+    }
+
     protected function documentQuery()
     {
         return $this->db->table($this->table)
-            ->select('tbl_documents.*, tbl_document_category.category_name, tbl_document_type.type_name, tbl_document_scope.scope_name, tbl_document_scope.scope_slug, tbl_fakultas.fak_name, tbl_prodi.prodi_nama')
+            ->select('tbl_documents.*, tbl_document_category.category_name, tbl_document_category.category_slug, tbl_document_type.type_name, tbl_document_type.type_slug, tbl_document_scope.scope_name, tbl_document_scope.scope_slug, tbl_fakultas.fak_name, tbl_prodi.prodi_nama')
             ->join('tbl_document_category', 'tbl_documents.category_id = tbl_document_category.category_id', 'left')
             ->join('tbl_document_type', 'tbl_documents.type_id = tbl_document_type.type_id', 'left')
             ->join('tbl_document_scope', 'tbl_documents.scope_id = tbl_document_scope.scope_id', 'left')

@@ -16,15 +16,22 @@
                         <div class="panel panel-white">
 
                             <div class="panel-body">
+                                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                                    <h5 class="mb-0"><?= esc($keyword); ?></h5>
+                                    <span class="text-muted small"><?= count($documents); ?> dokumen ditemukan</span>
+                                </div>
+
+                                <?= $this->include('documents/_filter_form'); ?>
+
                                 <div class="table-responsive">
                                     <table id="mytable" class="display table table-striped table-hover" style="width: 100%; ">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Tahun</th>
-                                                <th>Nama Dokumen</th>
-                                                <th>Pembuat</th>                    
-                                                <th>Kategori</th>
+                                                <th>Tanggal</th>
+                                                <th>Judul Dokumen</th>
+                                                <th>Jenis</th>
+                                                <th>Lingkup</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -36,10 +43,10 @@
                                             ?>
                                                 <tr>
                                                     <td style="vertical-align: middle;"><?= $no; ?></td>
-                                                    <td style="vertical-align: middle;"><?= $row['docs_year']; ?></td>
-                                                    <td style="vertical-align: middle;"><a href="<?= base_url('d/' . $row['docs_slug']); ?>"><?= $row['docs_name']; ?></a></td>
-                                                    <td style="vertical-align: middle;"><?= $row['docs_unit']; ?></td>
-                                                    <td style="vertical-align: middle;"><?= $row['docscategory_name']; ?></td>
+                                                    <td style="vertical-align: middle;"><?= !empty($row['document_date']) ? date('d M Y', strtotime((string) $row['document_date'])) : '-'; ?></td>
+                                                    <td style="vertical-align: middle;"><a href="<?= base_url('d/' . $row['docs_slug']); ?>"><?= esc($row['document_title']); ?></a></td>
+                                                    <td style="vertical-align: middle;"><?= esc($row['type_name'] ?? '-'); ?></td>
+                                                    <td style="vertical-align: middle;"><?= esc($row['scope_name'] ?? '-'); ?></td>
                                                     <td style="vertical-align: middle;">
                                                         <div class="btn-group">
                                                         <a class="btn-sm btn btn-outline-primary" href="<?= base_url('d/' . $row['docs_slug']); ?>"><i class="fas fa-eye"></i></a>
