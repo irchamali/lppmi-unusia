@@ -128,6 +128,38 @@ class DocumentModel extends Model
     }
 
     /**
+     * Dokumen approved yang boleh direlasikan oleh manager: milik fakultas/prodi-nya sendiri
+     * atau berlingkup universitas (fak_id null), tidak termasuk fakultas lain.
+     */
+    public function getRelatableDocumentsForManager(int $userId): array
+    {
+        $ownFacultyRows = $this->db->table('tbl_user_document_scope')
+            ->select('fak_id')
+            ->where('user_id', $userId)
+            ->where('scope_status', 1)
+            ->where('fak_id IS NOT NULL', null, false)
+            ->groupBy('fak_id')
+            ->get()
+            ->getResultArray();
+
+        $ownFacultyIds = array_values(array_filter(array_map(
+            static fn (array $row): int => (int) ($row['fak_id'] ?? 0),
+            $ownFacultyRows
+        )));
+
+        $builder = $this->documentQuery()->where('tbl_documents.status', 'approved');
+
+        $builder->groupStart()
+            ->where('tbl_documents.fak_id', null);
+        if ($ownFacultyIds !== []) {
+            $builder->orWhereIn('tbl_documents.fak_id', $ownFacultyIds);
+        }
+        $builder->groupEnd();
+
+        return $builder->orderBy('tbl_documents.document_date', 'DESC')->get()->getResultArray();
+    }
+
+    /**
      * Tahun-tahun yang tersedia dari dokumen terpublikasi, untuk opsi filter.
      */
     public function getPublicDocumentYears(): array

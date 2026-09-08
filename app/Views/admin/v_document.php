@@ -344,6 +344,16 @@
                                 <?php if (!empty($row['prodi_nama'])) : ?><p><strong>Program Studi:</strong><br><?= esc($row['prodi_nama']); ?></p><?php endif; ?>
                                 <p><strong>Description:</strong><br><?= nl2br(esc($row['document_description'])); ?></p>
                                 <?php if (!empty($row['validation_notes'])) : ?><p><strong>Validation Notes:</strong><br><?= nl2br(esc($row['validation_notes'])); ?></p><?php endif; ?>
+                                <?php $relatedDocs = $relations[$row['document_id']] ?? []; ?>
+                                <?php if ($relatedDocs !== []) : ?>
+                                <p><strong>Related Documents:</strong></p>
+                                <ul class="list-unstyled">
+                                    <?php foreach ($relatedDocs as $related) : ?>
+                                        <?php $relatedStatus = $related['status'] ?: 'submitted'; ?>
+                                        <li><span class="label label-default"><?= esc($related['relation_name']); ?></span> <?= esc($related['document_title']); ?> (<?= esc($related['document_number']); ?>) <span class="label <?= ['approved' => 'label-success', 'revised' => 'label-warning', 'submitted' => 'label-default', 'rejected' => 'label-danger', 'archived' => 'label-info'][$relatedStatus] ?? 'label-default'; ?>"><?= esc(ucfirst($relatedStatus)); ?></span></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                                <?php endif; ?>
                                 <p><a href="<?= esc($row['document_file']); ?>" target="_blank" rel="noopener noreferrer" class="btn btn-default btn-sm"><i class="fa fa-external-link"></i> Open Document</a></p>
                             </div>
                             <div class="col-md-7">

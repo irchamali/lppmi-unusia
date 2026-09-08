@@ -5,6 +5,7 @@ namespace App\Controllers\Validator;
 use App\Controllers\BaseController;
 use App\Models\CommentModel;
 use App\Models\DocumentModel;
+use App\Models\DocumentRelationModel;
 use App\Models\InboxModel;
 use App\Models\ProdiModel;
 use App\Models\SiteModel;
@@ -13,6 +14,7 @@ class DocumentValidatorController extends BaseController
 {
     protected $commentModel;
     protected $documentModel;
+    protected $relationModel;
     protected $inboxModel;
     protected $prodiModel;
     protected $siteModel;
@@ -21,6 +23,7 @@ class DocumentValidatorController extends BaseController
     {
         $this->commentModel = new CommentModel();
         $this->documentModel = new DocumentModel();
+        $this->relationModel = new DocumentRelationModel();
         $this->inboxModel = new InboxModel();
         $this->prodiModel = new ProdiModel();
         $this->siteModel = new SiteModel();
@@ -28,6 +31,9 @@ class DocumentValidatorController extends BaseController
 
     public function index()
     {
+        $documents = $this->documentModel->getDocumentsForValidator((int) session('id'));
+        $documentIds = array_map(static fn (array $row): int => (int) $row['document_id'], $documents);
+
         return view('admin/v_document', [
             'site' => $this->siteModel->find(1),
             'akun' => $this->akun,
@@ -44,7 +50,8 @@ class DocumentValidatorController extends BaseController
             'types' => [],
             'fakultas' => $this->prodiModel->db->table('tbl_fakultas')->orderBy('fak_name', 'ASC')->get()->getResultArray(),
             'prodi' => $this->prodiModel->orderBy('prodi_nama', 'ASC')->findAll(),
-            'documents' => $this->documentModel->getDocumentsForValidator((int) session('id'))
+            'documents' => $documents,
+            'relations' => $this->relationModel->getRelationsForDocuments($documentIds),
         ]);
     }
 

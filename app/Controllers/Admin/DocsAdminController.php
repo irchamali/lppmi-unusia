@@ -8,6 +8,7 @@ use App\Models\InboxModel;
 use App\Models\SiteModel;
 use App\Models\DocumentModel;
 use App\Models\DocumentCategoryModel;
+use App\Models\DocumentRelationModel;
 use App\Models\DocumentScopeModel;
 use App\Models\DocumentTypeModel;
 use App\Models\ProdiModel;
@@ -19,6 +20,7 @@ class DocsAdminController extends BaseController
     protected $siteModel;
     protected $documentModel;
     protected $docscategoryModel;
+    protected $relationModel;
     protected $scopeModel;
     protected $typeModel;
     protected $prodiModel;
@@ -30,6 +32,7 @@ class DocsAdminController extends BaseController
         $this->siteModel = new SiteModel();
         $this->documentModel = new DocumentModel();
         $this->docscategoryModel = new DocumentCategoryModel();
+        $this->relationModel = new DocumentRelationModel();
         $this->scopeModel = new DocumentScopeModel();
         $this->typeModel = new DocumentTypeModel();
         $this->prodiModel = new ProdiModel();
@@ -39,6 +42,8 @@ class DocsAdminController extends BaseController
         $documents = session('role') === 'manager'
             ? $this->documentModel->getDocumentsByUser((int) session('id'))
             : $this->documentModel->getAllDocuments();
+
+        $documentIds = array_map(static fn (array $row): int => (int) $row['document_id'], $documents);
 
         $data = [
             'site' => $this->siteModel->find(1),
@@ -56,7 +61,8 @@ class DocsAdminController extends BaseController
             'types'      => $this->typeModel->findAll(),
             'fakultas'   => $this->prodiModel->db->table('tbl_fakultas')->orderBy('fak_name', 'ASC')->get()->getResultArray(),
             'prodi'      => $this->prodiModel->orderBy('prodi_nama', 'ASC')->findAll(),
-            'documents'  => $documents
+            'documents'  => $documents,
+            'relations'  => $this->relationModel->getRelationsForDocuments($documentIds),
         ];
 
         return view('admin/v_document', $data);

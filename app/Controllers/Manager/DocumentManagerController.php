@@ -8,6 +8,9 @@ class DocumentManagerController extends DocsAdminController
 {
 	public function index()
 	{
+		$documents = $this->documentModel->getDocumentsByUser((int) session('id'));
+		$documentIds = array_map(static fn (array $row): int => (int) $row['document_id'], $documents);
+
 		return view('admin/v_document', [
 			'site' => $this->siteModel->find(1),
 			'akun' => $this->akun,
@@ -24,7 +27,8 @@ class DocumentManagerController extends DocsAdminController
 			'types' => $this->typeModel->findAll(),
 			'fakultas' => $this->prodiModel->db->table('tbl_fakultas')->orderBy('fak_name', 'ASC')->get()->getResultArray(),
 			'prodi' => $this->prodiModel->orderBy('prodi_nama', 'ASC')->findAll(),
-			'documents' => $this->documentModel->getDocumentsByUser((int) session('id')),
+			'documents' => $documents,
+			'relations' => $this->relationModel->getRelationsForDocuments($documentIds),
 		]);
 	}
 	public function dashboard()

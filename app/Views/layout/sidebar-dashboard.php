@@ -166,10 +166,26 @@
             <?php endif; ?>
 
             <?php if (session('role') === 'manager') : ?>
-            <li class="<?= ($title === 'All Document') ? 'active' : '' ?>"><a href="/manager/document" class="waves-effect waves-button"><span class="menu-icon icon-link"></span><p>Documents</p></a></li>
+            <li class="droplink <?= in_array($title, ['All Document', 'Document Relations'], true) ? 'active open' : '' ?>"><a
+                    href="#" class="waves-effect waves-button"><span class="menu-icon icon-link"></span>
+                    <p>Documents</p><span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="<?= ($title === 'All Document') ? 'active' : '' ?>"><a href="/manager/document">All Document</a></li>
+                    <li class="<?= ($title === 'Document Relations') ? 'active' : '' ?>"><a href="/manager/document-relations">Document Relations</a></li>
+                </ul>
+            </li>
             <?php endif; ?>
             <?php if (session('role') === 'validator') : ?>
-            <li class="<?= ($title === 'Document Validation') ? 'active' : '' ?>"><a href="/validator/document" class="waves-effect waves-button"><span class="menu-icon icon-check"></span><p>Document Validation</p></a></li>
+            <li class="droplink <?= in_array($title, ['Document Validation', 'Document Relations Validation'], true) ? 'active open' : '' ?>"><a
+                    href="#" class="waves-effect waves-button"><span class="menu-icon icon-check"></span>
+                    <p>Documents</p><span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="<?= ($title === 'Document Validation') ? 'active' : '' ?>"><a href="/validator/document">Document Validation</a></li>
+                    <li class="<?= ($title === 'Document Relations Validation') ? 'active' : '' ?>"><a href="/validator/document-relations">Relation Validation</a></li>
+                </ul>
+            </li>
             <?php endif; ?>
             <?php if (session('role') == 'admin') : ?>
             <!-- Programs menu -->

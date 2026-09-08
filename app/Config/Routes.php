@@ -164,6 +164,12 @@ $routes->group('manager', ['filter' => 'authmanager'], static function ($routes)
         $routes->put('', 'Manager\DocumentManagerController::update');
         $routes->delete('', 'Manager\DocumentManagerController::delete');
     });
+    $routes->group('document-relations', static function ($routes) {
+        $routes->get('', 'Manager\DocumentRelationManagerController::index');
+        $routes->post('', 'Manager\DocumentRelationManagerController::insert');
+        $routes->put('', 'Manager\DocumentRelationManagerController::update');
+        $routes->delete('', 'Manager\DocumentRelationManagerController::delete');
+    });
 });
 
 // Validator Routes
@@ -173,6 +179,10 @@ $routes->group('validator', ['filter' => 'authvalidator'], static function ($rou
     $routes->post('document/(:num)/approve', 'Validator\DocumentValidatorController::validateDocument/$1/approved');
     $routes->post('document/(:num)/revise', 'Validator\DocumentValidatorController::validateDocument/$1/revised');
     $routes->post('document/(:num)/reject', 'Validator\DocumentValidatorController::validateDocument/$1/rejected');
+    $routes->get('document-relations', 'Validator\DocumentRelationValidatorController::index');
+    $routes->post('document-relations/(:num)/approve', 'Validator\DocumentRelationValidatorController::validateRelation/$1/approved');
+    $routes->post('document-relations/(:num)/revise', 'Validator\DocumentRelationValidatorController::validateRelation/$1/revised');
+    $routes->post('document-relations/(:num)/reject', 'Validator\DocumentRelationValidatorController::validateRelation/$1/rejected');
 });
 
 // Admin Routes
