@@ -170,6 +170,16 @@ $routes->group('manager', ['filter' => 'authmanager'], static function ($routes)
         $routes->put('', 'Manager\DocumentRelationManagerController::update');
         $routes->delete('', 'Manager\DocumentRelationManagerController::delete');
     });
+    // Setting Route
+    $routes->group('setting', static function ($routes) {
+        $routes->get('', static function () {
+            return redirect()->to('manager/setting/profile');
+        });
+        // Setting My Profile
+        $routes->get('profile', 'Manager\SettingManagerController::profile');
+        $routes->post('profile', 'Manager\SettingManagerController::profile_update');
+        $routes->put('profile', 'Manager\SettingManagerController::profile_password');
+    });
 });
 
 // Validator Routes
@@ -183,6 +193,16 @@ $routes->group('validator', ['filter' => 'authvalidator'], static function ($rou
     $routes->post('document-relations/(:num)/approve', 'Validator\DocumentRelationValidatorController::validateRelation/$1/approved');
     $routes->post('document-relations/(:num)/revise', 'Validator\DocumentRelationValidatorController::validateRelation/$1/revised');
     $routes->post('document-relations/(:num)/reject', 'Validator\DocumentRelationValidatorController::validateRelation/$1/rejected');
+    // Setting Route
+    $routes->group('setting', static function ($routes) {
+        $routes->get('', static function () {
+            return redirect()->to('validator/setting/profile');
+        });
+        // Setting My Profile
+        $routes->get('profile', 'Validator\SettingValidatorController::profile');
+        $routes->post('profile', 'Validator\SettingValidatorController::profile_update');
+        $routes->put('profile', 'Validator\SettingValidatorController::profile_password');
+    });
 });
 
 // Admin Routes
