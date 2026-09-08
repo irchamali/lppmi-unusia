@@ -14,12 +14,12 @@
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/elixir/assets/img/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/elixir/assets/img/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/elixir/assets/img/favicons/favicon-16x16.png">
-    <link rel="shortcut icon" type="image/x-icon" href="/assets/elixir/assets/img/favicons/favicon.ico">
-    <link rel="manifest" href="/assets/elixir/assets/img/favicons/manifest.json">
-    <meta name="msapplication-TileImage" content="/assets/elixir/assets/img/favicons/mstile-150x150.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/backend/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/backend/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/backend/images/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/backend/images/favicons/favicon.ico">
+    <link rel="manifest" href="/assets/backend/images/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="/assets/backend/images/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
     <script src="/assets/elixir/vendors/overlayscrollbars/OverlayScrollbars.min.js"></script>
 
@@ -68,7 +68,7 @@
               <div class="mb-5" data-zanim-xs='{"delay":0,"duration":1}'><a href="/"><img src="/assets/elixir/assets/img/logo-light1.png" alt="logo" /></a></div>
               <div class="card" data-zanim-xs='{"delay":0.1,"duration":1}'>
                 <div class="card-body p-md-5">
-                  <h4 class="text-uppercase fs-0 fs-md-1">login with Lppmi</h4>
+                  <h4 class="text-uppercase fs-0 fs-md-1">login</h4>
                     <?php if (session()->getFlashData('pesan')) : ?>
                         <div class="alert alert-warning" role="alert">
                         <?= session()->getFlashData('pesan') ?>

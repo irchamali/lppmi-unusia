@@ -90,7 +90,7 @@ $ppeppLabel = $ppeppLabels[$document['ppepp_stage'] ?? ''] ?? null;
                       <li class="mb-2">
                         <a href="<?= base_url('d/' . $related['docs_slug']); ?>"><?= esc($related['document_title']); ?></a>
                         <?php if (!empty($related['relation_notes'])) : ?>
-                          <span class="text-muted small d-block"><?= esc($related['relation_notes']); ?></span>
+                          <!-- <span class="text-muted small d-block"><?= esc($related['relation_notes']); ?></span> -->
                         <?php endif; ?>
                       </li>
                     <?php endforeach; ?>

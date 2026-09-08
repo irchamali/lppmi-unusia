@@ -22,9 +22,9 @@
                 <ul class="list-unstyled">
                   <li class="mb-3"><a class="text-white" href="/about">Tentang</a></li>
                   <li class="mb-3"><a class="text-white" href="/d">Dokumen</a></li>
-                  <li class="mb-3"><a class="text-white" href="/r">Laporan</a></li>
-                  <li class="mb-3"><a class="text-white" href="/data">Data</a></li>
-                  <li class="mb-3"><a class="text-white" href="/pengaduan">Pengaduan</a></li>
+                  <li class="mb-3"><a class="text-white" href="/strukturorganisasi">Struktur</a></li>
+                  <li class="mb-3"><a class="text-white" href="/contact">Kontak</a></li>
+                  <!-- <li class="mb-3"><a class="text-white" href="/pengaduan">Pengaduan</a></li> -->
                 </ul>
               </div>
               <div class="col-6 col-sm-5 ms-sm-auto">
@@ -32,12 +32,12 @@
                   <li class="mb-2"><a class="text-decoration-none d-flex align-items-center" href="<?= $site['site_linkedin']; ?>"> <span class="brand-icon me-3"><span class="fab fa-linkedin-in"></span></span>
                       <h5 class="fs-0 text-white mb-0 d-inline-block">Linkedin</h5>
                     </a></li>
-                  <li class="mb-2"><a class="text-decoration-none d-flex align-items-center" href="<?= $site['site_twitter']; ?>"> <span class="brand-icon me-3"><span class="fab fa-twitter"></span></span>
-                      <h5 class="fs-0 text-white mb-0 d-inline-block">Twitter</h5>
+                  <li class="mb-2"><a class="text-decoration-none d-flex align-items-center" href="<?= $site['site_twitter']; ?>"> <span class="brand-icon me-3"><span class="fab fa-youtube"></span></span>
+                      <h5 class="fs-0 text-white mb-0 d-inline-block">YouTube</h5>
                     </a></li>
-                  <li class="mb-2"><a class="text-decoration-none d-flex align-items-center" href="<?= $site['site_facebook']; ?>"> <span class="brand-icon me-3"><span class="fab fa-facebook-f"></span></span>
+                  <!-- <li class="mb-2"><a class="text-decoration-none d-flex align-items-center" href="<?= $site['site_facebook']; ?>"> <span class="brand-icon me-3"><span class="fab fa-facebook-f"></span></span>
                       <h5 class="fs-0 text-white mb-0 d-inline-block">Facebook</h5>
-                    </a></li>
+                    </a></li> -->
                   <li class="mb-2"><a class="text-decoration-none d-flex align-items-center" href="<?= $site['site_instagram']; ?>"> <span class="brand-icon me-3"><span class="fab fa-instagram"></span></span>
                       <h5 class="fs-0 text-white mb-0 d-inline-block">Instagram</h5>
                     </a></li>

@@ -311,6 +311,12 @@ $routes->group('admin', ['filter' => 'authadmin'], static function ($routes) {
         $routes->put('', 'Admin\DocsAdminController::update');
         $routes->delete('', 'Admin\DocsAdminController::delete');
     });
+    $routes->group('document-relations', static function ($routes) {
+        $routes->get('', 'Manager\DocumentRelationManagerController::index');
+        $routes->post('', 'Manager\DocumentRelationManagerController::insert');
+        $routes->put('', 'Manager\DocumentRelationManagerController::update');
+        $routes->delete('', 'Manager\DocumentRelationManagerController::delete');
+    });
     // Documents Category Route
     $routes->group('docscategory', static function ($routes) {
         $routes->get('', 'Admin\DocsCategoryAdminController::index');

@@ -240,13 +240,14 @@
                 </ul>
             </li>
 
-            <li class="droplink <?= ($title === "All Document") ? 'active open' : '' ?><?= ($title === "Category of Document") ? 'active open' : '' ?><?= ($title === "Document Type") ? 'active open' : '' ?><?= ($title === "Document Scope") ? 'active open' : '' ?><?= ($title === "Document Relation Type") ? 'active open' : '' ?>"><a
+            <li class="droplink <?= ($title === "All Document") ? 'active open' : '' ?><?= ($title === "Document Relations") ? 'active open' : '' ?><?= ($title === "Category of Document") ? 'active open' : '' ?><?= ($title === "Document Type") ? 'active open' : '' ?><?= ($title === "Document Scope") ? 'active open' : '' ?><?= ($title === "Document Relation Type") ? 'active open' : '' ?>"><a
                     href="/<?= session('role'); ?>/document" class="waves-effect waves-button"><span
                         class="menu-icon icon-link"></span>
                     <p>Documents</p><span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
                     <li class="<?= ($title === "All Document") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/document">Document</a></li>
+                    <li class="<?= ($title === "Document Relations") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/document-relations">Relations</a></li>
                     <li class="<?= ($title === "Category of Document") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/docscategory">Category</a></li>
                     <li class="<?= ($title === "Document Type") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/doctype">Type</a></li>
                     <li class="<?= ($title === "Document Scope") ? 'active' : '' ?>"><a href="/<?= session('role'); ?>/docscope">Scope</a></li>

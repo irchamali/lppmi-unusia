@@ -23,9 +23,19 @@ class DocumentRelationModel extends Model
     public function getPublicRelatedDocuments(int $documentId): array
     {
         $rows = $this->db->table($this->table)
-            ->select('tbl_document_relations.relation_id, tbl_document_relations.relation_notes, tbl_document_relation_type.relation_name, tbl_document_relation_type.relation_slug,
-                CASE WHEN tbl_document_relations.document_id = ' . (int) $documentId . ' THEN tbl_document_relations.related_document_id ELSE tbl_document_relations.document_id END AS other_document_id', false)
-            ->join('tbl_document_relation_type', 'tbl_document_relation_type.relation_type_id = tbl_document_relations.relation_type_id', 'left')
+            ->select('
+                tbl_document_relations.relation_id,
+                tbl_document_relations.document_id,
+                tbl_document_relations.related_document_id,
+                tbl_document_relations.relation_notes,
+                tbl_document_relation_type.relation_name,
+                tbl_document_relation_type.relation_slug
+            ')
+            ->join(
+                'tbl_document_relation_type',
+                'tbl_document_relation_type.relation_type_id = tbl_document_relations.relation_type_id',
+                'left'
+            )
             ->where('tbl_document_relations.status', 'approved')
             ->groupStart()
                 ->where('tbl_document_relations.document_id', $documentId)
@@ -38,31 +48,114 @@ class DocumentRelationModel extends Model
             return [];
         }
 
-        $otherIds = array_values(array_unique(array_map(static fn ($row) => (int) $row['other_document_id'], $rows)));
+        /*
+         * Tentukan ID dokumen lawan dari masing-masing relasi.
+         */
+        $otherIds = [];
+
+        foreach ($rows as $row) {
+            if ((int) $row['document_id'] === $documentId) {
+                $otherIds[] = (int) $row['related_document_id'];
+            } else {
+                $otherIds[] = (int) $row['document_id'];
+            }
+        }
+
+        $otherIds = array_values(array_unique($otherIds));
 
         $documents = $this->db->table('tbl_documents')
-            ->select('tbl_documents.document_id, tbl_documents.document_title, tbl_documents.document_number, tbl_documents.document_date, tbl_document_category.category_name, tbl_document_type.type_name')
-            ->join('tbl_document_category', 'tbl_document_category.category_id = tbl_documents.category_id', 'left')
-            ->join('tbl_document_type', 'tbl_document_type.type_id = tbl_documents.type_id', 'left')
+            ->select('
+                tbl_documents.document_id,
+                tbl_documents.document_title,
+                tbl_documents.document_number,
+                tbl_documents.document_date,
+                tbl_document_category.category_name,
+                tbl_document_type.type_name
+            ')
+            ->join(
+                'tbl_document_category',
+                'tbl_document_category.category_id = tbl_documents.category_id',
+                'left'
+            )
+            ->join(
+                'tbl_document_type',
+                'tbl_document_type.type_id = tbl_documents.type_id',
+                'left'
+            )
             ->whereIn('tbl_documents.document_id', $otherIds)
             ->where('tbl_documents.status', 'approved')
             ->get()
             ->getResultArray();
 
         $documentsById = [];
+
         foreach ($documents as $document) {
             $documentsById[(int) $document['document_id']] = $document;
         }
 
+        /*
+         * Label kebalikan relasi jika dokumen yang sedang dibuka
+         * berada pada sisi related_document_id.
+         */
+        $reverseRelationLabels = [
+            'menggantikan'    => 'Digantikan',
+            'mencabut'        => 'Dicabut oleh',
+            'menjabarkan'     => 'Dijabarkan oleh',
+            'menindaklanjuti' => 'Ditindaklanjuti oleh',
+            'mengacu-pada'    => 'Diacu oleh',
+            'mendukung'       => 'Didukung oleh',
+            'terkait'         => 'Terkait',
+        ];
+
         $grouped = [];
+
         foreach ($rows as $row) {
-            $otherId = (int) $row['other_document_id'];
+
+            $sourceDocumentId = (int) $row['document_id'];
+            $targetDocumentId = (int) $row['related_document_id'];
+
+            /*
+             * Jika dokumen yang sedang dibuka adalah document_id,
+             * berarti dia adalah sumber relasi.
+             */
+            $isSource = ($sourceDocumentId === $documentId);
+
+            /*
+             * Tentukan dokumen lawan.
+             */
+            if ($isSource) {
+                $otherId = $targetDocumentId;
+            } else {
+                $otherId = $sourceDocumentId;
+            }
 
             if (!isset($documentsById[$otherId])) {
                 continue; // dokumen terkait belum/tidak dipublikasikan
             }
 
-            $relationName = $row['relation_name'] ?: 'Terkait';
+            /*
+             * Tentukan nama relasi berdasarkan perspektif.
+             *
+             * Contoh:
+             * document_id = 3
+             * related_document_id = 2
+             * relation = Menggantikan
+             *
+             * Buka dokumen 3:
+             * -> MENGGANTIKAN
+             *
+             * Buka dokumen 2:
+             * -> DIGANTIKAN
+             */
+            if ($isSource) {
+                $relationName = $row['relation_name'] ?: 'Terkait';
+            } else {
+                $relationSlug = $row['relation_slug'] ?? '';
+
+                $relationName = $reverseRelationLabels[$relationSlug]
+                    ?? 'Terkait dengan';
+            }
+
             $grouped[$relationName][] = $documentsById[$otherId] + [
                 'relation_notes' => $row['relation_notes'],
             ];
@@ -111,8 +204,18 @@ class DocumentRelationModel extends Model
         }
 
         $rows = $this->db->table($this->table)
-            ->select('tbl_document_relations.document_id, tbl_document_relations.related_document_id, tbl_document_relations.relation_notes, tbl_document_relation_type.relation_name')
-            ->join('tbl_document_relation_type', 'tbl_document_relation_type.relation_type_id = tbl_document_relations.relation_type_id', 'left')
+            ->select('
+                tbl_document_relations.document_id,
+                tbl_document_relations.related_document_id,
+                tbl_document_relations.relation_notes,
+                tbl_document_relation_type.relation_name,
+                tbl_document_relation_type.relation_slug
+            ')
+            ->join(
+                'tbl_document_relation_type',
+                'tbl_document_relation_type.relation_type_id = tbl_document_relations.relation_type_id',
+                'left'
+            )
             ->where('tbl_document_relations.status', 'approved')
             ->groupStart()
                 ->whereIn('tbl_document_relations.document_id', $documentIds)
@@ -126,6 +229,7 @@ class DocumentRelationModel extends Model
         }
 
         $otherIds = [];
+
         foreach ($rows as $row) {
             $otherIds[] = (int) $row['document_id'];
             $otherIds[] = (int) $row['related_document_id'];
@@ -138,22 +242,74 @@ class DocumentRelationModel extends Model
             ->getResultArray();
 
         $documentsById = [];
+
         foreach ($documents as $document) {
             $documentsById[(int) $document['document_id']] = $document;
         }
 
-        $grouped = [];
-        foreach ($rows as $row) {
-            $documentId = (int) $row['document_id'];
-            $relatedId = (int) $row['related_document_id'];
-            $relationName = $row['relation_name'] ?: 'Terkait';
-            $entry = ['relation_name' => $relationName, 'relation_notes' => $row['relation_notes']];
+        /*
+         * Label kebalikan relasi.
+         */
+        $reverseRelationLabels = [
+            'menggantikan'    => 'Digantikan',
+            'mencabut'        => 'Dicabut oleh',
+            'menjabarkan'     => 'Dijabarkan oleh',
+            'menindaklanjuti' => 'Ditindaklanjuti oleh',
+            'mengacu-pada'    => 'Diacu oleh',
+            'mendukung'       => 'Didukung oleh',
+            'terkait'         => 'Terkait',
+        ];
 
-            if (in_array($documentId, $documentIds, true) && isset($documentsById[$relatedId])) {
-                $grouped[$documentId][] = $documentsById[$relatedId] + $entry;
+        $grouped = [];
+
+        foreach ($rows as $row) {
+
+            $sourceDocumentId = (int) $row['document_id'];
+            $targetDocumentId = (int) $row['related_document_id'];
+
+            /*
+             * --------------------------------------------------
+             * Sisi sumber
+             * --------------------------------------------------
+             */
+            if (
+                in_array($sourceDocumentId, $documentIds, true)
+                && isset($documentsById[$targetDocumentId])
+            ) {
+
+                $relationName = $row['relation_name'] ?: 'Terkait';
+
+                $entry = [
+                    'relation_name'  => $relationName,
+                    'relation_notes' => $row['relation_notes'],
+                ];
+
+                $grouped[$sourceDocumentId][] =
+                    $documentsById[$targetDocumentId] + $entry;
             }
-            if (in_array($relatedId, $documentIds, true) && isset($documentsById[$documentId])) {
-                $grouped[$relatedId][] = $documentsById[$documentId] + $entry;
+
+            /*
+             * --------------------------------------------------
+             * Sisi target
+             * --------------------------------------------------
+             */
+            if (
+                in_array($targetDocumentId, $documentIds, true)
+                && isset($documentsById[$sourceDocumentId])
+            ) {
+
+                $relationSlug = $row['relation_slug'] ?? '';
+
+                $relationName = $reverseRelationLabels[$relationSlug]
+                    ?? 'Terkait dengan';
+
+                $entry = [
+                    'relation_name'  => $relationName,
+                    'relation_notes' => $row['relation_notes'],
+                ];
+
+                $grouped[$targetDocumentId][] =
+                    $documentsById[$sourceDocumentId] + $entry;
             }
         }
 
