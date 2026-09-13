@@ -310,6 +310,7 @@ $routes->group('admin', ['filter' => 'authadmin'], static function ($routes) {
         $routes->post('', 'Admin\DocsAdminController::insert');
         $routes->put('', 'Admin\DocsAdminController::update');
         $routes->delete('', 'Admin\DocsAdminController::delete');
+        $routes->get('toggle_archive/(:num)', 'Admin\DocsAdminController::toggleArchive/$1');
     });
     $routes->group('document-relations', static function ($routes) {
         $routes->get('', 'Manager\DocumentRelationManagerController::index');

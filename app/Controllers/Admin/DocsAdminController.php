@@ -232,6 +232,18 @@ class DocsAdminController extends BaseController
         $this->documentModel->delete($document_id);
         return redirect()->to($this->documentPath())->with('msg', 'success-delete');
     }
+    public function toggleArchive($document_id)
+    {
+        $document = $this->documentModel->find($document_id);
+        if ($document === null || !in_array($document['status'], ['approved', 'archived'], true)) {
+            return redirect()->to($this->documentPath())->with('msg', 'error-document-not-found');
+        }
+
+        $newStatus = $document['status'] === 'archived' ? 'approved' : 'archived';
+        $this->documentModel->update($document_id, ['status' => $newStatus]);
+
+        return redirect()->to($this->documentPath())->with('msg', $newStatus === 'archived' ? 'success-archive' : 'success-unarchive');
+    }
     protected function documentPath(): string
     {
         return '/' . session('role') . '/document';

@@ -98,7 +98,7 @@ $formatDuration = static function (DateInterval $diff): string {
                                                         if ($diff->invert === 1) {
                                                             $validityText = 'Kadaluarsa sejak ' . $durationText;
                                                             $validityClass = 'bg-danger';
-                                                        } elseif ($days <= 90) {
+                                                        } elseif ($days <= 300) {
                                                             $validityText = 'Sisa ' . $durationText;
                                                             $validityClass = 'bg-warning text-dark';
                                                         } else {

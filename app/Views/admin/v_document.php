@@ -63,7 +63,7 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Judul Dokumen</th>
-                                                <th>Nomor</th>
+                                                <!-- <th>Nomor</th> -->
                                                 <th>Kategori</th>
                                                 <th>Tipe</th>
                                                 <th>Lingkup</th>
@@ -80,13 +80,24 @@
                                                 <tr>
                                                     <td style="vertical-align: middle;"><?= $no; ?></td>
                                                     <td style="vertical-align: middle;"><?= $row['document_title']; ?></td>
-                                                    <td style="vertical-align: middle;"><a href="<?= $row['document_file']; ?>" target="_blank"><?= $row['document_number']; ?></a></td>
+                                                    <!-- <td style="vertical-align: middle;"><a href="<?= $row['document_file']; ?>" target="_blank"><?= $row['document_number']; ?></a></td> -->
                                                     <td style="vertical-align: middle;"><?= $row['category_name']; ?></td>
                                                     <td style="vertical-align: middle;"><?= $row['type_name']; ?></td>
                                                     <td style="vertical-align: middle;"><?= $row['scope_name']; ?></td>
                                                     <?php $status = $row['status'] ?: 'submitted'; ?>
                                                     <?php $statusClass = ['approved' => 'label-success', 'revised' => 'label-warning', 'submitted' => 'label-default', 'rejected' => 'label-danger', 'archived' => 'label-info'][$status] ?? 'label-default'; ?>
-                                                    <td style="vertical-align: middle;"><span class="label <?= $statusClass; ?>" <?= $status === 'submitted' ? 'style="background-color: #000;"' : ''; ?>><?= esc(ucfirst($status)); ?></span></td>
+                                                    <td style="vertical-align: middle;">
+                                                        <span class="label <?= $statusClass; ?>" <?= $status === 'submitted' ? 'style="background-color: #000;"' : ''; ?>><?= esc(ucfirst($status)); ?></span>
+                                                        <?php if (session('role') === 'admin' && in_array($status, ['approved', 'archived'], true)) : ?>
+                                                            <a href="/admin/document/toggle_archive/<?= $row['document_id']; ?>" class="btn btn-xs" title="<?= $status === 'archived' ? 'Batalkan arsip (tampilkan di publik)' : 'Arsipkan (sembunyikan dari publik)'; ?>">
+                                                                <?php if ($status === 'archived') : ?>
+                                                                    <span class="fa fa-toggle-on text-info"></span>
+                                                                <?php else : ?>
+                                                                    <span class="fa fa-toggle-off text-success"></span>
+                                                                <?php endif; ?>
+                                                            </a>
+                                                        <?php endif; ?>
+                                                    </td>
                                                     <td style="vertical-align: middle;">
                                                         <?php if ($isValidator) : ?>
                                                             <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#ModalDetail<?= $row['document_id']; ?>" title="View document details"><i class="fa fa-eye"></i></button>
@@ -587,6 +598,30 @@
                 hideAfter: false,
                 position: 'bottom-right',
                 bgColor: '#00C9E6'
+            });
+        </script>
+    <?php elseif (session()->getFlashdata('msg') == 'success-archive') : ?>
+        <script type="text/javascript">
+            $.toast({
+                heading: 'Success',
+                text: "Dokumen berhasil diarsipkan dan disembunyikan dari daftar publik.",
+                showHideTransition: 'slide',
+                icon: 'success',
+                hideAfter: false,
+                position: 'bottom-right',
+                bgColor: '#00C9E6'
+            });
+        </script>
+    <?php elseif (session()->getFlashdata('msg') == 'success-unarchive') : ?>
+        <script type="text/javascript">
+            $.toast({
+                heading: 'Success',
+                text: "Dokumen kembali berstatus approved dan tampil di daftar publik.",
+                showHideTransition: 'slide',
+                icon: 'success',
+                hideAfter: false,
+                position: 'bottom-right',
+                bgColor: '#7EC857'
             });
         </script>
     <?php elseif (session()->getFlashdata('msg') == 'success-delete') : ?>
